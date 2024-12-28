@@ -1,2 +1,2 @@
 # MyShop
-<h1>MyShop</h1>
+<h1 align="center">MyShop</h1>
