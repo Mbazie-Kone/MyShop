@@ -25,6 +25,16 @@ namespace UserService.Services
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            var token = new JwtSecurityToken(
+              _config["JwtSettings:Issuer"],
+              _config["JwtSettings:Audience"],
+              claims,
+              expires: DateTime.UtcNow.AddMinutes(int.Parse(_config["JwtSettings:ExpiryMinutes"])),
+              signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
