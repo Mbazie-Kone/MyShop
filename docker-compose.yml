@@ -20,6 +20,16 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
+  
+  api-gateway:
+    image: apigateway
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    depends_on:
+      - user-service
       
   frontend:
     build:
