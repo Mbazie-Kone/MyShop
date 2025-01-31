@@ -15,7 +15,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapReverseProxy();
+app.MapReverseProxy(); // Enable Reverse Proxy
 
 
 app.Run();
