@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddReverseProxy().LoadFromMemory(new[]
-{
-    new Microsoft.ReverseProxy.Ab
-})
+builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy")); // Add YARP Reverse Proxy
 
 var app = builder.Build();
 
@@ -21,6 +14,8 @@ var app = builder.Build();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapReverseProxy();
 
 
 app.Run();
