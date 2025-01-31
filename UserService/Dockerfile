@@ -1,19 +1,19 @@
-# Usa l'immagine SDK di .NET 8
+# Use the .NET 8 SDK image
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copia i file di progetto e ripristina le dipendenze
+# Copy project files and restore dependencies
 COPY ["UserService/UserService.csproj", "UserService/"]
 RUN dotnet restore "UserService/UserService.csproj"
 
-# Copia il resto dei file del progetto
+# Copy the rest of the project files
 COPY . .
 
-# Costruisci il progetto
+# Build the project
 WORKDIR "/src/UserService"
 RUN dotnet build -c Release -o /app/build
 
-# Pubblica il progetto
+# Publish the project
 FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish
 
