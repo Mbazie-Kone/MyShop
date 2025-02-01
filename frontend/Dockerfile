@@ -1,8 +1,23 @@
-# Usa Nginx per servire Angular
+# Usa Node.js per costruire l'app Angular
+FROM node:18 AS build
+WORKDIR /app
+
+# Copia i file di dipendenze
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copia tutto il codice sorgente
+COPY . .
+
+# Costruisce l'app Angular in modalità produzione
+RUN npm run build --configuration=production
+
+# Usa Nginx per servire l'app Angular
 FROM nginx:alpine
 COPY --from=build /app/dist/frontend /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf  # 👈 Aggiunge la configurazione personalizzata
 
+# Espone la porta 80 per il traffico HTTP
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
 
+# Avvia Nginx
+CMD ["nginx", "-g", "daemon off;"]
