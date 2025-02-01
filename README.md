@@ -123,5 +123,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-For any inquiries, reach out to: 📧 Email: mbazie89@gmail.com
+For any inquiries, reach out to: 
+
+📧 Email: mbazie89@gmail.com
 🚀 LinkedIn: https://www.linkedin.com/in/mbaziekone2251
