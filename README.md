@@ -52,3 +52,10 @@ Backend API: http://localhost:5000/api/users
 API Gateway: http://localhost:5001/users
 
 ```
+
+## 🛠 Development Mode (Without Docker)**
+
+If you prefer running services manually without Docker:
+
+### ✅ Run the Backend (User-Service)
+1.Open Visual Studio
