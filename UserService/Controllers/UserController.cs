@@ -6,9 +6,8 @@ using UserService.Services;
 
 namespace UserService.Controllers
 {
-    [Produces("application/json")]
     [ApiController]
-    [Route("api/user")]
+    [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly UserDbContext _userDbContext;
