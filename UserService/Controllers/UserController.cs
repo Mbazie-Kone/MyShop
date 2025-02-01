@@ -7,5 +7,10 @@ namespace UserService.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            return Ok("Hello World");
+        }
     }
 }
