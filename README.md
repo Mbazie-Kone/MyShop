@@ -2,7 +2,7 @@
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-blue?style=for-the-badge&logo=dotnet)
 ![Angular](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-2019-orange?style=for-the-badge&logo=microsoftsqlserver)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-orange?style=for-the-badge&logo=microsoftsqlserver)
 ![Docker](https://img.shields.io/badge/Docker-Container-blue?style=for-the-badge&logo=docker)
 
 ## 📌 Project Overview
