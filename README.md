@@ -35,3 +35,20 @@ cd MyShop
 ```
 ### 🔹 Start the Application (Dockerized)
 To run all services (backend, frontend, database, and API Gateway) inside Docker containers, execute:
+```sh
+docker-compose up --build
+
+```
+This will:
+- tart the User-Service (ASP.NET Core)
+- tart the API Gateway (YARP)
+- Start the Angular Frontend
+- Start SQL Server with persistent data
+
+### ⏳ Wait until all containers are running, then open:
+```bash
+Frontend: http://localhost:4200
+Backend API: http://localhost:5000/api/users
+API Gateway: http://localhost:5001/users
+
+```
