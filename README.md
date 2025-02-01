@@ -53,7 +53,7 @@ API Gateway: http://localhost:5001/users
 
 ```
 
-## 🛠 Development Mode (Without Docker)**
+## 🛠 Development Mode (Without Docker)
 
 If you prefer running services manually without Docker:
 
