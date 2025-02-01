@@ -6,7 +6,8 @@ using UserService.Services;
 
 namespace UserService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
+    [Produces("application/json")]
     [ApiController]
     public class UserController : ControllerBase
     {
