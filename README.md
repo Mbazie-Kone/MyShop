@@ -32,5 +32,6 @@ Ensure you have the following installed:
 git clone https://github.com/Mbazie-Kone/MyShop.git
 cd MyShop
 
-🔹 Start the Application (Dockerized)
+```
+### 🔹 Start the Application (Dockerized)
 To run all services (backend, frontend, database, and API Gateway) inside Docker containers, execute:
