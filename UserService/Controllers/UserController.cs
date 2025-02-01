@@ -8,20 +8,12 @@ namespace UserService.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly UserDbContext _userDbContext;
-
-        public UserController(UserDbContext userDbContext)
-        {
-            _userDbContext = userDbContext;
-        }
-
         //GET
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public IActionResult Get()
         {
-            var users = await _userDbContext.Users.ToListAsync();
 
-            return Ok(users);
+            return Ok("Hello World");
         }
 
     }
