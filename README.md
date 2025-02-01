@@ -59,8 +59,8 @@ If you prefer running services manually without Docker:
 
 ### ✅ Run the Backend (User-Service)
 1. Open Visual Studio
-2. Select UserService.sln
-3. Press F5 or run:
+2. Select `UserService.sln`
+3. Press `F5` or run:
 ```sh
 docker run
 
