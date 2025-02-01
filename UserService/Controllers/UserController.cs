@@ -10,7 +10,6 @@ namespace UserService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-
             return Ok("Hello World");
         }
 
