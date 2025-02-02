@@ -11,13 +11,17 @@ namespace UserService.Controllers
         [HttpGet]
         [Route("find")]
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUsers()
         {
             User user = new User();
             user.FirstName = "Joe";
             user.Lastname = "Doe";
 
-            return Ok(user);
+            var product = new List<string> { "Book", "Mouse", "Keyboard" };
+
+            return Ok(product);
         }
     }
 }
