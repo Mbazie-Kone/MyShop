@@ -9,6 +9,7 @@ namespace UserService.Controllers
     {
         [HttpGet]
         [Route("find")]
+        [Produces("application/json")]
         public IActionResult GetUsers()
         {
             return Ok("Hello World");
