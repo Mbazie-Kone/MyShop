@@ -5,7 +5,7 @@ namespace UserService.Controllers
 {
     [Route("api/users")]
     [ApiController]
-    public class UserServiceController : ControllerBase
+    public class UserController : ControllerBase
     {
         [HttpGet]
         [Route("find")]
