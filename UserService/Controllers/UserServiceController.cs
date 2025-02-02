@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UserService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UserServiceController : ControllerBase
     {
         [HttpGet]
+        [Route("find")]
         public IActionResult GetUsers()
         {
             return Ok("Hello World");
