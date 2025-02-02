@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserService.Models;
 
 namespace UserService.Controllers
 {
@@ -12,7 +13,11 @@ namespace UserService.Controllers
         [Produces("application/json")]
         public IActionResult GetUsers()
         {
-            return Ok("Hello World");
+            User user = new User();
+            user.FirstName = "Joe";
+            user.Lastname = "Doe";
+
+            return Ok(user);
         }
     }
 }
