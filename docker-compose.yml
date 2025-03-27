@@ -1,44 +1,17 @@
-services:
-  user-service:
-    image: userservice
-    build:
-      context: ./UserService
-      dockerfile: Dockerfile
-    ports:
-      - "5000:80"
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserDB;User Id=sa;Password=a123456789A!;TrustServerCertificate=True;
-    depends_on:
-      - sqlserver
+version: '3.8'
 
+services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     environment:
-      SA_PASSWORD: "a123456789A!"
       ACCEPT_EULA: "Y"
+      SA_PASSWORD: "a123456789A!"
     ports:
       - "1433:1433"
     volumes:
-      - sqlserver_data:/var/opt/mssql
-  
-  api-gateway:
-    image: apigateway
-    build:
-      context: ./ApiGateway
-      dockerfile: Dockerfile
-    ports:
-      - "5001:5000"
-    depends_on:
-      - user-service
-      
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4200:80"
-    depends_on:
-      - api-gateway
+      - sql_data:/var/opt/mssql
+    restart: always
 
 volumes:
-  sqlserver_data:
+  sql_data:

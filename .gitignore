@@ -5,3 +5,5 @@ obj/
 *.suo
 *.dll
 *.exe
+*.sql
+*.log
