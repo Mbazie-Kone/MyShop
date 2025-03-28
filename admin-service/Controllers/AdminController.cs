@@ -15,6 +15,7 @@ namespace admin_service.Controllers
             _context = context;
         }
 
+        // POST: api/admin
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
