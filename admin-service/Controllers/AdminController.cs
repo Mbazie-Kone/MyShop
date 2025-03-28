@@ -1,6 +1,7 @@
 ﻿using admin_service.Data;
 using admin_service.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace admin_service.Controllers
 {
@@ -13,6 +14,17 @@ namespace admin_service.Controllers
         public AdminController(AppDbContext context)
         {
             _context = context;
+        }
+
+        // GET: api/admin/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(long id)
+        {
+            var admin = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id == id);
+            if (admin == null)
+                return NotFound();
+
+            return Ok(admin);
         }
 
         // POST: api/admin
