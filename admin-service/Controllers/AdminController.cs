@@ -64,15 +64,13 @@ namespace admin_service.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // DTO for response
-            var userDto = new UserDto
+            return CreatedAtAction(nameof(Login), new { username = user.Username}, new UserDto 
             {
+                Id = user.Id,
                 Username = user.Username,
                 RoleName = role.Name,
                 CreatedAt = user.CreatedAt
-            };
-
-            return CreatedAtAction(nameof(Login), new { username = user.Username}, userDto);
+            });
         }
 
         // api/admin/login
