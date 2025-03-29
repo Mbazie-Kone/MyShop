@@ -20,5 +20,22 @@ namespace admin_service.Helpers
 
             return $"{Convert.ToBase64String(salt)}.{hashed}";
         }
+
+        public static bool VerifyPassword(string hashedPassword, string inputPassword)
+        {
+            var parts = hashedPassword.Split('.');
+            if (parts.Length != 2) return false;
+
+            byte[] salt = Convert.FromBase64String(parts[0]);
+
+            string inputHashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: inputPassword,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8));
+
+            return inputHashed == parts[1];
+        }
     }
 }
