@@ -4,7 +4,6 @@ using admin_service.Helpers;
 using admin_service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -72,6 +71,8 @@ namespace admin_service.Controllers
                 RoleName = role.Name,
                 CreatedAt = user.CreatedAt
             };
+
+            return CreatedAtAction(nameof(Login), new { username = user.Username}, userDto);
         }
 
         // api/admin/login
