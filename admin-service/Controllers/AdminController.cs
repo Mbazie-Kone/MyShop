@@ -4,6 +4,10 @@ using admin_service.Helpers;
 using admin_service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace admin_service.Controllers
 {
@@ -34,19 +38,6 @@ namespace admin_service.Controllers
 
         // POST:
 
-        // api/admin
-        [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
-        {
-            user.CreatedAt = DateTime.Now;
-            user.UpdatedAt = DateTime.Now;
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-        }
-
         // api/admin/login
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
@@ -56,6 +47,32 @@ namespace admin_service.Controllers
 
             if (user == null || !PasswordHasher.VerifyPassword(user.Password, request.Password))
                 return Unauthorized("Invalid credentials.");
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_config["JwtSettings:Secret"]!);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Role, user.Role!.Name)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(_config.GetValue<int>("JwtSettings:ExpirationMinutes")),
+                Issuer = _config["JwtSettings:Issuer"],
+                Audience = _config["JwtSettings:Audience"],
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return new LoginResponse
+            {
+                Token = tokenHandler.WriteToken(token),
+                Username = user.Username,
+                Role = user.Role.Name
+            };
         }
     }
 }
