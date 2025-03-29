@@ -4,6 +4,7 @@ using admin_service.Helpers;
 using admin_service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -37,6 +38,41 @@ namespace admin_service.Controllers
         }
 
         // POST:
+
+        // api/admin/register
+        public async Task<ActionResult<UserDto>> Register([FromBody] User request)
+        {
+            // Check if the username is already in use
+            var existing = await _context.Users
+                .AnyAsync(u => u.Username == request.Username);
+            if (existing)
+                return Conflict("Username already exists.");
+
+            // Check that the role exists
+            var role = await _context.Roles.FindAsync(request.RoleId);
+            if (role == null) return BadRequest("Invalid role.");
+
+            // Hash the password and save the user
+            var user = new User
+            {
+                Username = request.Username,
+                Password = PasswordHasher.HashPassword(request.Password),
+                RoleId = request.RoleId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            // DTO for response
+            var userDto = new UserDto
+            {
+                Username = user.Username,
+                RoleName = role.Name,
+                CreatedAt = user.CreatedAt
+            };
+        }
 
         // api/admin/login
         [HttpPost("login")]
