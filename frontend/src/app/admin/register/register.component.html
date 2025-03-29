@@ -18,4 +18,10 @@
             </option>
         </select>
     </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+
+    <div class="error" *ngIf="error">
+        {{ error }}
+    </div>
 </form>
