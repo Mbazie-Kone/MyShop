@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace admin_service.Models
+﻿namespace admin_service.Models
 {
     public class User
     {
