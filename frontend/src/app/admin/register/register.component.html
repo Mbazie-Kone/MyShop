@@ -1,1 +1,21 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label>Username</label>
+        <input type="text" formControlName="username">
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input type="password" formControlName="password">
+    </div>
+
+    <div>
+        <label>Role</label>
+        <select formControlName="roleId">
+            <option value="">Select a role</option>
+            <option *ngFor="let role of roles" [value]="role.id">
+                {{ role.name }}
+            </option>
+        </select>
+    </div>
+</form>
