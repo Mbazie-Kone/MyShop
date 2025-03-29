@@ -5,7 +5,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
-
 @NgModule({
   declarations: [
     LoginComponent,
