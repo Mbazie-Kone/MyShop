@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -16,7 +16,20 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      roleId: ['', Validators.required]
+    });
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) return;
+
+    this.adminService.register(this.registerForm.value).subscribe({
+      next: () => alert('Registration completed!'),
+      error: (err) => this.error = err.error || 'Error during registration'
+    });
   }
 
 }
