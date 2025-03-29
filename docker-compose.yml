@@ -9,7 +9,32 @@ services:
       - "1433:1433"
     volumes:
       - sql_data:/var/opt/mssql
-    restart: always
-
+    networks: 
+      - mynetwork
+      
+  admin-service:
+    build:
+      context: ./admin-service
+    container_name: admin-service
+    ports:
+      - "5001:80"
+    depends_on:
+      - sqlserver
+    networks:
+      - mynetwork
+      
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "5000:80"
+    depends_on:
+      - admin-service
+    networks:
+      - mynetwork
 volumes:
   sql_data:
+  
+networks:
+  mynetwork:
