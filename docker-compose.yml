@@ -33,6 +33,16 @@ services:
       - admin-service
     networks:
       - mynetwork
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - api-gateway
+      
 volumes:
   sql_data:
   
