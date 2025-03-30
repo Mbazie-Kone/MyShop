@@ -10,7 +10,7 @@ RUN npm run build --prod
 
 # Serve Angular app with nginx and custom configuration
 FROM nginx:stable-alpine
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
 
 # Use your custom configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
