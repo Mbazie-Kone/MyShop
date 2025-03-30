@@ -36,9 +36,18 @@ namespace admin_service.Controllers
             return Ok(admin);
         }
 
+        // api/admin/roles
+        [HttpGet("roles")]
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
+        {
+            return await _context.Roles.ToListAsync();
+        }
+
+
         // POST:
 
         // api/admin/register
+        [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register([FromBody] User request)
         {
             // Check if the username is already in use
@@ -109,5 +118,6 @@ namespace admin_service.Controllers
                 Role = user.Role.Name
             };
         }
+
     }
 }

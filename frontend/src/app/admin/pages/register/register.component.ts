@@ -21,6 +21,11 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       roleId: ['', Validators.required]
     });
+
+    this.adminService.getRoles().subscribe({
+      next: (res) => this.roles = res,
+      error: () => this.error = 'error loading roles'
+    })
   }
 
   onSubmit(): void {
@@ -31,5 +36,4 @@ export class RegisterComponent implements OnInit {
       error: (err) => this.error = err.error || 'Error during registration'
     });
   }
-
 }
