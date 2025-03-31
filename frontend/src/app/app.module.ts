@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
+import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

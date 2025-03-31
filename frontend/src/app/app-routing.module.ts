@@ -4,6 +4,7 @@ import { LoginComponent } from './admin/pages/login/login.component';
 import { RegisterComponent } from './admin/pages/register/register.component';
 import { AdminLayoutComponent } from './core/components/admin/layout/admin-layout.component';
 import { LayoutComponent } from './core/components/myshop/layout/layout.component';
+import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
 const routes: Routes = [
   { path: 'admin', redirectTo: 'admin/login', pathMatch: 'full'},
@@ -24,8 +25,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'catalog', pathMatch: 'full' },
       { path: 'catalog', loadChildren: () => import() }
     ]
-  }
-  { path: '**', redirectTo: 'catalog', pathMatch: 'full'}
+  },
+  { path: '**', component: ErrorPageComponent }
 ];
 
 @NgModule({
