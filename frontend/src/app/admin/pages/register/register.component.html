@@ -2,6 +2,7 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-4">
 
+            <!-- CARD FORM -->
             <div class="card p-5">
 
                 <!-- LOGO -->
@@ -10,14 +11,18 @@
                 </div>
                 
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                    <!-- USERNAME -->
                     <div class="mb-4 mt-4">
                         <input class="form-control" type="text" placeholder="Username" formControlName="username">
                     </div>
 
+                    <!-- PASSWORD -->
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Password" formControlName="password">
                     </div>
 
+                    <!-- CONFIRM PASSWORD -->
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
                         <small *ngif="registerForm.errors?.passwordsMismatch" class="text-danger">The passwords do not match.</small>
@@ -45,5 +50,3 @@
         </div>
     </div>
 </div>
-
-

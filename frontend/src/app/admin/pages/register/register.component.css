@@ -1,6 +1,5 @@
-.error {
-    color: red;
-    margin-top: 10px;
+.row {
+    height: 100vh;
 }
 
 .card {
@@ -10,6 +9,11 @@
     justify-content: center;
 }
 
-.row {
-    height: 100vh;
+.logo {
+    width: 120px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
 }
