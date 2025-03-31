@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-6">
-            <div class="card p-2">
+            <div class="card p-4">
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <input class="form-control" type="text" placeholder="Username" formControlName="username">
@@ -12,7 +12,6 @@
                     </div>
                 
                     <div class="mb-3">
-                        <label>Role</label>
                         <select class="form-select" formControlName="roleId">
                             <option value="">Select a role</option>
                             <option *ngFor="let role of roles" [value]="role.id">
