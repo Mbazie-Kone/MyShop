@@ -6,3 +6,7 @@
 .card {
     border-radius: 1px;
 }
+
+.row {
+    height: 100vh;
+}
