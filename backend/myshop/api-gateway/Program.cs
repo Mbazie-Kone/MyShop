@@ -15,8 +15,6 @@ builder.Services.AddReverseProxy()
 
 var app = builder.Build();
 
-app.UseCors("AllowFrontend");
-
 app.Use(async (context, next) =>
 {
     if (context.Request.Method == "OPTIONS")
@@ -29,6 +27,7 @@ app.Use(async (context, next) =>
     await next();
 });
 
+app.UseCors("AllowFrontend");
 
 app.MapReverseProxy();
 
