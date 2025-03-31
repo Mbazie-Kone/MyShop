@@ -21,12 +21,21 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       roleId: ['', Validators.required]
-    });
+    }, 
+    { validators: this.passwordsMatchValidator }
+  );
 
     this.adminService.getRoles().subscribe({
       next: (res) => this.roles = res,
       error: () => this.error = 'error loading roles'
     })
+  }
+
+  passwordsMatchValidator(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const confirm = group.get('confirmPassword')?.value;
+
+    return password === confirm ? null : { passwordsMismatch: true };
   }
 
   onSubmit(): void {
