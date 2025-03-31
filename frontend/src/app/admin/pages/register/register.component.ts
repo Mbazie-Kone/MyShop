@@ -39,11 +39,23 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) {
+      this.error = 'Fill in all the fields correctly.';
+      
+      return;
+    }
 
-    this.adminService.register(this.registerForm.value).subscribe({
-      next: () => alert('Registration completed!'),
-      error: (err) => this.error = err.error || 'Error during registration'
+    const formData = this.registerForm.value;
+
+    this.adminService.register(formData).subscribe({
+      next: () => {
+        alert('Registration completed!');
+        this.registerForm.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = err.error || 'Error during registration';
+      } 
     });
   }
 }
