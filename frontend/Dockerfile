@@ -6,7 +6,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build --prod
+# RUN npm run build --prod
+RUN npm run build
 
 # Serve Angular app with nginx and custom configuration
 FROM nginx:stable-alpine
