@@ -21,7 +21,8 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      
+      { path: '', redirectTo: 'catalog', pathMatch: 'full' },
+      { path: 'catalog', loadChildren: () => import() }
     ]
   }
   { path: '**', redirectTo: 'catalog', pathMatch: 'full'}
