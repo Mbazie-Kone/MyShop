@@ -6,11 +6,13 @@ import { AdminModule } from './admin/admin.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
+import { CatalogComponent } from './myshop/catalog/catalog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,
