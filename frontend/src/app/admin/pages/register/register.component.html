@@ -1,27 +1,35 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label>Username</label>
-        <input type="text" formControlName="username">
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" placeholder="Username" formControlName="username">
+                    </div>
 
-    <div>
-        <label>Password</label>
-        <input type="password" formControlName="password">
+                    <div class="mb-3">
+                        <input class="form-control" type="password" placeholder="Password" formControlName="password">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label>Role</label>
+                        <select class="form-select" formControlName="roleId">
+                            <option value="">Select a role</option>
+                            <option *ngFor="let role of roles" [value]="role.id">
+                                {{ role.name }}
+                            </option>
+                        </select>
+                    </div>
+                
+                    <button class="btn btn-success" type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+                
+                    <div class="error" *ngIf="error">
+                        {{ error }}
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div>
-        <label>Role</label>
-        <select formControlName="roleId">
-            <option value="">Select a role</option>
-            <option *ngFor="let role of roles" [value]="role.id">
-                {{ role.name }}
-            </option>
-        </select>
-    </div>
 
-    <button type="submit" [disabled]="registerForm.invalid">Sign Up</button>
-
-    <div class="error" *ngIf="error">
-        {{ error }}
-    </div>
-</form>
