@@ -1,10 +1,16 @@
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-4">
+
             <div class="card p-5">
-                <img src="../../../../../public/assets/images/logo.png" alt="logo">
+
+                <!-- LOGO -->
+                <div class="text-center mb-4">
+                    <img class="logo" src="assets/images/logo.png" alt="logo">
+                </div>
+                
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                    <div class="mb-4">
+                    <div class="mb-4 mt-4">
                         <input class="form-control" type="text" placeholder="Username" formControlName="username">
                     </div>
 
@@ -14,8 +20,10 @@
 
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+                        <small *ngif="registerForm.errors?.passwordsMismatch" class="text-danger">The passwords do not match.</small>
                     </div>
-                
+                    
+                    <!-- ROLE -->
                     <div class="mb-4">
                         <select class="form-select" formControlName="roleId">
                             <option value="">Select a role</option>
@@ -24,9 +32,11 @@
                             </option>
                         </select>
                     </div>
-                
-                    <button class="btn btn-success" type="submit" [disabled]="registerForm.invalid">Sign Up</button>
-                
+                    
+                    <!-- SUBMIT -->
+                    <button class="btn btn-success w-100" type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+                    
+                    <!-- ERROR -->
                     <div class="error" *ngIf="error">
                         {{ error }}
                     </div>
