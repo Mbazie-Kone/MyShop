@@ -7,6 +7,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { CoreModule } from './core/core.module';
 import { MyshopModule } from './myshop/myshop.module';
 import { ErrorsModule } from './errors/errors.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorsModule } from './errors/errors.module';
     AdminModule,
     CoreModule,
     MyshopModule,
-    ErrorsModule
+    ErrorsModule,
+    RouterModule
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

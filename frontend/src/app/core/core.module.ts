@@ -6,6 +6,7 @@ import { SidebarComponent } from './components/myshop/sidebar/sidebar.component'
 import { LayoutComponent } from './components/myshop/layout/layout.component';
 import { HeaderSidebarComponent } from './components/admin/header-sidebar/header-sidebar.component';
 import { AdminLayoutComponent } from './components/admin/layout/admin-layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AdminLayoutComponent } from './components/admin/layout/admin-layout.com
     AdminLayoutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,
