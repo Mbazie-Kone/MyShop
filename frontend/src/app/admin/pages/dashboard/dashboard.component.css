@@ -5,3 +5,7 @@
 .content .row {
     margin-right: 5px;
 }
+
+.card {
+    border-radius: 2px;
+}
