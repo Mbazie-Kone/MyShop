@@ -6,9 +6,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// SQL Server connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// SQL Server connection
 builder.Services.AddDbContext<AppDbContext>(options =>
 { 
     options.UseSqlServer(connectionString, sqlOptions =>
