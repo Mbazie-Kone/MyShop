@@ -42,6 +42,8 @@ services:
       - "4200:80"
     depends_on:
       - api-gateway
+    networks:
+      - mynetwork
       
 volumes:
   sql_data:
