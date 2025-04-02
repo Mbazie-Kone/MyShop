@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -16,25 +16,28 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
   ngOnInit(): void {
+    const options: AbstractControlOptions = {
+      validators: this.passwordsMatchValidator
+    };
+
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       roleId: ['', Validators.required]
-    }, 
-    { validators: this.passwordsMatchValidator }
-  );
+    }, options);
 
     this.adminService.getRoles().subscribe({
       next: (res) => this.roles = res,
       error: () => this.error = 'error loading roles'
-    })
+    });
   }
 
-  passwordsMatchValidator(group: FormGroup) {
+  passwordsMatchValidator(control: AbstractControl): { [key: string]: any } | null  {
+    const group = control as FormGroup;
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;
-
+  
     return password === confirm ? null : { passwordsMismatch: true };
   }
 
