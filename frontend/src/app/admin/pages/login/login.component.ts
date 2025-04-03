@@ -33,6 +33,6 @@ export class LoginComponent implements OnInit {
         console.error(err);
         this.error = err.error || 'Login failed';
       }
-    })
+    });
   }
 }
