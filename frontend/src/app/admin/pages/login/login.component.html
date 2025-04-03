@@ -11,11 +11,11 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
                     <div class="mb-4 mt-4">
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="text" class="form-control" placeholder="Username" formControlName="username">
                     </div>
 
                     <div class="mb-4">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" formControlName="password">
                     </div>
 
                     <div class="mb-4">
