@@ -42,12 +42,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.registerForm.invalid) {
-      this.error = 'Fill in all the fields correctly.';
-      
-      return;
-    }
-
+    if (this.registerForm.invalid) return;
+    
     const formData = this.registerForm.value;
 
     this.adminService.register(formData).subscribe({
