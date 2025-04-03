@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: [''],
-      password: ['']
-    })
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   onSubmit(): void {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     this.adminService.login(this.loginForm.value).subscribe({
       next: (res) => {
-        console.log('Login succes', res);
+        console.log('Login successful!', res);
         this.loginForm.reset();
       },
       error: (err) => {
