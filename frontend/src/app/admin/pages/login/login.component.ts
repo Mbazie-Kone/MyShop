@@ -27,6 +27,11 @@ export class LoginComponent implements OnInit {
     this.adminService.login(this.loginForm.value).subscribe({
       next: (res) => {
         console.log('Login succes', res);
+        this.loginForm.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = err.error || 'Login failed';
       }
     })
   }
