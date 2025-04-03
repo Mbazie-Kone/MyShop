@@ -23,5 +23,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.invalid) return;
+
+    this.adminService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        console.log('Login succes', res);
+      }
+    })
   }
 }
