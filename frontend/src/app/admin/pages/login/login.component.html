@@ -8,9 +8,9 @@
                     <img class="logo" src="assets/images/logo.png" alt="logo">
                  </div>
 
-                <form action="">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-                    <div class="mb-4">
+                    <div class="mb-4 mt-4">
                         <input type="text" class="form-control" placeholder="Username">
                     </div>
 
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <button class="btn btn-primary w-100">Login</button>
+                        <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid">Login</button>
                     </div>
 
                     <hr>
