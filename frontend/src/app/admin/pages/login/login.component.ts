@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm! : FormGroup;
+  error: string = '';
+
+  constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
   ngOnInit(): void {
 
