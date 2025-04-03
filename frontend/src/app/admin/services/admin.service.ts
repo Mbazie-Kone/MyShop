@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginResponse } from '../../core/models/login-response.model';
 import { LoginRequest, RegisterRequest } from '../../core/models/auth-request.model';
+import { Role, UserDto } from '../../core/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class AdminService {
 
   constructor(private http: HttpClient) {}
 
-  register(data: RegisterRequest): Observable<any> {
+  register(data: RegisterRequest): Observable<UserDto> {
 
-    return this.http.post(`${this.apiUrl}/register`, data);
+    return this.http.post<UserDto>(`${this.apiUrl}/register`, data);
   }
 
   login(data: LoginRequest): Observable<LoginResponse> {
@@ -23,8 +24,8 @@ export class AdminService {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
   }
 
-  getRoles(): Observable<any[]> {
+  getRoles(): Observable<Role[]> {
 
-    return this.http.get<any[]>(`${this.apiUrl}/roles`);
+    return this.http.get<Role[]>(`${this.apiUrl}/roles`);
   }
 }
