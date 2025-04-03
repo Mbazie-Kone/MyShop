@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { MyshopModule } from './myshop/myshop.module';
 import { ErrorsModule } from './errors/errors.module';
 import { RouterModule } from '@angular/router';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,14 @@ import { RouterModule } from '@angular/router';
     ErrorsModule,
     RouterModule
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: authInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
