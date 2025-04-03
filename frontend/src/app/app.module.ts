@@ -24,10 +24,9 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
     RouterModule
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
-      useValue: authInterceptor,
+      useFactory: () => authInterceptor,
       multi: true
     }
   ],
