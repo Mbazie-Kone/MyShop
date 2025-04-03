@@ -11,8 +11,8 @@ using System.Text;
 
 namespace admin_service.Controllers
 {
+    [Route("api/admin")]
     [ApiController]
-    [Route("api/[controller]")]
     public class AdminController : ControllerBase
     {
         private readonly AppDbContext _context;
