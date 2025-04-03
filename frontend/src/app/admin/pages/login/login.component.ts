@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     this.adminService.login(this.loginForm.value).subscribe({
       next: (res) => {
+        this.authService.setToken(res.token);
         console.log('Login successful!', res);
         this.loginForm.reset();
       },
