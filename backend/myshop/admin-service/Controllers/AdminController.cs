@@ -18,9 +18,10 @@ namespace admin_service.Controllers
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
 
-        public AdminController(AppDbContext context)
+        public AdminController(AppDbContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         // GET:
@@ -40,9 +41,7 @@ namespace admin_service.Controllers
         [HttpGet("roles")]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
-            var roles = await _context.Roles.ToListAsync();
-
-            return Ok(roles.Select(r => new { r.Id, r.Name }));
+            return await _context.Roles.ToListAsync();
         }
 
 
