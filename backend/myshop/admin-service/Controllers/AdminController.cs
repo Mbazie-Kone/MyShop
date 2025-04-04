@@ -40,7 +40,9 @@ namespace admin_service.Controllers
         [HttpGet("roles")]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
-            return await _context.Roles.ToListAsync();
+            var roles = await _context.Roles.ToListAsync();
+
+            return Ok(roles.Select(r => new { r.Id, r.Name }));
         }
 
 
