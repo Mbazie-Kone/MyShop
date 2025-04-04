@@ -25,7 +25,9 @@
                     <!-- CONFIRM PASSWORD -->
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
-                        <small *ngif="registerForm.errors?.passwordsMismatch" class="text-danger">The passwords do not match.</small>
+                        <small *ngIf="registerForm.errors?.['passwordsMismatch']" class="text-danger">
+                            The passwords do not match.
+                        </small>
                     </div>
                     
                     <!-- ROLE -->
