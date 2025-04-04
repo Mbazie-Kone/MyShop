@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         this.authService.setToken(res.token);
         console.log('Login successful!', res);
+
+        this.router.navigate(['/administration/dashboard']);
+
         this.loginForm.reset();
       },
       error: (err) => {
