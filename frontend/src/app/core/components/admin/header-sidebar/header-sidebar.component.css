@@ -68,8 +68,14 @@
   width: 250px;
   position: fixed;
   background: #1f3a93;
-  padding: 20px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar-header {
+    text-align: center;
 }
 
 .sidebar a {
