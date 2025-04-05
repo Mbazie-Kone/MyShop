@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'admin-icon';
-    src: url('../font/admin-icon.eot?1402895');
-    src: url('../font/admin-icon.eot?1402895#iefix') format('embedded-opentype'),
-         url('../font/admin-icon.woff2?1402895') format('woff2'),
-         url('../font/admin-icon.woff?1402895') format('woff'),
-         url('../font/admin-icon.ttf?1402895') format('truetype'),
-         url('../font/admin-icon.svg?1402895#admin-icon') format('svg');
+    src: url('../../../../../public/assets/fonts/admin-icon.eot?1402895');
+    src: url('../../../../../public/assets/fonts/admin-icon.eot?1402895#iefix') format('embedded-opentype'),
+         url('../../../../../public/assets/fonts/admin-icon.woff2?1402895') format('woff2'),
+         url('../../../../../public/assets/fonts/admin-icon.woff?1402895') format('woff'),
+         url('../../../../../public/assets/fonts/admin-icon.ttf?1402895') format('truetype'),
+         url('../../../../../public/assets/fonts/admin-icon.svg?1402895#admin-icon') format('svg');
     font-weight: normal;
     font-style: normal;
   }
