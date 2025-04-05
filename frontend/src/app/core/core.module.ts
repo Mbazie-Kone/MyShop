@@ -7,6 +7,7 @@ import { LayoutComponent } from './components/myshop/layout/layout.component';
 import { HeaderSidebarComponent } from './components/admin/header-sidebar/header-sidebar.component';
 import { AdminLayoutComponent } from './components/admin/layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
+import { AdminFooterComponent } from './components/admin/admin-footer/admin-footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     LayoutComponent,
     HeaderSidebarComponent,
     AdminLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    AdminFooterComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { RouterModule } from '@angular/router';
     LayoutComponent,
     HeaderSidebarComponent,
     AdminLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    AdminFooterComponent
   ]
 })
 export class CoreModule { }
