@@ -1,0 +1,8 @@
+
+.icon-dashboard:before { content: '\61'; } /* 'a' */
+.icon-chart:before { content: '\62'; } /* 'b' */
+.icon-products:before { content: '\63'; } /* 'c' */
+.icon-settings:before { content: '\64'; } /* 'd' */
+.icon-hamburger:before { content: '\65'; } /* 'e' */
+.icon-search:before { content: '\66'; } /* 'f' */
+.icon-bell:before { content: '\67'; } /* 'g' */
