@@ -101,3 +101,11 @@
   gap: 15px;
   cursor: pointer;
 }
+
+.icons {
+    font-size: 1.2rem;
+}
+
+.icon__name {
+    margin-left: 10px;
+}
