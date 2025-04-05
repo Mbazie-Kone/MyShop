@@ -22,7 +22,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'catalog', pathMatch: 'full' },
+      { path: 'catalog', redirectTo: 'catalog', pathMatch: 'full' },
       { path: '', loadChildren: () => import('./myshop/myshop.module').then(m => m.MyshopModule) }
     ]
   },
