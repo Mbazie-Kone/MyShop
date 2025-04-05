@@ -68,14 +68,8 @@
   width: 250px;
   position: fixed;
   background: #1f3a93;
-  color: white;
-  display: flex;
-  flex-direction: column;
   padding: 20px;
-}
-
-.sidebar-header {
-    text-align: center;
+  color: white;
 }
 
 .sidebar a {
@@ -83,13 +77,17 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 10px;
   font-size: 1rem;
 }
 
 .sidebar a:hover {
   background: #495057;
   border-radius: 5px;
+}
+
+.sidebar a i {
+    margin-right: 10px;
 }
 
 .navbar {
@@ -108,8 +106,9 @@
   cursor: pointer;
 }
 
-.icons {
+.navbar .icon-hamburger {
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .icon__name {
