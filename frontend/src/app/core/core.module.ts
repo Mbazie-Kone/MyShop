@@ -15,7 +15,8 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     LayoutComponent,
     HeaderSidebarComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     LayoutComponent,
     HeaderSidebarComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }
