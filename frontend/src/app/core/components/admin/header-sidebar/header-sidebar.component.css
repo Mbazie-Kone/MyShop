@@ -80,7 +80,7 @@
 }
 
 .sidebar a {
-    color: white;
+    color: black;
     text-decoration: none;
     display: flex;
     gap: 15px;
@@ -102,14 +102,13 @@
     margin-top: 1rem;
 }
 
+.sidebar__menu ul{
+    text-decoration: none;
+}
+
 .item {
     min-height: 2.5rem;
     position: relative;
-}
-
-.item__icon {
-    display: flex;
-    text-decoration: none;
 }
 
 .navbar {
@@ -124,4 +123,12 @@
 .navbar .icon-hamburger {
     font-size: 1.3rem;
     cursor: pointer;
+}
+
+.sidebar__user .sidebar__user__name {
+    color: black;
+}
+
+.sidebar__menu ul li a{
+    text-decoration: none;
 }
