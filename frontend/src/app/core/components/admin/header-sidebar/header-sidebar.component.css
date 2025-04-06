@@ -69,6 +69,7 @@
 
 .sidebar {
     height: 100vh;
+    height: 100svh;
     width: 250px;
     position: fixed;
     background: #9CA3AF;
@@ -86,8 +87,11 @@
     justify-content: center;
 }
 
-.sidebar__user_img {
+.sidebar__user .sidebar__user_img {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    border-block-color: hsl(240, 98%,36%);
 }

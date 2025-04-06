@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './header-sidebar.component.css'
 })
 export class HeaderSidebarComponent {
-
+  
 }
