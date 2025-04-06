@@ -68,6 +68,11 @@
     cursor: pointer;
 }
 
+.logo-dim {
+    width: 7rem;
+    height: 1.8rem;
+}
+
 /* SIDEBAR */
 
 .sidebar {
@@ -82,9 +87,10 @@
 }
 
 .sidebar__user .sidebar__user_img {
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
+    background: white;
     object-fit: cover;
     border: 5px solid white;
     border-block-color: hsl(240, 98%,36%);
