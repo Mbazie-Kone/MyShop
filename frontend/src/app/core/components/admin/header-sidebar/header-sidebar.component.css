@@ -85,3 +85,9 @@
     padding: 10px;
     justify-content: center;
 }
+
+.sidebar__user_img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
