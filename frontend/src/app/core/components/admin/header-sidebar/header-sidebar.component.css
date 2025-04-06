@@ -103,6 +103,10 @@
     color: black;
 }
 
+.sidebar__menu {
+    
+}
+
 .sidebar__menu ul {
     list-style: none;
 }
@@ -124,6 +128,6 @@
     cursor: pointer;
 }
 
-.item__icon {
-    
+.icon__name {
+    margin-left: 20px;
 }
