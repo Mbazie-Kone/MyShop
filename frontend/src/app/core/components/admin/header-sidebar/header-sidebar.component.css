@@ -86,6 +86,7 @@
     gap: 15px;
     padding: 10px;
     justify-content: center;
+    
 }
 
 .sidebar__user .sidebar__user_img {
@@ -95,6 +96,20 @@
     object-fit: cover;
     border: 5px solid white;
     border-block-color: hsl(240, 98%,36%);
+}
+
+.sidebar__menu {
+    margin-top: 1rem;
+}
+
+.item {
+    min-height: 2.5rem;
+    position: relative;
+}
+
+.item__icon {
+    display: flex;
+    text-decoration: none;
 }
 
 .navbar {
