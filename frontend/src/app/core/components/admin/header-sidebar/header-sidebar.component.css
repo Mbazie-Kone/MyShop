@@ -95,3 +95,15 @@
     border: 5px solid white;
     border-block-color: hsl(240, 98%,36%);
 }
+
+.navbar {
+    background-color: #9CA3AF;
+    padding: 10px;
+    display: flex;
+    margin-left: 270px;
+}
+
+.navbar .icon-hamburger {
+    font-size: 1.3rem;
+    cursor: pointer;
+}
