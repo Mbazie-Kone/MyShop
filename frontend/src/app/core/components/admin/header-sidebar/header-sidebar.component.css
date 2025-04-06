@@ -125,3 +125,11 @@
     margin-right: 5px;
     cursor: pointer;
 }
+
+.icons a {
+    color: black;
+}
+
+.icons a:hover {
+    color: white;
+}
