@@ -115,6 +115,10 @@
     cursor: pointer;
 }
 
+.navbar .icon-hamburger:hover {
+    color: white;
+}
+
 .icon__name {
     margin-left: 20px;
 }
