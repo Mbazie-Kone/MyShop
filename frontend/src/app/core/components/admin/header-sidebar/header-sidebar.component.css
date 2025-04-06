@@ -68,6 +68,10 @@
     cursor: pointer;
 }
 
+.sidebar__logo {
+    margin-top: 0.1px;
+}
+
 /* SIDEBAR */
 
 .sidebar {
