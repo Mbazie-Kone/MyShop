@@ -65,6 +65,7 @@
 
 .logo {
     width: 120px;
+    cursor: pointer;
 }
 
 .sidebar {
@@ -101,6 +102,8 @@
     padding: 10px;
     display: flex;
     margin-left: 270px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar .icon-hamburger {
