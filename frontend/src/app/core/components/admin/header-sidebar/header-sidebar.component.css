@@ -118,3 +118,10 @@
 .icon__name {
     margin-left: 20px;
 }
+
+.icons {
+    display: flex;
+    gap: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
