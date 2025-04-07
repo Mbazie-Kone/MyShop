@@ -100,7 +100,7 @@ namespace admin_service.Controllers
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim("username", user.Username),
                     new Claim(ClaimTypes.Role, user.Role!.Name)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_config.GetValue<int>("JwtSettings:ExpirationMinutes")),
