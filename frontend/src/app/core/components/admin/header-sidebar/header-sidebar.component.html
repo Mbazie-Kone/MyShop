@@ -15,17 +15,17 @@
   <div class="icons">
     <i class="icon-search"></i>
     <a href="#"><i class="icon-bell"></i></a>
-
+  
     <div class="user-menu">
       <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
 
       <div class="user-card" *ngIf="showUserCard">
-        <div class="card-body">
+        <div class="card-body text-center">
           <p><strong>{{ username }}</strong></p>
           <a href="/administration/settings">Settings</a>
         </div>
-        <div class="card-footer">
-          <button (click)="logout()" class="btn btn-danger btn-sm">Logout</button>
+        <div class="card-footer text-center">
+          <p (click)="logout()" class="logout">Logout</p>
         </div>
       </div>
     </div>
