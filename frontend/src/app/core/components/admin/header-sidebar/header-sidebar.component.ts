@@ -9,12 +9,18 @@ import { Router } from '@angular/router';
   styleUrl: './header-sidebar.component.css'
 })
 export class HeaderSidebarComponent {
-  isMenuOpen = false;
+  showUserCard = false;
+  username = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  toggleMenu(): void {
-    this.isMenuOpen  = !this.isMenuOpen;
+  ngOnInit() {
+    const tokenData = this.authService.decodeToken();
+    this.username = tokenData?.username || 'User';
+  }
+
+  toggleUserCard() {
+    this.showUserCard  = !this.showUserCard;
   }
 
   logout(): void {
