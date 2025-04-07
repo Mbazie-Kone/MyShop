@@ -115,6 +115,10 @@
     cursor: pointer;
 }
 
+.icon-search:hover {
+  color: white;
+}
+
 .icon-bell {
   color: black;
 }
@@ -163,4 +167,12 @@
 .card-footer {
   padding: 10px;
   text-align: right;
+}
+
+.user-card a:hover {
+  color: #9CA3AF;
+}
+
+.logout:hover {
+  color: red;
 }
