@@ -126,3 +126,32 @@
 .icons a:hover {
     color: white;
 }
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+}
+
+.submenu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: white;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  list-style: none;
+  min-width: 100px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.submenu li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.submenu li:hover {
+  background-color: #f2f2f2;
+}
