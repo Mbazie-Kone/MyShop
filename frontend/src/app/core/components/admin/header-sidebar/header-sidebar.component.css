@@ -127,6 +127,14 @@
     color: white;
 }
 
+.icon-bell:hover {
+  color: white;
+}
+
+.icon-user:hover {
+  color: white;
+}
+
 .user-menu {
   position: relative;
   cursor: pointer;
