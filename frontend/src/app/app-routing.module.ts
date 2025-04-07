@@ -19,11 +19,11 @@ const routes: Routes = [
     ]
   },
   { 
-    path: 'catalog',
+    path: '',
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'catalog', pathMatch: 'full' },
-      { path: '', loadChildren: () => import('./myshop/myshop.module').then(m => m.MyshopModule) }
+      { path: 'catalog', loadChildren: () => import('./myshop/myshop.module').then(m => m.MyshopModule) }
     ]
   },
   { path: '**', component: ErrorPageComponent }
