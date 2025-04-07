@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './header-sidebar.component.html',
   styleUrl: './header-sidebar.component.css'
 })
-export class HeaderSidebarComponent {
+export class HeaderSidebarComponent implements OnInit {
   showUserCard = false;
   username = '';
 
