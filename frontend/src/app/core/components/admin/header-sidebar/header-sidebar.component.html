@@ -13,19 +13,21 @@
   <i class="icon-hamburger" id="menuToggle"></i>
   <h4>My Shop Overview</h4>
   <div class="icons">
-    <a href="#"><i class="icon-search"></i></a>
-    <i class="icon-bell"></i>
-    <li class="user-menu" (click)="toggleMenu()">
-      <i class="icon-user"></i>
-      <div *ngIf="isMenuOpen" class="card" (click)="logout()">
+    <i class="icon-search"></i>
+    <a href="#"><i class="icon-bell"></i></a>
+
+    <div class="user-menu">
+      <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
+      <div class="user-card" *ngIf="showUserCard">
         <div class="card-body">
-          Admin
+          <p><strong>{{ username }}</strong></p>
+          <a href="/administration/settings">Settings</a>
         </div>
         <div class="card-footer">
-          Logout
+          <button (click)="logout()" class="btn btn-danger btn-sm">Logout</button>
         </div>
       </div>
-      </li>
-  </div>
+    </div>
+  </diV>
 </div>
 <br />
