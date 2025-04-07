@@ -18,7 +18,12 @@
   <div class="icons">
     <a href="#"><i class="icon-search"></i></a>
     <i class="icon-bell"></i>
-    <li class="user-menu" (click)="toggleMenu()"></li>
+    <li class="user-menu" (click)="toggleMenu()">
+      <i class="icon-user"></i>
+      <ul *ngIf="isMenuOpen" class="submenu">
+        <li (click)="logout()">Logout</li>
+      </ul>
+    </li>
   </div>
 </div>
 <br />
