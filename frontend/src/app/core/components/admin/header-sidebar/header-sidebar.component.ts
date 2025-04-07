@@ -12,4 +12,13 @@ export class HeaderSidebarComponent {
   isMenuOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  toggleMenu(): void {
+    this.isMenuOpen  = !this.isMenuOpen;
+  }
+
+  logout(): void {
+    this.authService.clearToken();
+    this.router.navigate(['/admin/login']);
+  }
 }
