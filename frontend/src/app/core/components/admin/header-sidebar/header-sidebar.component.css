@@ -133,29 +133,36 @@
 
 .user-menu {
   position: relative;
-  cursor: pointer;
   list-style: none;
 }
 
-.submenu {
+.user-card {
   position: absolute;
-  top: 30px;
+  top: 40px;
   right: 0;
-  background-color: white;
-  color: #333;
+  width: 200px;
+  background: white;
+  color: #000;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   list-style: none;
-  min-width: 100px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 100;
 }
 
-.submenu li {
-  padding: 5px 10px;
-  cursor: pointer;
+.card-body {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
 }
 
-.submenu li:hover {
-  background-color: #f2f2f2;
+.card-body a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.card-footer {
+  padding: 10px;
+  text-align: right;
 }
