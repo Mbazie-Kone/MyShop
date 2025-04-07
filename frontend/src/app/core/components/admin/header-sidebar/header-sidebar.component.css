@@ -146,7 +146,7 @@
   right: 0;
   background: white;
   color: #000;
-  border-radius: 8px;
+  border-radius: 5px;
   list-style: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   z-index: 100;
@@ -165,8 +165,8 @@
 }
 
 .card-footer {
-  padding: 10px;
-  text-align: right;
+  display: flex;
+  justify-content: center;
 }
 
 .user-card a:hover {
