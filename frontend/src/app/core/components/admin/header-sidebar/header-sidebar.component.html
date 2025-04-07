@@ -1,6 +1,6 @@
 <div class="sidebar" id="sidebar">
   <div class="sidebar__logo">
-    <a href="#"><img class="logo" src="assets/images/logo.png" alt="logo"></a>
+    <a href="/administration/dashboard"><img class="logo" src="assets/images/logo.png" alt="logo"></a>
   </div>
   <hr>
 
@@ -22,7 +22,7 @@
       <div class="user-card" *ngIf="showUserCard">
         <div class="card-body text-center">
           <p class="username-login"><strong>{{ username }}</strong></p>
-          <a href="/administration/settings">Settings</a>
+          <a href="/administration/user/settings">Settings</a>
         </div>
         <div class="card-footer text-center">
           <p (click)="logout()" class="logout">Logout</p>
