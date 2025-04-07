@@ -17,10 +17,15 @@
     <i class="icon-bell"></i>
     <li class="user-menu" (click)="toggleMenu()">
       <i class="icon-user"></i>
-      <ul *ngIf="isMenuOpen" class="submenu">
-        <li (click)="logout()" class="text-center">Logout</li>
-      </ul>
-    </li>
+      <div *ngIf="isMenuOpen" class="card" (click)="logout()">
+        <div class="card-body">
+          Admin
+        </div>
+        <div class="card-footer">
+          Logout
+        </div>
+      </div>
+      </li>
   </div>
 </div>
 <br />
