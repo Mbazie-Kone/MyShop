@@ -109,6 +109,7 @@
 .navbar-icons {
   display: flex;
   gap: 15px;
+  margin-right: 7px;
 }
 
 .icons {
