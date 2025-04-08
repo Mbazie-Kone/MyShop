@@ -1,11 +1,32 @@
 <div class="sidebar" id="sidebar">
   <div class="sidebar__logo">
-    <a href="/administration/dashboard"><img class="logo" src="assets/images/logo.png" alt="logo"></a>
+    <a routerLink="/administration/dashboard">
+      <img class="logo" src="assets/images/logo.png" alt="logo">
+    </a>
   </div>
   <hr>
 
   <div class="sidebar__user">
     <img class="sidebar__user__img">
+  </div>
+
+  <div class="sidebar-menu">
+    <a class="sidebar-item" routerLink="/administration/dashboard">
+      <i class="icons icon-dashboard"></i>
+      <span class="icon__name">Dashboard</span>
+    </a>
+    <div class="sidebar-item">
+      <i class="icons icon-chart"></i>
+      <a href="#">Analytics</a>
+    </div>
+    <div class="sidebar-item">
+      <i class="icons icon-products"></i>
+      <a href="#">Products</a>
+    </div>
+    <div class="sidebar-item">
+      <i class="icons icon-settings"></i>
+      <a href="#">Settings</a>
+    </div>
   </div>
 </div>
 

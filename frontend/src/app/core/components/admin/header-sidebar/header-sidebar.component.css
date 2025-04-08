@@ -88,6 +88,23 @@
     color: black;
 }
 
+.icons-column, .links-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.icon-column i {
+  margin: 15px 0;
+  text-align: right;
+}
+
+.links-column a {
+  margin: 15px 0;
+  text-align: left;
+}
+
 /* NAVBAR */
 
 .navbar {
