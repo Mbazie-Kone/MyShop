@@ -80,7 +80,7 @@
     background: #9CA3AF;
     object-fit: cover;
     border: 6px solid white;
-    border-block-color: black;
+    border-block-color: #000;
 }
 
 /* NAVBAR */
@@ -110,7 +110,8 @@
 /* ICONS */
 
 .sidebar-icons {
-  
+  color: #000;
+  font-size: 1.2rem;
 }
 
 .navbar-icons {
@@ -126,6 +127,11 @@
     padding: 10px;
 }
 
+.icons a {
+  text-decoration: none;
+  color: #000;
+}
+
 .icon-name {
   margin-left: 10px;
 }
@@ -136,7 +142,7 @@
 }
 
 .icon-bell {
-  color: black;
+  color: #000;
 }
 
 .icon-bell:hover {
@@ -178,7 +184,7 @@
 .card-body a {
   display: block;
   margin-top: 10px;
-  color: black;
+  color: #000;
   text-decoration: none;
 }
 
