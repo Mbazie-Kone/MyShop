@@ -106,12 +106,19 @@
 
 /* ICONS */
 
+.navbar-icons {
+  display: flex;
+  gap: 15px;
+}
+
 .icons {
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .icon-search:hover {
   color: white;
+  cursor: pointer;
 }
 
 .icon-bell {
@@ -120,10 +127,12 @@
 
 .icon-bell:hover {
   color: white;
+  
 }
 
 .icon-user:hover {
   color: white;
+  cursor: pointer;
 }
 
 .username-login {
@@ -170,4 +179,5 @@
 
 .logout:hover {
   color: red;
+  cursor: pointer;
 }
