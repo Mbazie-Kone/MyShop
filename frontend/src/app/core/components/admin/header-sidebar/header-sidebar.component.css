@@ -73,7 +73,11 @@
     color: white;
 }
 
-.sidebar-user-img {
+.sidebar a {
+  padding: 5px;
+}
+
+/*.sidebar-user-img {
     width: 4rem; 
     height: 4rem;
     border-radius: 50%;
@@ -81,7 +85,7 @@
     object-fit: cover;
     border: 6px solid white;
     border-block-color: #000;
-}
+}*/
 
 /* NAVBAR */
 
@@ -103,14 +107,13 @@
     color: white;
 }
 
-.navbar > h4 {
+.navbar h4 {
   cursor: default;
 }
 
 /* ICONS */
 
 .sidebar-icons {
-  color: #000;
   font-size: 1.2rem;
 }
 
@@ -130,6 +133,12 @@
 .icons a {
   text-decoration: none;
   color: #000;
+}
+
+.icons a:hover {
+  background: #096cae;
+  border-radius: 5px;
+  color: white;
 }
 
 .icon-name {
