@@ -15,18 +15,21 @@
       <i class="icons icon-dashboard"></i>
       <span class="icon__name">Dashboard</span>
     </a>
-    <div class="sidebar-item">
+
+    <a class="sidebar-item" routerLink="/administration/analytics">
       <i class="icons icon-chart"></i>
-      <a href="#">Analytics</a>
-    </div>
-    <div class="sidebar-item">
+      <span class="icon__name">Analytics</span>
+    </a>
+
+    <a class="sidebar-item" routerLink="/administration/products">
       <i class="icons icon-products"></i>
-      <a href="#">Products</a>
-    </div>
-    <div class="sidebar-item">
+      <span class="icon__name">Products</span>
+    </a>
+
+    <a class="sidebar-item" routerLink="/administration/settings">
       <i class="icons icon-settings"></i>
-      <a href="#">Settings</a>
-    </div>
+      <span class="icon__name">Settings</span>
+    </a>
   </div>
 </div>
 
@@ -35,7 +38,7 @@
   <h4><strong>My Shop Overview</strong></h4>
   <div class="icons">
     <i class="icon-search"></i>
-    <a href="/administration/notifications"><i class="icon-bell"></i></a>
+    <a routerLink="/administration/notifications"><i class="icon-bell"></i></a>
   
     <div class="user-menu">
       <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
@@ -43,7 +46,7 @@
       <div class="user-card" *ngIf="showUserCard">
         <div class="card-body text-center">
           <p class="username-login"><strong>{{ username }}</strong></p>
-          <a href="/administration/user/settings">Settings</a>
+          <a routerLink="/administration/user/settings">Settings</a>
         </div>
         <div class="card-footer text-center">
           <p (click)="logout()" class="logout mt-2">Logout</p>
