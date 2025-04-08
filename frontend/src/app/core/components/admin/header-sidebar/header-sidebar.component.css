@@ -109,6 +109,10 @@
 
 /* ICONS */
 
+.sidebar-icons {
+  
+}
+
 .navbar-icons {
   display: flex;
   gap: 15px;
