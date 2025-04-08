@@ -124,10 +124,10 @@
 }
 
 .icons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
 }
 
 .icons a {
@@ -177,7 +177,7 @@
   position: absolute;
   top: 25px;
   right: 0;
-  background: white;
+  background: #9CA3AF;
   color: #000;
   border-radius: 5px;
   list-style: none;
@@ -203,7 +203,7 @@
 }
 
 .user-card a:hover {
-  color: #9CA3AF;
+  color: white;
 }
 
 .logout:hover {
