@@ -71,6 +71,12 @@
     background: #9CA3AF;
     padding: 11px;
     color: white;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar.sidebar-collapsed {
+  width: 80px;
 }
 
 .sidebar a {
@@ -96,6 +102,11 @@
     margin-left: 270px;
     justify-content: space-between;
     align-items: center;
+    transition: margin-left 0.3s ease;
+}
+
+.navbar.navbar-expanded {
+  margin-left: 90px;
 }
 
 .navbar .icon-hamburger {
@@ -143,6 +154,13 @@
 
 .icon-name {
   margin-left: 10px;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.sidebar.sidebar-collapsed .icon-name {
+  opacity: 0;
+  display: none;
 }
 
 .icon-search:hover {
