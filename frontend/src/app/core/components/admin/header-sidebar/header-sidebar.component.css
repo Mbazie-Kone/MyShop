@@ -57,6 +57,10 @@
     cursor: pointer;
 }
 
+.sidebar-logo {
+  margin-left: 10px;
+}
+
 /* SIDEBAR */
 
 .sidebar {
@@ -115,6 +119,12 @@
 .icons {
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+}
+
+.icon-name {
+  margin-left: 10px;
 }
 
 .icon-search:hover {
