@@ -72,7 +72,7 @@
     padding: 11px;
     color: white;
     transition: width 0.3s ease;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .sidebar.sidebar-collapsed {
@@ -154,8 +154,9 @@
 
 .icon-name {
   margin-left: 10px;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, width 0.3s ease, margin-left 0.3s ease;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .sidebar.sidebar-collapsed .icon-name {
