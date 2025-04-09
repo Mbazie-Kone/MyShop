@@ -55,7 +55,26 @@ export class DashboardComponent implements OnInit {
   }
 
   createLineChart() {
-
+    new Chart('trafficChart', {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+          label: 'Visitors',
+          data: [300, 500, 400, 600],
+          fill: true,
+          borderColor: '#4e73df',
+          backgroundColor: 'rgba(78, 115, 223, 0.1)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
   }
 
 }
