@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class HeaderSidebarComponent implements OnInit {
   showUserCard = false;
   username = '';
-  isCollapsed = false;
 
   constructor(private authService: AuthService, private router: Router, private eRef: ElementRef) {}
 
@@ -36,7 +35,4 @@ export class HeaderSidebarComponent implements OnInit {
     }
   }
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
 }
