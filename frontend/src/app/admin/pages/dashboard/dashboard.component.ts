@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,22 @@ export class DashboardComponent implements OnInit {
   }
 
   createDonutChart() {
-
+    new Chart('categoryChart', {
+      type: 'doughnut',
+      data: {
+        labels: ['Books', 'Laptops', 'Phones', 'Accessories'],
+        datasets: [{
+          data: [30, 25, 20, 25],
+          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom'}
+        }
+      }
+    });
   }
 
   createBarChart() {
@@ -23,7 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createLineChart() {
-    
+
   }
 
 }
