@@ -8,11 +8,16 @@ import { Chart } from 'chart.js/auto';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  loading = true;
 
   ngOnInit(): void {
-    this.createDonutChart();
-    this.createBarChart();
-    this.createLineChart();
+    // Simulated data loading from the backend
+    setTimeout(() => {
+      this.createDonutChart();
+      this.createBarChart();
+      this.createLineChart();
+      this.loading = false;
+    }, 1000); // Simulate a 1-second delay
   }
 
   createDonutChart() {
