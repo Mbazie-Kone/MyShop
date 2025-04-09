@@ -35,7 +35,23 @@ export class DashboardComponent implements OnInit {
   }
 
   createBarChart() {
-
+    new Chart('revenueChart', {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+          label: 'Revenue (€)',
+          data: [1200, 1900, 3000, 2500, 3200],
+          backgroundColor: '#36b9cc'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
   }
 
   createLineChart() {
