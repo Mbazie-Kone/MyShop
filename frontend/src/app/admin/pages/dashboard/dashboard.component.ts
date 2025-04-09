@@ -8,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-
-
   ngOnInit(): void {
+    this.createDonutChart();
+    this.createBarChart();
+    this.createLineChart();
+  }
+
+  createDonutChart() {
+
+  }
+
+  createBarChart() {
+
+  }
+
+  createLineChart() {
     
   }
 
