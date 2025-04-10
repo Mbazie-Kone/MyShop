@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 
 @Component({
@@ -7,8 +7,16 @@ import { Chart } from 'chart.js/auto';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements AfterViewInit {
   loading = true;
+
+  @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('trafficChart') trafficChartRef!: ElementRef<HTMLCanvasElement>;
+
+  ngAfterViewInit(): void {
+   
+  }
 
   ngOnInit(): void {
     // Simulated data loading from the backend
