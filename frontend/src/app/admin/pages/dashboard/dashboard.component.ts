@@ -25,7 +25,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   createDonutChart() {
-    new Chart('categoryChart', {
+    new Chart(this.categoryChartRef.nativeElement, {
       type: 'doughnut',
       data: {
         labels: ['Books', 'Laptops', 'Phones', 'Accessories'],
@@ -44,7 +44,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   createBarChart() {
-    new Chart('revenueChart', {
+    new Chart(this.revenueChartRef.nativeElement, {
       type: 'bar',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -64,7 +64,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   createLineChart() {
-    new Chart('trafficChart', {
+    new Chart(this.trafficChartRef.nativeElement, {
       type: 'line',
       data: {
         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
