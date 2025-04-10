@@ -53,7 +53,7 @@
 /* LOGO */
 
 .logo {
-    width: 120px;
+    width: 90px;
     cursor: pointer;
 }
 
@@ -96,7 +96,8 @@
     margin: 0;
     justify-content: space-between;
     align-items: center;
-}
+    height: 65px;
+  }
 
 .navbar .icon-hamburger {
     font-size: 1.3rem;
