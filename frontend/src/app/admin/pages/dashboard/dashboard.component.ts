@@ -40,10 +40,12 @@ export class DashboardComponent implements AfterViewInit {
       },
       options: {
         responsive: true,
-        cutout: '74%',
         plugins: {
-          legend: { position: 'bottom'}
-        }
+          legend: {
+            display: false
+          }
+        },
+        cutout: '74%'
       }
     });
   }
