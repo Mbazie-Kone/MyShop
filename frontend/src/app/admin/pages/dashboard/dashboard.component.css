@@ -7,7 +7,7 @@
     height: 100%;
 }
 
-canvas {
+canvas#categoryChart {
     max-height: 250px;
     margin: auto;
 }
