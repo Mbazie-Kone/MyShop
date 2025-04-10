@@ -15,13 +15,17 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('trafficChart') trafficChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
-   // Simulated data loading from the backend
-   setTimeout(() => {
-    this.createDonutChart();
-    this.createBarChart();
-    this.createLineChart();
-    this.loading = false;
-  }, 1000); // Simulate a 1-second delay
+    // Delay the loading to allow Angular to update the DOM.
+    setTimeout(() => {
+      this.loading = false;
+
+      // Simulated data loading from the backend
+      setTimeout(() => {
+        this.createDonutChart();
+        this.createBarChart();
+        this.createLineChart();
+      }, 0);
+    }, 1000);
   }
 
   createDonutChart() {
