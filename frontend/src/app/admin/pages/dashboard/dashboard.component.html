@@ -4,7 +4,7 @@
 
 <div class="row" *ngIf="!loading">
   <div class="col-md-3">
-    <div class="card p-3 text-center">
+    <div class="card">
       <small class="text-danger"></small>
     </div>
   </div>
@@ -23,8 +23,9 @@
   </div>
 
   <div class="col-md-3">
-    <div class="card p-3 text-center">
-      <small class="text-success"></small>
+    <div class="card">
+      <h6 class="text-center">Sales by Category</h6>
+      <canvas class="charts" #categoryChart></canvas>
     </div>
   </div>
 </div>
@@ -32,22 +33,21 @@
 <div class="row mt-4" *ngIf="!loading">
   <div class="col-md-6 mb-4">
       <div class="card p-3">
-          <h6 class="text-center">Sales by Category</h6>
-          <canvas class="charts" #categoryChart></canvas>
+        
       </div>
   </div>
 
   <div class="col-md-6 mb-4">
       <div class="card p-3">
           <h6 class="text-center">Monthly Revenue</h6>
-          <canvas class="charts" #revenueChart></canvas>
+          <canvas #revenueChart></canvas>
       </div>
   </div>
 
   <div class="col-md-12">
     <div class="card p-3">
         <h6 class="text-center">Traffic Trend</h6>
-        <canvas class="charts" #trafficChart></canvas>
+        <canvas #trafficChart></canvas>
     </div>
   </div>
 </div>
