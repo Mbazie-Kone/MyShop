@@ -93,7 +93,7 @@
     background-color: #9CA3AF;
     padding: 10px;
     display: flex;
-    margin-left: 270px;
+    margin: 0;
     justify-content: space-between;
     align-items: center;
 }
