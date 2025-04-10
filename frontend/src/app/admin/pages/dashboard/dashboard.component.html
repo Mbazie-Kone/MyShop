@@ -23,7 +23,7 @@
   </div>
 
   <div class="col-md-3">
-    <div class="card">
+    <div class="card p-3">
       <h6 class="text-center">Sales by Category</h6>
       <canvas class="charts" #categoryChart></canvas>
     </div>
@@ -33,7 +33,8 @@
 <div class="row mt-4" *ngIf="!loading">
   <div class="col-md-6 mb-4">
       <div class="card p-3">
-        
+        <h6 class="text-center">Traffic Trend</h6>
+        <canvas #trafficChart></canvas>
       </div>
   </div>
 
@@ -45,9 +46,6 @@
   </div>
 
   <div class="col-md-12">
-    <div class="card p-3">
-        <h6 class="text-center">Traffic Trend</h6>
-        <canvas #trafficChart></canvas>
-    </div>
+    
   </div>
 </div>
