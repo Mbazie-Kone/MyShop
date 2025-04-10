@@ -90,15 +90,20 @@
 /* NAVBAR */
 
 .navbar {
-    background-color: #1f3a93;
-    color: white;
-    height: 60px;
-    z-index: 1050;
-  }
+  background-color: #1f3a93;
+  color: white;
+  height: 60px;
+  z-index: 1050;
+}
+
+.app-wrapper {
+  display: flex;
+  margin-top: 60px;
+}
 
 .navbar .icon-hamburger {
-    font-size: 1.3rem;
-    cursor: pointer;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
 
 .navbar .icon-hamburger:hover {
