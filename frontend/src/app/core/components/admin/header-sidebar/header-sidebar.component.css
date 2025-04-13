@@ -80,13 +80,13 @@
   font-size: 1.1rem;
 }
 
+.sidebar a {
+  text-decoration: none;
+}
+
 .sidebar a:hover {
   background-color: #34495e;
   color: #fff;
-}
-
-.sidebar .nav-link i {
-  margin-right: 10px;
 }
 
 /*.sidebar-user-img {
@@ -98,10 +98,6 @@
     border: 6px solid white;
     border-block-color: #000;
 }*/
-
-/* LOGO */
-
-
 
 /* NAVBAR */
 
