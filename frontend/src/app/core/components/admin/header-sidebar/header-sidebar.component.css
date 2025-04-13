@@ -103,11 +103,8 @@
   top: 0px;
   right: 0px;
   left: 260px;
-  height: 60px;
-  z-index: 1050;
+  z-index: 1000;
   display: flex;
-  align-items: center;
-  padding-left: 1.5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
