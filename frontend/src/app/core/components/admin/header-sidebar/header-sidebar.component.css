@@ -64,12 +64,17 @@
 }
 
 .sidebar-logo-container {
-  padding: 20px;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  height: 55px;
 }
 
 .sidebar-logo {
   width: 90px;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .sidebar-icons-container {
@@ -103,6 +108,7 @@
 
 .navbar {
   background-color: #fff;
+  height: 55px;
   top: 0px;
   right: 0px;
   left: 260px;
