@@ -90,8 +90,7 @@
 }
 
 .sidebar-icons-container a:hover {
-  background-color: #34495e;
-  color: #fff;
+
   border-radius: 5px;
 }
 
@@ -101,6 +100,7 @@
 
 .sidebar-icons-name {
   margin-left: 10px;
+  color: #475569;
 }
 
 /*.sidebar-user-img {
