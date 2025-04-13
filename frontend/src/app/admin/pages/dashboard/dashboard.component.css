@@ -4,8 +4,9 @@
 }
 
 .card {
+    width: 326px;
+    height: 164px;
     border-radius: 10px;
-    height: 100%;
 }
 
 .charts {
