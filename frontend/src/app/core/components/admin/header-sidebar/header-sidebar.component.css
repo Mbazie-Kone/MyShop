@@ -157,6 +157,7 @@
   margin-top: 55px;
   width: 99vw;
   margin-right: 0;
+  z-index: -4;
 }
 
 .icons a:hover {
