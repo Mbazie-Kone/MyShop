@@ -100,7 +100,7 @@
 
 .navbar {
   background-color: #fff;
-  color: white;
+  left: 260px;
   height: 60px;
   z-index: 1050;
   display: flex;
