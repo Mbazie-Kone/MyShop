@@ -74,24 +74,19 @@
 .sidebar-logo {
   width: 120px;
   cursor: pointer;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .sidebar-icons-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  font-size: 1.1rem;
-  padding: 20px;
+  font-size: 1.0rem;
+  padding: 10px;
 }
 
 .sidebar-icons-container a {
   text-decoration: none;
-}
-
-.sidebar-icons-container a:hover {
-
-  border-radius: 5px;
 }
 
 .sidebar-icons {
@@ -102,6 +97,7 @@
 .sidebar-icons-name {
   margin-left: 10px;
   color: #475569;
+  font-weight: 500;
 }
 
 /*.sidebar-user-img {
