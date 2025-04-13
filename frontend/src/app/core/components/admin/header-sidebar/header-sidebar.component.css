@@ -104,6 +104,11 @@
   color: #054ea8;
 }
 
+.container-fluid {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 /*.sidebar-user-img {
     width: 4rem; 
     height: 4rem;
