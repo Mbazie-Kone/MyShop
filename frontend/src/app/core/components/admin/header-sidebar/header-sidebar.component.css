@@ -84,17 +84,18 @@
   font-size: 1.1rem;
 }
 
-.sidebar-icons {
-  margin-left: 30px;
-}
-
-.sidebar a {
+.sidebar-icons-container a {
   text-decoration: none;
 }
 
-.sidebar a:hover {
+.sidebar-icons-container a:hover {
   background-color: #34495e;
   color: #fff;
+  border-radius: 5px;
+}
+
+.sidebar-icons {
+  margin-left: 30px;
 }
 
 .sidebar-icons-name {
