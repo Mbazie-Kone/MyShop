@@ -74,15 +74,18 @@
 .sidebar-logo {
   width: 90px;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .sidebar-icons-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px;
   font-size: 1.1rem;
+}
+
+.sidebar-icons {
+  margin-left: 30px;
 }
 
 .sidebar a {
@@ -92,6 +95,10 @@
 .sidebar a:hover {
   background-color: #34495e;
   color: #fff;
+}
+
+.sidebar-icons-name {
+  margin-left: 10px;
 }
 
 /*.sidebar-user-img {
@@ -127,12 +134,10 @@
   cursor: default;
 }
 
-/* ICONS */
-
 .navbar-icons {
   display: flex;
   gap: 15px;
-  margin-right: 7px;
+  align-items: center;
 }
 
 .icons a {
