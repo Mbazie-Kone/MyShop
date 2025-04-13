@@ -63,8 +63,13 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.sidebar-logo {
+.sidebar-logo-container {
   padding: 20px;
+}
+
+.sidebar-logo {
+  width: 90px;
+  cursor: pointer;
 }
 
 .sidebar-icons {
@@ -96,10 +101,7 @@
 
 /* LOGO */
 
-.logo {
-  width: 90px;
-  cursor: pointer;
-}
+
 
 /* NAVBAR */
 
