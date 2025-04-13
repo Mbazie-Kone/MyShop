@@ -9,7 +9,7 @@
 **MyShop** is a microservices-based e-commerce web application built with:
 - **Backend**: ASP.NET Core 8 (Microservices architecture)
 - **Frontend**: Angular 17
-- **Database**: Microsoft SQL Server
+- **Database**: Microsoft SQL Server 2022
 - **API Gateway**: YARP Reverse Proxy
 - **Containerization**: Docker & Docker Compose
 
@@ -40,16 +40,15 @@ docker-compose up --build
 
 ```
 This will:
-- tart the User-Service (ASP.NET Core)
-- tart the API Gateway (YARP)
+- Start the admin-service (ASP.NET Core)
+- Start the api-gateway (YARP)
 - Start the Angular Frontend
 - Start SQL Server with persistent data
 
-### ⏳ Wait until all containers are running, then open:
+### ⏳ Wait until all containers are running, then open in Browser:
 ```bash
-Frontend: http://localhost:4200
-Backend API: http://localhost:5000/api/users
-API Gateway: http://localhost:5001/users
+🌐 Frontend: http://localhost:4200
+🔐 Admin API Login: http://localhost:5000/api/admin/login
 
 ```
 
@@ -57,12 +56,13 @@ API Gateway: http://localhost:5001/users
 
 If you prefer running services manually without Docker:
 
-### ✅ Run the Backend (User-Service)
+### ✅ Run the Backend (admin-service)
 1. Open Visual Studio
-2. Select `UserService.sln`
+2. Select `AdminService.sln`
 3. Press `F5` or run:
 ```sh
-docker run
+cd backend/myshop/admin-service
+dotnet run
 
 ```
 
@@ -84,8 +84,8 @@ http://localhost:4200
 ```scss
 📦 MyShop
  ├── 📂 backend
- │   ├── 📂 UserService (ASP.NET Core Microservice)
- │   ├── 📂 ApiGateway (YARP Reverse Proxy)
+ │   ├── 📂 admin-service (ASP.NET Core Microservice)
+ │   ├── 📂 api-gateway (YARP Reverse Proxy)
  │   └── 📂 Database (SQL Server)
  ├── 📂 frontend (Angular UI)
  ├── 📄 docker-compose.yml (Container setup)
@@ -93,29 +93,33 @@ http://localhost:4200
 
 ```
 
-## 🔗 API Endpoints
+## API Endpoints (admin-service)
 
-| **Endpoint**           | **Description**         | **Method** |
-|------------------------|-------------------------|------------|
-| `/api/users`           | Get all users           | `GET`      |
-| `/api/users/{id}`      | Get user by ID          | `GET`      |
-| `/api/users/login`     | User authentication     | `POST`     |
-| `/api/users/register`  | Register a new user     | `POST`     |
+| **Endpoint**           | **Description**           | **Method** |
+|------------------------|---------------------------|------------|
+| `/api/admin/login`     | Login as admin with JWT   | `POST`     |
+| `/api/admin/register`  | Register a new admin user | `POST`     |
+| `/api/admin/roles`     | Fetch available roles     | `GET`      |
 
 
-## 🔥 Built With
-- ASP.NET Core 8 - Backend API
-- Angular 17 - Frontend UI
-- Microsoft SQL Server - Database
-- YARP Reverse Proxy - API Gateway
-- Docker & Docker Compose - Containerization
+## 🔧 Technologies Used
+
+- ASP.NET Core 8 – Backend REST API
+- Angular 17 – Modular and responsive frontend
+- Chart.js – Interactive and animated dashboard charts
+- Microsoft SQL Server 2022 – Relational database
+- YARP Reverse Proxy – Modern API Gateway
+- JWT Authentication – Token-based secured APIs
+- Bootstrap 5.3 – Clean responsive UI design
+- Docker & Docker Compose – Full containerization
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to:
+I welcome contributions! You can:
 - ⭐ Star this repository
 - 📥 Open an issue
 - 🛠 Submit a pull request
+- 💬 Suggest improvements or new features
 
 ## 🛡 License
 
