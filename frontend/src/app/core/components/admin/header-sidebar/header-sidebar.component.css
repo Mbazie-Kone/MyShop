@@ -60,7 +60,7 @@
     top: 0px;
     left: 0;
     overflow-y: auto;
-    border-right: 1px solid rgba(212, 208, 208);
+    border-right: 1px solid rgb(212, 208, 208);
 }
 
 .sidebar-logo-container {
@@ -126,12 +126,6 @@
   display: flex;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
-.app-wrapper {
-  display: flex;
-  margin-top: 60px;
-}
-
 
 .navbar h4 {
   cursor: default;
