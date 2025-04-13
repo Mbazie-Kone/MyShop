@@ -63,11 +63,16 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.icons {
+.sidebar-logo {
+  padding: 20px;
+}
+
+.sidebar-icons {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 20px;
+  font-size: 1.1rem;
 }
 
 .sidebar a:hover {
@@ -119,10 +124,6 @@
 }
 
 /* ICONS */
-
-.sidebar-icons {
-  font-size: 1.2rem;
-}
 
 .navbar-icons {
   display: flex;
