@@ -1,9 +1,10 @@
 .row {
     margin-right: 5px;
+    margin-top: 90px;
 }
 
 .card {
-    border-radius: 2px;
+    border-radius: 10px;
     height: 100%;
 }
 
