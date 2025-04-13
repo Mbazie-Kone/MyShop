@@ -115,7 +115,7 @@ http://localhost:4200
 
 ## 🤝 Contributing
 
-We welcome contributions! You can:
+I welcome contributions! You can:
 - ⭐ Star this repository
 - 📥 Open an issue
 - 🛠 Submit a pull request
