@@ -62,7 +62,7 @@
     overflow-y: auto;
     border-right: 1px solid rgb(212, 208, 208);
     position: fixed;
-    z-index: 2;
+    z-index: 500;
 }
 
 .sidebar-logo-container {
@@ -155,9 +155,8 @@
   background: #054ea8;
   position: absolute;
   margin-top: 55px;
-  width: 80vw;
+  width: 100vw;
   z-index: 20;
-  margin-left: 259px;
 }
 
 .icons a:hover {
