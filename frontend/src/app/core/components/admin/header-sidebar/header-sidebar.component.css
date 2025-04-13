@@ -72,7 +72,7 @@
   cursor: pointer;
 }
 
-.sidebar-icons {
+.sidebar-icons-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
