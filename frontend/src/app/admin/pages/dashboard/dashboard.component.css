@@ -1,15 +1,14 @@
 .row {
-    margin-top: 90px;
+    margin-top: 140px;
 }
 
 .card {
-    width: 326px;
     height: 164px;
     border-radius: 10px;
 }
 
 .charts {
-    max-height: 200px;
+   height: 200px;
     margin: auto;
 }
 
