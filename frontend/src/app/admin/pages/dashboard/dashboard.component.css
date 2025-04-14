@@ -1,6 +1,12 @@
+.test-dashboard {
+    padding: 20px;
+    margin-left: 260px;
+    position: absolute;
+    z-index: 40;
+}
+
 .row {
-    margin-top: 140px;
-    position: relative;
+    margin-top: 100px;
 }
 
 .card {

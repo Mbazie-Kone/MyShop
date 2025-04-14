@@ -151,16 +151,6 @@
   color: #000;
 }
 
-/* TEST */
-.test {
-  height: 200px;
-  background: #054ea8;
-  position: absolute;
-  margin-top: 55px;
-  width: 100vw;
-  z-index: 20;
-}
-
 .icons a:hover {
   background: #096cae;
   border-radius: 5px;

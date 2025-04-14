@@ -1,8 +1,17 @@
 .content {
-    margin-left: 260px;
-    padding: 20px;
+    width: 100vw;
     background-color: #f4f7f9;
     height: 100vh;
     position: relative;
     z-index: -1;
 }
+
+/* TEST */
+.test {
+    height: 200px;
+    background: #054ea8;
+    position: absolute;
+    margin: 0;
+    width: 100vw;
+    z-index: 20;
+  }
