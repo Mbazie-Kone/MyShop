@@ -1,16 +1,13 @@
 .test-dashboard {
+    margin-top: 100px;
     padding: 20px;
     margin-left: 260px;
     position: absolute;
     z-index: 40;
 }
 
-.row {
-    margin-top: 100px;
-}
-
 .card {
-    height: 164px;
+    height: 155px;
     border-radius: 10px;
 }
 
