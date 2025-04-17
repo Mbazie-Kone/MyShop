@@ -117,8 +117,7 @@
 
 .container-fluid {
   margin-left: 260px;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
 /*.sidebar-user-img {
