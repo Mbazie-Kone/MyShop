@@ -1,13 +1,16 @@
 .card {
-    height: 200px;
     border-radius: 10px;
-    overflow: hidden;
-    padding: 10px;
 }
 
-.charts {
-   height: 150px;
-   margin: auto;
+.chart-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 300px;
 }
 
 .spinner-container {
