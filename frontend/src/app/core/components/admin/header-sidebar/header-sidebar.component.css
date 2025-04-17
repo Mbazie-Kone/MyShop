@@ -134,6 +134,10 @@
   display: flex;
   gap: 15px;
   align-items: center;
+}
+
+.margin-right-icons,
+.margin-right-icons i {
   color: #94a3b8;
 }
 
