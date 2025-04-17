@@ -172,12 +172,17 @@
   position: absolute;
   top: 25px;
   right: 0;
+  width: 145px;
   background: #fff;
-  color: #000;
+  color: #475569;
   border-radius: 5px;
   list-style: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   z-index: 100;
+}
+
+.user-card a:hover {
+  color: #054ea8;
 }
 
 .card-body {
@@ -188,17 +193,8 @@
 .card-body a {
   display: block;
   margin-top: 10px;
-  color: #000;
+  color: #475569;
   text-decoration: none;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: center;
-}
-
-.user-card a:hover {
-  color: white;
 }
 
 .logout:hover {
