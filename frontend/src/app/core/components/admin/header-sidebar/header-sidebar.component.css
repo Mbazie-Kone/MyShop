@@ -136,7 +136,6 @@
   align-items: center;
 }
 
-.icon-user,
 .margin-right-icons i,
 .icon-hamburger {
   color: #94a3b8;
@@ -145,6 +144,11 @@
 .icon-user,
 .icon-hamburger:hover {
   cursor: pointer;
+  color: #054ea8;
+}
+
+.margin-right-icons i:hover {
+  color: #054ea8;
 }
 
 .username-login {
