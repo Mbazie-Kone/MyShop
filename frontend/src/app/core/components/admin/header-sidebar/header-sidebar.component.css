@@ -155,12 +155,16 @@
   color: #054ea8;
 }
 
-.username-login {
+.user-logged {
   cursor: default;
+  color: #475569;
 }
 
 .user-menu {
   position: relative;
+}
+
+.user-menu li {
   list-style: none;
 }
 
@@ -168,7 +172,7 @@
   position: absolute;
   top: 25px;
   right: 0;
-  background: #9CA3AF;
+  background: #fff;
   color: #000;
   border-radius: 5px;
   list-style: none;
