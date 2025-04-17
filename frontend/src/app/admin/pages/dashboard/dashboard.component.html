@@ -27,8 +27,13 @@
 
   <div class="col-md mb-4">
     <div class="card p-3">
-      <h6 class="text-center">Monthly Revenue</h6>
-      <canvas #revenueChart></canvas>
+      <div class="spinner-container" *ngIf="loading">
+        <div class="spinner"></div>
+      </div>
+      <div *ngIf="!loading">
+        <h6 class="text-center">Monthly Revenue</h6>
+        <canvas #revenueChart></canvas>
+      </div>
     </div>
   </div>
 </div>
