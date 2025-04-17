@@ -1,13 +1,5 @@
-.test-dashboard {
-    margin-top: 100px;
-    padding: 20px;
-    margin-left: 260px;
-    position: absolute;
-    z-index: 40;
-}
-
 .card {
-    height: 155px;
+    height: auto;
     border-radius: 10px;
 }
 
