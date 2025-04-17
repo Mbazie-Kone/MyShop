@@ -134,40 +134,12 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  color: #94a3b8;
 }
 
 .icons a {
   text-decoration: none;
   color: #000;
-}
-
-.icons a:hover {
-  background: #096cae;
-  border-radius: 5px;
-  color: white;
-}
-
-.icon-name {
-  margin-left: 10px;
-}
-
-.icon-search:hover {
-  color: white;
-  cursor: pointer;
-}
-
-.icon-bell {
-  color: #000;
-}
-
-.icon-bell:hover {
-  color: white;
-  
-}
-
-.icon-user:hover {
-  color: white;
-  cursor: pointer;
 }
 
 .username-login {
