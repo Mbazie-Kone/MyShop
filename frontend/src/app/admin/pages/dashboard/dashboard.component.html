@@ -12,11 +12,16 @@
   </div>
 </div>
 
-<div class="row mt-4" *ngIf="!loading">
+<div class="row mt-4">
   <div class="col-md mb-4">
     <div class="card p-3">
-      <h6 class="text-center">Traffic Trend</h6>
-      <canvas #trafficChart></canvas>
+      <div class="spinner-container" *ngIf="loading">
+        <div class="spinner"></div>
+      </div>
+      <div *ngIf="!loading">
+        <h6 class="text-center">Traffic Trend</h6>
+        <canvas #trafficChart></canvas>
+      </div>
     </div>
   </div>
 
