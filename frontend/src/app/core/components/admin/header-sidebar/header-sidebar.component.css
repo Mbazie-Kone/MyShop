@@ -106,6 +106,15 @@
 
 /* NAVBAR */
 
+.navbar {
+  background-color: #fff;
+  height: auto;
+  width: 100vw;
+  z-index: 500;
+  display: flex;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 .container-fluid {
   margin-left: 260px;
   padding-left: 20px;
@@ -122,15 +131,6 @@
     border-block-color: #000;
 }*/
 
-.navbar {
-  background-color: #fff;
-  height: auto;
-  right: 0px;
-  width: 100vw;
-  z-index: 500;
-  display: flex;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
 
 .navbar h4 {
   cursor: default;
