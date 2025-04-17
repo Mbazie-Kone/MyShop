@@ -136,15 +136,15 @@
   align-items: center;
 }
 
-.margin-right-icons,
+.icon-user,
 .margin-right-icons i,
 .icon-hamburger {
   color: #94a3b8;
 }
 
-.icons a {
-  text-decoration: none;
-  color: #000;
+.icon-user,
+.icon-hamburger:hover {
+  cursor: pointer;
 }
 
 .username-login {
