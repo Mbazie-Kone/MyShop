@@ -1,49 +1,29 @@
-<div class="test-dashboard">
-  <div class="spinner-container" *ngIf="loading">
-    <div class="spinner"></div>
-  </div>
-
-  <div class="row" *ngIf="!loading">
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h6 class="text-center">Sales by Category</h6>
-        <canvas class="charts" #categoryChart></canvas>
+<div class="row">
+  <div class="col-md-3">
+    <div class="card p-3">
+      <div class="spinner-container" *ngIf="loading">
+        <div class="spinner"></div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h6 class="text-center">Sales by Category</h6>
-        <canvas class="charts" #categoryChart></canvas>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h6 class="text-center">Sales by Category</h6>
-        <canvas class="charts" #categoryChart></canvas>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card p-3">
+      <div *ngIf="!loading">
         <h6 class="text-center">Sales by Category</h6>
         <canvas class="charts" #categoryChart></canvas>
       </div>
     </div>
   </div>
-  <div class="row"></div>
+</div>
 
-  <div class="row mt-4" *ngIf="!loading">
-    <div class="col-md mb-4">
-      <div class="card p-3">
-        <h6 class="text-center">Traffic Trend</h6>
-        <canvas #trafficChart></canvas>
-      </div>
+<div class="row mt-4" *ngIf="!loading">
+  <div class="col-md mb-4">
+    <div class="card p-3">
+      <h6 class="text-center">Traffic Trend</h6>
+      <canvas #trafficChart></canvas>
     </div>
+  </div>
 
-    <div class="col-md mb-4">
-      <div class="card p-3">
-        <h6 class="text-center">Monthly Revenue</h6>
-        <canvas #revenueChart></canvas>
-      </div>
+  <div class="col-md mb-4">
+    <div class="card p-3">
+      <h6 class="text-center">Monthly Revenue</h6>
+      <canvas #revenueChart></canvas>
     </div>
   </div>
 </div>
