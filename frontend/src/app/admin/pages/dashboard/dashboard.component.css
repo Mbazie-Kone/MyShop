@@ -2,6 +2,10 @@
     border-radius: 10px;
 }
 
+.chart-wrapper-test {
+    max-width: 200px;
+}
+
 .chart-wrapper {
     max-width: 500px;
     margin: 0 auto;
