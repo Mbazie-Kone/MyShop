@@ -1,6 +1,5 @@
 <div class="navbar fixed-top">
   <div class="container-fluid">
-    <div class="navbar-icons">
       <i class="icon-hamburger"></i>
       <form class="d-flex" role="search">
         <input
@@ -9,26 +8,26 @@
           placeholder="Search"
           aria-label="Search"/>
       </form>
-      <a routerLink="/administration/notifications">
-        <i class="icon-bell"></i>
-      </a>
 
-      <div class="user-menu">
-        <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
-
-        <div class="user-card" *ngIf="showUserCard">
-          <div class="card-body text-center">
-            <p class="username-login">
-              <strong>{{ username }}</strong>
-            </p>
-            <a routerLink="/administration/user/settings">Settings</a>
-          </div>
-          <div class="card-footer text-center">
-            <p (click)="logout()" class="logout mt-2">Logout</p>
+      <div class="margin-right-icons">
+        <a routerLink="/administration/notifications">
+          <i class="icon-bell"></i>
+        </a>
+        <div class="user-menu">
+          <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
+          <div class="user-card" *ngIf="showUserCard">
+            <div class="card-body text-center">
+              <p class="username-login">
+                <strong>{{ username }}</strong>
+              </p>
+              <a routerLink="/administration/user/settings">Settings</a>
+            </div>
+            <div class="card-footer text-center">
+              <p (click)="logout()" class="logout mt-2">Logout</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </div>
 
