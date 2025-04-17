@@ -61,7 +61,6 @@
     left: 0;
     overflow-y: auto;
     border-right: 1px solid rgb(212, 208, 208);
-    position: fixed;
     z-index: 1000;
 }
 
@@ -75,7 +74,6 @@
 
 .sidebar-logo {
   width: 120px;
-  cursor: pointer;
   margin-left: 20px;
 }
 
