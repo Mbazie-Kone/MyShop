@@ -77,6 +77,16 @@
   margin-left: 20px;
 }
 
+/*.sidebar-user-img {
+    width: 4rem; 
+    height: 4rem;
+    border-radius: 50%;
+    background: #9CA3AF;
+    object-fit: cover;
+    border: 6px solid white;
+    border-block-color: #000;
+}*/
+
 .sidebar-icons-container {
   display: flex;
   flex-direction: column;
@@ -118,21 +128,6 @@
 .container-fluid {
   margin-left: 260px;
   margin-right: 20px;
-}
-
-/*.sidebar-user-img {
-    width: 4rem; 
-    height: 4rem;
-    border-radius: 50%;
-    background: #9CA3AF;
-    object-fit: cover;
-    border: 6px solid white;
-    border-block-color: #000;
-}*/
-
-
-.navbar h4 {
-  cursor: default;
 }
 
 .navbar-icons {
