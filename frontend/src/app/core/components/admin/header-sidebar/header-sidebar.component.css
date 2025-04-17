@@ -104,6 +104,8 @@
   color: #054ea8;
 }
 
+/* NAVBAR */
+
 .container-fluid {
   margin-left: 260px;
   padding-left: 20px;
@@ -120,13 +122,9 @@
     border-block-color: #000;
 }*/
 
-/* NAVBAR */
-
 .navbar {
   background-color: #fff;
-  position: fixed;
-  height: 55px;
-  top: 0px;
+  height: auto;
   right: 0px;
   width: 100vw;
   z-index: 500;
