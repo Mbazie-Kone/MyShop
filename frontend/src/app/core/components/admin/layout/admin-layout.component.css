@@ -3,13 +3,3 @@
     background-color: #f4f7f9;
     height: 100vh;
 }
-
-/* DIV BLUE FOR Z-INDEX */
-.blue {
-    height: 200px;
-    background: #054ea8;
-    position: absolute;
-    margin: 0;
-    width: 100vw;
-    z-index: 20;
-}
