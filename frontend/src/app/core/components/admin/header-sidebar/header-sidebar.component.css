@@ -132,7 +132,7 @@
 
 .margin-right-icons {
   display: flex;
-  gap: 15px;
+  gap: 25px;
   align-items: center;
 }
 
@@ -141,12 +141,16 @@
   color: #94a3b8;
 }
 
-.icon-user,
-.icon-hamburger:hover {
-  cursor: pointer;
-  color: #054ea8;
+.icon-hamburger {
+  font-size: 1.4rem;
 }
 
+.icon-user:hover,
+.icon-hamburger:hover {
+  cursor: pointer;
+}
+
+.icon-hamburger:hover,
 .margin-right-icons i:hover {
   color: #054ea8;
 }
