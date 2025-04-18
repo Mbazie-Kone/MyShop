@@ -14,6 +14,7 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('trafficChart') trafficChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('radarChart') radarChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('stackedChart') stackedChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
     // Delay the loading to allow Angular to update the DOM.
@@ -26,6 +27,7 @@ export class DashboardComponent implements AfterViewInit {
         this.createBarChart();
         this.createLineChart();
         this.createRadarChart();
+        this.createStackedBarChart();
       }, 0);
     }, 1000);
   }
@@ -112,6 +114,38 @@ export class DashboardComponent implements AfterViewInit {
         responsive: true,
         scales: {
           r: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  createStackedBarChart() {
+    new Chart(this.stackedChartRef.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        datasets: [{
+          label: 'Online Orders',
+          data: [0, 0, 0, 0],
+          backgroundColor: '#4e73df'
+        },
+      {
+        label: 'Store Orders',
+        data: [0, 0, 0, 0],
+        backgroundColor: '#1cc88a'
+      }
+      ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            stacked: true
+          },
+          y: {
+            stacked: true,
             beginAtZero: true
           }
         }
