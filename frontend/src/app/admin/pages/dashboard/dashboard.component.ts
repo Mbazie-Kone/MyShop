@@ -13,6 +13,7 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('trafficChart') trafficChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('radarChart') radarChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
     // Delay the loading to allow Angular to update the DOM.
@@ -24,6 +25,7 @@ export class DashboardComponent implements AfterViewInit {
         this.createDonutChart();
         this.createBarChart();
         this.createLineChart();
+        this.createRadarChart();
       }, 0);
     }, 1000);
   }
@@ -32,9 +34,9 @@ export class DashboardComponent implements AfterViewInit {
     new Chart(this.categoryChartRef.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ['Books', 'Laptops', 'Phones', 'Accessories'],
+        labels: [],
         datasets: [{
-          data: [30, 25, 20, 25],
+          data: [],
           backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
         }]
       },
@@ -57,7 +59,7 @@ export class DashboardComponent implements AfterViewInit {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
         datasets: [{
           label: 'Revenue (€)',
-          data: [1200, 1900, 3000, 2500, 3200],
+          data: [0, 0, 0, 0, 0],
           backgroundColor: '#36b9cc'
         }]
       },
@@ -77,7 +79,7 @@ export class DashboardComponent implements AfterViewInit {
         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
         datasets: [{
           label: 'Visitors',
-          data: [300, 500, 400, 600],
+          data: [0, 0, 0, 0],
           fill: true,
           borderColor: '#4e73df',
           backgroundColor: 'rgba(78, 115, 223, 0.1)',
@@ -88,6 +90,30 @@ export class DashboardComponent implements AfterViewInit {
         responsive: true,
         scales: {
           y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  createRadarChart() {
+    new Chart(this.radarChartRef.nativeElement, {
+      type: 'radar',
+      data: {
+        labels: ['Speed', 'Quality', 'Suppot', 'Features', 'Usability'],
+        datasets: [{
+          label: 'Score',
+          data: [0, 0, 0, 0, 0],
+          backgroundColor: 'rgba(54, 185, 204, 0.2)',
+          borderColor: '#36b9cc',
+          pointBackgroundColor: '#36b9cc'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            beginAtZero: true
+          }
         }
       }
     });
