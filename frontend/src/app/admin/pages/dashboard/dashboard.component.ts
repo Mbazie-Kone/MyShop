@@ -16,6 +16,7 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('radarChart') radarChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('stackedChart') stackedChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('areaChart') areaChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('pieChart') pieChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
     // Delay the loading to allow Angular to update the DOM.
@@ -30,6 +31,7 @@ export class DashboardComponent implements AfterViewInit {
         this.createRadarChart();
         this.createStackedBarChart();
         this.createAreaChart();
+        this.createPieChart();
       }, 0);
     }, 1000);
   }
@@ -173,6 +175,25 @@ export class DashboardComponent implements AfterViewInit {
         responsive: true,
         scales: {
           y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  createPieChart() {
+    new Chart(this.pieChartRef.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ['Admin', 'Customer', 'Guest'],
+        datasets: [{
+          data: [0, 0, 0],
+          backgroundColor: ['#f6c23e', '#36b9cc', '#e74a3b']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
         }
       }
     });
