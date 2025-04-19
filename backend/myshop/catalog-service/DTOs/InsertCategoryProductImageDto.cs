@@ -7,9 +7,11 @@
         public decimal Price { get; set; }
         public int Stock {  get; set; }
         public bool IsAvailable { get; set; }
-        public long CategoryId { get; set; }
 
-        // At most 10 images (validated in the controller)
+        // Foreign key for category
+        public int CategoryId { get; set; }
+
+        // Optional image URLs (up to 10)
         public List<string>? ImageUrls { get; set; }
     }
 }
