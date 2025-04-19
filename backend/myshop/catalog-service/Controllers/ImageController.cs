@@ -7,22 +7,21 @@ namespace catalog_service.Controllers
 {
     [Route("api/catalog")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class ImageController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public CategoryController(AppDbContext context)
+        public ImageController(AppDbContext context)
         {
             _context = context;
         }
 
         // GET:
 
-        // Get all categories
-        [HttpGet("categories")]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        // Get all images
+        public async Task<ActionResult<IEnumerable<Image>>> GetImages()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Images.Include(i => i.Product).ToListAsync();
         }
     }
 }
