@@ -22,6 +22,19 @@ services:
       - sqlserver
     networks:
       - mynetwork
+  
+  catalog-service:
+    build:
+      context: ./backend/myshop/catalog-service
+    container_name: catalog-service
+    ports:
+      - "5002:80"
+    volumes:
+      - ./shared/public/images:/app/wwwroot/assets/images
+    depends_on:
+      - sqlserver
+    networks:
+      - mynetwork
       
   api-gateway:
     build:
