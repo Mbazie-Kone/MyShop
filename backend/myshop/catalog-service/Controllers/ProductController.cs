@@ -16,7 +16,7 @@ namespace catalog_service.Controllers
             _context = context;
         }
 
-        // GET
+        // GET:
 
         // Get all products
         [HttpGet("products")]
@@ -25,7 +25,7 @@ namespace catalog_service.Controllers
             return await _context.Products.Include(p => p.Category).Include(p => p.Images).ToListAsync();
         }
 
-        // POST
+        // POST:
 
         // Add new product
         [HttpPost("add-product")]

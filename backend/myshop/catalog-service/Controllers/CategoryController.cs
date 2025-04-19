@@ -16,7 +16,7 @@ namespace catalog_service.Controllers
             _context = context;
         }
 
-        // GET
+        // GET:
 
         // Get all products
         [HttpGet("categories")]
