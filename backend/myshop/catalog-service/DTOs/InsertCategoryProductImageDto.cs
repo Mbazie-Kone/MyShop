@@ -20,7 +20,6 @@ namespace catalog_service.DTOs
         public bool IsAvailable { get; set; }
 
         // Foreign key for category
-
         [Required(ErrorMessage = "Category is required.")]
         public int CategoryId { get; set; }
 
