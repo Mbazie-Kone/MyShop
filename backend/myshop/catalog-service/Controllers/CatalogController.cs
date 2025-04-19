@@ -11,10 +11,12 @@ namespace catalog_service.Controllers
     public class CatalogController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CatalogController(AppDbContext context)
+        public CatalogController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET:
