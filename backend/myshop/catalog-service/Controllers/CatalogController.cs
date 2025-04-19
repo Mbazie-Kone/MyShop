@@ -34,6 +34,15 @@ namespace catalog_service.Controllers
             return Ok(product);
         }
 
+        // api/catalog/categories
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var categories = await _context.Categories.ToListAsync();
+
+            return Ok(categories);
+        }
+
         // POST:
 
         // api/catalog/add-product
