@@ -9,7 +9,7 @@
 
     <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea name="" id="" class="form-control" rows="3" formControlName="description"></textarea>
+        <textarea class="form-control" rows="3" formControlName="description"></textarea>
     </div>
 
     <div class="mb-3">
@@ -25,8 +25,8 @@
     <div class="mb-3">
         <label class="form-label">Availability</label>
         <select class="form-select" formControlName="isAvailable">
-            <option [value]="">Available</option>
-            <option [value]="">Not Available</option>
+            <option [value]="true">Available</option>
+            <option [value]="false">Not Available</option>
         </select>
     </div>
 
@@ -36,4 +36,6 @@
             <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
         </select>
     </div>
+
+    <button class="btn btn-success mt-3" type="submit" [disabled]="prosuctForm.invalid">Add Product</button>
 </form>
