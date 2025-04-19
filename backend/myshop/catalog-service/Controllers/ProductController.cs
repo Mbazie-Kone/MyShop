@@ -34,7 +34,7 @@ namespace catalog_service.Controllers
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProducts), new { id = product.Id}, product);
+            return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
         }
     }
     
