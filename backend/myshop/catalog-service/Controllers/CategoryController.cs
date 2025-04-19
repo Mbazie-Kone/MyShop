@@ -16,6 +16,9 @@ namespace catalog_service.Controllers
             _context = context;
         }
 
+        // GET
+
+        // Get all products
         [HttpGet("categories")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {

@@ -3,41 +3,39 @@ using catalog_service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace admin_service.Controllers
+namespace catalog_service.Controllers
 {
+    [Route("api/catalog")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
-        [Route("api/catalog")]
-        [ApiController]
-        public class CategoryController : ControllerBase
+        private readonly AppDbContext _context;
+
+        public ProductController(AppDbContext context)
         {
-            private readonly AppDbContext _context;
+            _context = context;
+        }
 
-            public CategoryController(AppDbContext context)
-            {
-                _context = context;
-            }
+        // GET
 
-            // GET
+        // Get all products
+        [HttpGet("products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        {
+            return await _context.Products.Include(p => p.Category).Include(p => p.Images).ToListAsync();
+        }
 
-            // Get all products
-            [HttpGet("products")]
-            public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-            {
-                return await _context.Products.Include(p => p.Category).Include(p => p.Images).ToListAsync();
-            }
+        // POST
 
-            // POST
+        // Add new product
+        [HttpPost("add-product")]
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
 
-            // Add new product
-            [HttpPost("add-product")]
-            public async Task<ActionResult<Product>> CreateProduct(Product product)
-            {
-                _context.Products.Add(product);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetProducts), new { id = product.Id}, product);
-            }
+            return CreatedAtAction(nameof(GetProducts), new { id = product.Id}, product);
         }
     }
+    
 }
