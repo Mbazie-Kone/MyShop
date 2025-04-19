@@ -2,6 +2,7 @@
 using catalog_service.DTOs;
 using catalog_service.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace catalog_service.Controllers
 {
@@ -14,6 +15,23 @@ namespace catalog_service.Controllers
         public CatalogController(AppDbContext context)
         {
             _context = context;
+        }
+
+        // GET:
+
+        // api/catalog/produts/{id}
+        [HttpGet("products/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         // POST:
