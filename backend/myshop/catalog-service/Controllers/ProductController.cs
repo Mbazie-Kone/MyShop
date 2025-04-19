@@ -25,17 +25,6 @@ namespace catalog_service.Controllers
             return await _context.Products.Include(p => p.Category).Include(p => p.Images).ToListAsync();
         }
 
-        // POST:
-
-        // Add new product
-        [HttpPost("add-product")]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
-        }
     }
     
 }
