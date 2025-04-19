@@ -18,11 +18,19 @@ namespace admin_service.Controllers
                 _context = context;
             }
 
+            // GET
+
+            // Get all products
             [HttpGet("products")]
             public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
             {
                 return await _context.Products.Include(p => p.Category).Include(p => p.Images).ToListAsync();
             }
+
+            // POST
+
+            // Add new product
+            public async Task<>
         }
     }
 }
