@@ -1,8 +1,8 @@
-<form action="">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="p-4">
     <div class="mb-3">
-        <label for="" class="form-label"></label>
-        <input type="text" class="form-control">
-        <div class="text-danger">
+        <label class="form-label">Product Name</label>
+        <input type="text" class="form-control" formControlName="name">
+        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
             Product name is required.
         </div>
     </div>
@@ -14,12 +14,12 @@
 
     <div class="mb-3">
         <label class="form-label">Price</label>
-        <textarea name="" id="" class="form-control" rows="3" formControlName="description"></textarea>
+        <input type="number" class="form-control" formControlName="price">
     </div>
 
     <div class="mb-3">
         <label class="form-label">Stock</label>
-        <textarea name="" id="" class="form-control" rows="3" formControlName="description"></textarea>
+        <input type="number" class="form-control" formControlName="stock">
     </div>
 
     <div class="mb-3">
@@ -27,6 +27,13 @@
         <select class="form-select" formControlName="isAvailable">
             <option [value]="">Available</option>
             <option [value]="">Not Available</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Category</label>
+        <select class="form-select" formControlName="categoryId">
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
         </select>
     </div>
 </form>
