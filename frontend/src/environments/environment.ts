@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: '/api/admin'
+    apiAdminUrl: '/api/admin',
+    apiCatalogUrl: '/api/catalog'
 };

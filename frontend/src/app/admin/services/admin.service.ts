@@ -10,22 +10,19 @@ import { Role, UserDto } from '../../core/models/user.model';
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiAdminUrl;
 
   constructor(private http: HttpClient) {}
 
   register(data: RegisterRequest): Observable<UserDto> {
-
     return this.http.post<UserDto>(`${this.apiUrl}/register`, data);
   }
 
   login(data: LoginRequest): Observable<LoginResponse> {
-
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
   }
 
   getRoles(): Observable<Role[]> {
-
     return this.http.get<Role[]>(`${this.apiUrl}/roles`);
   }
 }
