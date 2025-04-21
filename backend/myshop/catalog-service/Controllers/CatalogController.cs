@@ -86,6 +86,13 @@ namespace catalog_service.Controllers
                     {
                         await file.CopyToAsync(stream);
                     }
+
+                    product.Images.Add(new Image
+                    {
+                        Url = $"images/{fileName}",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    });
                 }
             }
 
