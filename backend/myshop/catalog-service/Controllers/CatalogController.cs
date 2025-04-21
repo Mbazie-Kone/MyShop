@@ -72,7 +72,7 @@ namespace catalog_service.Controllers
 
             if (dto.Images != null)
             {
-
+                var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath!, "images");
             }
 
             _context.Products.Add(product);
