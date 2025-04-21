@@ -1,25 +1,27 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="p-4">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="p-4" enctype="multipart/form-data">
     <div class="mb-3">
-        <label class="form-label">Product Name</label>
-        <input type="text" class="form-control" formControlName="name">
+        <input type="text" class="form-control" formControlName="name" placeholder="Product Name">
         <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
             Product name is required.
         </div>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" rows="3" formControlName="description"></textarea>
+        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description"></textarea>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Price</label>
-        <input type="number" class="form-control" formControlName="price">
+        <input type="number" class="form-control" formControlName="price" placeholder="Price">
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Stock</label>
-        <input type="number" class="form-control" formControlName="stock">
+        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
+    </div>
+
+    <div class="mb-3">
+        <select class="form-select" formControlName="categoryId">
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
     </div>
 
     <div class="mb-3">
@@ -31,10 +33,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="" class="form-label">Category</label>
-        <select class="form-select" formControlName="categoryId">
-            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-        </select>
+        <input type="file" (change)="onFileSelected($event)" multiple>
     </div>
 
     <button class="btn btn-success mt-3" type="submit" [disabled]="prosuctForm.invalid">Add Product</button>
