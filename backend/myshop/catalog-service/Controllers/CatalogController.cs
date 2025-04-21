@@ -76,6 +76,17 @@ namespace catalog_service.Controllers
 
                 if (!Directory.Exists(uploadPath))
                     Directory.CreateDirectory(uploadPath);
+
+                foreach (var file in dto.Images)
+                {
+                    var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    var path = Path.Combine(uploadPath, fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
             }
 
             _context.Products.Add(product);
