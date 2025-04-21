@@ -56,7 +56,7 @@ namespace catalog_service.Controllers
 
             var category = await _context.Categories.FindAsync(dto.CategoryId);
             if (category == null)
-                return NotFound("Category not found.");
+                return BadRequest("Invalid category.");
 
             var product = new Product
             {
@@ -67,14 +67,13 @@ namespace catalog_service.Controllers
                 IsAvailable = dto.IsAvailable,
                 CategoryId = dto.CategoryId,
                 CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Images = dto.ImageUrls != null ? dto.ImageUrls.Select(url => new Image
-                {
-                    Url = url,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                }).ToList() : new List<Image>()
+                UpdatedAt = DateTime.UtcNow
             };
+
+            if (dto.Images != null)
+            {
+
+            }
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
