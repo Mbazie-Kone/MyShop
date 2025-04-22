@@ -45,6 +45,11 @@
         <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
     </div>
 
+    <!-- IMAGE PREVIEW -->
+     <div class="mb-3 d-flex flex-wrap gap2">
+        <img *ngFor="let img of imagePreviews" [src]="img" class="preview-img">
+     </div>
+
     <!-- SUBMIT -->
     <button class="btn btn-success mt-3 w-100" type="submit" [disabled]="productForm.invalid">Add Product</button>
 </form>
