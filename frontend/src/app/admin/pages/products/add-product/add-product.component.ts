@@ -57,20 +57,25 @@ export class AddProductComponent implements OnInit {
     if (this.productForm.invalid) return;
 
     const formData = new FormData();
-    Object.entries(this.productForm.value).forEach(([key, value]) => {
-      if (key !== 'images') {
-        formData.append(key, value);
-      }
-    });
-   
-    this.selectedFiles.forEach(image => {
-      formData.append('images', image);
-    });
+    const stock = this.productForm.get('stock')?.value;
+    const isAvailable = stock > 0;
 
+    formData.append('name', this.productForm.get('name')?.value);
+    formData.append('description', this.productForm.get('description')?.value);
+    formData.append('price', this.productForm.get('price')?.value);
+    formData.append('stock', stock);
+    formData.append('isAvailable', String(isAvailable));
+    formData.append('categoryId', this.productForm.get('categoryId')?.value);
+    
+    for (let file of this.selectedFiles) {
+      formData.append('images', file);
+    }
+    
     this.catalogService.createProduct(formData).subscribe({
       next: () => {
         alert('Product created successfully!');
         this.productForm.reset();
+        this.imagePreviews = [];
       },
       error: err => {
         console.error(err);
