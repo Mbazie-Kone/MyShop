@@ -20,5 +20,6 @@ export interface Image {
 }
 
 export interface Category {
-
+    id: number;
+    name: string;
 }
