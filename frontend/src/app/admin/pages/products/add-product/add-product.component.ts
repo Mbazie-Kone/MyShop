@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
       name: ['', Validators.required],
       description: [''],
       price: [null, Validators.required],
-      stock: [0, Validators.required],
+      stock: ['', Validators.required],
       categoryId: ['', Validators.required],
       images: [null]
     });
