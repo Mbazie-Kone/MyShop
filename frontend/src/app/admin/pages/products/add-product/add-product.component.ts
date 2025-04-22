@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-add-product',
   standalone: false,
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  templateUrl: './add-product.component.html',
+  styleUrl: './add-product.component.css'
 })
-export class ProductsComponent implements OnInit {
+export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
   selectedFiles: File[] = [];
   categories: any[] = [];
@@ -24,11 +24,6 @@ export class ProductsComponent implements OnInit {
       isAvailable: [true],
       categoryId: [null, Validators.required]
     });
-
-    /*
-    this.http.get<any[]>('http://localhost:5000/api/catalog/categories')
-      .subscribe(res => this.categories = res);
-    */
   }
 
   onFileSelected(event: any) {
@@ -44,10 +39,6 @@ export class ProductsComponent implements OnInit {
       formData.append('Images', file);
     })
 
-    /*
-    this.http.post('http://localhost:5000/api/catalog/add-product', formData)
-      .subscribe(() => alert("Product added!"));
-    */
   }
 
 }

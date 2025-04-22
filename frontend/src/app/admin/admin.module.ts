@@ -7,13 +7,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { AddProductComponent } from './pages/products/add-product/add-product.component';
+import { ViewProductsComponent } from './pages/products/view-products/view-products.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    ProductsComponent
+    ProductsComponent,
+    AddProductComponent,
+    ViewProductsComponent
   ],
   imports: [
     CommonModule,
