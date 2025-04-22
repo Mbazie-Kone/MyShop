@@ -13,6 +13,7 @@ export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
   selectedFiles: File[] = [];
   categories: Category[] = [];
+  imagePreviews: string[] = [];
 
   constructor(private fb: FormBuilder, private catalogService: CatalogService) {}
   
