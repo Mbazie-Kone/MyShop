@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatalogService } from '../../../services/catalog.service';
+import { Category } from '../../../../core/models/catalog.model';
 
 @Component({
   selector: 'app-add-product',
