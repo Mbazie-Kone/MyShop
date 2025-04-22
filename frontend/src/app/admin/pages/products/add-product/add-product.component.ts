@@ -21,24 +21,36 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
-      price: [{ value: '', disabled: true}, Validators.required],
-      stock: [0, [Validators.required, Validators.min(0)]],
+      price: [null, Validators.required],
+      stock: [0, Validators.required],
       categoryId: ['', Validators.required],
       images: [null]
     });
 
-    this.catalogService.getCategories().subscribe(categories => this.categories = categories);
+    this.catalogService.getCategories().subscribe(res => this.categories = res);
 
     this.productForm.get('stock')?.valueChanges.subscribe(value => {
-      const isAvailable = value > 0;
-      this.productForm.get('isAvailable')?.setValue(isAvailable);
       const priceControl = this.productForm.get('price');
-      isAvailable ? priceControl?.enable() : priceControl?.disable();
+      if (value > 0) {
+        priceControl?.enable();
+      } else {
+        priceControl?.disable();
+      }
     });
   }
 
-  onImageSelected(event: any): void {
-    this.selectedFiles = Array.from(event.target.files);
+  onImageSelected(event: any) {
+    const files: FileList = event.target.files;
+    this.selectedFiles = Array.from(files).slice(0, 10); // max 10
+
+    this.imagePreviews = [];
+    for (let file of this.selectedFiles) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result) this.imagePreviews.push(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit(): void {
