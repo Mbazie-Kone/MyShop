@@ -1,29 +1,5 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="container mt-4" enctype="multipart/form-data">
-    <div class="mb-3">
-        <input type="text" class="form-control" formControlName="name" placeholder="Product Name">
-        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
-            Product name is required.
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description"></textarea>
-    </div>
-
-    <div class="mb-3">
-        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
-        <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">
-            Stock must be at least 0.
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <input type="number" class="form-control" formControlName="price" placeholder="Price">
-        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
-            Price is required.
-        </div>
-    </div>
-
+    <!-- CATEGORY -->
     <div class="mb-3">
         <select class="form-select" formControlName="categoryId">
             <option value="">Select category</option>
@@ -33,11 +9,42 @@
             Category is required.
         </div>
     </div>
+    
+    <!-- NAME -->
+    <div class="mb-3">
+        <input type="text" class="form-control" formControlName="name" placeholder="Product Name">
+        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
+            Product name is required.
+        </div>
+    </div>
 
+    <!-- STOCK -->
+    <div class="mb-3">
+        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
+        <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">
+            Stock must be at least 0.
+        </div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="mb-3">
+        <input type="number" class="form-control" formControlName="price" placeholder="Price">
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+            Price is required.
+        </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="mb-3">
+        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description"></textarea>
+    </div>
+
+    <!-- IMAGES -->
     <div class="mb-3">
         <label class="form-label">Images (max 10)</label>
         <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
     </div>
 
+    <!-- SUBMIT -->
     <button class="btn btn-success mt-3 w-100" type="submit" [disabled]="productForm.invalid">Add Product</button>
 </form>
