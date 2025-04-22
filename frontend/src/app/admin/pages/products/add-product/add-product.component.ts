@@ -16,14 +16,23 @@ export class AddProductComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private catalogService: CatalogService) {}
   
-  ngOnInit() {
+  ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
-      price: [0, Validators.required],
-      stock: [0, Validators.required],
-      isAvailable: [true],
-      categoryId: [null, Validators.required]
+      price: [{ value: '', disabled: true}, Validators.required],
+      stock: [0, [Validators.required, Validators.min(0)]],
+      categoryId: ['', Validators.required],
+      images: [null]
+    });
+
+    this.catalogService.getCategories().subscribe(categories => this.categories = categories);
+
+    this.productForm.get('stock')?.valueChanges.subscribe(value => {
+      const isAvailable = value > 0;
+      this.productForm.get('isAvailable')?.setValue(isAvailable);
+      const priceControl = this.productForm.get('price');
+      isAvailable ? priceControl?.enable() : priceControl?.disable();
     });
   }
 
