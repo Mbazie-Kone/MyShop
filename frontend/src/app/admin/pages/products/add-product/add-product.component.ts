@@ -36,19 +36,34 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
+  onImageSelected(event: any): void {
     this.selectedFiles = Array.from(event.target.files);
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.productForm.invalid) return;
+
     const formData = new FormData();
     Object.entries(this.productForm.value).forEach(([key, value]) => {
-      formData.append(key, value as string);
+      if (key !== 'images') {
+        formData.append(key, value);
+      }
     });
-    this.selectedFiles.forEach(file => {
-      formData.append('Images', file);
-    })
+   
+    this.selectedFiles.forEach(image => {
+      formData.append('images', image);
+    });
 
+    this.catalogService.createProduct(formData).subscribe({
+      next: () => {
+        alert('Product created successfully!');
+        this.productForm.reset();
+      },
+      error: err => {
+        console.error(err);
+        alert('Failed to create product.');
+      }
+    });
   }
 
 }
