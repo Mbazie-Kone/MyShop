@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CatalogService } from '../../../services/catalog.service';
 
 @Component({
   selector: 'app-add-product',
@@ -11,9 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
   selectedFiles: File[] = [];
-  categories: any[] = [];
+  categories: Category[] = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private catalogService: CatalogService) {}
   
   ngOnInit() {
     this.productForm = this.fb.group({
