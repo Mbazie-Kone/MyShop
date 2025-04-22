@@ -11,17 +11,27 @@
     </div>
 
     <div class="mb-3">
-        <input type="number" class="form-control" formControlName="price" placeholder="Price">
+        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
+        <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">
+            Stock must be at least 0.
+        </div>
     </div>
 
     <div class="mb-3">
-        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
+        <input type="number" class="form-control" formControlName="price" placeholder="Price">
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+            Price is required.
+        </div>
     </div>
 
     <div class="mb-3">
         <select class="form-select" formControlName="categoryId">
+            <option value="">Select category</option>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
+        <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
+            Category is required.
+        </div>
     </div>
 
     <div class="mb-3">
