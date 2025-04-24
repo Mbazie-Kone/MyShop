@@ -20,7 +20,7 @@
 
     <!-- STOCK -->
     <div class="mb-3">
-        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
+        <input type="number" class="form-control" formControlName="stock" placeholder="Stock" min="0">
         <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
             Stock cannot be negative.
         </div>
@@ -28,9 +28,15 @@
 
     <!-- PRICE -->
     <div class="mb-3">
-        <input type="number" class="form-control" formControlName="price" [disabled]="isPriceDisabled" placeholder="Price">
-        <div *ngIf="productForm.get('price')?.enabled && productForm.get('price')?.hasError('min')" class="text-danger">
-            Price must be >= 0.
+        <input type="number" class="form-control" formControlName="price" [disabled]="isPriceDisabled" placeholder="Price (EUR)" step="0.01" min="0">
+        <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
+            Price is required.
+        </div>
+        <div *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
+            Price must be 0 or greater.
+        </div>
+        <div *ngIf="productForm.get('price')?.hasError('pattern')" class="text-danger">
+            Price must be a valid Euro amount (e.g. 10.99).
         </div>
     </div>
 
