@@ -42,7 +42,14 @@ export class AddProductComponent implements OnInit {
 
   loadCategories(): void {
     this.catalogService.getCategories().subscribe({
-      next: (res) => this.categories = res,
+      next: (res) => {
+        this.categories = res;
+        if (this.categories.length > 0) {
+          this.productForm.patchValue({
+            categoryId: this.categories[0].id
+          });
+        }
+      },
       error: () => console.error('Error loading categories')
     });
   }
