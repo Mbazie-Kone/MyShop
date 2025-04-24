@@ -19,8 +19,6 @@ namespace catalog_service.DTOs
         [Range(0, int.MaxValue, ErrorMessage ="Stock must be a positive number.")]
         public int Stock {  get; set; }
 
-        public bool IsAvailable { get; set; }
-
         // Foreign key for category
         [Required(ErrorMessage = "Category is required.")]
         public int CategoryId { get; set; }

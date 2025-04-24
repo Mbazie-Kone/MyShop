@@ -27,19 +27,27 @@ export class AddProductComponent implements OnInit {
       images: [null]
     });
 
-    this.catalogService.getCategories().subscribe(res => this.categories = res);
+    this.loadCategories();
 
+    // Dynamically enable/disable the price field
     this.productForm.get('stock')?.valueChanges.subscribe(value => {
-      const priceControl = this.productForm.get('price');
-      if (value > 0) {
-        priceControl?.enable();
+      if (value >= 1) {
+        this.productForm.get('price')?.enable();
       } else {
-        priceControl?.disable();
+        this.productForm.get('price')?.disable();
+        this.productForm.get('price')?.reset();
       }
     });
   }
 
-  onImageSelected(event: any) {
+  loadCategories(): void {
+    this.catalogService.getCategories().subscribe({
+      next: (res) => this.categories = res,
+      error: () => console.error('Error loading categories')
+    });
+  }
+
+  onImageSelected(event: any): void {
     const files: FileList = event.target.files;
     this.selectedFiles = Array.from(files).slice(0, 10); // max 10
 
@@ -57,29 +65,24 @@ export class AddProductComponent implements OnInit {
     if (this.productForm.invalid) return;
 
     const formData = new FormData();
-    const stock = this.productForm.get('stock')?.value;
-    const isAvailable = stock > 0;
+    formData.append('name', this.productForm.value.name);
+    formData.append('description', this.productForm.value.description || '');
+    formData.append('stock', this.productForm.value.stock);
+    formData.append('price', this.productForm.get('price')?.value || 0);
+    formData.append('categoryId', this.productForm.value.categoryId);
 
-    formData.append('name', this.productForm.get('name')?.value);
-    formData.append('description', this.productForm.get('description')?.value);
-    formData.append('price', this.productForm.get('price')?.value);
-    formData.append('stock', stock);
-    formData.append('isAvailable', String(isAvailable));
-    formData.append('categoryId', this.productForm.get('categoryId')?.value);
-    
-    for (let file of this.selectedFiles) {
-      formData.append('images', file);
-    }
+    this.selectedFiles.forEach(file => formData.append('images', file));
     
     this.catalogService.createProduct(formData).subscribe({
       next: () => {
         alert('Product created successfully!');
         this.productForm.reset();
         this.imagePreviews = [];
+        this.selectedFiles = [];
       },
       error: err => {
         console.error(err);
-        alert('Failed to create product.');
+        alert('Error adding product.');
       }
     });
   }
