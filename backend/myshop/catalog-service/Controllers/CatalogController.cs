@@ -54,17 +54,19 @@ namespace catalog_service.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            // Check if category exists
             var category = await _context.Categories.FindAsync(dto.CategoryId);
             if (category == null)
                 return BadRequest("Invalid category.");
 
+            // Create the product
             var product = new Product
             {
                 Name = dto.Name,
                 Description = dto.Description,
                 Price = dto.Price,
                 Stock = dto.Stock,
-                IsAvailable = dto.IsAvailable,
+                IsAvailable = dto.Stock > 0,
                 CategoryId = dto.CategoryId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
