@@ -21,16 +21,16 @@
     <!-- STOCK -->
     <div class="mb-3">
         <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
-        <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">
-            Stock must be at least 0.
+        <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
+            Stock cannot be negative.
         </div>
     </div>
 
     <!-- PRICE -->
     <div class="mb-3">
-        <input type="number" class="form-control" formControlName="price" placeholder="Price">
-        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
-            Price is required.
+        <input type="number" class="form-control" formControlName="price" placeholder="Price" [disabled]="isPriceDisabled">
+        <div *ngIf="productForm.get('price')?.enabled && productForm.get('price')?.hasError('min')" class="text-danger">
+            Price must be >= 0.
         </div>
     </div>
 

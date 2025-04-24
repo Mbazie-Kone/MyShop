@@ -21,7 +21,7 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
-      stock: [0, [Validators.required, Validators.min(0)]],
+      stock: ['', [Validators.required, Validators.min(0)]],
       price: [{ value: null, disabled: true }, [Validators.required, Validators.min(0)]],
       categoryId: [null, Validators.required],
       images: [null]
@@ -45,6 +45,10 @@ export class AddProductComponent implements OnInit {
       next: (res) => this.categories = res,
       error: () => console.error('Error loading categories')
     });
+  }
+
+  get isPriceDisabled(): boolean {
+    return (this.productForm.get('stock')?.value || 0) < 1;
   }
 
   onImageSelected(event: any): void {
