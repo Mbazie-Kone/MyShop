@@ -2,7 +2,6 @@
     <!-- CATEGORY -->
     <div class="mb-3">
         <select class="form-select" formControlName="categoryId">
-            <option value="">Select category</option>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
         <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
