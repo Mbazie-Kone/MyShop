@@ -11,12 +11,10 @@ namespace catalog_service.Controllers
     public class CatalogController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CatalogController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        public CatalogController(AppDbContext context)
         {
             _context = context;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET:
@@ -72,36 +70,42 @@ namespace catalog_service.Controllers
                 UpdatedAt = DateTime.UtcNow
             };
 
-            if (dto.Images != null)
-            {
-                var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath!, "images");
-
-                if (!Directory.Exists(uploadPath))
-                    Directory.CreateDirectory(uploadPath);
-
-                foreach (var file in dto.Images)
-                {
-                    var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                    var path = Path.Combine(uploadPath, fileName);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    product.Images.Add(new Image
-                    {
-                        Url = $"images/{fileName}",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
-                    });
-                }
-            }
-
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProductById), new {  id = product.Id }, product);
+            // Image management
+            if (dto.Images != null && dto.Images.Count > 0)
+            {
+                var productImages = new List<Image>();
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "public", "products");
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                foreach (var file in dto.Images.Take(10)) // Max 10 images
+                {
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                    var filepath = Path.Combine(folderPath, fileName);
+
+                    using var stream = new FileStream(filepath, FileMode.Create);
+                    await file.CopyToAsync(stream);
+
+                    var image = new Image
+                    {
+                        Url = $"assets/products/{fileName}",
+                        ProductId = product.Id,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+
+                    product.Images.Add(image);
+                }
+
+                _context.Images.AddRange(productImages);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { message = "Product created successfully!" });
             
         }
     }
