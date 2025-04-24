@@ -12,8 +12,7 @@
     
     <!-- NAME -->
     <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" formControlName="name">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name">
         <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
             Product name is required.
         </div>
@@ -21,8 +20,7 @@
 
     <!-- STOCK -->
     <div class="mb-3">
-        <label class="form-label">Stock</label>
-        <input type="number" class="form-control" formControlName="stock">
+        <input type="number" class="form-control" formControlName="stock" placeholder="Stock">
         <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
             Stock cannot be negative.
         </div>
@@ -30,8 +28,7 @@
 
     <!-- PRICE -->
     <div class="mb-3">
-        <label class="form-label">Price</label>
-        <input type="number" class="form-control" formControlName="price" [disabled]="isPriceDisabled">
+        <input type="number" class="form-control" formControlName="price" [disabled]="isPriceDisabled" placeholder="Price">
         <div *ngIf="productForm.get('price')?.enabled && productForm.get('price')?.hasError('min')" class="text-danger">
             Price must be >= 0.
         </div>
