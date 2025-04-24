@@ -35,7 +35,7 @@
         <div *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
             Price must be 0 or greater.
         </div>
-        <div *ngIf="productForm.get('price')?.hasError('pattern')" class="text-danger">
+        <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('pattern')" class="text-danger">
             Price must be a valid Euro amount (e.g. 10.99).
         </div>
     </div>
