@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'admin-icon';
-  src: url('../../../../../../public/assets/fonts/admin-icon.eot?35122790');
-  src: url('../../../../../../public/assets/fonts/admin-icon.eot?35122790#iefix') format('embedded-opentype'),
-       url('../../../../../../public/assets/fonts/admin-icon.woff2?35122790') format('woff2'),
-       url('../../../../../../public/assets/fonts/admin-icon.woff?35122790') format('woff'),
-       url('../../../../../../public/assets/fonts/admin-icon.ttf?35122790') format('truetype'),
-       url('../../../../../../public/assets/fonts/admin-icon.svg?35122790#admin-icon') format('svg');
+  src: url('../../../../../assets/fonts/admin-icon.eot?35122790');
+  src: url('../../../../../assets/fonts/admin-icon.eot?35122790#iefix') format('embedded-opentype'),
+       url('../../../../../assets/fonts/admin-icon.woff2?35122790') format('woff2'),
+       url('../../../../../assets/fonts/admin-icon.woff?35122790') format('woff'),
+       url('../../../../../assets/fonts/admin-icon.ttf?35122790') format('truetype'),
+       url('../../../../../assets/fonts/admin-icon.svg?35122790#admin-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
