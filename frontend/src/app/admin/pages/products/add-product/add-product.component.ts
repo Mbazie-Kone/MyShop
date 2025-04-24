@@ -15,8 +15,8 @@ export class AddProductComponent implements OnInit {
   categories: Category[] = [];
   imagePreviews: string[] = [];
 
-  constructor(private fb: FormBuilder, private catalogService: CatalogService) {}
-  
+  constructor(private fb: FormBuilder, private catalogService: CatalogService) { }
+
   ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -60,15 +60,23 @@ export class AddProductComponent implements OnInit {
 
   onImageSelected(event: any): void {
     const files: FileList = event.target.files;
-    this.selectedFiles = Array.from(files).slice(0, 10); // max 10
-
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    this.selectedFiles = [];
     this.imagePreviews = [];
-    for (let file of this.selectedFiles) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result) this.imagePreviews.push(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+
+    for (let i = 0; i < files.length && this.selectedFiles.length < 10; i++) {
+      const file = files[i];
+      if (allowedTypes.includes(file.type)) {
+        this.selectedFiles.push(file);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.result) this.imagePreviews.push(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert(`File "${file.name}" is not a valid image. only JPG and PNG are allowes.`);
+      }
     }
   }
 
@@ -83,7 +91,7 @@ export class AddProductComponent implements OnInit {
     formData.append('categoryId', this.productForm.value.categoryId);
 
     this.selectedFiles.forEach(file => formData.append('images', file));
-    
+
     this.catalogService.createProduct(formData).subscribe({
       next: () => {
         alert('Product created successfully!');
