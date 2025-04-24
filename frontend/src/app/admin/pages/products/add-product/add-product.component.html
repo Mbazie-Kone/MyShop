@@ -1,6 +1,7 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="container mt-4" enctype="multipart/form-data">
     <!-- CATEGORY -->
     <div class="mb-3">
+        <label class="form-label">Select Category</label>
         <select class="form-select" formControlName="categoryId">
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
