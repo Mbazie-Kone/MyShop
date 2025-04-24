@@ -78,12 +78,18 @@ namespace catalog_service.Controllers
             {
                 var productImages = new List<Image>();
                 var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "public", "products");
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
 
                 if (!Directory.Exists(folderPath))
                     Directory.CreateDirectory(folderPath);
 
                 foreach (var file in dto.Images.Take(10)) // Max 10 images
                 {
+                    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+                    if (!allowedExtensions.Contains(extension))
+                        return BadRequest($"Unsupported image format: {extension}");
+
                     var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
                     var filepath = Path.Combine(folderPath, fileName);
 
