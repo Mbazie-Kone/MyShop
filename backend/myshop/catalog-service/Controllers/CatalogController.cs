@@ -36,7 +36,7 @@ namespace catalog_service.Controllers
 
         // api/catalog/categories
         [HttpGet("categories")]
-        public async Task<IActionResult> GetCategories()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
             var categories = await _context.Categories.ToListAsync();
 
