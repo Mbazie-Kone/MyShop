@@ -21,7 +21,7 @@ namespace catalog_service.Controllers
 
         // api/catalog/produts/{id}
         [HttpGet("products/{id}")]
-        public async Task<IActionResult> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
             var product = await _context.Products
                 .Include(p => p.Category)
@@ -47,7 +47,7 @@ namespace catalog_service.Controllers
 
         // api/catalog/add-product
         [HttpPost("add-product")]
-        public async Task<IActionResult> AddProduct([FromBody] InsertCategoryProductImageDto dto)
+        public async Task<ActionResult<Product>> AddProduct([FromBody] InsertCategoryProductImageDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
