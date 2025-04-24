@@ -13,6 +13,7 @@ namespace catalog_service.DTOs
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price must be a valid Euro format.")]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Stock is required")]
