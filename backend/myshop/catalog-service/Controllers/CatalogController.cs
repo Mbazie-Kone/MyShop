@@ -90,10 +90,10 @@ namespace catalog_service.Controllers
                     if (!allowedExtensions.Contains(extension))
                         return BadRequest($"Unsupported image format: {extension}");
 
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                    var filepath = Path.Combine(folderPath, fileName);
+                    var fileName = Guid.NewGuid() + extension;
+                    var savepath = Path.Combine(folderPath, fileName);
 
-                    using var stream = new FileStream(filepath, FileMode.Create);
+                    using var stream = new FileStream(savepath, FileMode.Create);
                     await file.CopyToAsync(stream);
 
                     var image = new Image
