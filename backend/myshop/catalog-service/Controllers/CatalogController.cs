@@ -47,7 +47,8 @@ namespace catalog_service.Controllers
 
         // api/catalog/add-product
         [HttpPost("add-product")]
-        public async Task<ActionResult<Product>> AddProduct([FromBody] InsertCategoryProductImageDto dto)
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<Product>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
