@@ -30,7 +30,7 @@ services:
     ports:
       - "5002:80"
     volumes:
-      - ./shared/public/products:/app/public/products
+      - product_images:/app/public/products
     depends_on:
       - sqlserver
     networks:
@@ -55,7 +55,7 @@ services:
     ports:
       - "4200:80"
     volumes:
-      - ./shared/public/products:/usr/share/nginx/html/assets/products
+      - product_images:/usr/share/nginx/html/assets/products
     depends_on:
       - api-gateway
     networks:
@@ -63,6 +63,7 @@ services:
       
 volumes:
   sql_data:
+  product_images:
   
 networks:
   mynetwork:
