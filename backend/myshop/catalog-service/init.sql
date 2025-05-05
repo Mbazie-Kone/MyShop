@@ -1,0 +1,45 @@
+IF DB_ID('catalogdb') IS NULL
+	CREATE DATABASE catalogdb;
+GO
+USE catalogdb;
+GO
+
+-- Drop tables if exist
+IF OBJECT_ID('Images', 'U') IS NOT NULL DROP TABLE Images;
+IF OBJECT_ID('Products', 'U') IS NOT NULL DROP TABLE Products;
+IF OBJECT_ID('Categories', 'U') IS NOT NULL DROP TABLE Categories;
+GO
+
+-- Tables
+CREATE TABLE Categories (
+  Id INT PRIMARY KEY IDENTITY(1,1),
+  Name NVARCHAR(100) NOT NULL UNIQUE,
+  CreatedAt DATETIME2 DEFAULT GETDATE(),
+  UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+
+CREATE TABLE Products (
+  Id INT PRIMARY KEY IDENTITY(1,1),
+  Name NVARCHAR(150) NOT NULL,
+  Description NVARCHAR(500),
+  Price DECIMAL(10,2) NOT NULL CHECK (Price >= 0),
+  Stock INT NOT NULL CHECK (Stock >= 0),
+  IsAvailable BIT NOT NULL,
+  CategoryId INT NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+  UpdatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+  FOREIGN KEY (CategoryId) REFERENCES Categories(Id)
+);
+
+CREATE TABLE Images (
+  Id INT PRIMARY KEY IDENTITY(1,1),
+  Url NVARCHAR(255) NOT NULL,
+  ProductId INT NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+  UpdatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+  FOREIGN KEY (ProductId) REFERENCES Products(Id)
+);
+
+-- Sample categories
+INSERT INTO Categories (Name) VALUES ('Books'), ('Electronics'), ('Accessories');
+GO
