@@ -1,7 +1,8 @@
 services:
   sqlserver:
     build:
-      context: ./backend/database
+      context: .
+      dockerfile: backend/database/Dockerfile
     container_name: sqlserver
     environment:
       ACCEPT_EULA: "Y"
@@ -10,13 +11,7 @@ services:
       - "1433:1433"
     volumes:
       - sql_data:/var/opt/mssql
-      - ./initdb/:/initdb/
-    command: >
-      /bin/bash -c "
-        /opt/mssql/bin/sqlservr &
-        sleep 20 &&
-        /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P a123456789A! -i /initdb/init.sql
-      "
+      - ./initdb:/initdb
     networks: 
       - mynetwork
   
