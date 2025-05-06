@@ -10,3 +10,5 @@ ENV PATH="$PATH:/opt/mssql-tools/bin"
 WORKDIR /initdb
 COPY ./initdb /initdb
 RUN chmod +x /initdb/entrypoint.sh
+
+ENTRYPOINT [ "bin/bash", "/initdb/entrypoint.sh" ]
