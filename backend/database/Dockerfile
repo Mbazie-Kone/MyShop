@@ -18,4 +18,4 @@ RUN apt-get update && \
 COPY ./initdb /initdb
 WORKDIR /initdb
 
-ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/initdb/entrypoint.sh"]
