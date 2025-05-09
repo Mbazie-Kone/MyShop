@@ -1,4 +1,4 @@
-If you're starting the application for the first time, run these two commands (only once) in the root of the project using Git Bash, before executing the command 'docker-compose up --build -d'.
+Anyone who modifies the entrypoint.sh file must run this command (only once on the new version) using Git Bash in the root of the project before starting the application with the command docker-compose up --build -d.
 
 dos2unix ./initdb/entrypoint.sh
 chmod +x ./initdb/entrypoint.sh
