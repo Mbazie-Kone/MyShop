@@ -23,10 +23,10 @@ else
     echo "Database admindb already exists, skipping initialization."
 fi
 
-# Run init.sql of admin-service only if the admindb database does not exist.
+# Run init.sql of catalog-service only if the catalogdb database does not exist.
 if [ "$(db_exists catalogdb)" != "YES" ]; then
     echo "Database catalogdb not found, creating it..."
-	for script in /initdb/admin-service/*.sql; do
+	for script in /initdb/catalog-service/*.sql; do
 	    echo "Running $script"
 	    /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -d master -i "$script"
 	done
