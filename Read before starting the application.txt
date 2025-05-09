@@ -2,3 +2,5 @@ If you're starting the application for the first time, run these two commands (o
 
 dos2unix ./initdb/entrypoint.sh
 chmod +x ./initdb/entrypoint.sh
+
+Hello By M'bazie
