@@ -31,7 +31,7 @@ if [ "$(db_exists catalogdb)" != "YES" ]; then
 	    /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -d master -i "$script"
 	done
 else
-    echo "Database admindb already exists, skipping initialization."
+    echo "Database catalogdb already exists, skipping initialization."
 fi
 
 tail -f /dev/null
