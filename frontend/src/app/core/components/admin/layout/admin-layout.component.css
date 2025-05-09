@@ -1,6 +1,9 @@
-.content {
-    margin-top: 85px;
-    margin-left: 260px;
+.container {
+    /*
+    
     padding: 10px;
-    margin-right: 9px;
+    margin-right: 9px;*/
+
+    margin-left: 260px;
+    margin-top: 85px;
 }
