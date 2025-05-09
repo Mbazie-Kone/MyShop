@@ -34,9 +34,4 @@ else
     echo "Database admindb already exists, skipping initialization."
 fi
 
-for script in /initdb/catalog-service/*.sql; do
-	echo "Running $script"
-	/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -d master -i "$script"
-done
-
 tail -f /dev/null
