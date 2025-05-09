@@ -1,9 +1,5 @@
 .container {
-    /*
-    
-    padding: 10px;
-    margin-right: 9px;*/
-
+    max-width: 1245px;
     margin-left: 260px;
     margin-top: 85px;
 }
