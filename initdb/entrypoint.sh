@@ -17,7 +17,7 @@ if [ "$(db_exists admindb)" != "YES" ]; then
     echo "Database admindb not found, creating it..."
 	for script in /initdb/admin-service/*.sql; do
 	    echo "Running $script"
-	    /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -d master -i "$script"
+	    /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -d master -i "$script"
 	done
 else
     echo "Database admindb already exists, skipping initialization."
@@ -28,7 +28,7 @@ if [ "$(db_exists catalogdb)" != "YES" ]; then
     echo "Database catalogdb not found, creating it..."
 	for script in /initdb/catalog-service/*.sql; do
 	    echo "Running $script"
-	    /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -d master -i "$script"
+	    /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -d master -i "$script"
 	done
 else
     echo "Database catalogdb already exists, skipping initialization."
