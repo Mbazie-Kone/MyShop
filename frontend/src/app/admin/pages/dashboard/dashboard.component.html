@@ -9,17 +9,18 @@
           <h6 class="text-center">Sales by Category</h6>
           <canvas #categoryChart></canvas>
         </div>
-    </div>
-  </div>
-
-  <div class="col-md-10">
-    <div class="card p-3">
-      <div class="spinner-container" *ngIf="loading">
-        <div class="spinner"></div>
       </div>
-      <div *ngIf="!loading">
-        <h6 class="text-center">User Engagement</h6>
-        <canvas #areaChart></canvas>
+    </div>
+  
+    <div class="col-md-10">
+      <div class="card p-3">
+        <div class="spinner-container" *ngIf="loading">
+          <div class="spinner"></div>
+        </div>
+        <div *ngIf="!loading">
+          <h6 class="text-center">User Engagement</h6>
+          <canvas #areaChart></canvas>
+        </div>
       </div>
     </div>
   </div>
