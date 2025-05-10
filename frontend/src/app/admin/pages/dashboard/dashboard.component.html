@@ -16,15 +16,17 @@
     <div class="col">
       <div class="col mb-4">
         <div class="card p-3 chart-wrapper">
-          <h6 class="text-center">Performance Score</h6>
-          <canvas #radarChart></canvas>
+          <div class="spinner-container" *ngIf="loading">
+            <div class="spinner"></div>
+          </div>
+          <div *ngIf="!loading">
+            <h6 class="text-center">Performance Score</h6>
+            <canvas #radarChart></canvas>
+          </div>
         </div>
       </div>
-    
     </div>
   </div>
-
-  
   <!-- ROW 1 -->
 
   <!-- ROW 2 -->
