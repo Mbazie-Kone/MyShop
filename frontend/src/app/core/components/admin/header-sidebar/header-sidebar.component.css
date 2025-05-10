@@ -99,6 +99,11 @@
   text-decoration: none;
 }
 
+.sidebar-icons-container a:hover {
+  background-color: #054ea8;
+  border-radius: 5px;
+}
+
 .sidebar-icons {
   margin-left: 10px;
   color: #94a3b8;
@@ -110,9 +115,9 @@
   font-weight: 500;
 }
 
-.sidebar-icons-name:hover {
+/*.sidebar-icons-name:hover {
   color: #054ea8;
-}
+}*/
 
 /* NAVBAR */
 
