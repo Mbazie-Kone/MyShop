@@ -12,7 +12,20 @@
         </div>
       </div>
     </div>
+
+    <div class="col">
+      <div class="col mb-4">
+        <div class="card p-3 chart-wrapper">
+          <h6 class="text-center">Performance Score</h6>
+          <canvas #radarChart></canvas>
+        </div>
+      </div>
+    
+    </div>
   </div>
+
+  
+  <!-- ROW 1 -->
 
   <!-- ROW 2 -->
   <div class="row mb-3">
@@ -39,7 +52,20 @@
         </div>
       </div>
     </div>
+    
+    <div class="col">
+      <div class="card p-3 chart-wrapper">
+        <div class="spinner-container" *ngIf="loading">
+          <div class="spinner"></div>
+        </div>
+        <div *ngIf="!loading">
+          <h6 class="text-center">Orders Comparison</h6>
+          <canvas #stackedChart></canvas>
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- ROW 2 -->
 
   <!-- ROW 3 -->
   <div class="row">
@@ -55,6 +81,13 @@
       </div>
     </div>
   </div>
+  <!-- ROW 3 -->
+
+  <!-- ROW 4 -->
+  <div class="row">
+
+  </div>
+  <!-- ROW 4 -->
 </div>
 
 
@@ -66,50 +99,7 @@
 
 
 <!-- <div class="row">
-  <div class="col-md-2">
-    <div class="card p-3 chart-wrapper-donut">
-      <div class="spinner-container" *ngIf="loading">
-        <div class="spinner"></div>
-      </div>
-      <div *ngIf="!loading">
-        <h6 class="text-center">Sales by Category</h6>
-        <canvas #categoryChart></canvas>
-      </div>
-    </div>
-  </div>
 
-  <div class="col">
-    <div class="card p-3">
-      <h6 class="text-center">User Engagement</h6>
-      <canvas #areaChart></canvas>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-5">
-    <div class="card p-3 chart-wrapper">
-      <div class="spinner-container" *ngIf="loading">
-        <div class="spinner"></div>
-      </div>
-      <div *ngIf="!loading">
-        <h6 class="text-center">Traffic Trend</h6>
-        <canvas #trafficChart></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-5">
-    <div class="card p-3 chart-wrapper">
-      <div class="spinner-container" *ngIf="loading">
-        <div class="spinner"></div>
-      </div>
-      <div *ngIf="!loading">
-        <h6 class="text-center">Monthly Revenue</h6>
-        <canvas #revenueChart></canvas>
-      </div>
-    </div>
-  </div>
 
   <div class="col mb-4">
     <div class="card p-3 chart-wrapper">
@@ -118,19 +108,8 @@
     </div>
   </div>
 
-  <div class="col-md-6 mb-4">
-    <div class="card p-3 chart-wrapper">
-      <h6 class="text-center">Orders Comparison</h6>
-      <canvas #stackedChart></canvas>
-    </div>
-  </div>
+  
 
-  <div class="col-md-12 mb-4">
-    <div class="card p-3">
-      <h6 class="text-center">User Engagement</h6>
-      <canvas #areaChart></canvas>
-    </div>
-  </div>
 
   <div class="col-md-6 mb-4">
     <div class="card p-3">
