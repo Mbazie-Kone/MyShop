@@ -97,6 +97,7 @@
 
 .sidebar-icons-container a {
   text-decoration: none;
+  padding: 8px;
 }
 
 .sidebar-icons-container a:hover {
@@ -114,10 +115,6 @@
   color: #475569;
   font-weight: 500;
 }
-
-/*.sidebar-icons-name:hover {
-  color: #054ea8;
-}*/
 
 /* NAVBAR */
 
