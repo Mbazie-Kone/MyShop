@@ -116,6 +116,7 @@
 .sidebar-icons-container a:hover {
   background-color: #054ea899;
   border-radius: 5px;
+  transition: color 0.3s ease;
 }
 
 .sidebar-icons-container a:hover .sidebar-icons,
