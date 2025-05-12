@@ -112,9 +112,13 @@
 }
 
 .sidebar-icons-container a:hover {
-  background-color: #054ea8;
+  background-color: #054ea84D;
   border-radius: 5px;
-  color: #fff;
+}
+
+.sidebar-icons-container a:hover .sidebar-icons,
+.sidebar-icons-container a:hover .sidebar-icons-name {
+   color: #fff;
 }
 
 /* NAVBAR */
