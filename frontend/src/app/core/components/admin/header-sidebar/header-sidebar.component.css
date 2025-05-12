@@ -100,11 +100,6 @@
   padding: 8px;
 }
 
-.sidebar-icons-container a:hover {
-  background-color: #054ea8;
-  border-radius: 5px;
-}
-
 .sidebar-icons {
   margin-left: 10px;
   color: #94a3b8;
@@ -114,6 +109,12 @@
   margin-left: 10px;
   color: #475569;
   font-weight: 500;
+}
+
+.sidebar-icons-container a:hover {
+  background-color: #054ea8;
+  border-radius: 5px;
+  color: #fff;
 }
 
 /* NAVBAR */
