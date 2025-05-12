@@ -1,38 +1,42 @@
 <div class="navbar fixed-top">
-  <div class="container-fluid">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Left section -->
+    <div class="left-section d-flex align-items-center">
       <i class="icon-hamburger"></i>
-      <form class="d-flex" role="search">
+    </div>
+    
+    <!-- Center section -->
+    <div class="center-section">
+      <form class="d-flex search-form" role="search">
         <input
           class="form-control me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"/>
       </form>
-
+    </div>
+    
+    <!-- Right section -->
+    <div class="margin-right-icons d-flex align-items-center">
       <a routerLink="/administration/notifications">
         <i class="icon-bell"></i>
       </a>
-
-      <i class="icon-user"></i>
-
-      <!-- <div class="margin-right-icons">
-        <a routerLink="/administration/notifications">
-          <i class="icon-bell"></i>
-        </a>
-        <div class="user-menu">
-          <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
-          <div class="user-card" *ngIf="showUserCard">
-            <div class="card-body text-center">
-              <p class="user-logged">
-                <strong>{{ username }}</strong>
-              </p>
-              <hr>
-              <a routerLink="/administration/user/settings">Settings</a>
-              <p (click)="logout()" class="logout mt-2">Sign Out</p>
-            </div>
+      <div class="user-menu">
+        <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
+        <div class="user-card" *ngIf="showUserCard">
+          <div class="card-body text-center">
+            <p class="user-logged">
+              <strong>{{ username }}</strong>
+            </p>
+            <hr>
+            <a routerLink="/administration/user/settings">Settings</a>
+            <p (click)="logout()" class="logout mt-2">Sign Out</p>
           </div>
         </div>
-      </div> -->
+      </div>
+    </div>
+    
   </div>
 </div>
 

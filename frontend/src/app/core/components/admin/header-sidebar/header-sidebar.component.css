@@ -148,12 +148,27 @@
 
 .container-fluid {
   margin-left: 250px;
-  padding: 0;
+}
+
+.left-section,
+.center-section,
+.margin-right-icons {
+  flex: 1;
+}
+
+.center-section {
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 300px;
 }
 
 .margin-right-icons {
-  display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
 }
 
 .margin-right-icons i,
