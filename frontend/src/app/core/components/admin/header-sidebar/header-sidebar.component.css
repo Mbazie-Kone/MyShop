@@ -123,6 +123,17 @@
    color: #fff;
 }
 
+.sidebar-icons-container a.active {
+  background-color: #054ea84D;
+  border-radius: 5px;
+}
+
+.sidebar-icons-container a.active .sidebar-icons,
+.sidebar-icons-container a.active .sidebar-icons-name {
+   color: #fff;
+}
+
+
 /* NAVBAR */
 
 .navbar {
