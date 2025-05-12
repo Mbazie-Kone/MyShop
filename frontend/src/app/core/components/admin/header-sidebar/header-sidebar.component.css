@@ -147,13 +147,12 @@
 }
 
 .container-fluid {
-  margin-left: 260px;
-  margin-right: 10px;
+  margin-left: 250px;
+  padding: 0;
 }
 
 .margin-right-icons {
   display: flex;
-  gap: 25px;
   align-items: center;
 }
 
