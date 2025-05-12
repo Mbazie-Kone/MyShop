@@ -77,16 +77,6 @@
   margin-left: 20px;
 }
 
-/*.sidebar-user-img {
-    width: 4rem; 
-    height: 4rem;
-    border-radius: 50%;
-    background: #9CA3AF;
-    object-fit: cover;
-    border: 6px solid white;
-    border-block-color: #000;
-}*/
-
 .sidebar-icons-container {
   display: flex;
   flex-direction: column;
@@ -114,7 +104,7 @@
 }
 
 .sidebar-icons-container a:hover {
-  background-color: #054ea899;
+  background-color: #054ea880;
   border-radius: 5px;
   transition: color 0.3s ease;
 }
@@ -125,7 +115,7 @@
 }
 
 .sidebar-icons-container a.active {
-  background-color: #054ea8;
+  background-color: #054ea8CC;
   border-radius: 5px;
 }
 
