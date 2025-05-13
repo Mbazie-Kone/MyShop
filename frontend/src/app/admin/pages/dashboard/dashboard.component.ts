@@ -52,8 +52,7 @@ export class DashboardComponent implements AfterViewInit {
           legend: {
             display: false
           }
-        },
-        cutout: '74%'
+        }
       }
     });
   }
