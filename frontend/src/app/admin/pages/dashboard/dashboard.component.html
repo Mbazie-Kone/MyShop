@@ -59,18 +59,6 @@
 
   <!-- ROW 3 -->
   <div class="row mb-3">
-    <div class="col-9">
-      <div class="card p-3 chart-wrapper">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Monthly Revenue</h6>
-          <canvas #revenueChart></canvas>
-        </div>
-      </div>
-    </div>
-    
     <div class="col">
       <div class="card p-3 chart-wrapper">
         <div class="spinner-container" *ngIf="loading">
@@ -79,6 +67,18 @@
         <div *ngIf="!loading">
           <h6 class="text-center">User Types</h6>
           <canvas #pieChart></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-9">
+      <div class="card p-3 chart-wrapper">
+        <div class="spinner-container" *ngIf="loading">
+          <div class="spinner"></div>
+        </div>
+        <div *ngIf="!loading">
+          <h6 class="text-center">Monthly Revenue</h6>
+          <canvas #revenueChart></canvas>
         </div>
       </div>
     </div>
