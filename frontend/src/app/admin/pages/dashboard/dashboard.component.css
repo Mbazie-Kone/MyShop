@@ -1,19 +1,33 @@
 .card {
     border-radius: 10px;
+
+    /* COLLAPSED */
+    height: 100%;
 }
 
-/*.chart-wrapper-donut {
-    max-width: 200px;
-}*/
-
-/*.chart-wrapper {
-    max-width: 500px;
-}*/
-
+/* COLLAPSED */
 canvas {
-    /*width: 100% !important;
+    width: 100% !important;
     height: auto !important;
-    max-height: 300px;*/
+    max-height: 300px;
+}
+
+/* COLLAPSED */
+.chart-wrapper,
+.chart-wrapper-donut {
+    height: 100%;
+    min-height: 250px;
+}
+
+/* COLLAPSED */
+@media (max-width: 768px) {
+    .chart-wrapper, .chart-wrapper-donut {
+        min-height: 200px;
+    }
+
+    canvas {
+        max-height: 200px;
+    }
 }
 
 .spinner-container {
