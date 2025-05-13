@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-header-sidebar',
@@ -12,7 +13,7 @@ export class HeaderSidebarComponent implements OnInit {
   showUserCard = false;
   username = '';
 
-  constructor(private authService: AuthService, private router: Router, private eRef: ElementRef) {}
+  constructor(private authService: AuthService, private router: Router, private eRef: ElementRef, public layoutService: LayoutService) {}
 
   ngOnInit() {
     const tokenData = this.authService.decodeToken();
@@ -33,6 +34,11 @@ export class HeaderSidebarComponent implements OnInit {
     if (this.showUserCard && !this.eRef.nativeElement.contains(event.target)) {
       this.showUserCard = false;
     }
+  }
+
+  // COLLAPSED
+  toggleSidebar() {
+    this.layoutService.toggle();
   }
 
 }

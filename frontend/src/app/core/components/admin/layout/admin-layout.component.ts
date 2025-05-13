@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
-
+  // COLLAPSED
+  constructor(public layoutService: LayoutService) {}
 }
