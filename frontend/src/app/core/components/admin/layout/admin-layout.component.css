@@ -2,4 +2,12 @@
     margin-top: 85px;
     margin-left: 260px;
     margin-right: 10px;
+
+    /* COLLAPSED */
+    transition: margin-left 0.3s ease;
+}
+
+/* COLLAPSED */
+.sidebar-collapsed .content {
+    margin-left: 80px;
 }
