@@ -68,7 +68,7 @@
 }
 
 /* COLLAPSED */
-.sidebar.collapsed {
+.collapsed .sidebar {
   width: 80px;
 }
 
@@ -115,7 +115,7 @@
 }
 
 /* COLLAPSED */
-.sidebar.collapsed .sidebar-icons-name {
+.collapsed .sidebar-icons-name {
   opacity: 0;
   pointer-events: none;
 }
@@ -158,6 +158,11 @@
 
   /* COLLAPSED */
   transition: margin-left 0.3s ease;
+}
+
+/* COLLAPSED */
+.collapsed .container-fluid {
+  margin-left: 80px;
 }
 
 /* COLLAPSED */
