@@ -75,6 +75,7 @@
 /* COLLAPSED */
 .collapsed .sidebar {
   width: 80px;
+  overflow: visible;
 }
 
 .sidebar-logo-container {
@@ -123,7 +124,7 @@
   transition: opacity 0.2s ease;
   font-size: 0.75rem;
   margin-left: 10px;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 /* COLLAPSED Show tooltip ONLY when sidebar is collapsed and hovered */
