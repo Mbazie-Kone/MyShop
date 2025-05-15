@@ -1,7 +1,7 @@
+<app-header-sidebar></app-header-sidebar>
 <!-- COLLAPSED -->
 <div [ngClass]="{ 'collapsed': layoutService.isCollapsed() }">
 <!-- COLLAPSED -->
-    <app-header-sidebar></app-header-sidebar>
     <div class="content">
         <router-outlet></router-outlet>
         <app-admin-footer></app-admin-footer>

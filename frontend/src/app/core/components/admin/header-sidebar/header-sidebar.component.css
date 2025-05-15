@@ -50,6 +50,11 @@
 .icon-user:before { content: '\68'; } /* 'h' */
 .icon-cart:before { content: '\69'; } /* 'i' */
 
+/* COLLAPSED */
+.layout-wrapper {
+  transition: all 0.3s ease;
+}
+
 /* SIDEBAR */
 
 .sidebar {
