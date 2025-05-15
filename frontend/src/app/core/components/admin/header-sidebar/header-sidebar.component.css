@@ -57,14 +57,14 @@
     height: 100vh;
     background: #fff;
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
     overflow-y: auto;
     border-right: 1px solid rgb(212, 208, 208);
     z-index: 1000;
 
     /* COLLAPSED */
-    transition: widyh 0.3s ease;
+    transition: width 0.3s ease;
 }
 
 /* COLLAPSED */
