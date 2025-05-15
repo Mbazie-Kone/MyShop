@@ -52,8 +52,9 @@
 
 /* COLLAPSED */
 .layout-wrapper {
+  max-width: 100vw;
+  overflow-x: hidden;
   transition: all 0.3s ease;
-  width: 100%;
 }
 
 /* SIDEBAR */
