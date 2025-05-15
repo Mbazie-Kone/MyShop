@@ -86,6 +86,28 @@
   height: 55px;
 }
 
+/* COLLAPSED */
+.logo-expanded {
+  display: block;
+  width: 120px;
+  transition: opacity 0.3s ease;
+}
+
+.logo-collapsed {
+  display: none;
+  width: 40px;
+  transition: opacity 0.3s ease;
+}
+
+.layout-wrapper.collapsed .logo-expanded {
+  display: none;
+}
+
+.layout-wrapper.collapsed .logo-collapsed {
+  display: block;
+}
+/* COLLAPSED */
+
 .sidebar-logo {
   width: 120px;
   margin-left: 20px;
