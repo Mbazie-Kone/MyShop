@@ -86,6 +86,11 @@
   height: 55px;
 }
 
+.sidebar-logo {
+  /* width: 120px; */
+  margin-left: 20px;
+}
+
 /* COLLAPSED */
 .logo-expanded {
   display: block;
@@ -95,7 +100,7 @@
 
 .logo-collapsed {
   display: none;
-  width: 40px;
+  width: 32px;
   transition: opacity 0.3s ease;
 }
 
@@ -107,11 +112,6 @@
   display: block;
 }
 /* COLLAPSED */
-
-.sidebar-logo {
-  width: 120px;
-  margin-left: 20px;
-}
 
 .sidebar-icons-container {
   display: flex;
