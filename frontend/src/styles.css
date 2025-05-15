@@ -10,6 +10,9 @@ body, html {
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
     font-size: 16px;
+
+    /* COLLAPSED */
+    overflow-x: hidden;
 }
 
 body {
