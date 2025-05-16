@@ -5,16 +5,14 @@
     box-sizing: border-box;
 }
 
-body, html {
+html, body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
     font-size: 16px;
 
-    /* COLLAPSED */
-    overflow-x: hidden;
-}
-
-body {
+    /* OVERFLOW */
+    height: 100%;
+    overflow: hidden;
     background-color: #f4f7f9;
 }

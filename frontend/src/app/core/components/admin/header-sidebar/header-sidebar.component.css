@@ -204,6 +204,8 @@
 /* NAVBAR */
 
 .navbar {
+  position: fixed;
+  top: 0;
   background-color: #fff;
   height: auto;
   width: 100%;
@@ -223,11 +225,6 @@
 .collapsed .container-fluid {
   margin-left: 80px;
 }
-
-/* COLLAPSED 
-.content {
-  transition: margin-left 0.3s ease;
-}*/
 
 .left-section,
 .center-section,
