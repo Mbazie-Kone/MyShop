@@ -4,11 +4,12 @@
     height: calc(100vh - 0px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding-top: 0px;
     /* OVERFLOW */
 
     padding-top: 85px;
     margin-left: 250px;
+
+    box-sizing: border-box;
 
     /* COLLAPSED */
     transition: margin-left 0.3s ease;
