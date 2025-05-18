@@ -12,7 +12,6 @@ html, body {
     font-size: 16px;
 
     /* OVERFLOW */
-    height: 100%;
     overflow: hidden;
     background-color: #f4f7f9;
 }
