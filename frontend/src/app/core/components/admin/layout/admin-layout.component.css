@@ -1,7 +1,7 @@
 .content {
     /* OVERFLOW */
     position: relative;
-    height: calc(100vh - 0px);
+    height: calc(100vh - 50px);
     overflow-y: auto;
     overflow-x: hidden;
     /* OVERFLOW */
