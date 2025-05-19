@@ -5,11 +5,10 @@
     overflow-y: auto;
     overflow-x: hidden;
     /* OVERFLOW */
-
+    
     padding-top: 32px;
     margin-left: 250px;
     margin-top: 50px;
-
 
     /* COLLAPSED */
     transition: margin-left 0.3s ease;
