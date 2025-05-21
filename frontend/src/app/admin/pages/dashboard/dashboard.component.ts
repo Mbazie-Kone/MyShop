@@ -25,12 +25,10 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('pieChart') pieChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
-    // Delay the loading to allow Angular to update the DOM.
-    setTimeout(() => {
-      this.loading = false;
-
-      // Simulated data loading from the backend
-      setTimeout(() => {
+    this.dashboardService.getProductCountPerCategory().subscribe({
+      next: (data) => {
+        this.categoryLabels = data.map(d => d.categoryName);
+        this.categoryData = data.map(d => d.productCount);
         this.createDonutChart();
         this.createBarChart();
         this.createLineChart();
@@ -38,8 +36,12 @@ export class DashboardComponent implements AfterViewInit {
         this.createStackedBarChart();
         this.createAreaChart();
         this.createPieChart();
-      }, 0);
-    }, 1000);
+      },
+      error: (error) => {
+        console.error('Error retrieving data for the donut chart')
+        this.loading = false;
+      }
+    })
   }
 
   createDonutChart() {
