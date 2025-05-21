@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
+import { CategoryProductCount } from '../../../core/models/category-product-count.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ export class DashboardComponent implements AfterViewInit {
   loading = true;
   public categoryLabels: string[] = [];
   public categoryData: number[] = [];
+  public categories: CategoryProductCount[] = [];
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -25,7 +27,8 @@ export class DashboardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dashboardService.getProductCountPerCategory().subscribe({
-      next: (data) => {
+      next: (data: CategoryProductCount[]) => {
+        this.categories = data;
         this.categoryLabels = data.map(d => d.categoryName);
         this.categoryData = data.map(d => d.productCount);
 
