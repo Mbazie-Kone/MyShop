@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { DashboardService } from '../../../core/services/dashboard.service';
+import { CategoryProductCount } from '../../../core/models/category-product-count.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +11,10 @@ import { Chart } from 'chart.js/auto';
 })
 export class DashboardComponent implements AfterViewInit {
   loading = true;
+  public categoryLabels: string[] = [];
+  public categoryData: number[] = [];
+
+  constructor(private dashboardService: DashboardService) {}
 
   @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
