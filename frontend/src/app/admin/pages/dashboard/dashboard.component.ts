@@ -48,10 +48,10 @@ export class DashboardComponent implements AfterViewInit {
     new Chart(this.categoryChartRef.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: [],
+        labels: this.categoryLabels,
         datasets: [{
-          data: [],
-          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+          data: this.categoryData,
+          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
         }]
       },
       options: {
