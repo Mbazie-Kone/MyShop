@@ -13,6 +13,6 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getProductCountPerCategory(): Observable<CategoryProductCount[]> {
-    return this.http.get<CategoryProductCount[]>(`${this.apiUrl}/categories-count`);
+    return this.http.get<CategoryProductCount[]>(`${this.apiUrl}/dashboard/categories-count`);
   }
 }
