@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { CategoryProductCount } from '../../../core/models/category-product-count.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,19 +28,29 @@ export class DashboardComponent implements AfterViewInit {
       next: (data) => {
         this.categoryLabels = data.map(d => d.categoryName);
         this.categoryData = data.map(d => d.productCount);
-        this.createDonutChart();
-        this.createBarChart();
-        this.createLineChart();
-        this.createRadarChart();
-        this.createStackedBarChart();
-        this.createAreaChart();
-        this.createPieChart();
+
+        setTimeout(() => {
+          if (this.categoryChartRef) {
+            this.createDonutChart();
+          } else {
+            console.warn('The canvas for the donut chart is not yet available.')
+          }
+          this.loading = false;
+
+          this.createDonutChart();
+          this.createBarChart();
+          this.createLineChart();
+          this.createRadarChart();
+          this.createStackedBarChart();
+          this.createAreaChart();
+          this.createPieChart();
+        });
       },
       error: (error) => {
-        console.error('Error retrieving data for the donut chart')
+        console.error('Error loading categories:', error)
         this.loading = false;
       }
-    })
+    });
   }
 
   createDonutChart() {
