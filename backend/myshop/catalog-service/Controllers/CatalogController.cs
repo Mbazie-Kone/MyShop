@@ -45,9 +45,19 @@ namespace catalog_service.Controllers
 
         // api/catalog/dashboard/categories-count
         [HttpGet("dashboard/categories-count")]
-        public async Task<ActionResult<CategoryProductCountDto> GetProductPerCategory()
+        public async Task<ActionResult<IEnumerable<CategoryProductCountDto>>> GetProductPerCategory()
         {
+            var data = await _context.Products
+                .Include(p => p.Category)
+                .GroupBy(p => p.Category.Name)
+                .Select(g => new CategoryProductCountDto
+                {
+                    CategoryName = g.Key,
+                    ProductCount = g.Count()
+                })
+                .ToListAsync();
 
+            return Ok(data);
         }
 
         // POST:
