@@ -43,6 +43,13 @@ namespace catalog_service.Controllers
             return Ok(categories);
         }
 
+        // api/catalog/dashboard/categories-count
+        [HttpGet("dashboard/categories-count")]
+        public async Task<ActionResult<CategoryProductCountDto> GetProductPerCategory()
+        {
+
+        }
+
         // POST:
 
         // api/catalog/add-product
@@ -115,5 +122,7 @@ namespace catalog_service.Controllers
             return Ok(new { message = "Product created successfully!" });
             
         }
+
+       
     }
 }
