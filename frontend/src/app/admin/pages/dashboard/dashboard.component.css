@@ -17,12 +17,21 @@
 .card.a {
     height: 150px;
     background-color: blue;
-    border-radius: 10px;
 }
 
 .card.b {
     height: 600px;
     background-color: red;
+}
+
+.card.c {
+    height: 500px;
+    background-color: green;
+}
+
+.card.a,
+.card.b,
+.card.c {
     border-radius: 10px;
 }
 
