@@ -25,13 +25,22 @@
 }
 
 .card.c {
-    height: 500px;
     background-color: green;
+}
+
+.card.d {
+    background-color: yellow;
+}
+
+.card.c
+.card.d {
+    height: 500px;
 }
 
 .card.a,
 .card.b,
-.card.c {
+.card.c,
+.card.d {
     border-radius: 10px;
 }
 
