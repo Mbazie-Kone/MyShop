@@ -12,16 +12,16 @@
 /* COLLAPSED */
 canvas {
     width: 100% !important;
-    height: visible !important;
+    /* height: visible !important; */
     max-height: 300px;
 }
 
 /* COLLAPSED */
-.chart-wrapper,
+/* .chart-wrapper,
 .chart-wrapper-donut {
     height: 100%;
     min-height: 250px;
-}
+}*/
 
 /* COLLAPSED */
 @media (max-width: 768px) {
@@ -33,14 +33,6 @@ canvas {
         max-height: 200px;
     }
 }
-
-/*.spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*height: 200px;
-}
-*/
 
 .spinner {
     width: 50px;
