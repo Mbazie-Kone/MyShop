@@ -6,7 +6,7 @@
     overflow-x: hidden;
     /* OVERFLOW */
     
-    margin-left: 238px;
+    margin-left: 250px;
     margin-top: 50px;
     padding-top: 31px;
 
@@ -17,5 +17,5 @@
 
 /* COLLAPSED */
 .collapsed .content {
-    margin-left: 68px;
+    margin-left: 80px;
 }
