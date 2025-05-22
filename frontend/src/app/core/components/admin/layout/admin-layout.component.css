@@ -8,7 +8,7 @@
     
     margin-left: 238px;
     margin-top: 50px;
-    padding-top: 50px;
+    padding-top: 31px;
 
     /* COLLAPSED */
     transition: margin-left 0.3s ease;
@@ -17,5 +17,5 @@
 
 /* COLLAPSED */
 .collapsed .content {
-    margin-left: 66px;
+    margin-left: 68px;
 }
