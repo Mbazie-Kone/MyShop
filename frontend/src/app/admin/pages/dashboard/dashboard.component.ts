@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CategoryProductCount } from '../../../core/models/category-product-count.model';
@@ -9,8 +9,10 @@ import { CategoryProductCount } from '../../../core/models/category-product-coun
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewChecked {
   loading = true;
+  private donutChartInitialized = false;
+  
   public categoryLabels: string[] = [];
   public categoryData: number[] = [];
   public categories: CategoryProductCount[] = [];
@@ -31,29 +33,29 @@ export class DashboardComponent implements AfterViewInit {
         this.categories = data;
         this.categoryLabels = data.map(d => d.categoryName);
         this.categoryData = data.map(d => d.productCount);
+        this.loading = false;
 
-        setTimeout(() => {
-          if (this.categoryChartRef) {
-            this.createDonutChart();
-          } else {
-            console.warn('The canvas for the donut chart is not yet available.')
-          }
-          this.loading = false;
-
-          this.createDonutChart();
-          this.createBarChart();
-          this.createLineChart();
-          this.createRadarChart();
-          this.createStackedBarChart();
-          this.createAreaChart();
-          this.createPieChart();
-        });
+        this.createBarChart();
+        this.createLineChart();
+        this.createRadarChart();
+        this.createStackedBarChart();
+        this.createAreaChart();
+        this.createPieChart();
       },
       error: (error) => {
         console.error('Error loading categories:', error)
         this.loading = false;
       }
     });
+  }
+
+  ngAfterViewChecked(): void {
+    if (!this.donutChartInitialized && this.categoryChartRef) {
+      if (this.categoryLabels.length && this.categoryData.length) {
+        this.createDonutChart();
+        this.donutChartInitialized = true;
+      }
+    }
   }
 
   createDonutChart() {
