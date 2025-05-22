@@ -1,8 +1,12 @@
 .card {
     border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     /* COLLAPSED */
     height: 100%;
+
 }
 
 /* COLLAPSED */
@@ -30,12 +34,13 @@ canvas {
     }
 }
 
-.spinner-container {
+/*.spinner-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*height: 200px;*/
+    /*height: 200px;
 }
+*/
 
 .spinner {
     width: 50px;
