@@ -1,3 +1,11 @@
+.container-fluid {
+    padding-left: 32px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
 .col,
 .col-1,
 .col-2,
@@ -11,25 +19,16 @@
 .col-10,
 .col-11,
 .col-12 {
-    padding: 0;
+    padding: 0px;
+    padding-right: 20px;
 }
 
 .card.a {
     height: 150px;
-    background-color: blue;
 }
 
 .card.b {
     height: 600px;
-    background-color: red;
-}
-
-.card.c {
-    background-color: green;
-}
-
-.card.d {
-    background-color: yellow;
 }
 
 .card.c,
@@ -42,6 +41,7 @@
 .card.c,
 .card.d {
     border-radius: 10px;
+    background-color: #FFFFFF;
 }
 
 /*.card {
