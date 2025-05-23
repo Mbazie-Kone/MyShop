@@ -1,7 +1,8 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CategoryProductCount } from '../../../core/models/category-product-count.model';
+import { PageTitleService } from '../../../core/services/page-title.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,13 @@ export class DashboardComponent implements AfterViewChecked {
   public categoryData: number[] = [];
   public categories: CategoryProductCount[] = [];
 
-  constructor(private dashboardService: DashboardService) {}
+  pageTitle: string = '';
+
+  constructor(private dashboardService: DashboardService, private pageTitleService: PageTitleService) {
+    this.pageTitleService.pageTitle$.subscribe(title => {
+      this.pageTitle = title;
+    });
+  }
 
   @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
