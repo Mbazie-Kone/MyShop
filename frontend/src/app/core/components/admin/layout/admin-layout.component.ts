@@ -10,22 +10,7 @@ import { filter } from 'rxjs/operators';
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
-  pageTitle: string = '';
-
   // COLLAPSED
-  constructor(public layoutService: LayoutService, private router: Router) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.setPageTitle(this.router.url);
-    });
-  }
+  constructor(public layoutService: LayoutService) {}
 
-  private setPageTitle(url: string): void {
-    if (url.includes('/administration/dashboard')) {
-      this.pageTitle = 'MyShop';
-    } else if (url.includes('/administration/view-products')) {
-      this.pageTitle = 'Products';
-    }
-  }
 }
