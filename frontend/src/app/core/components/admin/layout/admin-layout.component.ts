@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { LayoutService } from '../../../services/layout.service';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { PageTitleService } from '../../../services/page-title.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-layout',
@@ -10,7 +11,33 @@ import { filter } from 'rxjs/operators';
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
+  pageTitle = '';
+
   // COLLAPSED
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: LayoutService, private router: Router, private activatedRoute: ActivatedRoute, private pagetitleService: PageTitleService) {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.getCurrentRoute(this.activatedRoute)),
+        filter(route => route.outlet === 'primary'),
+        map(route => route.snapshot.data['title'])
+      )
+      .subscribe((title: string) => {
+        const finalTitle = title || 'Admin';
+        this.pagetitleService.setTitle(finalTitle);
+      });
+
+    this.pagetitleService.pageTitle$.subscribe(title => {
+      this.pageTitle = title;
+    });
+  }
+
+  private getCurrentRoute(route: ActivatedRoute): ActivatedRoute {
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+
+    return route;
+  }
 
 }
