@@ -1,4 +1,4 @@
-<div class="container-fluid"> 
+
   <!-- ROW 1 -->
   <div class="row">
     <h4 class="page-title">{{ pageTitle }}</h4>
@@ -10,7 +10,10 @@
     <div class="col">
       <div class="card a">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="spinner-container" *ngIf="loading">
+            <div class="spinner"></div>
+          </div>
+          <div *ngIf="!loading" class="d-flex justify-content-between align-items-center">
             <span class="text-muted fw-semibold">Orders</span>
           </div>
         </div>
@@ -37,7 +40,7 @@
     <div class="col">
       <div class="card a">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center">
+          <div *ngIf="!loading" class="d-flex justify-content-between align-items-center">
             <span class="text-muted fw-semibold">Balance</span>
           </div>
         </div>
@@ -98,109 +101,3 @@
     </div>
   </div>
   <!-- ROW 5 -->
-</div> 
-
-
-
-
-
-  <div class="row">
-    <div class="col-2">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Sales by Category</h6>
-          <canvas #categoryChart></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-10">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">User Engagement</h6>
-          <canvas #areaChart></canvas>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <!-- ROW 1 -->
-
-  <!-- ROW 2 -->
-  <div class="row">
-    <div class="col-3">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Performance Score</h6>
-          <canvas #radarChart></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Traffic Trend</h6>
-          <canvas #trafficChart></canvas>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <!-- ROW 2 -->
-
-  <!-- ROW 3 -->
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">User Types</h6>
-          <canvas #pieChart></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-9">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Monthly Revenue</h6>
-          <canvas #revenueChart></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ROW 3 -->
-
-  <!-- ROW 4 -->
-    <div class="row mb-2">
-    <div class="col-9">
-      <div class="card">
-        <div class="spinner-container" *ngIf="loading">
-          <div class="spinner"></div>
-        </div>
-        <div *ngIf="!loading">
-          <h6 class="text-center">Orders Comparison</h6>
-          <canvas #stackedChart></canvas>
-        </div>
-      </div>
-    </div>
-    </div>
-  <!-- ROW 4 -->
