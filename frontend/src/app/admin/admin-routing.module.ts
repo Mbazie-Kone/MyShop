@@ -6,8 +6,8 @@ import { ViewProductsComponent } from './pages/products/view-products/view-produ
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard MyShop' }, canActivate: [authGuard] },
-  { path: 'view-products', component: ViewProductsComponent, data: { title: 'Products List MyShop' }},
+  { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard - MyShop' }, canActivate: [authGuard] },
+  { path: 'view-products', component: ViewProductsComponent, data: { title: 'Products List - MyShop' }},
   { path: 'add-product', component: AddProductComponent}
 ];
 
