@@ -42,6 +42,10 @@
     background-color: #FFFFFF;
 }
 
+.icons {
+    color: rgb(68, 178, 178);
+}
+
 /* COLLAPSED
 canvas {
     width: 100% !important;
