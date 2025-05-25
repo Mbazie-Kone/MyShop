@@ -42,13 +42,17 @@
     background-color: #FFFFFF;
 }
 
+.card-body > a {
+    text-decoration: none;
+}
+
 .icons {
     color: rgb(68, 178, 178);
     font-size: 20px;
 }
 
-.card-body > a {
-    text-decoration: none;
+.other-icons {
+    font-size: 13px;
 }
 
 
