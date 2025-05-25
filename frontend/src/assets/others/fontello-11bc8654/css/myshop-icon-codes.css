@@ -1,0 +1,26 @@
+
+.icon-products:before { content: '\61'; } /* 'a' */
+.icon-euro:before { content: '\62'; } /* 'b' */
+.icon-cart:before { content: '\63'; } /* 'c' */
+.icon-chart:before { content: '\64'; } /* 'd' */
+.icon-settings:before { content: '\65'; } /* 'e' */
+.icon-dashboard:before { content: '\66'; } /* 'f' */
+.icon-user:before { content: '\67'; } /* 'g' */
+.icon-bell:before { content: '\68'; } /* 'h' */
+.icon-search:before { content: '\69'; } /* 'i' */
+.icon-hamburger:before { content: '\6a'; } /* 'j' */
+.icon-credit-card:before { content: '\6b'; } /* 'k' */
+.icon-light:before { content: '\6c'; } /* 'l' */
+.icon-dark:before { content: '\6d'; } /* 'm' */
+.icon-cancel-circled:before { content: '\6e'; } /* 'n' */
+.icon-ok-circled:before { content: '\6f'; } /* 'o' */
+.icon-adjust:before { content: '\70'; } /* 'p' */
+.icon-card:before { content: '\71'; } /* 'q' */
+.icon-dollar:before { content: '\72'; } /* 'r' */
+.icon-user-plus:before { content: '\73'; } /* 's' */
+.icon-user-delete:before { content: '\74'; } /* 't' */
+.icon-parameter:before { content: '\75'; } /* 'u' */
+.icon-mail:before { content: '\76'; } /* 'v' */
+.icon-edit:before { content: '\77'; } /* 'w' */
+.icon-trash:before { content: '\78'; } /* 'x' */
+.icon-trash-empty:before { content: '\79'; } /* 'y' */

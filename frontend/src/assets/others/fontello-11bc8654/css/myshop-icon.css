@@ -1,29 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 16px;
-
-    /* OVERFLOW */
-    overflow: hidden;
-    background-color: #f4f7f9;
-}
-
 @font-face {
   font-family: 'myshop-icon';
-  src: url('../src/assets/fonts/myshop-icon.eot?79015403');
-  src: url('../src/assets/fonts/myshop-icon.eot?79015403#iefix') format('embedded-opentype'),
-       url('../src/assets/fonts/myshop-icon.woff2?79015403') format('woff2'),
-       url('../src/assets/fonts/myshop-icon.woff?79015403') format('woff'),
-       url('../src/assets/fonts/myshop-icon.ttf?79015403') format('truetype'),
-       url('../src/assets/fonts/myshop-icon.svg?79015403#myshop-icon') format('svg');
+  src: url('../font/myshop-icon.eot?79015403');
+  src: url('../font/myshop-icon.eot?79015403#iefix') format('embedded-opentype'),
+       url('../font/myshop-icon.woff2?79015403') format('woff2'),
+       url('../font/myshop-icon.woff?79015403') format('woff'),
+       url('../font/myshop-icon.ttf?79015403') format('truetype'),
+       url('../font/myshop-icon.svg?79015403#myshop-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -37,19 +19,31 @@ html, body {
   }
 }
 */
-
 [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "myshop-icon";
   font-style: normal;
   font-weight: normal;
 
   display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
   text-align: center;
   /* opacity: .8; */
 
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
 
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
