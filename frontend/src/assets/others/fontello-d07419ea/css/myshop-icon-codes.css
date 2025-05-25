@@ -1,4 +1,12 @@
 
+.icon-up-big:before { content: '\31'; } /* '1' */
+.icon-left-big:before { content: '\32'; } /* '2' */
+.icon-right-big:before { content: '\33'; } /* '3' */
+.icon-down:before { content: '\34'; } /* '4' */
+.icon-left:before { content: '\35'; } /* '5' */
+.icon-right:before { content: '\36'; } /* '6' */
+.icon-up:before { content: '\37'; } /* '7' */
+.icon-arrows-cw:before { content: '\38'; } /* '8' */
 .icon-products:before { content: '\61'; } /* 'a' */
 .icon-euro:before { content: '\62'; } /* 'b' */
 .icon-cart:before { content: '\63'; } /* 'c' */
@@ -24,3 +32,4 @@
 .icon-edit:before { content: '\77'; } /* 'w' */
 .icon-trash:before { content: '\78'; } /* 'x' */
 .icon-trash-empty:before { content: '\79'; } /* 'y' */
+.icon-down-big:before { content: '\7a'; } /* 'z' */
