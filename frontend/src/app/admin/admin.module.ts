@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
 import { ViewProductsComponent } from './pages/products/view-products/view-products.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ViewProductsComponent } from './pages/products/view-products/view-produ
   imports: [
     CommonModule,
     AdminRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
