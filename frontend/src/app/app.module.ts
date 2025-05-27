@@ -8,10 +8,12 @@ import { CoreModule } from './core/core.module';
 import { MyshopModule } from './myshop/myshop.module';
 import { ErrorsModule } from './errors/errors.module';
 import { RouterModule } from '@angular/router';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
