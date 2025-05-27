@@ -55,7 +55,6 @@
     font-size: 13px;
 }
 
-
 /* COLLAPSED
 canvas {
     width: 100% !important;
@@ -73,18 +72,3 @@ canvas {
         max-height: 200px;
     }
 }*/
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 6px solid #ccc;
-    border-top: 6px solid #4e73df;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
