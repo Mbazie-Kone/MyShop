@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PageTitleService } from '../../../../core/services/page-title.service';
+import { Product } from '../../../../core/models/catalog.model';
+import { CatalogService } from '../../../services/catalog.service';
 
 @Component({
   selector: 'app-view-products',
@@ -10,9 +12,17 @@ import { PageTitleService } from '../../../../core/services/page-title.service';
 export class ViewProductsComponent {
   pageTitle: string = '';
 
-  constructor(private pageTitleService: PageTitleService) {
+  products: Product[] = [];
+
+  constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {
       this.pageTitle = title;
     });
+  }
+
+  ngOnInit(): void {
+    this.catalogService.getAllProducts().subscribe(data => {
+      this.products = data;
+    })
   }
 }

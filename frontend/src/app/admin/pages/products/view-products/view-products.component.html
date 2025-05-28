@@ -15,4 +15,29 @@
             <th>Action</th>
         </tr>
     </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td><input type="checkbox"></td>
+            <td class="d-flex align-items-center gap-3">
+                <img [src]="product.imageUrl" alt="Image" width="40" height="40" class="rounded">
+                <span>
+                    <div>{{ product.name }}</div>
+                    <div class="text-warning"><i class="bi bi-star-fill"></i></div>
+                </span>
+            </td>
+            <td>{{ product.categoryName }}</td>
+            <td>{{ product.createdAt | date: 'dd MMMM, YYYY' }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <span class="badge" [ngClass]="product.isAvailable ? 'bg-success' : 'bg-danger'">
+                    {{ product.isAvailable ? 'Active' : 'Deactivate'}}
+                </span>
+            </td>
+            <td>
+                <i class="icon-edit mx-1 text-warning"></i>
+                <i class="icon-trash mx-1 text-danger"></i>
+            </td>
+        </tr>
+    </tbody>
 </table>
