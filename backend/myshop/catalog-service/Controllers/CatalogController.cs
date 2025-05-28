@@ -19,8 +19,8 @@ namespace catalog_service.Controllers
 
         // GET:
 
-        // api/catalog/produts/{id}
-        [HttpGet("products/{id}")]
+        // api/catalog/produt/{id}
+        [HttpGet("product/{id}")]
         public async Task<ActionResult<Product>> GetProductById(int id)
         {
             var product = await _context.Products
@@ -41,6 +41,27 @@ namespace catalog_service.Controllers
             var categories = await _context.Categories.ToListAsync();
 
             return Ok(categories);
+        }
+
+        // api/catalog/products
+        [HttpGet("products")]
+        public async Task<ActionResult<IEnumerable<ViewAllProductsDto>>> GetAllProducts()
+        {
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .Select(p => new ViewAllProductsDto
+                {
+                    ProductName = p.Name,
+                    CategoryName = p.Category.Name,
+                    Price = p.Price,
+                    Quantity = p.Stock,
+                    IsActive = p.IsAvailable,
+                    ImageUrl = p.Images.FirstOrDefault().Url
+                })
+                .ToListAsync();
+
+            return Ok(products);
         }
 
         // api/catalog/dashboard/categories-count
