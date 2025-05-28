@@ -34,6 +34,9 @@
   <div class="col">
     <div class="card a">
       <div class="card-body">
+        <div *ngIf="loading">
+          <app-spinner [size]="'40px'"></app-spinner>
+        </div>
         <div class="d-flex justify-content-between align-items-center">
           <span class="text-muted fw-semibold">Revenue</span>
           <i class="icon-euro icons"></i>
