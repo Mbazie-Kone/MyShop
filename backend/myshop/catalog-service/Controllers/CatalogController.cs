@@ -57,7 +57,7 @@ namespace catalog_service.Controllers
                     Price = p.Price,
                     Quantity = p.Stock,
                     IsActive = p.IsAvailable,
-                    ImageUrl = p.Images.FirstOrDefault().Url
+                    ImageUrl = p.Images.Any() ? p.Images.First().Url : "assets/images/default.png"
                 })
                 .ToListAsync();
 
