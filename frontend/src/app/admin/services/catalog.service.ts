@@ -20,4 +20,8 @@ export class CatalogService {
     return this.http.post<Product>(`${this.apiUrl}/add-product`, formData);
   }
 
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+  }
+
 }
