@@ -11,8 +11,11 @@ import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dt
 })
 export class ViewProductsComponent {
   pageTitle: string = '';
-
   products: ViewAllProductsDto[] = [];
+
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 10;
 
   constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {

@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
 import { ViewProductsComponent } from './pages/products/view-products/view-products.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ]
 })
 export class AdminModule { }
