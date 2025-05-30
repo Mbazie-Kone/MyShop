@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageTitleService } from '../../../../core/services/page-title.service';
-import { Product } from '../../../../core/models/catalog.model';
 import { CatalogService } from '../../../services/catalog.service';
+import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dto';
 
 @Component({
   selector: 'app-view-products',
@@ -12,7 +12,7 @@ import { CatalogService } from '../../../services/catalog.service';
 export class ViewProductsComponent {
   pageTitle: string = '';
 
-  products: Product[] = [];
+  products: ViewAllProductsDto[] = [];
 
   constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {

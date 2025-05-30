@@ -19,17 +19,15 @@
         <tr *ngFor="let product of products">
             <td><input type="checkbox"></td>
             <td class="d-flex align-items-center gap-3">
-                <img [src]="product.images" alt="Image" width="40" height="40" class="rounded">
-                <span>
-                    <div>{{ product.name }}</div>
-                </span>
+                <img [src]="product.imageUrl || 'assets/images/default.png'" alt="Image" width="40" height="40" class="rounded">
+                <span>{{ product.productName }}</span>
             </td>
-            <td>{{ product.categoryId }}</td>
+            <td>{{ product.categoryName }}</td>
             <td>{{ product.price }}</td>
-            <td>{{ product.stock }}</td>
+            <td>{{ product.quantity }}</td>
             <td>
-                <span class="badge" [ngClass]="product.isAvailable ? 'bg-success' : 'bg-danger'">
-                    {{ product.isAvailable ? 'Active' : 'Deactivate'}}
+                <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
+                    {{ product.isActive ? 'Active' : 'Deactivate' }}
                 </span>
             </td>
             <td>
