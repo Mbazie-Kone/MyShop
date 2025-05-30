@@ -23,7 +23,7 @@
                 <span>{{ product.productName }}</span>
             </td>
             <td>{{ product.categoryName }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ product.price | currency: 'EUR':'symbol' }} </td>
             <td>{{ product.quantity }}</td>
             <td>
                 <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
