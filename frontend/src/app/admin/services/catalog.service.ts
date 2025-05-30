@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category, Product } from '../../core/models/catalog.model';
+import { ViewAllProductsDto } from '../../core/models/view-all-products.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class CatalogService {
     return this.http.post<Product>(`${this.apiUrl}/add-product`, formData);
   }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+  getAllProducts(): Observable<ViewAllProductsDto[]> {
+    return this.http.get<ViewAllProductsDto[]>(`${this.apiUrl}/products`);
   }
 
 }
