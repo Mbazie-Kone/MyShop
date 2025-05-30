@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PageTitleService } from '../../../../core/services/page-title.service';
 import { CatalogService } from '../../../services/catalog.service';
 import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dto';
+import { Product } from '../../../../core/models/catalog.model';
 
 @Component({
   selector: 'app-view-products',
@@ -16,6 +17,12 @@ export class ViewProductsComponent {
   // Pagination
   currentPage = 1;
   itemsPerPage = 10;
+
+  // Filter
+  searchTerm = '';
+  selectedCategory = '';
+  selectedStatus = '';
+  filteredProducts: Product [] = [];
 
   constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {
