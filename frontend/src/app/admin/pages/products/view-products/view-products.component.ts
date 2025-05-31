@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { PageTitleService } from '../../../../core/services/page-title.service';
 import { CatalogService } from '../../../services/catalog.service';
 import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dto';
-import { Product } from '../../../../core/models/catalog.model';
 
 @Component({
   selector: 'app-view-products',
@@ -22,7 +21,7 @@ export class ViewProductsComponent {
   searchTerm = '';
   selectedCategory = '';
   selectedStatus = '';
-  filteredProducts: Product [] = [];
+  filteredProducts: ViewAllProductsDto[] = [];
 
   constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {
@@ -34,6 +33,18 @@ export class ViewProductsComponent {
     this.catalogService.getAllProducts().subscribe(data => {
       console.log('Products:', data);
       this.products = data;
+      this.applyFilters();
     });
+  }
+
+  applyFilters() {
+    this.filteredProducts = this.products.filter(p => {
+      const matchesName = this.searchTerm === '' || p.productName.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const matchesCategory = this.selectedCategory === '' || p.categoryName === this.selectedCategory;
+      const matchesStatus = this.selectedStatus === '' || (p.isActive ? 'Active' : 'Deactivate') === this.selectedStatus;
+
+      return matchesName && matchesCategory && matchesStatus;
+    });
+    this.currentPage = 1;
   }
 }
