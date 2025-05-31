@@ -3,7 +3,7 @@
     <a [routerLink]="'/administration/add-product'">Add Product</a>
 </div>
 
-<!-- Filter -->
+<!-- Filters -->
 <div class="row mb-3">
     <div class="col-md-a">
         <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
@@ -14,6 +14,14 @@
     <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
         <option value="All Categories"></option>
         <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
+    </select>
+</div>
+
+<div class="col-md-3">
+    <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Deactivate">Deactivate</option>
     </select>
 </div>
 
