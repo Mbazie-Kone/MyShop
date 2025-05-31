@@ -12,7 +12,7 @@
 
 <div class="col-md-3">
     <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-        <option value="All Categories"></option>
+        <option value="">All Categories</option>
         <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
     </select>
 </div>
@@ -45,7 +45,7 @@
                 <span>{{ product.productName }}</span>
             </td>
             <td>{{ product.categoryName }}</td>
-            <td>{{ product.price | currency: 'EUR':'symbol' }} </td>
+            <td>{{ product.price | currency: 'EUR' :'symbol' }} </td>
             <td>{{ product.quantity }}</td>
             <td>
                 <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
