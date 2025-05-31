@@ -27,7 +27,7 @@
     <div class="col-md-2">
         <label class="d-flex align-items-center">
             Show
-            <div class="col-md-6">
+            <div class="col-md-5 ms-1 me-1">
                 <select class="form-select" [(ngModel)]="itemsPerPage" (change)="updatePaginatedProducts()">
                     <option *ngFor="let n of pageSizeOptions" [value]="n">{{ n }}</option>
                 </select>
