@@ -23,6 +23,12 @@
             <option value="Deactivate">Deactivate</option>
         </select>
     </div>
+
+    <div class="col-md-2">
+        <select class="form-select" [(ngModel)]="itemsPerPage" (change)="updatePaginatedProducts()">
+            <option *ngFor="let n of pageSizeOptions" [value]="n">{{ n }}</option>
+        </select>
+    </div>
 </div>
 
 <table class="table table-hover table-bordered align-middle text-center">

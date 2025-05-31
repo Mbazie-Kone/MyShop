@@ -15,9 +15,10 @@ export class ViewProductsComponent {
 
   // Pagination
   currentPage: number = 1;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 10;
   filteredProducts: ViewAllProductsDto[] = [];
   paginatedProducts: ViewAllProductsDto[] = [];
+  pageSizeOptions: number[] = [10, 25, 50, 100];
 
   // Filter
   searchTerm = '';
