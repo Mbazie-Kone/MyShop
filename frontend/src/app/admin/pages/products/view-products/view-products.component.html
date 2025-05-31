@@ -3,7 +3,7 @@
     <a [routerLink]="'/administration/add-product'" class="btn btn-primary add-product">Add Product</a>
 </div>
 
-<!-- Filters -->
+<!-- FILTERS -->
 <div class="row mb-3">
     <div class="col-md-3">
         <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
@@ -38,8 +38,7 @@
   
 </div>
 
-
-
+<!-- TABLE -->
 <table class="table table-hover table-bordered align-middle text-center">
     <thead class="table-light">
         <tr>
@@ -75,7 +74,7 @@
     </tbody>
 </table>
 
-<!-- Pagination -->
+<!-- PAGINATION -->
 <nav *ngIf="filteredProducts.length > itemsPerPage">
     <ul class="pagination justify-content-center mt-3">
         <li class="page-item" [class.disabled]="currentPage === 1">
