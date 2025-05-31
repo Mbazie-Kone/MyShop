@@ -10,6 +10,13 @@
     </div>
 </div>
 
+<div class="col-md-3">
+    <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+        <option value="All Categories"></option>
+        <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
+    </select>
+</div>
+
 <table class="table table-hover table-bordered align-middle text-center">
     <thead class="table-light">
         <tr>

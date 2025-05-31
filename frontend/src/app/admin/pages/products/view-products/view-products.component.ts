@@ -47,4 +47,10 @@ export class ViewProductsComponent {
     });
     this.currentPage = 1;
   }
+
+  get uniqueCategories(): string[] {
+    const categories = this.products.map(p => p.categoryName);
+
+    return [...new Set(categories)];
+  }
 }
