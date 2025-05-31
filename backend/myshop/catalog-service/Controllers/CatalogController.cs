@@ -152,9 +152,33 @@ namespace catalog_service.Controllers
             }
 
             return Ok(new { message = "Product created successfully!" });
-            
         }
 
-       
+        // Delete product
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+                return NotFound();
+
+            // Remove images
+            foreach (var image in product.Images)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "public", image.Url.Replace("assets/", ""));
+                if (System.IO.File.Exists(path))
+                    System.IO.File.Delete(path);
+            }
+
+            _context.Images.RemoveRange(product.Images);
+            _context.Products.Remove(product);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Product deleted successfully." });
+                
+        }
     }
 }

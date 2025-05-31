@@ -25,4 +25,8 @@ export class CatalogService {
     return this.http.get<ViewAllProductsDto[]>(`${this.apiUrl}/products`);
   }
 
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete-product/${id}`);
+  }
+
 }

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { PageTitleService } from '../../../../core/services/page-title.service';
 import { CatalogService } from '../../../services/catalog.service';
 import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dto';
-import { Product } from '../../../../core/models/catalog.model';
 
 @Component({
   selector: 'app-view-products',
@@ -89,5 +88,20 @@ export class ViewProductsComponent {
     const categories = this.products.map(p => p.categoryName);
 
     return [...new Set(categories)];
+  }
+
+  confirmDelete(id: number): void {
+    if (confirm('Are you sure you want to delete this product?')) {
+      this.catalogService.deleteProduct(id).subscribe({
+        next: () => {
+          this.products = this.products.filter(p => p.productId !== id);
+          this.applyFilters();
+        },
+        error: (err) => {
+          console.error('Delete failed', err);
+          alert('Error deleting product');
+        }
+      });
+    }
   }
 }
