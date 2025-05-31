@@ -14,14 +14,15 @@ export class ViewProductsComponent {
   products: ViewAllProductsDto[] = [];
 
   // Pagination
-  currentPage = 1;
-  itemsPerPage = 10;
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  filteredProducts: ViewAllProductsDto[] = [];
+  paginatedProducts: ViewAllProductsDto[] = [];
 
   // Filter
   searchTerm = '';
   selectedCategory = '';
   selectedStatus = '';
-  filteredProducts: ViewAllProductsDto[] = [];
 
   constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
     this.pageTitleService.pageTitle$.subscribe(title => {
@@ -37,6 +38,14 @@ export class ViewProductsComponent {
     });
   }
 
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+  }
+  
+  get totalPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
   applyFilters() {
     this.filteredProducts = this.products.filter(p => {
       const matchesName = this.searchTerm === '' || p.productName.toLowerCase().includes(this.searchTerm.toLowerCase());
@@ -46,6 +55,32 @@ export class ViewProductsComponent {
       return matchesName && matchesCategory && matchesStatus;
     });
     this.currentPage = 1;
+    this.updatePaginatedProducts();
+  }
+
+  updatePaginatedProducts(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedProducts = this.filteredProducts.slice(start, end);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedProducts();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedProducts();
+    }
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.updatePaginatedProducts();
   }
 
   get uniqueCategories(): string[] {
