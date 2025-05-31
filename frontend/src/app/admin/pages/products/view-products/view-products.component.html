@@ -5,24 +5,24 @@
 
 <!-- Filters -->
 <div class="row mb-3">
-    <div class="col-md-a">
+    <div class="col-md-3">
         <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
     </div>
-</div>
 
-<div class="col-md-3">
-    <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-        <option value="">All Categories</option>
-        <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
-    </select>
-</div>
+    <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+            <option value="">All Categories</option>
+            <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
+        </select>
+    </div>
 
-<div class="col-md-3">
-    <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
-        <option value="">All Status</option>
-        <option value="Active">Active</option>
-        <option value="Deactivate">Deactivate</option>
-    </select>
+    <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Deactivate">Deactivate</option>
+        </select>
+    </div>
 </div>
 
 <table class="table table-hover table-bordered align-middle text-center">
@@ -61,8 +61,6 @@
 </table>
 
 <!-- Pagination -->
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-
 <nav *ngIf="filteredProducts.length > itemsPerPage">
     <ul class="pagination justify-content-center mt-3">
         <li class="page-item" [class.disabled]="currentPage === 1">
