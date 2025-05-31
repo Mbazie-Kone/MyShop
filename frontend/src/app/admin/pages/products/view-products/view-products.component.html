@@ -67,8 +67,10 @@
                 </span>
             </td>
             <td>
-                <i class="icon-edit mx-1 text-warning"></i>
-                <i class="icon-trash mx-1 text-danger"></i>
+                <a [routerLink]="['/administration/edit-product', product.productId]">
+                    <i class="icon-edit mx-2 modify" title="Edit"></i>
+                </a>
+                <i class="icon-trash mx-2 modify" title="Delete" (click)="confirmDelete(product.productId)"></i>
             </td>
         </tr>
     </tbody>

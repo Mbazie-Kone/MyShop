@@ -4,7 +4,7 @@ namespace catalog_service.DTOs
 {
     public class ViewAllProductsDto
     {
-
+        public int ProductId { get; set; }
         public string ImageUrl { get; set; }
         public string CategoryName { get; set; }
         public string ProductName { get; set; }

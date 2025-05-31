@@ -20,3 +20,8 @@ img {
 .add-product {
     color: white;
 }
+
+.modify {
+    color: #94A3B8;
+    cursor: pointer;
+}

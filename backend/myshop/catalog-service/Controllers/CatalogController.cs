@@ -52,6 +52,7 @@ namespace catalog_service.Controllers
                 .Include(p => p.Images)
                 .Select(p => new ViewAllProductsDto
                 {
+                    ProductId = p.Id,
                     ProductName = p.Name,
                     CategoryName = p.Category.Name,
                     Price = p.Price,

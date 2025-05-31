@@ -1,4 +1,5 @@
 export interface ViewAllProductsDto {
+    productId: number;
     productName: string;
     categoryName: string;
     imageUrl: string;

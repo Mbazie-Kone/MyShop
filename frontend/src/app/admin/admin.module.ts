@@ -9,6 +9,7 @@ import { AddProductComponent } from './pages/products/add-product/add-product.co
 import { ViewProductsComponent } from './pages/products/view-products/view-products.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EditProductComponent } from './pages/products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterComponent,
     DashboardComponent,
     AddProductComponent,
-    ViewProductsComponent
+    ViewProductsComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,
