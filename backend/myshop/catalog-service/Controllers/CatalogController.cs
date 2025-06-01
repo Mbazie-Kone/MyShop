@@ -151,7 +151,12 @@ namespace catalog_service.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return Ok(new { message = "Product created successfully!" });
+            var createProduct = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == product.Id);
+
+            return Ok(createProduct);
         }
 
         // Delete product
