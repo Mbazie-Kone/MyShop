@@ -13,18 +13,26 @@ export class CatalogService {
 
   constructor(private http: HttpClient) { }
 
+  // GET
+
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrl}/categories`);
-  }
-
-  createProduct(formData: FormData): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/add-product`, formData);
   }
 
   getAllProducts(): Observable<ViewAllProductsDto[]> {
     return this.http.get<ViewAllProductsDto[]>(`${this.apiUrl}/products`);
   }
 
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/product/${id}`);
+  }
+
+  // POST
+  createProduct(formData: FormData): Observable<Product> {
+    return this.http.post<Product>(`${this.apiUrl}/add-product`, formData);
+  }
+
+  
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete-product/${id}`);
   }
