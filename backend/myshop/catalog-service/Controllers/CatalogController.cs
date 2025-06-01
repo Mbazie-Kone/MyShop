@@ -159,6 +159,74 @@ namespace catalog_service.Controllers
             return Ok(createProduct);
         }
 
+        // PUT
+
+        // api/catalog/update-product/{id}
+        [HttpPut("update-product/{id}")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] InsertCategoryProductImageDto dto)
+        {
+            var product = await _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+                return NotFound("Product not found");
+
+            var category = await _context.Categories.FindAsync(dto.CategoryId);
+            if (category == null)
+                return BadRequest("Invalid category.");
+
+            product.Name = dto.Name;
+            product.Description = dto.Description;
+            product.Price = dto.Price;
+            product.Stock = dto.Stock;
+            product.IsAvailable = dto.Stock > 0;
+            product.CategoryId = dto.CategoryId;
+            product.UpdatedAt = DateTime.UtcNow;
+
+            if (dto.Images != null && dto.Images.Count > 0)
+            {
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "public", "products");
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                foreach (var file in dto.Images.Take(10))
+                {
+                    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                    if (!allowedExtensions.Contains(extension))
+                        return BadRequest($"Unsopported image format: {extension}");
+
+                    var fileName = Guid.NewGuid() + extension;
+                    var savePath = Path.Combine(folderPath, fileName);
+
+                    using var stream = new FileStream(savePath, FileMode.Create);
+                    await file.CopyToAsync(stream);
+
+                    var image = new Image
+                    {
+                        Url = $"assets/products/{fileName}",
+                        ProductId = product.Id,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+
+                    _context.Images.Add(image);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            var updateProduct = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == product.Id);
+
+            return Ok(updateProduct);
+        }
+
         // Delete product
         public async Task<ActionResult> DeleteProduct(int id)
         {
