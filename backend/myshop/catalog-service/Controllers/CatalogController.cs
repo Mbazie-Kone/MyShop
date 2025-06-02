@@ -21,7 +21,7 @@ namespace catalog_service.Controllers
 
         // api/catalog/produt/{id}
         [HttpGet("product/{id}")]
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<ActionResult<UpdateProductDetailsDto>> GetProductById(int id)
         {
             var product = await _context.Products
                 .Include(p => p.Category)
@@ -31,7 +31,19 @@ namespace catalog_service.Controllers
             if (product == null)
                 return NotFound();
 
-            return Ok(product);
+            var dto = new UpdateProductDetailsDto()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Stock = product.Stock,
+                IsAvailable = product.IsAvailable,
+                CategoryId = product.CategoryId,
+                ImageUrls = product.Images.Select(i => i.Url).ToList()
+            };
+
+            return Ok(dto);
         }
 
         // api/catalog/categories
