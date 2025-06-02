@@ -28,17 +28,17 @@
         <div class="col-md-6">
             <label for="price" class="form-label">Price</label>
             <input type="number" step="0.01" id="price" class="form-control" formControlName="price" required>
-        </div>
-        <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="text-danger">
-            Price is required
+            <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="text-danger">
+                Price is required
+            </div>
         </div>
 
         <div class="col-md-6">
             <label for="stock" class="form-label">Stock</label>
             <input type="number" id="stock" class="form-control" formControlName="stock" required>
-        </div>
-        <div *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.invalid" class="text-danger">
-            Stock is required
+            <div *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.invalid" class="text-danger">
+                Stock is required
+            </div>
         </div>
     </div>
 </form>
