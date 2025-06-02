@@ -52,7 +52,16 @@ export class EditProductComponent implements OnInit {
   formData.append('Description', this.productForm.value.description);
   formData.append('Price', this.productForm.value.price);
   formData.append('Stock', this.productForm.value.stock);
-  formData.append('CategoryId', this.productForm.value.categoryId);
+  formData.append('CategoryId', this.productForm.value.categoryId)
+
+  for (let file of this.SelectedFiles) {
+    formData.append('Images', file);
+  }
+
+  this.catalogService.updateProduct(this.productId, formData).subscribe({
+    next: () => this.router.navigate(['/administration/view-products']),
+    error: err => console.error('Error during update', err)
+  });
  }
 
 }
