@@ -176,7 +176,7 @@ namespace catalog_service.Controllers
         // api/catalog/update-product/{id}
         [HttpPut("update-product/{id}")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] InsertCategoryProductImageDto dto)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] UpdateProductDto dto)
         {
             var product = await _context.Products
                 .Include(p => p.Images)

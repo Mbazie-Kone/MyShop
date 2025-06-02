@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category, Product } from '../../core/models/catalog.model';
 import { ViewAllProductsDto } from '../../core/models/view-all-products.dto';
+import { UpdateProductDetailsDto } from '../../core/models/update-product-details.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class CatalogService {
     return this.http.get<ViewAllProductsDto[]>(`${this.apiUrl}/products`);
   }
 
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/product/${id}`);
+  getProductById(id: number): Observable<UpdateProductDetailsDto> {
+    return this.http.get<UpdateProductDetailsDto>(`${this.apiUrl}/product/${id}`);
   }
 
   // POST
@@ -32,8 +33,8 @@ export class CatalogService {
   }
 
   // PUT
-  updateProduct(id: number, formData: FormData): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/product/${id}`, formData);
+  updateProduct(id: number, formData: FormData): Observable<UpdateProductDetailsDto> {
+    return this.http.put<UpdateProductDetailsDto>(`${this.apiUrl}/update-product/${id}`, formData);
   }
 
   // DELETE
