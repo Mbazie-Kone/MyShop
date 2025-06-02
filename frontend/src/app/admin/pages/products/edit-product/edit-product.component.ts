@@ -12,18 +12,24 @@ import { CatalogService } from '../../../services/catalog.service';
 })
 export class EditProductComponent implements OnInit {
   productForm!: FormGroup;
-  categories: Category[] = [];
-  SelectedFiles: File[] = [];
   productId!: number;
-  existingImages: string[] = [];
+  SelectedFiles: File[] = [];
 
   constructor(private route: ActivatedRoute, private catalogService: CatalogService, private fb: FormBuilder, private router: Router) {}
  
   ngOnInit(): void {
    this.productId = +this.route.snapshot.paramMap.get('id')!;
-   this.loadCategories();
-   this.loadProduct();
    this.initForm();
+
+   this.catalogService.getProductById(this.productId).subscribe(product => {
+    this.productForm.patchValue({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stock: product.stock,
+      categoryId: product.categoryId
+    });
+   });
   }
 
   initForm() {
@@ -32,9 +38,21 @@ export class EditProductComponent implements OnInit {
       description: [''],
       price: [0, [Validators.required, Validators.min(0)]],
       stock: [0, [Validators.required, Validators.min(0)]],
-      categoryId: [null, Validators.required],
-      Images: [null]
+      categoryId: [null, Validators.required]
     });
   }
+
+  onFileSelected(event: any): void {
+    this.SelectedFiles = Array.from(event.target.files);
+  }
+
+ onSubmit(): void {
+  const formData = new FormData();
+  formData.append('Name', this.productForm.value.name);
+  formData.append('Description', this.productForm.value.description);
+  formData.append('Price', this.productForm.value.price);
+  formData.append('Stock', this.productForm.value.stock);
+  formData.append('CategoryId', this.productForm.value.categoryId);
+ }
 
 }
