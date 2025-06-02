@@ -236,10 +236,28 @@ namespace catalog_service.Controllers
                 .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == product.Id);
 
-            return Ok(updateProduct);
+            if (updateProduct == null)
+                return NotFound();
+
+            var responseDto = new UpdateProductDetailsOutput
+            {
+                Id = updateProduct.Id,
+                Name = updateProduct.Name,
+                Description = updateProduct.Description,
+                Price = updateProduct.Price,
+                Stock = updateProduct.Stock,
+                IsAvailable = updateProduct.IsAvailable,
+                CategoryName = updateProduct.Category?.Name ?? "N/A",
+                ImageUrls = updateProduct.Images?.Select(img => img.Url).ToList() ?? new()
+            };
+
+            return Ok(responseDto);
         }
 
-        // Delete product
+        // DELETE
+
+        // api/catalog/delete-product/{id}
+        [HttpDelete("delete-product/{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products
