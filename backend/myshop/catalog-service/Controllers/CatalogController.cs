@@ -153,7 +153,7 @@ namespace catalog_service.Controllers
             if (createdProduct == null)
                 return NotFound("Product creation failed.");
 
-            var responseDto = new ProductResponseDto
+            var responseDto = new UpdateProductDetailsOutput
             {
                 Id = createdProduct.Id,
                 Name = createdProduct.Name,
