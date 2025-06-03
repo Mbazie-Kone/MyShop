@@ -27,5 +27,6 @@ namespace catalog_service.DTOs
         // Optional image URLs (up to 10)
         [MaxLength(10, ErrorMessage = "You can upload up to 10 images.")]
         public IFormFileCollection? Images { get; set; }
+
     }
 }

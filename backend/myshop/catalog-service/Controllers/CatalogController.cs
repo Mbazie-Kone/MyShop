@@ -77,23 +77,6 @@ namespace catalog_service.Controllers
             return Ok(products);
         }
 
-        // api/catalog/dashboard/categories-count
-        [HttpGet("dashboard/categories-count")]
-        public async Task<ActionResult<IEnumerable<CategoryProductCountDto>>> GetProductPerCategory()
-        {
-            var data = await _context.Products
-                .Include(p => p.Category)
-                .GroupBy(p => p.Category.Name)
-                .Select(g => new CategoryProductCountDto
-                {
-                    CategoryName = g.Key,
-                    ProductCount = g.Count()
-                })
-                .ToListAsync();
-
-            return Ok(data);
-        }
-
         // POST:
 
         // api/catalog/add-product
@@ -162,12 +145,27 @@ namespace catalog_service.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            var createProduct = await _context.Products
+            var createdProduct = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == product.Id);
 
-            return Ok(createProduct);
+            if (createdProduct == null)
+                return NotFound("Product creation failed.");
+
+            var responseDto = new ProductResponseDto
+            {
+                Id = createdProduct.Id,
+                Name = createdProduct.Name,
+                Description = createdProduct.Description,
+                Price = createdProduct.Price,
+                Stock = createdProduct.Stock,
+                IsAvailable = createdProduct.IsAvailable,
+                CategoryName = createdProduct.Category?.Name ?? string.Empty,
+                ImageUrls = createdProduct.Images.Select(i => i.Url).ToList()
+            };
+
+            return Ok(responseDto);
         }
 
         // PUT
