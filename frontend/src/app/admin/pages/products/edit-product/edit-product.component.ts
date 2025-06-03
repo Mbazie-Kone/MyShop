@@ -45,14 +45,25 @@ export class EditProductComponent implements OnInit {
    this.pageTitleService.pageTitle$.subscribe(title => {
     this.pageTitle = title;
    });
+
+   // Dynamically enable/disable the price field
+    this.productForm.get('stock')?.valueChanges.subscribe(value => {
+      if (value >= 1) {
+        this.productForm.get('price')?.enable();
+      } else {
+        this.productForm.get('price')?.disable();
+        this.productForm.get('price')?.value === 0;
+        this.productForm.get('price')?.reset();
+      }
+    });
   }
 
   initForm() {
     this.productForm = this.fb.group({
       name: ['', Validators.required ],
       description: [''],
-      price: [0, [Validators.required, Validators.min(0)]],
-      stock: [0, [Validators.required, Validators.min(0)]],
+      price: [{ value: null, disabled: true }, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      stock: ['', [Validators.required, Validators.min(0)]],
       categoryId: [null, Validators.required]
     });
   }
