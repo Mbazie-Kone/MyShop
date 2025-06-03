@@ -81,12 +81,16 @@ export class EditProductComponent implements OnInit {
   }
 
  onSubmit(): void {
+  if (this.productForm.invalid) return;
+
+  const formValue = { ...this.productForm.getRawValue() };
+
   const formData = new FormData();
-  formData.append('Name', this.productForm.value.name);
-  formData.append('Description', this.productForm.value.description);
-  formData.append('Price', this.productForm.value.price);
-  formData.append('Stock', this.productForm.value.stock);
-  formData.append('CategoryId', this.productForm.value.categoryId)
+  formData.append('Name', formValue.name);
+  formData.append('Description', formValue.description);
+  formData.append('Price', formValue.price.toString());
+  formData.append('Stock', formValue.stock.toString());
+  formData.append('CategoryId', formValue.categoryId.toString());
 
   for (let file of this.SelectedFiles) {
     formData.append('Images', file);
@@ -96,6 +100,6 @@ export class EditProductComponent implements OnInit {
     next: () => this.router.navigate(['/administration/view-products']),
     error: err => console.error('Error during update', err)
   });
- }
+  }
 
 }
