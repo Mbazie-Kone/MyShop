@@ -191,7 +191,7 @@ namespace catalog_service.Controllers
 
             product.Name = dto.Name;
             product.Description = dto.Description;
-            product.Price = dto.Price;
+            product.Price = dto.Stock == 0 ? 0 : dto.Price;
             product.Stock = dto.Stock;
             product.IsAvailable = dto.Stock > 0;
             product.CategoryId = dto.CategoryId;

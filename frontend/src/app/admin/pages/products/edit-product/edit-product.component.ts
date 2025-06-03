@@ -40,22 +40,30 @@ export class EditProductComponent implements OnInit {
       stock: product.stock,
       categoryId: product.categoryId,
     });
-   });
 
-   this.pageTitleService.pageTitle$.subscribe(title => {
-    this.pageTitle = title;
-   });
+    const priceControl = this.productForm.get('price');
+    const stockControl = this.productForm.get('stock');
 
-   // Dynamically enable/disable the price field
-    this.productForm.get('stock')?.valueChanges.subscribe(value => {
-      if (value >= 1) {
-        this.productForm.get('price')?.enable();
-      } else {
-        this.productForm.get('price')?.disable();
-        this.productForm.get('price')?.value === 0;
-        this.productForm.get('price')?.reset();
+    if (product.stock === 0 && priceControl) {
+      priceControl.setValue(0);
+      priceControl.disable();
+    }
+
+    stockControl?.valueChanges.subscribe((stock: number) => {
+      if (priceControl) {
+        if (stock === 0) {
+          priceControl.setValue(0);
+          priceControl.disable();
+        } else {
+          priceControl.enable();
+        }
       }
     });
+   });
+
+    this.pageTitleService.pageTitle$.subscribe(title => {
+    this.pageTitle = title;
+   });
   }
 
   initForm() {
