@@ -34,7 +34,7 @@ export class ViewProductsComponent {
   ngOnInit(): void {
     this.catalogService.getAllProducts().subscribe(data => {
       console.log('Products:', data);
-      this.products = data;
+      this.products = Array.isArray(data) ? data : [];
       this.applyFilters();
     });
   }
