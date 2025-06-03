@@ -12,6 +12,7 @@ import { PageTitleService } from '../../../../core/services/page-title.service';
   styleUrl: './edit-product.component.css'
 })
 export class EditProductComponent implements OnInit {
+  showToast = false;
   productForm!: FormGroup;
   productId!: number;
   SelectedFiles: File[] = [];
@@ -80,26 +81,36 @@ export class EditProductComponent implements OnInit {
     this.SelectedFiles = Array.from(event.target.files);
   }
 
- onSubmit(): void {
-  if (this.productForm.invalid) return;
+  onSubmit(): void {
+    if (this.productForm.invalid) return;
 
-  const formValue = { ...this.productForm.getRawValue() };
+    const formValue = { ...this.productForm.getRawValue() };
 
-  const formData = new FormData();
-  formData.append('Name', formValue.name);
-  formData.append('Description', formValue.description);
-  formData.append('Price', formValue.price.toString());
-  formData.append('Stock', formValue.stock.toString());
-  formData.append('CategoryId', formValue.categoryId.toString());
+    const formData = new FormData();
+    formData.append('Name', formValue.name);
+    formData.append('Description', formValue.description);
+    formData.append('Price', formValue.price.toString());
+    formData.append('Stock', formValue.stock.toString());
+    formData.append('CategoryId', formValue.categoryId.toString());
 
-  for (let file of this.SelectedFiles) {
-    formData.append('Images', file);
-  }
+    for (let file of this.SelectedFiles) {
+      formData.append('Images', file);
+    }
 
-  this.catalogService.updateProduct(this.productId, formData).subscribe({
-    next: () => this.router.navigate(['/administration/view-products']),
-    error: err => console.error('Error during update', err)
-  });
+    this.catalogService.updateProduct(this.productId, formData).subscribe({
+      next: () => {
+        this.showToast = true;
+
+        setTimeout(() => {
+          this.showToast = false;
+          this.router.navigate(['/administration/view-products']);
+        }, 3000) // Hide the toast after 3 seconds
+        
+      },
+      error: (err) => {
+        console.error('Error during update', err);
+      } 
+    });
   }
 
 }

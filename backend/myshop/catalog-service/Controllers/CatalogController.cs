@@ -156,10 +156,9 @@ namespace catalog_service.Controllers
                         UpdatedAt = DateTime.UtcNow
                     };
 
-                    product.Images.Add(image);
+                    _context.Images.Add(image);
                 }
 
-                _context.Images.AddRange(productImages);
                 await _context.SaveChangesAsync();
             }
 

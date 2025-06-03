@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatalogService } from '../../../services/catalog.service';
 import { Category } from '../../../../core/models/catalog.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -10,12 +11,13 @@ import { Category } from '../../../../core/models/catalog.model';
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent implements OnInit {
+  showToast = false;
   productForm!: FormGroup;
   selectedFiles: File[] = [];
   categories: Category[] = [];
   imagePreviews: string[] = [];
 
-  constructor(private fb: FormBuilder, private catalogService: CatalogService) { }
+  constructor(private fb: FormBuilder, private catalogService: CatalogService, private router: Router) { }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -94,10 +96,18 @@ export class AddProductComponent implements OnInit {
 
     this.catalogService.createProduct(formData).subscribe({
       next: () => {
-        alert('Product created successfully!');
+        this.showToast = true;
+        
         this.productForm.reset();
         this.imagePreviews = [];
         this.selectedFiles = [];
+
+        setTimeout(() => {
+          
+          this.showToast = false;
+          this.router.navigate(['/administration/view-products']);
+        }, 3000) // Hide the toast after 3 seconds
+
       },
       error: err => {
         console.error(err);
