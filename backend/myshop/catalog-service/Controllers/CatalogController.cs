@@ -70,7 +70,7 @@ namespace catalog_service.Controllers
                     Price = p.Price,
                     Quantity = p.Stock,
                     IsActive = p.Stock > 0,
-                    ImageUrl = p.Images.FirstOrDefault().Url
+                    ImageUrl = p.Images.Select(i => i.Url).FirstOrDefault()
                 })
                 .ToListAsync();
 
@@ -157,7 +157,7 @@ namespace catalog_service.Controllers
             {
                 Id = createdProduct.Id,
                 Name = createdProduct.Name,
-                Description = createdProduct.Description,
+                Description = createdProduct.Description?? string.Empty,
                 Price = createdProduct.Price,
                 Stock = createdProduct.Stock,
                 IsAvailable = createdProduct.IsAvailable,
