@@ -188,7 +188,7 @@ namespace catalog_service.Controllers
                 }
             }
 
-            // // Save changes
+            // Save changes
             await _context.SaveChangesAsync();
 
             var updateProduct = await _context.Products
