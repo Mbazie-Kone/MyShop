@@ -15,7 +15,7 @@ namespace catalog_service.Services.Impl
                 Directory.CreateDirectory(_folderPath);
         }
 
-        public async Task<List<Image>> SaveImagesAsync(IFormFileCollection files, int productId)
+        public async Task<List<Image>> SaveImagesAsync(IEnumerable<IFormFile> files, int productId)
         {
             var images = new List<Image>();
 
@@ -53,6 +53,7 @@ namespace catalog_service.Services.Impl
                     File.Delete(fullPath);
                 }
             }
-        } 
+        }
+
     }
 }

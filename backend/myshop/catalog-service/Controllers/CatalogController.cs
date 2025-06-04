@@ -177,37 +177,16 @@ namespace catalog_service.Controllers
 
             if (dto.Images != null && dto.Images.Count > 0)
             {
-                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "public", "products");
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
-
-                foreach (var file in dto.Images.Take(10))
+                try
                 {
-                    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-                    if (!allowedExtensions.Contains(extension))
-                        return BadRequest($"Unsopported image format: {extension}");
-
-                    var fileName = Guid.NewGuid() + extension;
-                    var savePath = Path.Combine(folderPath, fileName);
-
-                    using var stream = new FileStream(savePath, FileMode.Create);
-                    await file.CopyToAsync(stream);
-
-                    var image = new Image
-                    {
-                        Url = $"assets/products/{fileName}",
-                        ProductId = product.Id,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
-                    };
-
-                    _context.Images.Add(image);
+                    var images = await _imageService.SaveImagesAsync(dto.Images, product.Id);
+                    _context.Images.AddRange(images);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return BadRequest(ex.Message);
                 }
             }
-
-            await _context.SaveChangesAsync();
 
             var updateProduct = await _context.Products
                 .Include(p => p.Category)
