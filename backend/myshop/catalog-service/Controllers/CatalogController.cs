@@ -1,6 +1,7 @@
 ﻿using catalog_service.Data;
 using catalog_service.DTOs;
 using catalog_service.Models;
+using catalog_service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,12 @@ namespace catalog_service.Controllers
     public class CatalogController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IImageService _imageService;
 
-        public CatalogController(AppDbContext context)
+        public CatalogController(AppDbContext context, IImageService imageService)
         {
             _context = context;
+            _imageService = imageService;
         }
 
         // GET:
@@ -111,38 +114,16 @@ namespace catalog_service.Controllers
             // Image management
             if (dto.Images != null && dto.Images.Count > 0)
             {
-                var productImages = new List<Image>();
-                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "public", "products");
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
-
-                foreach (var file in dto.Images.Take(10)) // Max 10 images
+               try
                 {
-                    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-
-                    if (!allowedExtensions.Contains(extension))
-                        return BadRequest($"Unsupported image format: {extension}");
-
-                    var fileName = Guid.NewGuid() + extension;
-                    var savepath = Path.Combine(folderPath, fileName);
-
-                    using var stream = new FileStream(savepath, FileMode.Create);
-                    await file.CopyToAsync(stream);
-
-                    var image = new Image
-                    {
-                        Url = $"assets/products/{fileName}",
-                        ProductId = product.Id,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
-                    };
-
-                    _context.Images.Add(image);
+                    var images = await _imageService.SaveImagesAsync(dto.Images, product.Id);
+                    _context.Images.AddRange(images);
+                    await _context.SaveChangesAsync();
                 }
-
-                await _context.SaveChangesAsync();
+                catch (InvalidOperationException ex) 
+                {
+                    return BadRequest(ex.Message);
+                }
             }
 
             var createdProduct = await _context.Products
