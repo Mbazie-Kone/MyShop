@@ -188,6 +188,9 @@ namespace catalog_service.Controllers
                 }
             }
 
+            // // Save changes
+            await _context.SaveChangesAsync();
+
             var updateProduct = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
