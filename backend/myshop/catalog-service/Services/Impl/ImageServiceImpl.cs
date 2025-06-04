@@ -43,7 +43,7 @@ namespace catalog_service.Services.Impl
             return images;
         }
 
-        public void DeleteImage(List<Image> images)
+        public Task DeleteImage(IEnumerable<Image> images)
         {
             foreach (var image in images)
             {
@@ -51,9 +51,10 @@ namespace catalog_service.Services.Impl
                 if (File.Exists(fullPath))
                 {
                     File.Delete(fullPath);
-                }
+                } 
             }
-        }
 
+            return Task.CompletedTask;
+        }  
     }
 }

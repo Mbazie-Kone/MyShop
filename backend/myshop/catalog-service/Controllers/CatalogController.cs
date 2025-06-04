@@ -225,12 +225,7 @@ namespace catalog_service.Controllers
                 return NotFound();
 
             // Remove images
-            foreach (var image in product.Images)
-            {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "public", image.Url.Replace("assets/", ""));
-                if (System.IO.File.Exists(path))
-                    System.IO.File.Delete(path);
-            }
+            await _imageService.DeleteImage(product.Images);
 
             _context.Images.RemoveRange(product.Images);
             _context.Products.Remove(product);
