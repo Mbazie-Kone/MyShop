@@ -47,11 +47,9 @@ namespace catalog_service.Services.Impl
         {
             foreach (var image in images)
             {
-                var fullPath = Path.Combine(_folderPath, Path.GetFileName(image.Url));
+                var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "public", image.Url.Replace("assets/", ""));
                 if (File.Exists(fullPath))
-                {
                     File.Delete(fullPath);
-                } 
             }
 
             return Task.CompletedTask;
