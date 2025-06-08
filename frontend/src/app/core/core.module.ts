@@ -8,6 +8,7 @@ import { HeaderSidebarComponent } from './components/admin/header-sidebar/header
 import { AdminLayoutComponent } from './components/admin/layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
 import { AdminFooterComponent } from './components/admin/admin-footer/admin-footer.component';
+import { ProductFormComponent } from './components/admin/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminFooterComponent } from './components/admin/admin-footer/admin-foot
     HeaderSidebarComponent,
     AdminLayoutComponent,
     FooterComponent,
-    AdminFooterComponent
+    AdminFooterComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
