@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ProductFormData } from '../../../models/product-form-data.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -8,10 +8,16 @@ import { ProductFormData } from '../../../models/product-form-data.model';
   styleUrl: './product-form.component.css'
 })
 export class ProductFormComponent implements OnInit {
-  @Input() initialData?: ProductFormData;
+  @Input() isUpdate = false;
+  @Output() formSubmitted = new EventEmitter<FormData>();
+
+  productForm!: FormGroup;
+  selectedFiles: File[] = [];
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    
+  
   }
 
 }
