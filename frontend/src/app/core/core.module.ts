@@ -9,6 +9,7 @@ import { AdminLayoutComponent } from './components/admin/layout/admin-layout.com
 import { RouterModule } from '@angular/router';
 import { AdminFooterComponent } from './components/admin/admin-footer/admin-footer.component';
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductFormComponent } from './components/admin/product-form/product-fo
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

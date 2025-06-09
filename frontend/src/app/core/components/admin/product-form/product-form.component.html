@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <!-- SUBMIT -->
     <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
 </form>

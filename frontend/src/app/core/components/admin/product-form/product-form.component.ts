@@ -17,6 +17,7 @@ export class ProductFormComponent implements OnInit {
   categories: Category[] = [];
   isEditMode = false;
   productId!: number;
+  showToast = false;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private catalogService: CatalogService) {}
 
@@ -108,12 +109,33 @@ export class ProductFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.catalogService.updateProduct(this.productId, formData).subscribe({
-        next: () => this.router.navigate(['/administration/view-products']),
+        next: () => {
+          this.showToast = true;
+          this.productForm.reset();
+          this.imagePreviews = [];
+          this.selectedFiles = [];
+
+          setTimeout(() => {
+            this.showToast = false;
+            this.router.navigate(['/administration/view-products']);
+          }, 3000) // Hide the toast after 3 seconds
+        },
+
         error: err => alert('Update failed: ' + err.message)
       });
     } else {
       this.catalogService.createProduct(formData).subscribe({
-        next: () => this.router.navigate(['/administration/view-products']),
+        next: () => {
+          this.showToast = true;
+          this.productForm.reset();
+          this.imagePreviews = [];
+          this.selectedFiles = [];
+
+          setTimeout(() => {
+            this.showToast = false;
+            this.router.navigate(['/administration/view-products']);
+          }, 3000)
+        },
         error: err => alert('Creation failed: ' + err.message)
       });
     }

@@ -106,7 +106,6 @@ export class AddProductComponent implements OnInit {
         this.selectedFiles = [];
 
         setTimeout(() => {
-          
           this.showToast = false;
           this.router.navigate(['/administration/view-products']);
         }, 3000) // Hide the toast after 3 seconds
