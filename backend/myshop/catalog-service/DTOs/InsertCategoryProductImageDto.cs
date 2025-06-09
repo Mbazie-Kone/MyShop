@@ -25,6 +25,8 @@ namespace catalog_service.DTOs
         [StringLength(20, MinimumLength = 8, ErrorMessage = "Product code must be between 8 and 20 characters.")]
         public string ProductCode { get; set; } = null!;
 
+        [Required(ErrorMessage = "SKU is required.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "SKU must be between 8 and 20 characters.")]
         public string SKU { get; set; } = null!;
 
         // Foreign key for category
