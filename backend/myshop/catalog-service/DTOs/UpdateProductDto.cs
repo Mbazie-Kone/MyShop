@@ -18,6 +18,14 @@ namespace catalog_service.DTOs
         [Range(0, int.MaxValue, ErrorMessage = "Stock must be a positive number.")]
         public int Stock { get; set; }
 
+        [Required(ErrorMessage = "Product code is required.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Product code must be between 8 and 20 characters.")]
+        public string ProductCode { get; set; } = null!;
+
+        [Required(ErrorMessage = "SKU is required.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "SKU must be between 8 and 20 characters.")]
+        public string SKU { get; set; } = null!;
+
         [Required(ErrorMessage = "Category is required.")]
         public int CategoryId { get; set; }
 

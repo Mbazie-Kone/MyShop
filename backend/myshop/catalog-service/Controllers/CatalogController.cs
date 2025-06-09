@@ -148,6 +148,8 @@ namespace catalog_service.Controllers
                 Price = createdProduct.Price,
                 Stock = createdProduct.Stock,
                 IsAvailable = createdProduct.IsAvailable,
+                ProductCode = createdProduct.ProductCode,
+                SKU = createdProduct.SKU,
                 CategoryName = createdProduct.Category?.Name ?? string.Empty,
                 ImageUrls = createdProduct.Images.Select(i => i.Url).ToList()
             };
@@ -179,6 +181,8 @@ namespace catalog_service.Controllers
             product.Stock = dto.Stock;
             product.IsAvailable = dto.Stock > 0;
             product.CategoryId = dto.CategoryId;
+            product.ProductCode = dto.ProductCode;
+            product.SKU = dto.SKU;
             product.UpdatedAt = DateTime.UtcNow;
 
             if (dto.Images != null && dto.Images.Count > 0)
@@ -213,6 +217,8 @@ namespace catalog_service.Controllers
                 Price = updateProduct.Price,
                 Stock = updateProduct.Stock,
                 IsAvailable = updateProduct.IsAvailable,
+                ProductCode = updateProduct.ProductCode,
+                SKU = updateProduct.SKU,
                 CategoryName = updateProduct.Category?.Name ?? "N/A",
                 ImageUrls = updateProduct.Images?.Select(img => img.Url).ToList() ?? new()
             };
