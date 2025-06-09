@@ -1,5 +1,6 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="row">
+        <!-- COLUMN 1 -->
         <div class="col-lg-8 col-12">
             <!-- Card 1 -->
             <div class="card mb-4">
@@ -11,6 +12,8 @@
                             <label class="form-label">Product Name</label>
                             <input class="form-control" formControlName="name">
                         </div>
+
+                        <!-- Description -->
                         <div>
                             <label class="form-label">Product Description</label>
                             <textarea class="form-control" rows="3" formControlName="description"></textarea>
@@ -24,7 +27,7 @@
                 <!-- Card body -->
                 <div class="card-body">
                     <div>
-                        <!-- Product Image -->
+                        <!-- Product image -->
                         <div class="mb-4">
                             <!-- Heading -->
                             <h5 class="mb-4">Product Gallery</h5>
@@ -35,24 +38,50 @@
                 </div>
             </div>
         </div>
+
+        <!-- COLUMN 2 -->
         <div class="col-lg-4 col-12">
-            <!-- Card -->
+            <!-- Card 1 -->
             <div class="card mb-4">
                 <div class="card-body">
                     <div>
+                        <!-- Product code -->
                         <div class="mb-3">
                             <label class="form-label">Product Code</label>
                             <input class="form-control" formControlName="productCode">
                         </div>
+
+                        <!-- Product sku -->
                         <div class="mb-3">
                             <label class="form-label">Product SKU</label>
                             <input class="form-control" formControlName="sku">
                         </div>
+
+                        <!-- Product category-->
                         <div class="mb-3">
                             <label class="form-label">Category</label>
                             <select class="form-select" formControlName="categoryId">
                                 <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div>
+                        <!-- Product stock -->
+                        <div class="mb-3">
+                            <label class="form-label">Stock</label>
+                            <input class="number" class="form-control" formControlName="stock">
+                        </div>
+
+                        <!-- Product price -->
+                        <div class="mb-3">
+                            <label class="form-label">Regular Price</label>
+                            <input class="number" class="form-control" formControlName="price" [disabled]="isPriceDisabled">
                         </div>
                     </div>
                 </div>
