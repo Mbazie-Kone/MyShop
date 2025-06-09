@@ -61,7 +61,62 @@ export class ProductFormComponent implements OnInit {
   }
 
   loadProduct(id: number): void {
-    
+    this.catalogService.getProductById(id).subscribe(product => {
+      this.productForm.patchValue({
+        name: product.name,
+        description: product.description,
+        stock: product.stock,
+        price: product.price,
+        productCode: product.productCode,
+        sku: product.sku,
+        categoryId: product.categoryId
+      });
+    });
+  }
+
+  onImageSelected(event: any): void {
+    const files = event.target.files;
+    this.selectedFiles = [];
+    this.imagePreviews = [];
+
+    for (let i = 0; i < files.length && this.selectedFiles.length < 10; i++) {
+      const file = files[i];
+      if (['image/jpeg', 'image/png'].includes(file.type)) {
+        this.selectedFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = e => this.imagePreviews.push(reader.result as string);
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  onSubmit(): void {
+    if (this.productForm.invalid) return;
+
+    const formData = new FormData();
+    formData.append('name', this.productForm.value.name);
+    formData.append('description', this.productForm.value.description || '');
+    formData.append('stock', this.productForm.value.stock.toString());
+    formData.append('price', this.productForm.value.price?.toString() || '0');
+    formData.append('productCode', this.productForm.value.productCode);
+    formData.append('sku', this.productForm.value.sku);
+    formData.append('categoryId', this.productForm.value.categoryId.toString());
+
+    this.selectedFiles.forEach(file => {
+      formData.append('images', file);
+    });
+
+    if (this.isEditMode) {
+      this.catalogService.updateProduct(this.productId, formData).subscribe({
+        next: () => this.router.navigate(['/administration/view-products']),
+        error: err => alert('Update failed: ' + err.message)
+      });
+    } else {
+      this.catalogService.createProduct(formData).subscribe({
+        next: () => this.router.navigate(['/administration/view-products']),
+        error: err => alert('Creation failed: ' + err.message)
+      });
+    }
   }
 
 }
