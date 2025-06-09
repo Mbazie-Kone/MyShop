@@ -43,3 +43,10 @@ CREATE TABLE Images (
 -- Sample categories
 INSERT INTO Categories (Name) VALUES ('Books'), ('Electronics'), ('Accessories');
 GO
+
+-- Alter tables
+IF COL_LENGTH('Products', 'ProductCode') IS NULL
+	ALTER TABLE Products ADD ProductCode NVARCHAR(20) NULL;
+	
+IF COL_LENGTH('Products', 'SKU') IS NULL
+	ALTER TABLE Products ADD SKU NVARCHAR(20) NULL;
