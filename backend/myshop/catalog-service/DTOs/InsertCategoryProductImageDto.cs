@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace catalog_service.DTOs
 {
@@ -19,6 +20,10 @@ namespace catalog_service.DTOs
         [Required(ErrorMessage = "Stock is required")]
         [Range(0, int.MaxValue, ErrorMessage ="Stock must be a positive number.")]
         public int Stock {  get; set; }
+
+        public string ProductCode { get; set; } = null!;
+
+        public string SKU { get; set; } = null!;
 
         // Foreign key for category
         [Required(ErrorMessage = "Category is required.")]
