@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from '../core/guards/auth.guard';
 import { ViewProductsComponent } from './pages/products/view-products/view-products.component';
-import { AddProductComponent } from './pages/products/add-product/add-product.component';
-import { EditProductComponent } from './pages/products/edit-product/edit-product.component';
 import { ProductFormComponent } from '../core/components/admin/product-form/product-form.component';
 
 const routes: Routes = [
