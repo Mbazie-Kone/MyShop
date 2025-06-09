@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 
 namespace catalog_service.DTOs
 {
@@ -10,7 +9,7 @@ namespace catalog_service.DTOs
         public string Name { get; set; } = null!;
 
         [StringLength(500, ErrorMessage = "Description can't exceed 500 characters.")]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
