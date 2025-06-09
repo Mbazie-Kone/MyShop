@@ -26,7 +26,7 @@ export class ProductFormComponent implements OnInit {
       name: ['', Validators.required],
       description: [''],
       stock: [0, [Validators.required, Validators.min(0)]],
-      price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0)]],
+      price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       productCode: ['', Validators.required],
       sku: ['', Validators.required],
       categoryId: [null, Validators.required],
