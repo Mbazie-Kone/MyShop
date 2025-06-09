@@ -109,36 +109,27 @@ export class ProductFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.catalogService.updateProduct(this.productId, formData).subscribe({
-        next: () => {
-          this.showToast = true;
-          this.productForm.reset();
-          this.imagePreviews = [];
-          this.selectedFiles = [];
-
-          setTimeout(() => {
-            this.showToast = false;
-            this.router.navigate(['/administration/view-products']);
-          }, 3000) // Hide the toast after 3 seconds
-        },
-
+        next: () => this.handleSuccess(),
         error: err => alert('Update failed: ' + err.message)
       });
     } else {
       this.catalogService.createProduct(formData).subscribe({
-        next: () => {
-          this.showToast = true;
-          this.productForm.reset();
-          this.imagePreviews = [];
-          this.selectedFiles = [];
-
-          setTimeout(() => {
-            this.showToast = false;
-            this.router.navigate(['/administration/view-products']);
-          }, 3000)
-        },
+        next: () => this.handleSuccess(),
         error: err => alert('Creation failed: ' + err.message)
       });
     }
+  }
+
+  private handleSuccess(): void {
+    this.showToast = true;
+    this.productForm.reset();
+    this.imagePreviews = [];
+    this.selectedFiles = [];
+
+    setTimeout(() => {
+      this.showToast = false;
+      this.router.navigate(['/administration/view-products']);
+    }, 3000); // Hide the toast after 3 seconds
   }
 
 }
