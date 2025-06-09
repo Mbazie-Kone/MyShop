@@ -25,6 +25,8 @@ export class AddProductComponent implements OnInit {
       description: [''],
       stock: ['', [Validators.required, Validators.min(0)]],
       price: [{ value: null, disabled: true }, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      productCode: ['', Validators.required],
+      sku: ['', Validators.required],
       categoryId: [this.categories[0]?.id || null, Validators.required],
       images: [null]
     });
@@ -90,6 +92,8 @@ export class AddProductComponent implements OnInit {
     formData.append('description', this.productForm.value.description || '');
     formData.append('stock', this.productForm.value.stock);
     formData.append('price', this.productForm.get('price')?.value || 0);
+    formData.append('productCode', this.productForm.value.productCode);
+    formData.append('sku', this.productForm.value.sku);
     formData.append('categoryId', this.productForm.value.categoryId);
 
     this.selectedFiles.forEach(file => formData.append('images', file));

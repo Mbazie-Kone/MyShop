@@ -1,17 +1,18 @@
-<!-- ROW -->
+<!-- 
+ ROW 
  <div class="row">
     <div class="col-lg-8 col-12">
-        <!-- CARD -->
+         CARD 
          <div class="card mb-4">
-            <!-- CARD BODY -->
+             CARD BODY 
             <div class="card-body">
                 <div>
-                    <!-- PRODUCT NAME -->
+                     PRODUCT NAME 
                      <div class="mb-3">
                         <label class="form-label">Product Name</label>
                         <input type="text" class="form-control" placeholder="Enter product name" required>
                      </div>
-                    <!-- PRODUCT DESCRIPTION -->
+                    PRODUCT DESCRIPTION 
                      <label class="form-label">Product Description</label>
                      <div class="ql-toolbar ql-snow">
 
@@ -23,7 +24,7 @@
             </div>
          </div>
 
-         <!-- CARD -->
+          CARD 
          <div class="card mb-4">
             
          </div>
@@ -34,19 +35,19 @@
          </div>
     </div>
     <div class="col-lg-4 col-12">
-        <!-- CARD -->
+         CARD 
          <div class="card mb-4">
-            <!-- CARD BODY -->
+             CARD BODY 
              <div class="card-body">
                 <label class="form-label">Stock</label>
                 <input type="number" class="form-control mb-3">
-                <!-- INPUT -->
+                 INPUT 
                 <div>
                     <div class="mb-3">
                         <label class="form-label">Product Code</label>
                         <input type="text" class="form-control" placeholder="Enter Product Code">
                     </div>
-                    <!-- INPUT -->
+                     INPUT 
                      <div class="mb-3">
                         <label class="form-label">Product SKU</label>
                         <input type="text" class="form-control" placeholder="Enter Product Sku">
@@ -56,8 +57,7 @@
          </div>
     </div>
   
-</div>
-
+</div> -->
 
 
 
@@ -115,6 +115,16 @@
         <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('pattern')" class="text-danger">
             Price must be a valid Euro amount (e.g. 10.99).
         </div>
+    </div>
+
+    <!-- PRODUCT CODE -->
+    <div class="mb-3">
+        <input type="text" class="form-control" formControlName="productCode">
+    </div>
+
+    <!-- SKU -->
+    <div class="mb-3">
+        <input type="text" class="form-control" formControlName="sku">
     </div>
 
     <!-- DESCRIPTION -->
