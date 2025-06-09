@@ -9,7 +9,7 @@ namespace catalog_service.DTOs
         public string Name { get; set; } = null!;
 
         [StringLength(500, ErrorMessage = "Description can't exceed 500 characters.")]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price must be a valid Euro format.")]
         public decimal Price { get; set; }
