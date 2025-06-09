@@ -2,3 +2,15 @@
     <!-- SUBMIT -->
     <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
 </form>
+
+<!-- TOAST -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;" *ngIf="showToast">
+    <div class="toast align-items-center text-white bg-success border-o show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Product {{ isEditMode ? 'updated' : 'added' }} successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
