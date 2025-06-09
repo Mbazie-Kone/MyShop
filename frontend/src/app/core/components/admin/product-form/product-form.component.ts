@@ -54,4 +54,14 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
+  loadCategories(): void {
+    this.catalogService.getCategories().subscribe(res => {
+      this.categories = res;
+    });
+  }
+
+  loadProduct(id: number): void {
+    
+  }
+
 }
