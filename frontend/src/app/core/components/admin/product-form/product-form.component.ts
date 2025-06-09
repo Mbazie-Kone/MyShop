@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Category } from '../../../models/catalog.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CatalogService } from '../../../../admin/services/catalog.service';
 
 @Component({
   selector: 'app-product-form',
@@ -8,13 +11,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './product-form.component.css'
 })
 export class ProductFormComponent implements OnInit {
-  @Input() isUpdate = false;
-  @Output() formSubmitted = new EventEmitter<FormData>();
-
   productForm!: FormGroup;
+  imagePreviews: string[] = [];
   selectedFiles: File[] = [];
+  categories: Category[] = [];
+  isEditMode = false;
+  productId!: number;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private catalogService: CatalogService) {}
 
   ngOnInit(): void {
   
