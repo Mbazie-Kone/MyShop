@@ -2,7 +2,6 @@ import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/cor
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CategoryProductCount } from '../../../core/models/category-product-count.model';
-import { PageTitleService } from '../../../core/services/page-title.service';
 
 @Component({
   selector: 'app-dashboard',

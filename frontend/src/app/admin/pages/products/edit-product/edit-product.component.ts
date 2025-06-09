@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../../../core/models/catalog.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../../../services/catalog.service';
-import { PageTitleService } from '../../../../core/services/page-title.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -22,8 +21,7 @@ export class EditProductComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
               private catalogService: CatalogService, 
               private fb: FormBuilder, 
-              private router: Router, 
-              private pageTitleService: PageTitleService) {}
+              private router: Router,) {}
  
   ngOnInit(): void {
    this.productId = +this.route.snapshot.paramMap.get('id')!;
@@ -60,10 +58,6 @@ export class EditProductComponent implements OnInit {
         }
       }
     });
-   });
-
-    this.pageTitleService.pageTitle$.subscribe(title => {
-    this.pageTitle = title;
    });
   }
 
