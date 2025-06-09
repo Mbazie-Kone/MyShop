@@ -18,13 +18,7 @@ export class DashboardComponent implements AfterViewChecked {
   public categoryData: number[] = [];
   public categories: CategoryProductCount[] = [];
 
-  pageTitle: string = '';
-
-  constructor(private dashboardService: DashboardService, private pageTitleService: PageTitleService) {
-    this.pageTitleService.pageTitle$.subscribe(title => {
-      this.pageTitle = title;
-    });
-  }
+  constructor(private dashboardService: DashboardService) {}
 
   @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;

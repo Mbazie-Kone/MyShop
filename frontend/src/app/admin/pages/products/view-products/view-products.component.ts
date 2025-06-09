@@ -10,7 +10,6 @@ import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dt
   styleUrl: './view-products.component.css'
 })
 export class ViewProductsComponent {
-  pageTitle: string = '';
   products: ViewAllProductsDto[] = [];
 
   // Pagination
@@ -25,11 +24,7 @@ export class ViewProductsComponent {
   selectedCategory = '';
   selectedStatus = '';
 
-  constructor(private pageTitleService: PageTitleService, private catalogService: CatalogService) {
-    this.pageTitleService.pageTitle$.subscribe(title => {
-      this.pageTitle = title;
-    });
-  }
+  constructor(private catalogService: CatalogService) {}
 
   ngOnInit(): void {
     this.catalogService.getAllProducts().subscribe(data => {
