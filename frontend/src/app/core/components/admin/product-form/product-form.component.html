@@ -1,6 +1,14 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <!-- SUBMIT -->
-    <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+    <div class="row">
+        <div class="col-lg-8 col-12">
+            <!-- Card -->
+
+        </div>
+        <div class="col-lg-4 col-12">
+            <!-- Submit -->
+            <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+        </div>
+    </div>  
 </form>
 
 <!-- TOAST -->
