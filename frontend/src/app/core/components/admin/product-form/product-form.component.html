@@ -1,7 +1,7 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="col-lg-8 col-12">
-            <!-- Card -->
+            <!-- Card 1 -->
             <div class="card mb-4">
                 <!-- Card body -->
                 <div class="card-body">
@@ -9,13 +9,54 @@
                         <!-- Product name -->
                         <div class="mb-3">
                             <label class="form-label">Product Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Product Name" required>
+                            <input class="form-control" formControlName="name">
+                        </div>
+                        <div>
+                            <label class="form-label">Product Description</label>
+                            <textarea class="form-control" rows="3" formControlName="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card mb-4">
+                <!-- Card body -->
+                <div class="card-body">
+                    <div>
+                        <!-- Product Image -->
+                        <div class="mb-4">
+                            <!-- Heading -->
+                            <h5 class="mb-4">Product Gallery</h5>
+                            <label class="form-label">Product Image</label>
+                            <input type="file" class="form-control">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-12">
+            <!-- Card -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div>
+                        <div class="mb-3">
+                            <label class="form-label">Product Code</label>
+                            <input class="form-control" formControlName="productCode">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Product SKU</label>
+                            <input class="form-control" formControlName="sku">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" formControlName="categoryId">
+                                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Submit -->
             <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
         </div>
