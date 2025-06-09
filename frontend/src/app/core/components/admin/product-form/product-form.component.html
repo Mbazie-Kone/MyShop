@@ -31,8 +31,11 @@
                         <div class="mb-4">
                             <!-- Heading -->
                             <h5 class="mb-4">Product Gallery</h5>
-                            <label class="form-label">Product Image</label>
-                            <input type="file" class="form-control">
+                            <label class="form-label">Product Image (max 10)</label>
+                            <input type="file" class="form-control" (change)="onImageSelected($event)" multiple>
+                            <div class="mt-2 d-flex flex-wrap gap-2">
+                                <img *ngFor="let img of imagePreviews" [src]="img" class="img-thumbnail" style="width: 80px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,8 +89,11 @@
                     </div>
                 </div>
             </div>
+
             <!-- Submit -->
-            <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+             <div class="d-grid">
+                <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
+             </div>
         </div>
     </div>  
 </form>
