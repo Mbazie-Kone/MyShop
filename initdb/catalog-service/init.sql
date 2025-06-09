@@ -25,6 +25,8 @@ CREATE TABLE Products (
   Price DECIMAL(10,2) NOT NULL CHECK (Price >= 0),
   Stock INT NOT NULL CHECK (Stock >= 0),
   IsAvailable BIT NOT NULL,
+  ProductCode NVARCHAR(20) NOT NULL,
+  SKU NVARCHAR(20) NOT NULL,
   CategoryId INT NOT NULL,
   CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
   UpdatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
@@ -43,10 +45,3 @@ CREATE TABLE Images (
 -- Sample categories
 INSERT INTO Categories (Name) VALUES ('Books'), ('Electronics'), ('Accessories');
 GO
-
--- Alter tables
-IF COL_LENGTH('Products', 'ProductCode') IS NULL
-	ALTER TABLE Products ADD ProductCode NVARCHAR(20) NULL;
-	
-IF COL_LENGTH('Products', 'SKU') IS NULL
-	ALTER TABLE Products ADD SKU NVARCHAR(20) NULL;

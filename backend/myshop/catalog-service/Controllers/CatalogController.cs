@@ -41,7 +41,7 @@ namespace catalog_service.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                // IsAvailable = product.IsAvailable,
+                IsAvailable = product.IsAvailable,
                 ProductCode = product.ProductCode,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,
@@ -87,7 +87,7 @@ namespace catalog_service.Controllers
         // api/catalog/add-product
         [HttpPost("add-product")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<Product>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
+        public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

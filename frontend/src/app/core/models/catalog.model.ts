@@ -5,6 +5,8 @@ export interface Product {
     price: number;
     stock: number;
     isAvailable: boolean;
+    productCode: string;
+    sku: string;
     categoryId: number;
     createdAt?: Date;
     updatedAt?: Date;

@@ -5,5 +5,7 @@ export interface ViewAllProductsDto {
     imageUrl: string;
     price: number;
     quantity: number;
+    productCode: string;
+    sku: string;
     isActive: boolean;
 }

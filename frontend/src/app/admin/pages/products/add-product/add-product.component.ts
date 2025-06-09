@@ -101,7 +101,6 @@ export class AddProductComponent implements OnInit {
     this.catalogService.createProduct(formData).subscribe({
       next: () => {
         this.showToast = true;
-        
         this.productForm.reset();
         this.imagePreviews = [];
         this.selectedFiles = [];

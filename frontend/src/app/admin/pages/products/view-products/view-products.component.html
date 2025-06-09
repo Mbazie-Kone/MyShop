@@ -47,6 +47,8 @@
             <th>Category</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>P Code</th>
+            <th>SKU</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -61,6 +63,8 @@
             <td>{{ product.categoryName }}</td>
             <td>{{ product.price | currency: 'EUR' :'symbol' }} </td>
             <td>{{ product.quantity }}</td>
+            <td>{{ product.productCode }}</td>
+            <td>{{ product.sku }}</td>
             <td>
                 <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
                     {{ product.isActive ? 'Active' : 'Deactivate' }}
