@@ -74,6 +74,8 @@ namespace catalog_service.Controllers
                     CategoryName = p.Category.Name,
                     Price = p.Price,
                     Quantity = p.Stock,
+                    ProductCode = p.ProductCode,
+                    SKU = p.SKU,
                     IsActive = p.Stock > 0,
                     ImageUrl = p.Images.Select(i => i.Url).FirstOrDefault()
                 })

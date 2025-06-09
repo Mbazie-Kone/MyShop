@@ -11,5 +11,7 @@ namespace catalog_service.DTOs
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public bool IsActive { get; set; }
+        public string ProductCode { get; set; } = null!;
+        public string SKU { get; set; } = null!;
     }
 }
