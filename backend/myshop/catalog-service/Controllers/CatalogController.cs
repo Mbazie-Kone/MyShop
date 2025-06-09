@@ -42,6 +42,8 @@ namespace catalog_service.Controllers
                 Price = product.Price,
                 Stock = product.Stock,
                 IsAvailable = product.IsAvailable,
+                ProductCode = product.ProductCode,
+                SKU = product.SKU,
                 CategoryId = product.CategoryId,
                 ImageUrls = product.Images.Select(i => i.Url).ToList()
             };
