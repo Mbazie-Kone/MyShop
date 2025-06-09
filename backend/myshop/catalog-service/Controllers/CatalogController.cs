@@ -24,7 +24,7 @@ namespace catalog_service.Controllers
 
         // api/catalog/produt/{id}
         [HttpGet("product/{id}")]
-        public async Task<ActionResult<ProductDetailsDto>> GetProductById(int id)
+        public async Task<ActionResult<AdminProductDetailsDto>> GetProductById(int id)
         {
             var product = await _context.Products
                 .Include(p => p.Category)
@@ -34,14 +34,14 @@ namespace catalog_service.Controllers
             if (product == null)
                 return NotFound();
 
-            var dto = new ProductDetailsDto()
+            var dto = new AdminProductDetailsDto()
             {
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                IsAvailable = product.IsAvailable,
+                // IsAvailable = product.IsAvailable,
                 ProductCode = product.ProductCode,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,
@@ -62,12 +62,12 @@ namespace catalog_service.Controllers
 
         // api/catalog/products
         [HttpGet("products")]
-        public async Task<ActionResult<IEnumerable<ViewAllProductsDto>>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<AdminViewAllProductsDto>>> GetAllProducts()
         {
             var products = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
-                .Select(p => new ViewAllProductsDto
+                .Select(p => new AdminViewAllProductsDto
                 {
                     ProductId = p.Id,
                     ProductName = p.Name,
@@ -105,6 +105,8 @@ namespace catalog_service.Controllers
                 Price = dto.Price,
                 Stock = dto.Stock,
                 IsAvailable = dto.Stock > 0,
+                ProductCode = dto.ProductCode,
+                SKU = dto.SKU,
                 CategoryId = dto.CategoryId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
