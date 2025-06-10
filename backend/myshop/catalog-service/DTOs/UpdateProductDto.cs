@@ -20,6 +20,7 @@ namespace catalog_service.DTOs
 
         [Required(ErrorMessage = "Product code is required.")]
         [StringLength(20, MinimumLength = 8, ErrorMessage = "Product code must be between 8 and 20 characters.")]
+        [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Only uppercase letters, numbers and dashes are allowed.")]
         public string ProductCode { get; set; } = null!;
 
         [Required(ErrorMessage = "SKU is required.")]
