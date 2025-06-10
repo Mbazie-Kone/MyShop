@@ -1,7 +1,7 @@
 <!-- ROW 1 -->
 <div class="row">
   <div class="col">
-    <div class="card a">
+    <app-card class="custom-card a">
       <div class="card-body">
         <div *ngIf="loading">
           <app-spinner [size]="'40px'"></app-spinner>
@@ -23,10 +23,10 @@
           View Orders
         </a>
       </div>
-    </div>
+    </app-card>
   </div>
   <div class="col">
-    <div class="card a">
+    <app-card class="custom-card a">
       <div class="card-body">
         <div *ngIf="loading">
           <app-spinner [size]="'40px'"></app-spinner>
@@ -48,10 +48,10 @@
           View Earnings
         </a>
       </div>
-    </div>
+    </app-card>
   </div>
   <div class="col">
-    <div class="card a">
+    <app-card class="custom-card a">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <span class="text-muted fw-semibold">Customer</span>
@@ -70,10 +70,10 @@
           All Customer
         </a>
       </div>
-    </div>
+    </app-card>
   </div>
   <div class="col">
-    <div class="card a">
+    <app-card class="custom-card a">
       <div class="card-body">
         <div *ngIf="!loading" class="d-flex justify-content-between align-items-center">
           <span class="text-muted fw-semibold">Balance</span>
@@ -88,7 +88,7 @@
           Withdraw Money
         </a>
       </div>
-    </div>
+    </app-card>
   </div>
 </div>
 <!-- ROW 1 -->
@@ -96,20 +96,20 @@
 <!-- ROW 2 -->
 <div class="row">
   <div class="col-8">
-    <div class="card b">
+    <app-card>
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0 p-2">Revenue</h5>
       </div>
       <div class="card-body">
         
       </div>
-    </div>
+    </app-card>
   </div>
 
   <div class="col-4">
-    <div class="card b">
+    <app-card  class="b">
 
-    </div>
+    </app-card >
   </div>
 </div>
 <!-- ROW 2 -->
@@ -117,15 +117,15 @@
 <!-- ROW 3 -->
 <div class="row">
   <div class="col-4">
-    <div class="card c">
+    <app-card class="c">
 
-    </div>
+    </app-card>
   </div>
 
   <div class="col-8">
-    <div class="card c">
+    <app-card  class="c">
 
-    </div>
+    </app-card >
   </div>
 </div>
 <!-- ROW 3 -->
@@ -133,15 +133,15 @@
 <!-- ROW 5 -->
 <div class="row">
   <div class="col">
-    <div class="card d">
+    <app-card  class="d">
 
-    </div>
+    </app-card >
   </div>
 
   <div class="col">
-    <div class="card d">
+    <app-card  class="d">
 
-    </div>
+    </app-card >
   </div>
 </div>
 <!-- ROW 5 -->
