@@ -22,7 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     SharedModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
