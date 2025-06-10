@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../../models/catalog.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class ProductFormComponent implements OnInit {
       stock: [0, [Validators.required, Validators.min(0)]],
       price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       productCode: ['', Validators.required],
-      sku: ['', Validators.required],
+      sku: ['', Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^[A-Z0-9]+$/)],
       categoryId: [null, Validators.required],
       images: [null]
     });

@@ -60,7 +60,13 @@
                         <!-- Product sku -->
                         <div class="mb-3">
                             <label class="form-label">Product SKU</label>
-                            <input class="form-control" formControlName="sku">
+                            <input class="form-control" formControlName="sku" id="sku">
+                            <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
+                                <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
+                                <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 8 characters.</div>
+                                <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 20 characters.</div>
+                                <div *ngIf="productForm.get('sku')?.errors?.['pattern']">SKU must contain only uppercase letters and numbers.</div>
+                            </div>
                         </div>
 
                         <!-- Product category-->
