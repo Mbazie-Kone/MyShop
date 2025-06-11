@@ -103,6 +103,12 @@ html, body {
 }
 /* Dashboard custom card styles */
 
+/* Global card mb */
+.custom-card-mb {
+  margin-bottom: 19px !important;
+}
+/* Global card mb */
+
 /* Global col */
 .col,
 .col-1,
