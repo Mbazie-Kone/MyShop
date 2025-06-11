@@ -92,3 +92,13 @@ html, body {
 .icon-trash:before { content: '\78'; } /* 'x' */
 .icon-trash-empty:before { content: '\79'; } /* 'y' */
 .icon-down-big:before { content: '\7a'; } /* 'z' */
+
+/* Dashboard custom card styles */
+.custom-card-height {
+    height: 145px;
+}
+
+.custom-card-b-height {
+    height: 600px;
+}
+/* Dashboard custom card styles */
