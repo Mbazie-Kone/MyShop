@@ -117,13 +117,13 @@ html, body {
 .col-10,
 .col-11,
 .col-12 {
-    padding-left: 7px;
+    padding-left: 8px;
 }
 /* Global col */
 
 /* Global row */
 .row {
   padding-bottom: 2px;
-  padding-left: 3px;
+  padding-left: 4px;
 }
 /* Global row */
