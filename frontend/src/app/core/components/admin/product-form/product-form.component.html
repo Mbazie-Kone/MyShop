@@ -36,7 +36,17 @@
                             <h5 class="mb-4">Product Gallery</h5>
                             <label class="form-label">Product Image (max 10)</label>
                             <input type="file" class="form-control" (change)="onImageSelected($event)" accept=".jpg,.jpeg,.png" multiple>
+                            <p class="mt-2">Image Preview</p>
                             <div class="mt-2 d-flex flex-wrap gap-2">
+                                <!-- Existing images (edit mode) -->
+                                 <ng-container *ngIf="isEditMode">
+                                    <div *ngFor="let image of existingImages" class="position-relative">
+                                        <img [src]="image.url" class="img-thumbnail" style="width: 80px;">
+                                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeExistingImage(image.id)">
+                                            <i class="icon-cancel-circled"></i>
+                                        </button>
+                                    </div>
+                                 </ng-container>
                                 <img *ngFor="let img of imagePreviews" [src]="img" class="img-thumbnail" style="width: 80px;">
                             </div>
                         </div>

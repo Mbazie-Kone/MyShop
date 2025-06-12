@@ -179,6 +179,25 @@ namespace catalog_service.Controllers
             if (category == null)
                 return BadRequest("Invalid category.");
 
+            // Deleting image
+            if (dto.DeletedImageIds != null && dto.DeletedImageIds.Any())
+            {
+                foreach (var imageId in dto.DeletedImageIds)
+                {
+                    var image = await _context.Images.FindAsync(imageId);
+                    if (image != null)
+                    {
+                        _context.Images.Remove(image);
+
+                        var fileName = Path.GetFileName(image.Url ?? "");
+                        var physicalPath = Path.GetDirectoryName(fileName);
+
+                        if (System.IO.File.Exists(physicalPath))
+                            System.IO.File.Delete(physicalPath);
+                    }
+                }
+            }
+
             product.Name = dto.Name;
             product.Description = dto.Description;
             product.Price = dto.Stock == 0 ? 0 : dto.Price;

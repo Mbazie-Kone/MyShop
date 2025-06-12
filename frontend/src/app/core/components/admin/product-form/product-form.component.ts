@@ -114,6 +114,10 @@ export class ProductFormComponent implements OnInit {
     });
 
     if (this.isEditMode) {
+      this.deletedImageIds.forEach(id => {
+        formData.append('deletedImageIds', id.toString());
+      });
+
       this.catalogService.updateProduct(this.productId, formData).subscribe({
         next: () => this.handleSuccess(),
         error: err => alert('Update failed: ' + err.message)
@@ -124,6 +128,11 @@ export class ProductFormComponent implements OnInit {
         error: err => alert('Creation failed: ' + err.message)
       });
     }
+  }
+
+  removeExistingImage(id: number): void {
+    this.existingImages = this.existingImages.filter(img => img.id !== id);
+    this.deletedImageIds.push(id);
   }
 
   private handleSuccess(): void {
