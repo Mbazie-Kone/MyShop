@@ -135,6 +135,11 @@ export class ProductFormComponent implements OnInit {
     this.deletedImageIds.push(id);
   }
 
+  removeSelectedImage(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.imagePreviews.splice(index, 1);
+  }
+
   private handleSuccess(): void {
     this.showToast = true;
     this.productForm.reset();
