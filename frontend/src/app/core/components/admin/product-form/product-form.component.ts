@@ -82,19 +82,32 @@ export class ProductFormComponent implements OnInit {
   }
 
   onImageSelected(event: any): void {
-    const files = event.target.files;
+    const files: FileList = event.target.files;
     this.selectedFiles = [];
     this.imagePreviews = [];
 
-    for (let i = 0; i < files.length && this.selectedFiles.length < 10; i++) {
+    if (!files || files.length === 0) return;
+
+    const totalImages = this.selectedFiles.length + files.length + this.existingImages.length;
+    if (totalImages > 10) {
+      alert('You can only upload a maximum of 10 images (existing + new).');
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (['image/jpeg', 'image/png'].includes(file.type)) {
         this.selectedFiles.push(file);
         const reader = new FileReader();
-        reader.onload = e => this.imagePreviews.push(reader.result as string);
+        reader.onload = e => {
+          this.imagePreviews.push(reader.result as string);
+        };
         reader.readAsDataURL(file);
       }
     }
+
+    // Reset input to allow identical subsequent selections
+    event.target.value = '';
   }
 
   onSubmit(): void {

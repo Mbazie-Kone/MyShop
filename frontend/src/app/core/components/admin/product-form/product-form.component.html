@@ -48,9 +48,6 @@
                                 <!-- Selected images to upload -->
                                  <div *ngFor="let img of imagePreviews; let i = index" class="position-relative">
                                     <img [src]="img" style="width: 80px;">
-                                     <!--<button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeSelectedImage(i)">
-                                        <i class="icon-cancel-circled"></i>
-                                    </button>-->
                                     <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeSelectedImage(i)"></i>
                                  </div>
                             </div>
