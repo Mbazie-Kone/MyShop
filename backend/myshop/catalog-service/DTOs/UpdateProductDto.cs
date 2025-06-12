@@ -31,7 +31,7 @@ namespace catalog_service.DTOs
         [Required(ErrorMessage = "Category is required.")]
         public int CategoryId { get; set; }
 
-        [MaxLength(10, ErrorMessage = "You can upload up to 10 images.")]
+        [MaxLength(8, ErrorMessage = "You can upload up to 8 images.")]
         public List<IFormFile>? Images { get; set; }
 
         public List<int> DeletedImageIds { get; set; }

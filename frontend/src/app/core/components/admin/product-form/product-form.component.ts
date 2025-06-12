@@ -83,14 +83,12 @@ export class ProductFormComponent implements OnInit {
 
   onImageSelected(event: any): void {
     const files: FileList = event.target.files;
-    this.selectedFiles = [];
-    this.imagePreviews = [];
 
     if (!files || files.length === 0) return;
 
     const totalImages = this.selectedFiles.length + files.length + this.existingImages.length;
-    if (totalImages > 10) {
-      alert('You can only upload a maximum of 10 images (existing + new).');
+    if (totalImages > 8) {
+      alert('You can only upload a maximum of 8 images (existing + new).');
       return;
     }
 
