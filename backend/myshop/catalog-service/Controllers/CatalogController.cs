@@ -89,6 +89,7 @@ namespace catalog_service.Controllers
         // api/catalog/add-product
         [HttpPost("add-product")]
         [Consumes("multipart/form-data")]
+        [RequestSizeLimit(52428800)]
         public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
         {
             if (!ModelState.IsValid)
