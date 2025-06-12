@@ -19,6 +19,10 @@ export class ProductFormComponent implements OnInit {
   productId!: number;
   showToast = false;
 
+  // Deleting image
+  existingImages: { id: number; url: string }[] = [];
+  deletedImageIds: number[] = [];
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private catalogService: CatalogService) {}
 
   ngOnInit(): void {

@@ -45,7 +45,11 @@ namespace catalog_service.Controllers
                 ProductCode = product.ProductCode,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,
-                ImageUrls = product.Images.Select(i => i.Url).ToList()
+                Images = product.Images.Select(i => new AdminProductImageDto
+                {
+                    Id = i.Id,
+                    Url = i.Url,
+                }).ToList()
             };
 
             return Ok(dto);
@@ -89,7 +93,6 @@ namespace catalog_service.Controllers
         // api/catalog/add-product
         [HttpPost("add-product")]
         [Consumes("multipart/form-data")]
-        [RequestSizeLimit(52428800)]
         public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
         {
             if (!ModelState.IsValid)

@@ -29,11 +29,6 @@ builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 builder.Services.AddScoped<IImageService, ImageServiceImpl>();
 
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 50 * 1024 * 1024;
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

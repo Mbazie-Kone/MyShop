@@ -16,6 +16,12 @@
 
         public int CategoryId { get; set; }
 
-        public List<string> ImageUrls { get; set; } = new();
+        public List<AdminProductImageDto> Images { get; set; } = new();
+    }
+
+    public class AdminProductImageDto
+    {
+        public int Id { get; set; }
+        public string? Url { get; set; }
     }
 }
