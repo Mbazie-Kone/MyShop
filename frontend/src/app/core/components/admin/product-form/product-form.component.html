@@ -41,18 +41,17 @@
                                 <!-- Existing images (edit mode) -->
                                  <ng-container *ngIf="isEditMode">
                                     <div *ngFor="let image of existingImages" class="position-relative">
-                                        <img [src]="image.url" class="img-thumbnail" style="width: 80px;">
-                                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeExistingImage(image.id)">
-                                            <i class="icon-cancel-circled"></i>
-                                        </button>
+                                        <img [src]="image.url" style="width: 80px;">
+                                        <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeExistingImage(image.id)"></i>
                                     </div>
                                  </ng-container>
                                 <!-- Selected images to upload -->
                                  <div *ngFor="let img of imagePreviews; let i = index" class="position-relative">
-                                    <img [src]="img" class="img-thumbnail" style="width: 80px;">
-                                     <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeSelectedImage(i)">
+                                    <img [src]="img" style="width: 80px;">
+                                     <!--<button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeSelectedImage(i)">
                                         <i class="icon-cancel-circled"></i>
-                                    </button>
+                                    </button>-->
+                                    <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeSelectedImage(i)"></i>
                                  </div>
                             </div>
                         </div>
