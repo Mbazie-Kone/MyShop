@@ -76,6 +76,8 @@ export class ProductFormComponent implements OnInit {
         sku: product.sku,
         categoryId: product.categoryId
       });
+
+      this.existingImages = product.images;
     });
   }
 

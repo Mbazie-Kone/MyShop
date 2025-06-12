@@ -1,3 +1,8 @@
+export interface ProductImageDto {
+    id: number;
+    url: string;
+}
+
 export interface UpdateProductDetailsDto {
     id: number;
     name: string;
@@ -8,5 +13,5 @@ export interface UpdateProductDetailsDto {
     productCode: string;
     sku: string;
     categoryId: number;
-    imageUrls: string[];
+    images: ProductImageDto[];
 }
