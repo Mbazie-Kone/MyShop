@@ -23,6 +23,9 @@ export class ProductFormComponent implements OnInit {
   existingImages: { id: number; url: string }[] = [];
   deletedImageIds: number[] = [];
 
+  maxImages = 8;
+  isFileInputDisabled = false;
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private catalogService: CatalogService) {}
 
   ngOnInit(): void {
@@ -86,13 +89,10 @@ export class ProductFormComponent implements OnInit {
 
     if (!files || files.length === 0) return;
 
-    const totalImages = this.selectedFiles.length + files.length + this.existingImages.length;
-    if (totalImages > 8) {
-      alert('You can only upload a maximum of 8 images (existing + new).');
-      return;
-    }
-
     for (let i = 0; i < files.length; i++) {
+      const totalImages = this.selectedFiles.length + this.existingImages.length;
+      if (totalImages >= this.maxImages) break;
+    
       const file = files[i];
       if (['image/jpeg', 'image/png'].includes(file.type)) {
         this.selectedFiles.push(file);
@@ -104,8 +104,16 @@ export class ProductFormComponent implements OnInit {
       }
     }
 
+    // Update input disabled state
+    this.updateFileInputState();
+
     // Reset input to allow identical subsequent selections
     event.target.value = '';
+  }
+
+  updateFileInputState(): void {
+    const total = this.selectedFiles.length + this.existingImages.length;
+    this.isFileInputDisabled = total >= this.maxImages;
   }
 
   onSubmit(): void {
@@ -144,11 +152,13 @@ export class ProductFormComponent implements OnInit {
   removeExistingImage(id: number): void {
     this.existingImages = this.existingImages.filter(img => img.id !== id);
     this.deletedImageIds.push(id);
+    this.updateFileInputState();
   }
 
   removeSelectedImage(index: number): void {
     this.selectedFiles.splice(index, 1);
     this.imagePreviews.splice(index, 1);
+    this.updateFileInputState();
   }
 
   private handleSuccess(): void {
