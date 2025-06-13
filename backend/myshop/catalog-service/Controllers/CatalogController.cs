@@ -155,7 +155,11 @@ namespace catalog_service.Controllers
                 ProductCode = createdProduct.ProductCode,
                 SKU = createdProduct.SKU,
                 CategoryName = createdProduct.Category?.Name ?? string.Empty,
-                ImageUrls = createdProduct.Images.Select(i => i.Url).ToList()
+                Images = createdProduct.Images?.Select(img => new AdminProductImageDto
+                {
+                    Id = img.Id,
+                    Url = img.Url
+                }).ToList() ?? new()
             };
 
             return Ok(responseDto);
