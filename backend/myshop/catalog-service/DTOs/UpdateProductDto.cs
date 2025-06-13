@@ -34,6 +34,6 @@ namespace catalog_service.DTOs
         [MaxLength(8, ErrorMessage = "You can upload up to 8 images.")]
         public List<IFormFile>? Images { get; set; }
 
-        public List<int> DeletedImageIds { get; set; }
+        public List<int>? DeletedImageIds { get; set; }
     }
 }

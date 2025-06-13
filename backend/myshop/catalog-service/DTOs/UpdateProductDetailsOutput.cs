@@ -11,6 +11,8 @@
         public string ProductCode { get; set; } = null!;
         public string SKU { get; set; } = null!;
         public string CategoryName { get; set; } = null!;
-        public List<string> ImageUrls { get; set; } = new();    
+        public List<string> ImageUrls { get; set; } = new();
+        
+        public List<AdminProductImageDto> Images { get; set; } = new();
     }
 }

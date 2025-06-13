@@ -243,7 +243,11 @@ namespace catalog_service.Controllers
                 ProductCode = updateProduct.ProductCode,
                 SKU = updateProduct.SKU,
                 CategoryName = updateProduct.Category?.Name ?? "N/A",
-                ImageUrls = updateProduct.Images?.Select(img => img.Url).ToList() ?? new()
+                Images = updateProduct.Images?.Select(img => new AdminProductImageDto
+                {
+                    Id = img.Id,
+                    Url = img.Url
+                }).ToList() ?? new()
             };
 
             return Ok(responseDto);
