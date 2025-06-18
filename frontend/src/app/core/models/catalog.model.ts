@@ -1,16 +1,14 @@
-export interface Product {
+export interface ProductInputDto {
     id?: number;
     name: string;
     description?: string;
     price: number;
     stock: number;
-    isAvailable: boolean;
     productCode: string;
     sku: string;
     categoryId: number;
-    createdAt?: Date;
-    updatedAt?: Date;
     images?: Image[];
+    deletedImageIds?: number[];
 }
 
 export interface Image {

@@ -93,7 +93,7 @@ namespace catalog_service.Controllers
         // api/catalog/add-product
         [HttpPost("add-product")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] InsertCategoryProductImageDto dto)
+        public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] ProductInputDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -170,7 +170,7 @@ namespace catalog_service.Controllers
         // api/catalog/update-product/{id}
         [HttpPut("update-product/{id}")]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] UpdateProductDto dto)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] ProductInputDto dto)
         {
             var product = await _context.Products
                 .Include(p => p.Images)

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category, Product } from '../../core/models/catalog.model';
+import { Category, ProductInputDto } from '../../core/models/catalog.model';
 import { ViewAllProductsDto } from '../../core/models/view-all-products.dto';
 import { UpdateProductDetailsDto } from '../../core/models/update-product-details.dto';
 
@@ -28,8 +28,8 @@ export class CatalogService {
   }
 
   // POST
-  createProduct(formData: FormData): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/add-product`, formData);
+  createProduct(formData: FormData): Observable<ProductInputDto> {
+    return this.http.post<ProductInputDto>(`${this.apiUrl}/add-product`, formData);
   }
 
   // PUT
