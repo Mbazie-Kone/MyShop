@@ -12,7 +12,7 @@ namespace catalog_service.DTOs
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Price is required")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
+        [Range(0.00, 100000.00, ErrorMessage = "Price must be valid.")]
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price must be a valid Euro format.")]
         public decimal Price { get; set; }
 
@@ -21,12 +21,12 @@ namespace catalog_service.DTOs
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "Product code is required.")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "Product code must be between 8 and 20 characters.")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage = "Product can't exceed 16 characters.")]
         [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Only uppercase letters, numbers and dashes are allowed.")]
         public string ProductCode { get; set; } = null!;
 
         [Required(ErrorMessage = "SKU is required.")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "SKU must be between 8 and 20 characters.")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage = "SKU can't exceed 16 characters.")]
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "SKU must contain only uppercase letters and numbers.")]
         public string SKU { get; set; } = null!;
 
@@ -36,6 +36,9 @@ namespace catalog_service.DTOs
 
         // Optional image URLs (up to 8)
         [MaxLength(8, ErrorMessage = "You can upload up to 8 images.")]
-        public IFormFileCollection? Images { get; set; }
+        public List<IFormFile>? Images { get; set; }
+
+        // Only during update
+        public List<int>? DeletedImageIds { get; set; }
     }
 }
