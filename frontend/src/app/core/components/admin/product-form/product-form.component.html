@@ -69,8 +69,8 @@
                             <input class="form-control" id="productCode" formControlName="productCode">
                             <div *ngIf="productForm.get('productCode')?.touched && productForm.get('productCode')?.invalid" class="text-danger">
                                 <div *ngIf="productForm.get('productCode')?.errors?.['required']">Product code is required</div>
-                                <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at leat 8 characters</div>
-                                <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 20 characters</div>
+                                <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at leat 16 characters</div>
+                                <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 16 characters</div>
                                 <div *ngIf="productForm.get('productCode')?.errors?.['pattern']">Only uppercase letters, numbers and dashes are allowed.</div>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                             <input class="form-control" id="sku" formControlName="sku">
                             <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
                                 <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
-                                <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 8 characters.</div>
-                                <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 20 characters.</div>
+                                <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 16 characters.</div>
+                                <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 16 characters.</div>
                                 <div *ngIf="productForm.get('sku')?.errors?.['pattern']">SKU must contain only uppercase letters and numbers.</div>
                             </div>
                         </div>

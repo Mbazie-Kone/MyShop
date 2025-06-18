@@ -10,6 +10,7 @@
         public bool IsAvailable { get; set; }
         public string ProductCode { get; set; } = null!;
         public string SKU { get; set; } = null!;
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; } = null!;
         public List<string> ImageUrls { get; set; } = new();
         
