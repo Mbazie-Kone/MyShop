@@ -65,6 +65,7 @@ services:
       
   init-default-image:
     image: busybox
+    container_name: init-default-image
     volumes:
       - product_images:/mnt/products
       - ./default:/init:ro
