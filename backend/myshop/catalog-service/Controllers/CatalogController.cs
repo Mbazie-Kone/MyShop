@@ -45,11 +45,22 @@ namespace catalog_service.Controllers
                 ProductCode = product.ProductCode,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,
-                Images = product.Images.Select(i => new AdminProductImageDto
-                {
-                    Id = i.Id,
-                    Url = i.Url,
-                }).ToList()
+                Images = product.Images.Any() 
+                    ? product.Images.Select(i => new AdminProductImageDto
+                        {
+                            Id = i.Id,
+                            Url = i.Url,
+                        }).ToList()
+                    : new List<AdminProductImageDto>
+                        {
+                            new AdminProductImageDto
+                            {
+                                Id = 0,
+                                Url = "/assets/products/default.png"
+                            }
+
+                        }
+
             };
 
             return Ok(dto);
@@ -81,7 +92,9 @@ namespace catalog_service.Controllers
                     ProductCode = p.ProductCode,
                     SKU = p.SKU,
                     IsActive = p.Stock > 0,
-                    ImageUrl = p.Images.Select(i => i.Url).FirstOrDefault()
+                    ImageUrl = p.Images.Any()
+                        ? p.Images.Select(i => i.Url).FirstOrDefault()
+                        : "/assets/products/default.png"
                 })
                 .ToListAsync();
 
