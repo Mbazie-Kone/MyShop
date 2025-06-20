@@ -34,6 +34,7 @@ services:
     volumes:
       - product_images:/app/public/products
     depends_on:
+      - init-default-image
       - sqlserver
     networks:
       - mynetwork
@@ -60,6 +61,7 @@ services:
       - product_images:/usr/share/nginx/html/assets/products
     depends_on:
       - api-gateway
+      - init-default-image
     networks:
       - mynetwork
       
