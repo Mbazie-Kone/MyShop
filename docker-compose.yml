@@ -63,6 +63,13 @@ services:
     networks:
       - mynetwork
       
+  init-default-image:
+    image: busybox
+    volumes:
+      - product_images:/mnt/products
+      - ./default:/init:ro
+    command: ["sh", "-c", "cp /init/default.png /mnt/products/default.png"]
+      
 volumes:
   sql_data:
   product_images:
