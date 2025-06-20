@@ -68,7 +68,10 @@ services:
     volumes:
       - product_images:/mnt/products
       - ./default:/init:ro
-    command: ["sh", "-c", "cp /init/default.png /mnt/products/default.png"]
+    entrypoint: >
+      sh -c "if [ ! -f /mnt/products/default.png ]; then
+               cp /init/default.png /mnt/products/default.png;
+             fi"
       
 volumes:
   sql_data:
