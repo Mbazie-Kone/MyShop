@@ -74,6 +74,8 @@ services:
     entrypoint: >
       sh -c "if [ ! -f /mnt/products/default.png ]; then
                cp /init/default.png /mnt/products/default.png;
+             else
+               echo 'default.png already present';
              fi"
       
 volumes:
