@@ -1,7 +1,6 @@
 using catalog_service.Data;
 using catalog_service.Services;
 using catalog_service.Services.Impl;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -28,6 +27,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 builder.Services.AddScoped<IImageService, ImageServiceImpl>();
+
+builder.WebHost.UseWebRoot("public");
 
 var app = builder.Build();
 

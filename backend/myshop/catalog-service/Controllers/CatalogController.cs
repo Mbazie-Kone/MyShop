@@ -209,7 +209,7 @@ namespace catalog_service.Controllers
                         _context.Images.Remove(image);
 
                         var fileName = Path.GetFileName(image.Url ?? "");
-                        var physicalPath = Path.Combine("/app/public/products", fileName);
+                        var physicalPath = Path.Combine(_env.WebRootPath, "products", fileName);
 
                         if (System.IO.File.Exists(physicalPath))
                             System.IO.File.Delete(physicalPath);
