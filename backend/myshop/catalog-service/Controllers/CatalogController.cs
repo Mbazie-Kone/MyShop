@@ -207,7 +207,7 @@ namespace catalog_service.Controllers
                         _context.Images.Remove(image);
 
                         var fileName = Path.GetFileName(image.Url ?? "");
-                        var physicalPath = Path.GetDirectoryName(fileName);
+                        var physicalPath = Path.Combine("/app/public/images", fileName);
 
                         if (System.IO.File.Exists(physicalPath))
                             System.IO.File.Delete(physicalPath);
