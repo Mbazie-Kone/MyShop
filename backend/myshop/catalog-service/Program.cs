@@ -28,8 +28,6 @@ builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 builder.Services.AddScoped<IImageService, ImageServiceImpl>();
 
-builder.WebHost.UseWebRoot("public");
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

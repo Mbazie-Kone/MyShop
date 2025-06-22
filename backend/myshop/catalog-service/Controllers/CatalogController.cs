@@ -13,13 +13,11 @@ namespace catalog_service.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IImageService _imageService;
-        private readonly IWebHostEnvironment _env;
 
-        public CatalogController(AppDbContext context, IImageService imageService, IWebHostEnvironment env)
+        public CatalogController(AppDbContext context, IImageService imageService)
         {
             _context = context;
             _imageService = imageService;
-            _env = env;
         }
 
         // GET:
@@ -209,7 +207,7 @@ namespace catalog_service.Controllers
                         _context.Images.Remove(image);
 
                         var fileName = Path.GetFileName(image.Url ?? "");
-                        var physicalPath = Path.Combine(_env.WebRootPath, "products", fileName);
+                        var physicalPath = Path.GetDirectoryName(fileName);
 
                         if (System.IO.File.Exists(physicalPath))
                             System.IO.File.Delete(physicalPath);
