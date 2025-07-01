@@ -1,6 +1,10 @@
 .shared-card-header {
+    background-color: #ffffff;
     padding: 1rem;
-    background-color: #FFFF;
     border-bottom: 1px solid rgb(212, 208, 208);
     box-shadow: 0 2px 4px rgba(0, 0, 20, 0.08);
+}
+
+.shared-card-header.bg-custom {
+    background-color: #f1f5f9 !important;
 }
