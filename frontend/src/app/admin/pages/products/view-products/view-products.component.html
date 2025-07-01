@@ -2,7 +2,7 @@
     <a [routerLink]="'/administration/add-product'" class="btn btn-primary">Add Product</a>
 </app-card-header>
 
-<app-card-header cardHeaderCustom="d-flex">
+<app-card-header cardHeaderCustom="d-flex justify-content-between">
     <!-- FILTERS -->
         <div>
             <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
