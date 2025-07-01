@@ -9,6 +9,6 @@ import { CardHeaderComponent } from './card/card-header/card-header.component';
   imports: [
     CommonModule
   ],
-  exports: [SpinnerComponent, CardComponent]
+  exports: [SpinnerComponent, CardComponent, CardHeaderComponent]
 })
 export class SharedModule { }
