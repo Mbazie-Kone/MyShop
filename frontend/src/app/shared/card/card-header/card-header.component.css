@@ -1,7 +1,5 @@
 .shared-card-header {
-    height: 20px;
-    width: 70px;
-    background-color: blue;
+    padding: 1rem;
+    background-color: #FFFF;
     border-bottom: 1px solid black;
-    margin-top: 60px;
 }

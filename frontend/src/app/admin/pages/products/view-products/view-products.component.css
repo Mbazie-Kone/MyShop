@@ -13,15 +13,7 @@ img {
     border-radius: 10px;
 }
 
-.add-product {
-    color: white;
-}
-
 .modify {
     color: #94A3B8;
     cursor: pointer;
-}
-
-.card-mb {
-    margin-top: 5px;
 }
