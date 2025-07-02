@@ -6,7 +6,3 @@
         0 2px 4px rgba(0, 0, 20, 0.08),        
         0 6px 12px rgba(0, 0, 20, 0.08);
 }
-
-.shared-card-header.bg-custom {
-    background-color: #f1f5f9 !important;
-}

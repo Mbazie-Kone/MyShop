@@ -133,3 +133,8 @@ html, body {
   padding-left: 4px;
 }
 /* Global row */
+
+.shared-card-header.bg-custom {
+    background-color: #f1f5f9 !important;
+}
+
