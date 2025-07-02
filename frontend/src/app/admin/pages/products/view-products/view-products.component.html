@@ -4,39 +4,37 @@
 
 <app-card-header cardHeaderCustom="d-flex justify-content-between">
     <!-- FILTERS -->
-        <div>
-            <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
-        </div>
-        
-        <div>
-            <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-                <option value="">All Categories</option>
-                <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
-            </select>
-        </div>
+    <div>
+        <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
+    </div>
+    
+    <div>
+        <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+            <option value="">All Categories</option>
+            <option *ngFor="let c of uniqueCategories" [value]="c">{{ c }}</option>
+        </select>
+    </div>
 
-        <div>
-            <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
-                <option value="">All Status</option>
-                <option value="Active">Active</option>
-                <option value="Deactivate">Deactivate</option>
-            </select>
-        </div>
+    <div>
+        <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Deactivate">Deactivate</option>
+        </select>
+    </div>
 
-        <div>
-            <label class="d-flex align-items-center">
-                Show
-                <div class="col-md-5 ms-1 me-1">
-                    <select class="form-select" [(ngModel)]="itemsPerPage" (change)="updatePaginatedProducts()">
-                        <option *ngFor="let n of pageSizeOptions" [value]="n">{{ n }}</option>
-                    </select>
-                </div>
-                entries
-            </label>
-        </div>
+    <div>
+        <label class="d-flex align-items-center">
+            Show
+            <div class="col-md-5 ms-1 me-1">
+                <select class="form-select" [(ngModel)]="itemsPerPage" (change)="updatePaginatedProducts()">
+                    <option *ngFor="let n of pageSizeOptions" [value]="n">{{ n }}</option>
+                </select>
+            </div>
+            entries
+        </label>
+    </div>
 </app-card-header>
-
-
 
 <app-card-header cardHeaderCustom="bg-custom">
 
@@ -57,7 +55,6 @@
 </table>
 
 </app-card-header>
-
 
 <app-card customClass="rounded-top-0">
    <!-- TABLE -->
