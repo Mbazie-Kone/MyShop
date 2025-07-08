@@ -137,3 +137,12 @@ html, body {
 .shared-card-header.bg-custom {
     background-color: #f1f5f9 !important;
 }
+
+/* Tables th and td color */
+th {
+    color: #334155 !important;
+}
+
+td {
+    color: #475569 !important;
+}
