@@ -45,7 +45,7 @@ export class ViewProductsComponent {
     this.filteredProducts = this.products.filter(p => {
       const matchesName = this.searchTerm === '' || p.productName.toLowerCase().includes(this.searchTerm.toLowerCase());
       const matchesCategory = this.selectedCategory === '' || p.categoryName === this.selectedCategory;
-      const matchesStatus = this.selectedStatus === '' || (p.isActive ? 'Active' : 'Deactivate') === this.selectedStatus;
+      const matchesStatus = this.selectedStatus === '' || (p.isActive ? 'Available' : 'Not available') === this.selectedStatus;
 
       return matchesName && matchesCategory && matchesStatus;
     });
