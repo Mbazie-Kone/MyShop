@@ -43,5 +43,5 @@ CREATE TABLE Images (
 );
 
 -- Sample categories
-INSERT INTO Categories (Name) VALUES ('Books'), ('Computers'), ('Accessories');
+INSERT INTO Categories (Name) VALUES ('Books'), ('Computers'), ('Accessories'), ('Music');
 GO
