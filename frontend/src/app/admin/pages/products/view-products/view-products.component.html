@@ -18,8 +18,8 @@
     <div>
         <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
             <option value="">All Status</option>
-            <option value="Active">Active</option>
-            <option value="Deactivate">Deactivate</option>
+            <option value="Available">Available</option>
+            <option value="Not available">Not available</option>
         </select>
     </div>
 
@@ -72,7 +72,7 @@
                     <td>{{ product.sku }}</td>
                     <td>
                         <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
-                            {{ product.isActive ? 'Active' : 'Deactivate' }}
+                            {{ product.isActive ? 'Available' : 'Not available' }}
                         </span>
                     </td>
                     <td>
