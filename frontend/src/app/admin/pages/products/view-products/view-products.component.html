@@ -41,21 +41,23 @@
         <table class="table table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th class="bg-light"><input type="checkbox"></th>
-                    <th class="bg-light">Product</th>
-                    <th class="bg-light">Category</th>
-                    <th class="bg-light">Price</th>
-                    <th class="bg-light">Quantity</th>
-                    <th class="bg-light">P Code</th>
-                    <th class="bg-light">SKU</th>
-                    <th class="bg-light">Status</th>
-                    <th class="bg-light">Action</th>
+                    <th class="bg-custom">
+                        <input type="checkbox">
+                        Product
+                    </th>
+                    <th class="bg-custom">Category</th>
+                    <th class="bg-custom">Price</th>
+                    <th class="bg-custom">Quantity</th>
+                    <th class="bg-custom">P Code</th>
+                    <th class="bg-custom">SKU</th>
+                    <th class="bg-custom">Status</th>
+                    <th class="bg-custom">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let product of filteredProducts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-                    <td><input type="checkbox"></td>
                     <td class="d-flex align-items-center gap-3">
+                        <input type="checkbox">
                         <img [src]="product.imageUrl || 'assets/images/default.png'" alt="Image" width="40" height="40" class="rounded">
                         <span>{{ product.productName }}</span>
                     </td>
@@ -77,8 +79,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td>
                     <td class="d-flex align-items-center gap-3">
+                        <input type="checkbox">
                         <img alt="Image" width="40" height="40" class="rounded">
                         <span>Name</span>
                     </td>
