@@ -17,3 +17,10 @@ img {
     color: #94A3B8;
     cursor: pointer;
 }
+
+.card {
+    border: none;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 20, 0.08),
+        0 6px 12px rgba(0, 0, 20, 0.08);
+}
