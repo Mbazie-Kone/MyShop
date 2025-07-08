@@ -42,8 +42,10 @@
             <thead>
                 <tr>
                     <th class="bg-custom">
-                        <input type="checkbox">
-                        Product
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="checkbox">
+                            Product
+                        </div>
                     </th>
                     <th class="bg-custom">Category</th>
                     <th class="bg-custom">Price</th>
@@ -56,10 +58,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let product of filteredProducts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-                    <td class="d-flex align-items-center gap-3">
-                        <input type="checkbox">
-                        <img [src]="product.imageUrl || 'assets/images/default.png'" alt="Image" width="40" height="40" class="rounded">
-                        <span>{{ product.productName }}</span>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <input type="checkbox">
+                            <img [src]="product.imageUrl || 'assets/images/default.png'" alt="Image" width="40" height="40" class="rounded">
+                            <span>{{ product.productName }}</span>
+                        </div>
                     </td>
                     <td>{{ product.categoryName }}</td>
                     <td>{{ product.price | currency: 'EUR' :'symbol' }} </td>
@@ -79,10 +83,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="d-flex align-items-center gap-3">
-                        <input type="checkbox">
-                        <img alt="Image" width="40" height="40" class="rounded">
-                        <span>Name</span>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <input type="checkbox">
+                            <img alt="Image" width="40" height="40" class="rounded">
+                            <span>Name</span>
+                        </div>
                     </td>
                     <td>Test</td>
                     <td>20</td>
