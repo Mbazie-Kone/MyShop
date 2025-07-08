@@ -43,11 +43,11 @@ export class ViewProductsComponent {
 
   applyFilters() {
     this.filteredProducts = this.products.filter(p => {
-      const matchesName = this.searchTerm === '' || p.productName.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const matchesCode = this.searchTerm === '' || p.productCode.toLowerCase().includes(this.searchTerm.toLowerCase());
       const matchesCategory = this.selectedCategory === '' || p.categoryName === this.selectedCategory;
       const matchesStatus = this.selectedStatus === '' || (p.isActive ? 'Available' : 'Not available') === this.selectedStatus;
 
-      return matchesName && matchesCategory && matchesStatus;
+      return matchesCode && matchesCategory && matchesStatus;
     });
     this.currentPage = 1;
     this.updatePaginatedProducts();

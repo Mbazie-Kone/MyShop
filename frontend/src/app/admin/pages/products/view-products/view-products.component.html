@@ -5,7 +5,7 @@
 <app-card-header cardHeaderCustom="d-flex justify-content-between">
     <!-- FILTERS -->
     <div>
-        <input type="text" class="form-control" placeholder="Search by product name" [(ngModel)]="searchTerm" (input)="applyFilters()">
+        <input type="text" class="form-control" placeholder="Search by product code" [(ngModel)]="searchTerm" (input)="applyFilters()">
     </div>
     
     <div>
@@ -96,7 +96,9 @@
                     <td>GFVDTAGDMJHFDTSO</td>
                     <td>GFVDTAGDMJHFDTSO</td>
                     <td>
-                        Available
+                        <span class="badge bg-success">
+                            Available
+                        </span>
                     </td>
                     <td>
                         <a href="#">
