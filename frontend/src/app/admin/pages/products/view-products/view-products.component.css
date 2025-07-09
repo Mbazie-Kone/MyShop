@@ -33,6 +33,17 @@ img {
     padding-left: 19px;
 }
 
+/* Test */
 .hard {
     color: red !important;
+}
+
+.bg-success-soft {
+    background-color: rgba(25, 135, 84, .1);
+    color: #198754;
+}
+
+.bg-danger-soft {
+    background-color: rgba(220, 53, 69, .1);
+    color: #dc3545;
 }

@@ -146,3 +146,8 @@ th {
 td {
     color: #475569 !important;
 }
+
+/* Badge */
+.badge {
+  font-weight: 600;
+}
