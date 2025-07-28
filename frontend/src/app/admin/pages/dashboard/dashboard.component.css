@@ -15,6 +15,15 @@
     font-size: 13px;
 }
 
+/* Add vertical spacing between card rows */
+.row {
+    margin-bottom: 1.5rem;
+}
+
+.row:last-child {
+    margin-bottom: 0;
+}
+
 /* COLLAPSED
 canvas {
     width: 100% !important;
