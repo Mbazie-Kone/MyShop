@@ -11,13 +11,21 @@ export class PageTitleService {
 
   constructor(private title: Title) {}
 
-  setTitle(title: string): void {
-    this.pageTitleSubject.next(title);
-    this.title.setTitle(title); // Browser title
+  setTitle(browserTitle: string, pageTitle?: string): void {
+    // Set browser tab title
+    this.title.setTitle(browserTitle);
+    
+    // Set page title (if not provided, extract from browser title)
+    const internalTitle = pageTitle || this.extractPageTitle(browserTitle);
+    this.pageTitleSubject.next(internalTitle);
+  }
+
+  private extractPageTitle(browserTitle: string): string {
+    // Remove " - MyShop" suffix if present
+    return browserTitle.replace(' - MyShop', '');
   }
 
   get currentTitle(): string {
     return this.pageTitleSubject.value;
   }
-
 }

@@ -22,9 +22,9 @@ export class AdminLayoutComponent {
         filter(route => route.outlet === 'primary'),
         map(route => route.snapshot.data['title'])
       )
-      .subscribe((title: string) => {
-        const finalTitle = title || 'Admin';
-        this.pagetitleService.setTitle(finalTitle);
+      .subscribe((browserTitle: string) => {
+        const finalBrowserTitle = browserTitle || 'Admin - MyShop';
+        this.pagetitleService.setTitle(finalBrowserTitle);
       });
 
     this.pagetitleService.pageTitle$.subscribe(title => {
