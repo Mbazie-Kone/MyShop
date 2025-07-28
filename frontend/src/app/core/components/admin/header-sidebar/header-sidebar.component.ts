@@ -41,4 +41,12 @@ export class HeaderSidebarComponent implements OnInit {
     this.layoutService.toggle();
   }
 
+  // Check if current route is related to products
+  isProductsActive(): boolean {
+    const currentUrl = this.router.url;
+    return currentUrl.includes('/administration/view-products') || 
+           currentUrl.includes('/administration/add-product') || 
+           currentUrl.includes('/administration/edit-product');
+  }
+
 }

@@ -58,7 +58,9 @@
       </a>
 
       <!-- Products -->
-      <a routerLink="/administration/view-products" routerLinkActive="active" data-tooltip="Products">
+      <a routerLink="/administration/view-products" 
+         [class.active]="isProductsActive()"
+         data-tooltip="Products">
         <i class="icon-products sidebar-icons d-flex justify-content-center"></i>
         <span class="sidebar-icons-name">Products</span>
       </a>
