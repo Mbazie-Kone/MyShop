@@ -17,7 +17,7 @@
 
 /* Add vertical spacing between card rows */
 .row {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
 }
 
 .row:last-child {
