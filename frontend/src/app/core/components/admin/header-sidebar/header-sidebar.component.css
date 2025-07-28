@@ -174,13 +174,18 @@
   margin-left: 80px;
 }
 
-.left-section,
-.center-section,
-.margin-right-icons {
-  flex: 1;
+.left-section {
+  flex: 0 0 auto;
+  margin-left: 20px;
+}
+
+/* COLLAPSED */
+.collapsed .left-section {
+  margin-left: 20px;
 }
 
 .center-section {
+  flex: 1;
   display: flex;
   justify-content: center;
 }
@@ -191,8 +196,15 @@
 }
 
 .margin-right-icons {
+  flex: 0 0 auto;
   justify-content: flex-end;
   gap: 15px;
+  margin-right: 20px;
+}
+
+/* COLLAPSED */
+.collapsed .margin-right-icons {
+  margin-right: 20px;
 }
 
 .margin-right-icons i,
