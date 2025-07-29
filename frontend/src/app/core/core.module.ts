@@ -12,6 +12,7 @@ import { ProductFormComponent } from './components/admin/product-form/product-fo
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { Nl2brPipe } from '../shared/pipes/nl2br.pipe';
+import { TranslatePipe } from '../shared/pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,14 @@ import { Nl2brPipe } from '../shared/pipes/nl2br.pipe';
     AdminFooterComponent,
     ProductFormComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    SharedModule,
-    Nl2brPipe
-  ],
+           imports: [
+           CommonModule,
+           RouterModule,
+           ReactiveFormsModule,
+           SharedModule,
+           Nl2brPipe,
+           TranslatePipe
+         ],
   exports: [
     HeaderComponent,
     FooterComponent,

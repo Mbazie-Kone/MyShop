@@ -60,6 +60,155 @@
     gap: 0.25rem;
 }
 
+/* Description editor animations */
+.description-editor {
+    transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
+}
+
+.description-editor:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(78, 115, 223, 0.15);
+}
+
+.description-editor.drag-over {
+    border-color: #4e73df;
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: scale(1.02);
+}
+
+/* Template buttons */
+.btn-outline-primary {
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(78, 115, 223, 0.3);
+}
+
+/* Upload zone styles */
+.upload-zone {
+    position: relative;
+    border: 2px dashed #dee2e6;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.upload-zone:hover {
+    border-color: #4e73df;
+    background-color: rgba(78, 115, 223, 0.05);
+}
+
+.upload-zone.drag-over {
+    border-color: #4e73df;
+    background-color: rgba(78, 115, 223, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(78, 115, 223, 0.2);
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-zone-text {
+    pointer-events: none;
+    color: #6c757d;
+}
+
+.upload-zone-text i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.upload-zone-text p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Progress bar styles */
+.progress {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.3s ease;
+}
+
+/* Image preview styles */
+.btn-remove-image {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.btn-remove-image:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* Alert styles */
+.alert-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.alert-sm .alert-heading {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.alert-sm ul {
+    padding-left: 1.25rem;
+}
+
+/* Preview toggle button */
+.preview-toggle {
+    transition: transform 0.2s ease;
+}
+
+.preview-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* Keyboard shortcuts help */
+.keyboard-shortcuts {
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-size: 0.8rem;
+}
+
+/* Toast styles */
+.toast-container {
+    z-index: 1100;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .btn-group-sm .btn {
@@ -70,5 +219,120 @@
     .description-preview {
         padding: 0.75rem;
         font-size: 0.9rem;
+    }
+
+    .upload-zone {
+        padding: 1.5rem;
+    }
+
+    .upload-zone-text i {
+        font-size: 1.5rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .description-preview {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .form-control {
+        background-color: #4a5568;
+        border-color: #718096;
+        color: #e2e8f0;
+    }
+
+    .form-control:focus {
+        background-color: #4a5568;
+        border-color: #4e73df;
+        color: #e2e8f0;
+    }
+
+    .upload-zone {
+        background-color: #2d3748;
+        border-color: #718096;
+    }
+
+    .upload-zone:hover {
+        background-color: rgba(78, 115, 223, 0.1);
+    }
+
+    .upload-zone.drag-over {
+        background-color: rgba(78, 115, 223, 0.15);
+    }
+
+    .upload-zone-text {
+        color: #a0aec0;
+    }
+
+    .alert-info {
+        background-color: #2c5282;
+        border-color: #3182ce;
+        color: #bee3f8;
+    }
+
+    .keyboard-shortcuts {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    .text-muted {
+        color: #a0aec0 !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .description-editor {
+        border-width: 3px;
+    }
+
+    .upload-zone {
+        border-width: 3px;
+    }
+
+    .btn-remove-image {
+        border: 2px solid white;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .description-editor,
+    .upload-zone,
+    .btn-outline-primary,
+    .btn-remove-image,
+    .preview-toggle {
+        transition: none;
+    }
+
+    .description-editor:focus,
+    .upload-zone.drag-over {
+        transform: none;
+    }
+}
+
+/* Focus visible for better accessibility */
+.btn:focus-visible,
+.form-control:focus-visible,
+.upload-zone:focus-visible {
+    outline: 2px solid #4e73df;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .upload-zone,
+    .btn-group,
+    .progress,
+    .btn-remove-image {
+        display: none !important;
+    }
+
+    .description-preview {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #000 !important;
     }
 }
