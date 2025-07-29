@@ -51,13 +51,6 @@
                                             {{ descriptionLength }} / {{ maxDescriptionLength }} characters
                                         </small>
                                     </div>
-
-                                    <!-- Validation errors -->
-                                    <div *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid" class="text-danger mt-1">
-                                        <div *ngIf="productForm.get('description')?.errors?.['required']">Description is required</div>
-                                        <div *ngIf="productForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters long</div>
-                                        <div *ngIf="productForm.get('description')?.errors?.['maxlength']">Description cannot exceed {{ maxDescriptionLength }} characters</div>
-                                    </div>
                                 </div>
 
                                 <!-- Description Preview -->
