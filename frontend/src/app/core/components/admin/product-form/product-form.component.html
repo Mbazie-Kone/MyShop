@@ -1,144 +1,208 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <div class="row">
-        <!-- COLUMN 1 -->
-        <div class="col-lg-8 col-12">
-            <!-- Card 1 -->
-            <app-card customClass="custom-card-mb">
-                <!-- Card body -->
-                <div class="card-body">
-                    <div>
-                        <!-- Product name -->
-                        <div class="mb-3">
-                            <label class="form-label">Product Name</label>
-                            <input class="form-control" formControlName="name">
-                            <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
-                                Product name is required.
-                            </div>
-                        </div>
-
-                        <!-- Description -->
+<app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'" [minHeight]="'400px'">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class="row">
+            <!-- COLUMN 1 -->
+            <div class="col-lg-8 col-12">
+                <!-- Card 1 -->
+                <app-card customClass="custom-card-mb">
+                    <!-- Card body -->
+                    <div class="card-body">
                         <div>
-                            <label class="form-label">Product Description</label>
-                            <textarea class="form-control" rows="3" formControlName="description"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </app-card>
+                            <!-- Product name -->
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input class="form-control" formControlName="name">
+                                <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
+                                    Product name is required.
+                                </div>
+                            </div>
 
-            <!-- Card 2 -->
-            <app-card customClass="custom-card-mb">
-                <!-- Card body -->
-                <div class="card-body">
-                    <div>
-                        <!-- Product image -->
-                        <div class="mb-4">
-                            <!-- Heading -->
-                            <h5 class="mb-4">Product Gallery</h5>
-                            <label class="form-label">Product Image (max 8)</label>
-                            <input type="file" class="form-control" (change)="onImageSelected($event)" accept=".jpg,.jpeg,.png" multiple [disabled]="isFileInputDisabled">
-                            <p class="mt-2">Image Preview</p>
-                            <div class="mt-2 d-flex flex-wrap gap-2">
-                                <!-- Existing images (edit mode) -->
-                                 <ng-container *ngIf="isEditMode">
-                                    <div *ngFor="let image of existingImages" class="position-relative">
-                                        <img [src]="image.url" style="width: 80px;">
-                                        <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeExistingImage(image.id)"></i>
+                            <!-- Enhanced Product Description -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label mb-0">Product Description</label>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button type="button" class="btn btn-outline-secondary" (click)="toggleDescriptionPreview()">
+                                            <i class="icon-eye"></i> {{ showDescriptionPreview ? 'Hide' : 'Show' }} Preview
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger" (click)="clearDescription()">
+                                            <i class="icon-trash"></i> Clear
+                                        </button>
                                     </div>
-                                 </ng-container>
-                                <!-- Selected images to upload -->
-                                 <div *ngFor="let img of imagePreviews; let i = index" class="position-relative">
-                                    <img [src]="img" style="width: 80px;">
-                                    <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeSelectedImage(i)"></i>
-                                 </div>
+                                </div>
+
+                                <!-- Description Editor -->
+                                <div *ngIf="!showDescriptionPreview">
+                                    <textarea 
+                                        class="form-control" 
+                                        rows="6" 
+                                        formControlName="description"
+                                        [placeholder]="descriptionPlaceholder"
+                                        (input)="onDescriptionInput($event)"
+                                        [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                                    </textarea>
+                                    
+                                    <!-- Character counter and status -->
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <small [class]="getDescriptionStatusClass()">
+                                            <i class="icon-info-circled"></i> {{ getDescriptionStatusText() }}
+                                        </small>
+                                        <small [class]="descriptionLength > maxDescriptionLength ? 'text-danger' : 'text-muted'">
+                                            {{ descriptionLength }} / {{ maxDescriptionLength }} characters
+                                        </small>
+                                    </div>
+
+                                    <!-- Validation errors -->
+                                    <div *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid" class="text-danger mt-1">
+                                        <div *ngIf="productForm.get('description')?.errors?.['required']">Description is required</div>
+                                        <div *ngIf="productForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters long</div>
+                                        <div *ngIf="productForm.get('description')?.errors?.['maxlength']">Description cannot exceed {{ maxDescriptionLength }} characters</div>
+                                    </div>
+                                </div>
+
+                                <!-- Description Preview -->
+                                <div *ngIf="showDescriptionPreview" class="border rounded p-3 bg-light">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6 class="mb-0">Description Preview</h6>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="toggleDescriptionPreview()">
+                                            <i class="icon-edit"></i> Edit
+                                        </button>
+                                    </div>
+                                    <div class="description-preview">
+                                        <p *ngIf="productForm.get('description')?.value; else noDescription" 
+                                           [innerHTML]="productForm.get('description')?.value | nl2br">
+                                        </p>
+                                        <ng-template #noDescription>
+                                            <p class="text-muted fst-italic">No description entered yet...</p>
+                                        </ng-template>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </app-card>
-        </div>
+                </app-card>
 
-        <!-- COLUMN 2 -->
-        <div class="col-lg-4 col-12">
-            <!-- Card 1 -->
-            <app-card customClass="custom-card-mb">
-                <div class="card-body">
-                    <div>
-                        <!-- Product code -->
-                        <div class="mb-3">
-                            <label class="form-label">Product Code</label>
-                            <input class="form-control" id="productCode" formControlName="productCode">
-                            <div *ngIf="productForm.get('productCode')?.touched && productForm.get('productCode')?.invalid" class="text-danger">
-                                <div *ngIf="productForm.get('productCode')?.errors?.['required']">Product code is required</div>
-                                <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at leat 16 characters</div>
-                                <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 16 characters</div>
-                                <div *ngIf="productForm.get('productCode')?.errors?.['pattern']">Only uppercase letters, numbers and dashes are allowed.</div>
-                            </div>
-                        </div>
-
-                        <!-- Product sku -->
-                        <div class="mb-3">
-                            <label class="form-label">Product SKU</label>
-                            <input class="form-control" id="sku" formControlName="sku">
-                            <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
-                                <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
-                                <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 16 characters.</div>
-                                <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 16 characters.</div>
-                                <div *ngIf="productForm.get('sku')?.errors?.['pattern']">SKU must contain only uppercase letters and numbers.</div>
-                            </div>
-                        </div>
-
-                        <!-- Product category -->
-                        <div class="mb-3">
-                            <label class="form-label">Category</label>
-                            <select class="form-select" formControlName="categoryId">
-                                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-                            </select>
-                            <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
-                                Category is required.
+                <!-- Card 2 -->
+                <app-card customClass="custom-card-mb">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div>
+                            <!-- Product image -->
+                            <div class="mb-4">
+                                <!-- Heading -->
+                                <h5 class="mb-4">Product Gallery</h5>
+                                <label class="form-label">Product Image (max 8)</label>
+                                <input type="file" class="form-control" (change)="onImageSelected($event)" accept=".jpg,.jpeg,.png" multiple [disabled]="isFileInputDisabled">
+                                <p class="mt-2">Image Preview</p>
+                                <div class="mt-2 d-flex flex-wrap gap-2">
+                                    <!-- Existing images (edit mode) -->
+                                     <ng-container *ngIf="isEditMode">
+                                        <div *ngFor="let image of existingImages" class="position-relative">
+                                            <img [src]="image.url" style="width: 80px;">
+                                            <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeExistingImage(image.id)"></i>
+                                        </div>
+                                     </ng-container>
+                                    <!-- Selected images to upload -->
+                                     <div *ngFor="let img of imagePreviews; let i = index" class="position-relative">
+                                        <img [src]="img" style="width: 80px;">
+                                        <i type="button" class="icon-cancel-circled position-absolute top-0 end-0" style="font-size: 20px;" (click)="removeSelectedImage(i)"></i>
+                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </app-card>
+                </app-card>
+            </div>
 
-            <!-- Card 2 -->
-            <app-card customClass="custom-card-mb">
-                <div class="card-body">
-                    <div>
-                        <!-- Product stock -->
-                        <div class="mb-3">
-                            <label class="form-label">Stock</label>
-                            <input type="number" class="form-control" formControlName="stock" min="0">
-                            <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
-                                Stock cannot be negative.
+            <!-- COLUMN 2 -->
+            <div class="col-lg-4 col-12">
+                <!-- Card 1 -->
+                <app-card customClass="custom-card-mb">
+                    <div class="card-body">
+                        <div>
+                            <!-- Product code -->
+                            <div class="mb-3">
+                                <label class="form-label">Product Code</label>
+                                <input class="form-control" id="productCode" formControlName="productCode">
+                                <div *ngIf="productForm.get('productCode')?.touched && productForm.get('productCode')?.invalid" class="text-danger">
+                                    <div *ngIf="productForm.get('productCode')?.errors?.['required']">Product code is required</div>
+                                    <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at leat 16 characters</div>
+                                    <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 16 characters</div>
+                                    <div *ngIf="productForm.get('productCode')?.errors?.['pattern']">Only uppercase letters, numbers and dashes are allowed.</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Product price -->
-                        <div class="mb-3">
-                            <label class="form-label">Regular Price</label>
-                            <input type="number" class="form-control" formControlName="price" step="0.01" min="0">
-                            <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
-                                Price is required.
+                            <!-- Product sku -->
+                            <div class="mb-3">
+                                <label class="form-label">Product SKU</label>
+                                <input class="form-control" id="sku" formControlName="sku">
+                                <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
+                                    <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
+                                    <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 16 characters.</div>
+                                    <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 16 characters.</div>
+                                    <div *ngIf="productForm.get('sku')?.errors?.['pattern']">SKU must contain only uppercase letters and numbers.</div>
+                                </div>
                             </div>
-                            <div *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
-                                Price must be 0 or greater.
-                            </div>
-                            <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('pattern')" class="text-danger">
-                                Price must be a valid Euro amount (e.g. 10.99).
+
+                            <!-- Product category -->
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" formControlName="categoryId">
+                                    <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                                </select>
+                                <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
+                                    Category is required.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </app-card>
+                </app-card>
 
-            <!-- Submit -->
-             <div class="d-grid">
-                <button class="btn btn-success" type="submit" [disabled]="productForm.invalid">{{ isEditMode ? 'Update' : 'Add' }} Product</button>
-             </div>
-        </div>
-    </div>  
-</form>
+                <!-- Card 2 -->
+                <app-card customClass="custom-card-mb">
+                    <div class="card-body">
+                        <div>
+                            <!-- Product stock -->
+                            <div class="mb-3">
+                                <label class="form-label">Stock</label>
+                                <input type="number" class="form-control" formControlName="stock" min="0">
+                                <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
+                                    Stock cannot be negative.
+                                </div>
+                            </div>
+
+                            <!-- Product price -->
+                            <div class="mb-3">
+                                <label class="form-label">Regular Price</label>
+                                <input type="number" class="form-control" formControlName="price" step="0.01" min="0">
+                                <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
+                                    Price is required.
+                                </div>
+                                <div *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
+                                    Price must be 0 or greater.
+                                </div>
+                                <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('pattern')" class="text-danger">
+                                    Price must be a valid Euro amount (e.g. 10.99).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </app-card>
+
+                <!-- Submit -->
+                 <div class="d-grid">
+                    <button class="btn btn-success" type="submit" [disabled]="productForm.invalid || saving">
+                        <span *ngIf="saving">
+                            <app-spinner size="16px"></app-spinner>
+                            Saving...
+                        </span>
+                        <span *ngIf="!saving">{{ isEditMode ? 'Update' : 'Add' }} Product</span>
+                    </button>
+                 </div>
+            </div>
+        </div>  
+    </form>
+</app-loading-wrapper>
 
 <!-- TOAST -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;" *ngIf="showToast">

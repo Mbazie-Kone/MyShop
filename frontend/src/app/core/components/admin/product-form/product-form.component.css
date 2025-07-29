@@ -1,3 +1,74 @@
 .form-label {
     color: #1e293b;
 }
+
+/* Description editor styles */
+.description-preview {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.description-preview p {
+    margin-bottom: 0.5rem;
+}
+
+.description-preview p:last-child {
+    margin-bottom: 0;
+}
+
+/* Character counter styles */
+.text-success {
+    color: #198754 !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Button group styles */
+.btn-group-sm .btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Textarea focus styles */
+.form-control:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Preview container styles */
+.description-preview {
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    min-height: 100px;
+}
+
+/* Status indicator styles */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-group-sm .btn {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .description-preview {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}

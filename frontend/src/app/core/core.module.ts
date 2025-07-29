@@ -11,6 +11,7 @@ import { AdminFooterComponent } from './components/admin/admin-footer/admin-foot
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { Nl2brPipe } from '../shared/pipes/nl2br.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    Nl2brPipe
   ],
   exports: [
     HeaderComponent,
@@ -38,7 +40,8 @@ import { SharedModule } from '../shared/shared.module';
     HeaderSidebarComponent,
     AdminLayoutComponent,
     FooterComponent,
-    AdminFooterComponent
+    AdminFooterComponent,
+    ProductFormComponent
   ]
 })
 export class CoreModule { }

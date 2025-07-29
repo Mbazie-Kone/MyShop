@@ -18,6 +18,8 @@ export class ProductFormComponent implements OnInit {
   isEditMode = false;
   productId!: number;
   showToast = false;
+  loading: boolean = true; // Loading state for initial data
+  saving: boolean = false; // Loading state for form submission
 
   // Deleting image
   existingImages: { id: number; url: string }[] = [];
@@ -26,12 +28,22 @@ export class ProductFormComponent implements OnInit {
   maxImages = 8;
   isFileInputDisabled = false;
 
+  // Description editor properties
+  descriptionLength: number = 0;
+  maxDescriptionLength: number = 2000;
+  descriptionPlaceholder: string = 'Enter a detailed description of your product...';
+  showDescriptionPreview: boolean = false;
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private catalogService: CatalogService) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
-      description: [''],
+      description: ['', [
+        Validators.required, 
+        Validators.minLength(10), 
+        Validators.maxLength(this.maxDescriptionLength)
+      ]],
       stock: [0, [Validators.required, Validators.min(0)]],
       price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       productCode: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[A-Z0-9-]+$/)]],
@@ -48,7 +60,14 @@ export class ProductFormComponent implements OnInit {
         this.isEditMode = true;
         this.productId = +idParam;
         this.loadProduct(this.productId);
+      } else {
+        this.loading = false; // No product to load, categories will be loaded
       }
+    });
+
+    // Monitor description changes for character count
+    this.productForm.get('description')?.valueChanges.subscribe(value => {
+      this.descriptionLength = value ? value.length : 0;
     });
 
     this.productForm.get('stock')?.valueChanges.subscribe(stock => {
@@ -63,25 +82,87 @@ export class ProductFormComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.catalogService.getCategories().subscribe(res => {
-      this.categories = res;
+    this.catalogService.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+        if (!this.isEditMode) {
+          this.loading = false; // Categories loaded, no product to load
+        }
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+        this.loading = false;
+      }
     });
   }
 
   loadProduct(id: number): void {
-    this.catalogService.getProductById(id).subscribe(product => {
-      this.productForm.patchValue({
-        name: product.name,
-        description: product.description,
-        stock: product.stock,
-        price: product.price,
-        productCode: product.productCode,
-        sku: product.sku,
-        categoryId: product.categoryId
-      });
+    this.catalogService.getProductById(id).subscribe({
+      next: (product) => {
+        this.productForm.patchValue({
+          name: product.name,
+          description: product.description,
+          stock: product.stock,
+          price: product.price,
+          productCode: product.productCode,
+          sku: product.sku,
+          categoryId: product.categoryId
+        });
 
-      this.existingImages = product.images;
+        this.existingImages = product.images;
+        this.loading = false; // Both categories and product loaded
+      },
+      error: (error) => {
+        console.error('Error loading product:', error);
+        this.loading = false;
+      }
     });
+  }
+
+  // Description editor methods
+  onDescriptionInput(event: any): void {
+    const value = event.target.value;
+    this.descriptionLength = value ? value.length : 0;
+  }
+
+  clearDescription(): void {
+    this.productForm.get('description')?.setValue('');
+    this.descriptionLength = 0;
+  }
+
+  toggleDescriptionPreview(): void {
+    this.showDescriptionPreview = !this.showDescriptionPreview;
+  }
+
+  getDescriptionStatus(): string {
+    const length = this.descriptionLength;
+    if (length === 0) return 'empty';
+    if (length < 10) return 'too-short';
+    if (length > this.maxDescriptionLength * 0.9) return 'near-limit';
+    if (length > this.maxDescriptionLength) return 'over-limit';
+    return 'good';
+  }
+
+  getDescriptionStatusClass(): string {
+    const status = this.getDescriptionStatus();
+    switch (status) {
+      case 'empty': return 'text-muted';
+      case 'too-short': return 'text-warning';
+      case 'near-limit': return 'text-warning';
+      case 'over-limit': return 'text-danger';
+      default: return 'text-success';
+    }
+  }
+
+  getDescriptionStatusText(): string {
+    const status = this.getDescriptionStatus();
+    switch (status) {
+      case 'empty': return 'Description is required';
+      case 'too-short': return 'Description is too short (minimum 10 characters)';
+      case 'near-limit': return 'Approaching character limit';
+      case 'over-limit': return 'Exceeded character limit';
+      default: return 'Description length is good';
+    }
   }
 
   onImageSelected(event: any): void {
@@ -119,6 +200,8 @@ export class ProductFormComponent implements OnInit {
   onSubmit(): void {
     if (this.productForm.invalid) return;
 
+    this.saving = true; // Start saving loading state
+
     const formData = new FormData();
     formData.append('name', this.productForm.value.name);
     formData.append('description', this.productForm.value.description || '');
@@ -138,13 +221,25 @@ export class ProductFormComponent implements OnInit {
       });
 
       this.catalogService.updateProduct(this.productId, formData).subscribe({
-        next: () => this.handleSuccess(),
-        error: err => alert('Update failed: ' + err.message)
+        next: () => {
+          this.saving = false;
+          this.handleSuccess();
+        },
+        error: (err) => {
+          this.saving = false;
+          alert('Update failed: ' + err.message);
+        }
       });
     } else {
       this.catalogService.createProduct(formData).subscribe({
-        next: () => this.handleSuccess(),
-        error: err => alert('Creation failed: ' + err.message)
+        next: () => {
+          this.saving = false;
+          this.handleSuccess();
+        },
+        error: (err) => {
+          this.saving = false;
+          alert('Creation failed: ' + err.message);
+        }
       });
     }
   }

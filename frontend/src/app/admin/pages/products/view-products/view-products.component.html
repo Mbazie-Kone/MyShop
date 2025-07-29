@@ -1,10 +1,4 @@
 <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'" [minHeight]="'400px'">
-    <!-- Pulsante di test per verificare il loading -->
-    <div class="mb-3">
-        <button class="btn btn-secondary" (click)="testLoading()">Test Loading (2s)</button>
-        <span class="ms-3">Loading state: {{ loading ? 'TRUE' : 'FALSE' }}</span>
-    </div>
-
     <app-card-header cardHeaderCustom="rounded-top-3">
         <a [routerLink]="'/administration/add-product'" class="btn btn-primary">Add Product</a>
     </app-card-header>
