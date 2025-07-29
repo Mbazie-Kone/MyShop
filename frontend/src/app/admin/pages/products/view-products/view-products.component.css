@@ -24,8 +24,13 @@
     letter-spacing: 0.5px;
     padding: 16px 12px;
     border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     text-align: center;
+}
+
+.table thead th:last-child {
+    border-right: none;
 }
 
 /* Keep first header left-aligned for product info */
