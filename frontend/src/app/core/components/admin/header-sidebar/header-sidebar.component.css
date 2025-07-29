@@ -331,28 +331,27 @@
   cursor: pointer;
 }
 
-/* SIDEBAR THEME TOGGLE */
-.sidebar-theme-toggle {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+/* NAVBAR THEME TOGGLE */
+.navbar-theme-toggle {
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
-.sidebar-theme-toggle app-theme-toggle {
-  width: 100%;
+.navbar-theme-toggle app-theme-toggle {
+  display: flex;
+  align-items: center;
 }
 
-/* COLLAPSED */
-.collapsed .sidebar-theme-toggle {
-  width: 60px;
-}
-
-.collapsed .sidebar-theme-toggle .theme-label {
-  display: none;
+/* Responsive adjustments for navbar theme toggle */
+@media (max-width: 768px) {
+  .navbar-theme-toggle .theme-label {
+    display: none;
+  }
+  
+  .navbar-theme-toggle app-theme-toggle {
+    min-width: 40px;
+    justify-content: center;
+  }
 }
 
 /* Dark mode styles for sidebar and navbar */

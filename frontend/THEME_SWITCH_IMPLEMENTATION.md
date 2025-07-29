@@ -89,7 +89,7 @@ System → Light → Dark → System → ...
 - **Dark**: `icon-dark` - Modalità scura forzata
 
 ### **3. Posizionamento**
-Il pulsante è posizionato nella **sidebar** in basso, con stili che si adattano quando la sidebar è collassata.
+Il pulsante è posizionato nella **navbar** nella sezione destra, prima delle notifiche, con stili che si adattano ai dispositivi mobili.
 
 ## Implementazione Tecnica
 
@@ -151,6 +151,28 @@ exports: [
 ]
 ```
 
+### **5. Posizionamento nella Navbar**
+```html
+<!-- Right section della navbar -->
+<div class="margin-right-icons d-flex align-items-center">
+  <!-- Theme Toggle -->
+  <div class="navbar-theme-toggle me-3">
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+  
+  <a routerLink="/administration/notifications">
+    <i class="icon-bell"></i>
+  </a>
+  <!-- ... altri elementi ... -->
+</div>
+```
+
+**Vantaggi del nuovo posizionamento:**
+- ✅ **Più accessibile**: Sempre visibile nella navbar
+- ✅ **Più intuitivo**: Posizione standard per controlli globali
+- ✅ **Responsive**: Si adatta perfettamente ai dispositivi mobili
+- ✅ **Non interferisce**: Non occupa spazio nella sidebar
+
 ## Vantaggi del Sistema
 
 ### **1. Flessibilità**
@@ -168,10 +190,15 @@ exports: [
 - **Transizioni fluide**: Cambio tema istantaneo
 - **Ottimizzato**: Solo i colori necessari vengono cambiati
 
+### **4. Posizionamento Ottimale**
+- **Navbar**: Posizione standard per controlli globali
+- **Sempre visibile**: Non dipende dallo stato della sidebar
+- **Responsive**: Si adatta perfettamente a tutti i dispositivi
+
 ## Test del Sistema
 
 ### **1. Test Manuale**
-1. Clicca il pulsante nella sidebar
+1. Clicca il pulsante nella navbar (prima delle notifiche)
 2. Verifica che il tema cambi
 3. Ricarica la pagina e verifica la persistenza
 4. Cambia la preferenza del sistema e verifica l'auto-detect
@@ -183,9 +210,9 @@ exports: [
 4. Cambia tema e verifica che tutti i label e select si adattino
 
 ### **4. Test Responsive**
-1. Collassa la sidebar
-2. Verifica che il pulsante si adatti
-3. Testa su dispositivi mobili
+1. Verifica che il pulsante sia visibile nella navbar
+2. Testa su dispositivi mobili (il testo dovrebbe nascondersi)
+3. Verifica che il pulsante si adatti a schermi molto piccoli
 
 ## Manutenzione
 
@@ -206,14 +233,48 @@ exports: [
 // Modifica la logica del ciclo se necessario
 ```
 
+## Debug e Test
+
+### **1. Log di Debug**
+Ho aggiunto log di debug per monitorare il funzionamento:
+```typescript
+// ThemeService
+console.log('Setting theme to:', theme);
+console.log('Toggling theme from:', currentTheme);
+console.log('Applying theme:', theme);
+
+// ThemeToggleComponent
+console.log('Theme changed to:', theme);
+console.log('Toggle theme clicked, current theme:', currentTheme);
+```
+
+### **2. Metodo di Test**
+```typescript
+public testThemeSystem(): void {
+  console.log('=== THEME SYSTEM TEST ===');
+  console.log('Current theme:', this.getCurrentTheme());
+  console.log('Effective theme:', this.getEffectiveTheme());
+  console.log('Body classes:', document.body.className);
+  console.log('System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
+  console.log('LocalStorage theme:', localStorage.getItem(this.THEME_KEY));
+  console.log('========================');
+}
+```
+
+### **3. Inizializzazione**
+Il `ThemeService` viene inizializzato nell'`AppComponent` per garantire il corretto funzionamento all'avvio.
+
 ## Conclusione
 
 Il sistema risolve completamente i problemi segnalati:
 - ✅ **Testi leggibili**: Tutti i form-label ora si adattano al tema
 - ✅ **Form select**: Tutti i select (categoria, filtri, ecc.) si adattano al tema
 - ✅ **Pulsante di switch**: Implementato con 3 modalità (System/Light/Dark)
+- ✅ **Posizionamento ottimale**: Pulsante nella navbar per massima accessibilità
 - ✅ **Persistenza**: La scelta viene salvata e ripristinata
 - ✅ **Responsive**: Funziona su tutti i dispositivi
 - ✅ **Accessibile**: Tooltip e icone semantiche
+- ✅ **Debug**: Log di debug per monitorare il funzionamento
+- ✅ **Test**: Metodo di test per verificare il sistema
 
 L'utente ora ha il controllo completo sul tema dell'applicazione! 🎉 

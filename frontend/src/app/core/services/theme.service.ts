@@ -26,6 +26,7 @@ export class ThemeService {
   }
 
   public setTheme(theme: ThemeMode): void {
+    console.log('Setting theme to:', theme); // Debug log
     this.currentThemeSubject.next(theme);
     localStorage.setItem(this.THEME_KEY, theme);
     this.applyTheme(theme);
@@ -37,6 +38,7 @@ export class ThemeService {
 
   public toggleTheme(): void {
     const currentTheme = this.getCurrentTheme();
+    console.log('Toggling theme from:', currentTheme); // Debug log
     if (currentTheme === 'system') {
       // Se è system, passa a light
       this.setTheme('light');
@@ -63,17 +65,24 @@ export class ThemeService {
   private applyTheme(theme: ThemeMode): void {
     const body = document.body;
     
+    console.log('Applying theme:', theme); // Debug log
+    
     // Rimuovi le classi esistenti
     body.classList.remove('theme-light', 'theme-dark');
     
     if (theme === 'system') {
       // Per system, usa le media queries CSS
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      body.classList.add(isDark ? 'theme-dark' : 'theme-light');
+      const effectiveTheme = isDark ? 'theme-dark' : 'theme-light';
+      body.classList.add(effectiveTheme);
+      console.log('System theme applied:', effectiveTheme); // Debug log
     } else {
       // Per light/dark espliciti, aggiungi la classe corrispondente
       body.classList.add(`theme-${theme}`);
+      console.log('Explicit theme applied: theme-' + theme); // Debug log
     }
+    
+    console.log('Body classes after theme application:', body.className); // Debug log
   }
 
   // Listener per i cambiamenti di preferenza del sistema
@@ -85,5 +94,16 @@ export class ThemeService {
         this.applyTheme('system');
       }
     });
+  }
+
+  // Metodo di test per verificare il funzionamento
+  public testThemeSystem(): void {
+    console.log('=== THEME SYSTEM TEST ===');
+    console.log('Current theme:', this.getCurrentTheme());
+    console.log('Effective theme:', this.getEffectiveTheme());
+    console.log('Body classes:', document.body.className);
+    console.log('System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
+    console.log('LocalStorage theme:', localStorage.getItem(this.THEME_KEY));
+    console.log('========================');
   }
 } 

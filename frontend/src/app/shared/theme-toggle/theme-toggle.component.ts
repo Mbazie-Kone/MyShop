@@ -30,12 +30,14 @@ import { Subscription } from 'rxjs';
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 0.5rem;
       transition: all 0.3s ease;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: inherit;
+      font-size: 0.9rem;
+      min-height: 36px;
     }
 
     .theme-toggle-btn:hover {
@@ -45,11 +47,11 @@ import { Subscription } from 'rxjs';
     }
 
     .theme-toggle-btn i {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .theme-label {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 500;
     }
 
@@ -94,20 +96,42 @@ import { Subscription } from 'rxjs';
 
       .theme-toggle-btn {
         padding: 0.5rem;
-        min-width: 40px;
+        min-width: 36px;
         justify-content: center;
+        gap: 0;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 576px) {
+      .theme-toggle-btn {
+        min-width: 32px;
+        padding: 0.4rem;
+      }
+      
+      .theme-toggle-btn i {
+        font-size: 0.9rem;
       }
     }
   `]
 })
 export class ThemeToggleComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
+  public currentTheme: ThemeMode = 'system';
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
     // Setup listener per i cambiamenti di preferenza del sistema
     this.themeService.setupSystemThemeListener();
+    
+    // Sottoscriviti ai cambiamenti del tema
+    this.subscription.add(
+      this.themeService.currentTheme$.subscribe(theme => {
+        this.currentTheme = theme;
+        console.log('Theme changed to:', theme); // Debug log
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -115,11 +139,12 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   }
 
   toggleTheme(): void {
+    console.log('Toggle theme clicked, current theme:', this.currentTheme); // Debug log
     this.themeService.toggleTheme();
   }
 
   getCurrentTheme(): ThemeMode {
-    return this.themeService.getCurrentTheme();
+    return this.currentTheme;
   }
 
   getIconClass(): string {
