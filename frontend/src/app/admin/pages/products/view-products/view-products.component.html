@@ -36,24 +36,24 @@
     </div>
 </app-card-header>
 
-<div class="card overflow-hidden rounded-top-0">
+<div class="table-container">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th class="bg-custom">
+                    <th>
                         <div class="d-flex align-items-center gap-2">
                             <input type="checkbox">
                             Product
                         </div>
                     </th>
-                    <th class="bg-custom">Category</th>
-                    <th class="bg-custom">Price</th>
-                    <th class="bg-custom">Quantity</th>
-                    <th class="bg-custom">P Code</th>
-                    <th class="bg-custom">SKU</th>
-                    <th class="bg-custom">Status</th>
-                    <th class="bg-custom">Action</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>P Code</th>
+                    <th>SKU</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,10 +76,12 @@
                         </span>
                     </td>
                     <td>
-                        <a [routerLink]="['/administration/edit-product', product.productId]">
-                            <i class="icon-edit mx-2 modify" title="Edit"></i>
-                        </a>
-                        <i class="icon-trash mx-2 modify" title="Delete" (click)="confirmDelete(product.productId)"></i>
+                        <div class="d-flex align-items-center gap-2">
+                            <a [routerLink]="['/administration/edit-product', product.productId]">
+                                <i class="icon-edit modify" title="Edit"></i>
+                            </a>
+                            <i class="icon-trash modify" title="Delete" (click)="confirmDelete(product.productId)"></i>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -101,10 +103,12 @@
                         </span>
                     </td>
                     <td>
-                        <a href="#">
-                            <i class="icon-edit mx-2 modify" title="Edit"></i>
-                        </a>
-                        <i class="icon-trash mx-2 modify" title="Delete"></i>
+                        <div class="d-flex align-items-center gap-2">
+                            <a href="#">
+                                <i class="icon-edit modify" title="Edit"></i>
+                            </a>
+                            <i class="icon-trash modify" title="Delete"></i>
+                        </div>
                     </td>
                 </tr>
             </tbody>

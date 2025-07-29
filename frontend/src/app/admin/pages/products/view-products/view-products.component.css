@@ -1,49 +1,248 @@
-img {
-    object-fit: cover;
-    border-radius: 6px;
+/* Modern Table Styles */
+.table-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 12px;
+    border: none;
+    position: relative;
+    text-align: center;
+}
+
+/* Keep first header left-aligned for product info */
+.table thead th:first-child {
+    text-align: left;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 16px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 16px;
+}
+
+.table tbody tr {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
 }
 
 .table td {
     vertical-align: middle;
+    padding: 16px 12px;
+    color: #2d3748;
+    font-weight: 500;
+    text-align: center;
 }
 
+/* Keep first column left-aligned for product info */
+.table td:first-child {
+    text-align: left;
+}
+
+/* Product Image */
+img {
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* Modern Badges */
 .badge {
-    padding: 5px 12px;
-    font-size: 0.85rem;
-    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.bg-success-soft {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.bg-danger-soft {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+}
+
+/* Action Icons */
 .modify {
-    color: #94A3B8;
+    color: #667eea;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.modify:hover {
+    color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
+    transform: scale(1.1);
+}
+
+/* Action column alignment */
+.table td:last-child {
+    text-align: center;
+}
+
+/* Ensure perfect alignment for action icons */
+.table td:last-child .d-flex {
+    align-items: center;
+    justify-content: center;
+}
+
+.table td:last-child a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid #667eea;
+    accent-color: #667eea;
     cursor: pointer;
 }
 
+/* Card Styling */
 .card {
     border: none;
-    box-shadow: 
-        0 2px 4px rgba(0, 0, 20, 0.08),
-        0 6px 12px rgba(0, 0, 20, 0.08);
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0 !important;
 }
 
-.bg-custom {
-    background-color: #f1f5f9 ;
+.card-header {
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
 }
 
-.m-custom {
-    padding-left: 19px;
+/* Remove border radius from internal cards */
+.card.overflow-hidden {
+    border-radius: 0 !important;
+}
+
+.card.rounded-top-0 {
+    border-radius: 0 !important;
+}
+
+/* Filter Controls */
+.form-control, .form-select {
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Button Styling */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Pagination */
+.pagination {
+    gap: 8px;
+}
+
+.page-link {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #667eea;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.page-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: #764ba2;
+    transform: translateY(-1px);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.page-item.disabled .page-link {
+    background: rgba(102, 126, 234, 0.1);
+    color: rgba(102, 126, 234, 0.5);
 }
 
 /* Test */
 .hard {
-    color: red !important;
-}
-
-.bg-success-soft {
-    background-color: rgba(25, 135, 84, .1);
-    color: #198754;
-}
-
-.bg-danger-soft {
-    background-color: rgba(220, 53, 69, .1);
-    color: #dc3545;
+    color: #ef4444 !important;
+    font-weight: 600;
 }
