@@ -11,3 +11,11 @@
         transform: rotate(360deg);
     }
 }
+
+/* Dark mode styles for spinner */
+@media (prefers-color-scheme: dark) {
+    .spinner {
+        border: 6px solid #4a5568;
+        border-top: 6px solid #4e73df;
+    }
+}

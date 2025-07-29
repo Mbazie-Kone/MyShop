@@ -1,104 +1,113 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ThemeService, ThemeState } from '../../core/services/theme.service';
+import { CommonModule } from '@angular/common';
+import { ThemeService, ThemeMode } from '../../core/services/theme.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
+  imports: [CommonModule],
   template: `
-    <button 
-      type="button" 
-      class="btn btn-outline-secondary theme-toggle-btn"
-      (click)="toggleTheme()"
-      [title]="currentTheme.isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-      [attr.aria-label]="currentTheme.isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-      [attr.aria-pressed]="currentTheme.isDarkMode">
-      <i [class]="currentTheme.isDarkMode ? 'icon-sun' : 'icon-moon'"></i>
-      <span class="theme-toggle-text">
-        {{ currentTheme.isDarkMode ? 'Light Mode' : 'Dark Mode' }}
-      </span>
-    </button>
+    <div class="theme-toggle-container">
+      <button 
+        type="button" 
+        class="btn btn-outline-secondary theme-toggle-btn"
+        (click)="toggleTheme()"
+        [title]="getTooltipText()"
+        aria-label="Toggle theme">
+        <i [class]="getIconClass()"></i>
+        <span class="theme-label">{{ getThemeLabel() }}</span>
+      </button>
+    </div>
   `,
   styles: [`
+    .theme-toggle-container {
+      display: flex;
+      align-items: center;
+    }
+
     .theme-toggle-btn {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.3s ease;
-      border-radius: 20px;
       padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: inherit;
     }
 
     .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .theme-toggle-btn:focus {
-      outline: 2px solid #4e73df;
-      outline-offset: 2px;
+    .theme-toggle-btn i {
+      font-size: 1.1rem;
     }
 
-    .theme-toggle-text {
-      font-size: 0.875rem;
+    .theme-label {
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
-    /* Dark mode styles for the toggle button itself */
-    :host-context(.dark-mode) .theme-toggle-btn {
-      background-color: #2d3748;
-      border-color: #4a5568;
-      color: #e2e8f0;
+    /* Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+      .theme-toggle-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .theme-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
     }
 
-    :host-context(.dark-mode) .theme-toggle-btn:hover {
-      background-color: #4a5568;
-      border-color: #718096;
-    }
-
-    /* Light mode styles */
-    :host-context(.light-mode) .theme-toggle-btn {
-      background-color: #ffffff;
-      border-color: #d1d5db;
+    /* Theme-specific styles */
+    .theme-light .theme-toggle-btn {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
       color: #374151;
     }
 
-    :host-context(.light-mode) .theme-toggle-btn:hover {
-      background-color: #f9fafb;
-      border-color: #9ca3af;
+    .theme-light .theme-toggle-btn:hover {
+      background: rgba(0, 0, 0, 0.1);
     }
 
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      .theme-toggle-btn {
-        transition: none;
-      }
-      
-      .theme-toggle-btn:hover {
-        transform: none;
-      }
+    .theme-dark .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
     }
 
-    /* Print styles */
-    @media print {
+    .theme-dark .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .theme-label {
+        display: none;
+      }
+
       .theme-toggle-btn {
-        display: none !important;
+        padding: 0.5rem;
+        min-width: 40px;
+        justify-content: center;
       }
     }
   `]
 })
 export class ThemeToggleComponent implements OnInit, OnDestroy {
-  currentTheme: ThemeState = { isDarkMode: false };
   private subscription: Subscription = new Subscription();
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.themeService.theme$.subscribe(theme => {
-        this.currentTheme = theme;
-      })
-    );
+    // Setup listener per i cambiamenti di preferenza del sistema
+    this.themeService.setupSystemThemeListener();
   }
 
   ngOnDestroy(): void {
@@ -106,6 +115,52 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   }
 
   toggleTheme(): void {
-    this.themeService.toggleDarkMode();
+    this.themeService.toggleTheme();
+  }
+
+  getCurrentTheme(): ThemeMode {
+    return this.themeService.getCurrentTheme();
+  }
+
+  getIconClass(): string {
+    const theme = this.getCurrentTheme();
+    switch (theme) {
+      case 'light':
+        return 'icon-light';
+      case 'dark':
+        return 'icon-dark';
+      case 'system':
+        return 'icon-adjust';
+      default:
+        return 'icon-adjust';
+    }
+  }
+
+  getThemeLabel(): string {
+    const theme = this.getCurrentTheme();
+    switch (theme) {
+      case 'light':
+        return 'Light';
+      case 'dark':
+        return 'Dark';
+      case 'system':
+        return 'Auto';
+      default:
+        return 'Auto';
+    }
+  }
+
+  getTooltipText(): string {
+    const theme = this.getCurrentTheme();
+    switch (theme) {
+      case 'light':
+        return 'Switch to Dark Mode';
+      case 'dark':
+        return 'Switch to System Preference';
+      case 'system':
+        return 'Switch to Light Mode';
+      default:
+        return 'Toggle Theme';
+    }
   }
 } 

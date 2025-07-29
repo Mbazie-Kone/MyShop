@@ -1,0 +1,19 @@
+/* Dark mode styles for myshop footer */
+@media (prefers-color-scheme: dark) {
+  footer.bg-dark {
+    background-color: #1a202c !important;
+    border-top: 1px solid #4a5568;
+  }
+
+  footer .text-white {
+    color: inherit !important;
+  }
+
+  footer a.text-white {
+    color: inherit !important;
+  }
+
+  footer a.text-white:hover {
+    color: #4e73df !important;
+  }
+}

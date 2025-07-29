@@ -1,68 +1,89 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export interface ThemeState {
-  isDarkMode: boolean;
-}
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly THEME_KEY = 'myshop-theme-preference';
-  private themeSubject = new BehaviorSubject<ThemeState>({ isDarkMode: false });
-  
-  public theme$ = this.themeSubject.asObservable();
+  private currentThemeSubject = new BehaviorSubject<ThemeMode>('system');
+  public currentTheme$ = this.currentThemeSubject.asObservable();
+
+  private readonly THEME_KEY = 'app-theme';
 
   constructor() {
-    this.loadThemePreference();
+    this.initializeTheme();
   }
 
-  private loadThemePreference(): void {
-    const savedTheme = localStorage.getItem(this.THEME_KEY);
+  private initializeTheme(): void {
+    const savedTheme = localStorage.getItem(this.THEME_KEY) as ThemeMode;
     if (savedTheme) {
-      const themeState = JSON.parse(savedTheme);
-      this.themeSubject.next(themeState);
-      this.applyTheme(themeState.isDarkMode);
+      this.setTheme(savedTheme);
     } else {
-      // Default to light mode if no preference is saved
-      this.themeSubject.next({ isDarkMode: false });
-      this.applyTheme(false);
+      this.setTheme('system');
     }
   }
 
-  public toggleDarkMode(): void {
-    const currentState = this.themeSubject.value;
-    const newState = { isDarkMode: !currentState.isDarkMode };
+  public setTheme(theme: ThemeMode): void {
+    this.currentThemeSubject.next(theme);
+    localStorage.setItem(this.THEME_KEY, theme);
+    this.applyTheme(theme);
+  }
+
+  public getCurrentTheme(): ThemeMode {
+    return this.currentThemeSubject.value;
+  }
+
+  public toggleTheme(): void {
+    const currentTheme = this.getCurrentTheme();
+    if (currentTheme === 'system') {
+      // Se è system, passa a light
+      this.setTheme('light');
+    } else if (currentTheme === 'light') {
+      // Se è light, passa a dark
+      this.setTheme('dark');
+    } else {
+      // Se è dark, passa a system
+      this.setTheme('system');
+    }
+  }
+
+  public getEffectiveTheme(): 'light' | 'dark' {
+    const currentTheme = this.getCurrentTheme();
     
-    this.themeSubject.next(newState);
-    this.applyTheme(newState.isDarkMode);
-    this.saveThemePreference(newState);
+    if (currentTheme === 'system') {
+      // Controlla la preferenza del sistema
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    return currentTheme;
   }
 
-  public setDarkMode(isDark: boolean): void {
-    const newState = { isDarkMode: isDark };
-    this.themeSubject.next(newState);
-    this.applyTheme(isDark);
-    this.saveThemePreference(newState);
-  }
-
-  public getCurrentTheme(): ThemeState {
-    return this.themeSubject.value;
-  }
-
-  private applyTheme(isDark: boolean): void {
+  private applyTheme(theme: ThemeMode): void {
     const body = document.body;
-    if (isDark) {
-      body.classList.add('dark-mode');
-      body.classList.remove('light-mode');
+    
+    // Rimuovi le classi esistenti
+    body.classList.remove('theme-light', 'theme-dark');
+    
+    if (theme === 'system') {
+      // Per system, usa le media queries CSS
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      body.classList.add(isDark ? 'theme-dark' : 'theme-light');
     } else {
-      body.classList.add('light-mode');
-      body.classList.remove('dark-mode');
+      // Per light/dark espliciti, aggiungi la classe corrispondente
+      body.classList.add(`theme-${theme}`);
     }
   }
 
-  private saveThemePreference(themeState: ThemeState): void {
-    localStorage.setItem(this.THEME_KEY, JSON.stringify(themeState));
+  // Listener per i cambiamenti di preferenza del sistema
+  public setupSystemThemeListener(): void {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    mediaQuery.addEventListener('change', (e) => {
+      if (this.getCurrentTheme() === 'system') {
+        this.applyTheme('system');
+      }
+    });
   }
 } 

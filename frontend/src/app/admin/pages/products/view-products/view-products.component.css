@@ -188,6 +188,22 @@ input[type="checkbox"] {
     background: rgba(255, 255, 255, 0.95);
 }
 
+/* Dark mode styles for form controls */
+@media (prefers-color-scheme: dark) {
+    .form-control, .form-select {
+        background: rgba(74, 85, 104, 0.8);
+        border-color: rgba(113, 128, 150, 0.3);
+        color: #e2e8f0;
+    }
+
+    .form-control:focus, .form-select:focus {
+        background: rgba(74, 85, 104, 0.95);
+        border-color: #667eea;
+        color: #e2e8f0;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+}
+
 /* Ensure dropdowns are visible */
 .form-select {
     z-index: 1000;

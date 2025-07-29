@@ -34,3 +34,23 @@
 .shared-card:hover::before {
     opacity: 1;
 }
+
+/* Dark mode styles for shared card */
+@media (prefers-color-scheme: dark) {
+  .shared-card {
+    background: rgba(45, 55, 72, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: inherit;
+  }
+
+  .shared-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .shared-card::before {
+    background: linear-gradient(90deg, #4e73df 0%, #667eea 100%);
+  }
+}
