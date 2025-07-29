@@ -2,7 +2,6 @@
 .table-container {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -29,22 +28,13 @@
     text-align: center;
 }
 
-.table thead th:last-child {
-    border-right: none;
-}
 
 /* Keep first header left-aligned for product info */
 .table thead th:first-child {
     text-align: left;
 }
 
-.table thead th:first-child {
-    border-top-left-radius: 16px;
-}
 
-.table thead th:last-child {
-    border-top-right-radius: 16px;
-}
 
 .table tbody tr {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -189,12 +179,35 @@ input[type="checkbox"] {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 10;
 }
 
 .form-control:focus, .form-select:focus {
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     background: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure dropdowns are visible */
+.form-select {
+    z-index: 1000;
+}
+
+/* Fix dropdown overflow issues */
+.card {
+    overflow: visible !important;
+}
+
+.table-responsive {
+    overflow: visible !important;
+}
+
+/* Ensure proper z-index for dropdown options */
+select option {
+    background: white;
+    color: #2d3748;
+    padding: 8px 12px;
 }
 
 /* Button Styling */
