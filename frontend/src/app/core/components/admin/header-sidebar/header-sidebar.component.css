@@ -330,3 +330,43 @@
   color: red;
   cursor: pointer;
 }
+
+/* Theme toggle button styling */
+.margin-right-icons app-theme-toggle {
+  margin-right: 10px;
+}
+
+.margin-right-icons app-theme-toggle .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.margin-right-icons app-theme-toggle .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #667eea;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.margin-right-icons app-theme-toggle .theme-toggle-btn i {
+  font-size: 1rem;
+  margin-right: 6px;
+}
+
+/* Dark mode styles for theme toggle in header */
+body.dark-mode .margin-right-icons app-theme-toggle .theme-toggle-btn {
+  background: rgba(45, 55, 72, 0.8);
+  border-color: rgba(113, 128, 150, 0.3);
+  color: #e2e8f0;
+}
+
+body.dark-mode .margin-right-icons app-theme-toggle .theme-toggle-btn:hover {
+  background: rgba(45, 55, 72, 0.95);
+  border-color: #4e73df;
+  color: #e2e8f0;
+}
