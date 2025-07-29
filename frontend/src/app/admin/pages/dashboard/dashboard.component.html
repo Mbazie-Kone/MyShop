@@ -2,52 +2,50 @@
 <div class="row">
   <div class="col">
     <app-card customClass="custom-card-a-height">
-      <div class="card-body">
-        <div *ngIf="loading">
-          <app-spinner [size]="'40px'"></app-spinner>
+      <app-loading-wrapper [loading]="loading" [spinnerSize]="'40px'">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted fw-semibold">Orders</span>
+            <i class="icon-cart icons"></i>
+          </div>
+          <div class="mt-2 mb-3 d-flex align-items-center">
+            <h3 class="fw-bold mb-0">
+              5,312
+            </h3>
+            <span class="mt-1 ms-2 text-danger">
+              <i class="icon-down other-icons"></i>
+              2.29%
+            </span>
+          </div>
+          <a href="#" class="fw-bold">
+            View Orders
+          </a>
         </div>
-        <div *ngIf="!loading" class="d-flex justify-content-between align-items-center">
-          <span class="text-muted fw-semibold">Orders</span>
-          <i class="icon-cart icons"></i>
-        </div>
-        <div class="mt-2 mb-3 d-flex align-items-center">
-          <h3 class="fw-bold mb-0">
-            5,312
-          </h3>
-          <span class="mt-1 ms-2 text-danger">
-            <i class="icon-down other-icons"></i>
-            2.29%
-          </span>
-        </div>
-        <a href="#" class="fw-bold">
-          View Orders
-        </a>
-      </div>
+      </app-loading-wrapper>
     </app-card>
   </div>
   <div class="col">
     <app-card customClass="custom-card-a-height">
-      <div class="card-body">
-        <div *ngIf="loading">
-          <app-spinner [size]="'40px'"></app-spinner>
+      <app-loading-wrapper [loading]="loading" [spinnerSize]="'40px'">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted fw-semibold">Revenue</span>
+            <i class="icon-euro icons"></i>
+          </div>
+          <div class="mt-2 mb-3 d-flex align-items-center">
+            <h3 class="fw-bold mb-0">
+              €8,312
+            </h3>
+            <span class="mt-1 ms-2 text-success">
+              <i class="icon-up other-icons"></i>
+              2.29%
+            </span>
+          </div>
+          <a href="#" class="fw-bold">
+            View Earnings
+          </a>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <span class="text-muted fw-semibold">Revenue</span>
-          <i class="icon-euro icons"></i>
-        </div>
-        <div class="mt-2 mb-3 d-flex align-items-center">
-          <h3 class="fw-bold mb-0">
-            €8,312
-          </h3>
-          <span class="mt-1 ms-2 text-success">
-            <i class="icon-up other-icons"></i>
-            2.29%
-          </span>
-        </div>
-        <a href="#" class="fw-bold">
-          View Earnings
-        </a>
-      </div>
+      </app-loading-wrapper>
     </app-card>
   </div>
   <div class="col">
@@ -74,20 +72,22 @@
   </div>
   <div class="col">
     <app-card customClass="custom-card-a-height">
-      <div class="card-body">
-        <div *ngIf="!loading" class="d-flex justify-content-between align-items-center">
-          <span class="text-muted fw-semibold">Balance</span>
-          <i class="icon-card icons"></i>
+      <app-loading-wrapper [loading]="loading" [spinnerSize]="'40px'">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted fw-semibold">Balance</span>
+            <i class="icon-card icons"></i>
+          </div>
+          <div class="mt-2 mb-3 d-flex align-items-center">
+            <h3 class="fw-bold mb-0">
+              €35.64k
+            </h3>
+          </div>
+          <a href="#" class="fw-bold">
+            Withdraw Money
+          </a>
         </div>
-        <div class="mt-2 mb-3 d-flex align-items-center">
-          <h3 class="fw-bold mb-0">
-            €35.64k
-          </h3>
-        </div>
-        <a href="#" class="fw-bold">
-          Withdraw Money
-        </a>
-      </div>
+      </app-loading-wrapper>
     </app-card>
   </div>
 </div>

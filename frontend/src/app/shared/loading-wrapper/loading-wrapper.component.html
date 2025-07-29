@@ -1,0 +1,11 @@
+<!-- Spinner di caricamento -->
+<div *ngIf="loading && showSpinner" class="loading-container" [ngStyle]="{ 'min-height': minHeight }">
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <app-spinner [size]="spinnerSize"></app-spinner>
+    </div>
+</div>
+
+<!-- Contenuto - visibile solo quando non sta caricando -->
+<div *ngIf="!loading">
+    <ng-content></ng-content>
+</div> 

@@ -10,6 +10,7 @@ import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dt
 })
 export class ViewProductsComponent {
   products: ViewAllProductsDto[] = [];
+  loading: boolean = true; // Aggiunta proprietà per gestire lo stato di caricamento
 
   // Pagination
   currentPage: number = 1;
@@ -26,11 +27,36 @@ export class ViewProductsComponent {
   constructor(private catalogService: CatalogService) {}
 
   ngOnInit(): void {
-    this.catalogService.getAllProducts().subscribe(data => {
-      console.log('Products:', data);
-      this.products = Array.isArray(data) ? data : [];
-      this.applyFilters();
-    });
+    this.loading = true; // Imposta loading a true all'inizio
+    console.log('Loading started:', this.loading);
+    
+    // Aggiungiamo un delay artificiale per testare lo spinner
+    setTimeout(() => {
+      this.catalogService.getAllProducts().subscribe({
+        next: (data) => {
+          console.log('Products loaded:', data);
+          this.products = Array.isArray(data) ? data : [];
+          this.applyFilters();
+          this.loading = false; // Imposta loading a false quando i dati sono caricati
+          console.log('Loading finished:', this.loading);
+        },
+        error: (error) => {
+          console.error('Error loading products:', error);
+          this.loading = false; // Imposta loading a false anche in caso di errore
+          console.log('Loading finished with error:', this.loading);
+        }
+      });
+    }, 3000); // 3 secondi di delay per testare
+  }
+
+  // Metodo per testare il loading manualmente
+  testLoading(): void {
+    this.loading = true;
+    console.log('Test loading started:', this.loading);
+    setTimeout(() => {
+      this.loading = false;
+      console.log('Test loading finished:', this.loading);
+    }, 2000);
   }
 
   get totalPages(): number {

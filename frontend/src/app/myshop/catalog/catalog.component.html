@@ -1,1 +1,21 @@
-<p>catalog works!</p>
+<!-- Spinner di caricamento -->
+<div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
+    <app-spinner size="80px"></app-spinner>
+</div>
+
+<!-- Contenuto del catalogo - visibile solo quando non sta caricando -->
+<div *ngIf="!loading" class="container mt-4">
+    <h2>Catalogo Prodotti</h2>
+    
+    <div class="row">
+        <div *ngFor="let product of catalogData" class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Prezzo: €{{ product.price }}</p>
+                    <button class="btn btn-primary">Aggiungi al carrello</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

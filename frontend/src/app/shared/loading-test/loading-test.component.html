@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h3>Test Loading Wrapper Component</h3>
+    
+    <div class="mb-3">
+        <button class="btn btn-primary me-2" (click)="startLoading()">Start Loading (3s)</button>
+        <button class="btn btn-secondary" (click)="startShortLoading()">Start Loading (1s)</button>
+        <span class="ms-3">Loading state: {{ loading ? 'TRUE' : 'FALSE' }}</span>
+    </div>
+
+    <app-loading-wrapper [loading]="loading" [spinnerSize]="'80px'" [minHeight]="'300px'">
+        <div class="card">
+            <div class="card-header">
+                <h5>Test Content</h5>
+            </div>
+            <div class="card-body">
+                <p>Questo contenuto dovrebbe essere nascosto durante il caricamento.</p>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let item of testData">{{ item }}</li>
+                </ul>
+            </div>
+        </div>
+    </app-loading-wrapper>
+</div> 

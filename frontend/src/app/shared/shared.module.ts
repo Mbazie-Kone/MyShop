@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CardComponent } from './card/card.component';
 import { CardHeaderComponent } from './card/card-header/card-header.component';
+import { LoadingWrapperComponent } from './loading-wrapper/loading-wrapper.component';
+import { LoadingTestComponent } from './loading-test/loading-test.component';
 
 @NgModule({
-  declarations: [SpinnerComponent, CardComponent, CardHeaderComponent],
+  declarations: [SpinnerComponent, CardComponent, CardHeaderComponent, LoadingWrapperComponent, LoadingTestComponent],
   imports: [
     CommonModule
   ],
-  exports: [SpinnerComponent, CardComponent, CardHeaderComponent]
+  exports: [SpinnerComponent, CardComponent, CardHeaderComponent, LoadingWrapperComponent, LoadingTestComponent]
 })
 export class SharedModule { }
