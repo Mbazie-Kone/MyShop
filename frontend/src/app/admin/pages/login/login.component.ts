@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm! : FormGroup;
   error: string = '';
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder, private adminService: AdminService, private authService: AuthService, private router: Router) {}
 
@@ -26,6 +27,9 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
+    this.isLoading = true;
+    this.error = '';
+
     this.adminService.login(this.loginForm.value).subscribe({
       next: (res) => {
         this.authService.setToken(res.token);
@@ -34,10 +38,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/administration/dashboard']);
 
         this.loginForm.reset();
+        this.isLoading = false;
       },
       error: (err) => {
         console.error(err);
         this.error = err.error || 'Login failed';
+        this.isLoading = false;
       }
     });
   }

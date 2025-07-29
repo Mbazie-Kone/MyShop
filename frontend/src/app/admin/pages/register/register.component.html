@@ -1,53 +1,107 @@
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-4">
+<div class="register-container">
+    <div class="register-background">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+    
+    <div class="register-content">
+        <div class="register-card">
+            <!-- LOGO -->
+            <div class="logo-container">
+                <img class="logo" src="assets/images/logo.png" alt="logo">
+                <h2 class="welcome-text">Create Account</h2>
+                <p class="subtitle">Join our platform today</p>
+            </div>
+            
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+                <!-- USERNAME -->
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input class="form-control" 
+                               type="text" 
+                               placeholder="Enter your username" 
+                               formControlName="username"
+                               [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                    </div>
+                </div>
 
-            <!-- CARD FORM -->
-            <div class="card p-5">
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-light"></i>
+                        </span>
+                        <input class="form-control" 
+                               type="password" 
+                               placeholder="Enter your password" 
+                               formControlName="password"
+                               [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                    </div>
+                </div>
 
-                <!-- LOGO -->
-                <div class="text-center mb-4">
-                    <img class="logo" src="assets/images/logo.png" alt="logo">
+                <!-- CONFIRM PASSWORD -->
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-light"></i>
+                        </span>
+                        <input class="form-control" 
+                               type="password" 
+                               placeholder="Confirm your password" 
+                               formControlName="confirmPassword"
+                               [class.is-invalid]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+                    </div>
+                    <small *ngIf="registerForm.errors?.['passwordsMismatch']" class="error-text">
+                        <i class="icon-cancel-circled"></i>
+                        The passwords do not match.
+                    </small>
                 </div>
                 
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-                    <!-- USERNAME -->
-                    <div class="mb-4 mt-4">
-                        <input class="form-control" type="text" placeholder="Username" formControlName="username">
-                    </div>
-
-                    <!-- PASSWORD -->
-                    <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="Password" formControlName="password">
-                    </div>
-
-                    <!-- CONFIRM PASSWORD -->
-                    <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
-                        <small *ngIf="registerForm.errors?.['passwordsMismatch']" class="text-danger">
-                            The passwords do not match.
-                        </small>
-                    </div>
-                    
-                    <!-- ROLE -->
-                    <div class="mb-4">
-                        <select class="form-select" formControlName="roleId">
+                <!-- ROLE -->
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-settings"></i>
+                        </span>
+                        <select class="form-control" formControlName="roleId">
                             <option value="">Select a role</option>
                             <option *ngFor="let role of roles" [value]="role.id">
                                 {{ role.name }}
                             </option>
                         </select>
                     </div>
-                    
-                    <!-- SUBMIT -->
-                    <button class="btn btn-success w-100" type="submit" [disabled]="registerForm.invalid">Sign Up</button>
-                    
-                    <!-- ERROR -->
-                    <div class="error" *ngIf="error">
-                        {{ error }}
-                    </div>
-                </form>
+                </div>
+                
+                <!-- SUBMIT -->
+                <div class="form-group">
+                    <button class="register-btn" type="submit" [disabled]="registerForm.invalid || isLoading">
+                        <span *ngIf="!isLoading">Create Account</span>
+                        <span *ngIf="isLoading" class="loading-spinner">
+                            <i class="icon-arrows-cw"></i>
+                        </span>
+                    </button>
+                </div>
+                
+                <!-- ERROR -->
+                <div class="error-message" *ngIf="error">
+                    <i class="icon-cancel-circled"></i>
+                    {{ error }}
+                </div>
+            </form>
+
+            <div class="login-link">
+                <p>Already have an account? <a routerLink="/administration/login">Sign in here</a></p>
             </div>
         </div>
     </div>

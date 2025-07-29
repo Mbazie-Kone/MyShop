@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   roles: any[] = [];
   error: string = '';
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
@@ -44,16 +45,21 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.invalid) return;
     
+    this.isLoading = true;
+    this.error = '';
+    
     const formData = this.registerForm.value;
 
     this.adminService.register(formData).subscribe({
       next: () => {
         alert('Registration completed!');
         this.registerForm.reset();
+        this.isLoading = false;
       },
       error: (err) => {
         console.error(err);
         this.error = err.error || 'Error during registration';
+        this.isLoading = false;
       } 
     });
   }

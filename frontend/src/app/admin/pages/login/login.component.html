@@ -1,32 +1,67 @@
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-4">
-            <div class="card p-5">
+<div class="login-container">
+    <div class="login-background">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+    
+    <div class="login-content">
+        <div class="login-card">
+            <!-- LOGO -->
+            <div class="logo-container">
+                <img class="logo" src="../../../../assets/images/logo.png" alt="logo">
+                <h2 class="welcome-text">Welcome Back</h2>
+                <p class="subtitle">Sign in to your account</p>
+            </div>
 
-                <!-- LOGO -->
-                <div class="text-center mb-4">
-                    <img class="logo" src="../../../../assets/images/logo.png" alt="logo">
-                 </div>
-
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-                    <div class="mb-4 mt-4">
-                        <input type="text" class="form-control" placeholder="Username" formControlName="username">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Enter your username" 
+                               formControlName="username"
+                               [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
                     </div>
+                </div>
 
-                    <div class="mb-4">
-                        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="icon-light"></i>
+                        </span>
+                        <input type="password" 
+                               class="form-control" 
+                               placeholder="Enter your password" 
+                               formControlName="password"
+                               [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
                     </div>
+                </div>
 
-                    <div class="mb-4">
-                        <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid">Login</button>
-                    </div>
+                <div class="form-group">
+                    <button class="login-btn" type="submit" [disabled]="loginForm.invalid || isLoading">
+                        <span *ngIf="!isLoading">Sign In</span>
+                        <span *ngIf="isLoading" class="loading-spinner">
+                            <i class="icon-arrows-cw"></i>
+                        </span>
+                    </button>
+                </div>
 
-                    <hr>
-                    <div class="text-danger text-center mt-4" *ngIf="error">
-                        {{ error }}
-                    </div>
-                </form>
+                <div class="error-message" *ngIf="error">
+                    <i class="icon-cancel-circled"></i>
+                    {{ error }}
+                </div>
+            </form>
+
+            <div class="register-link">
+                <p>Don't have an account? <a routerLink="/administration/register">Sign up here</a></p>
             </div>
         </div>
     </div>
