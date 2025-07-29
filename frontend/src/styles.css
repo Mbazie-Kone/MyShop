@@ -18,6 +18,89 @@ html, body {
   min-height: 100vh;
 }
 
+/* Responsive breakpoints */
+:root {
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+}
+
+/* Mobile-first responsive utilities */
+.container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Responsive typography */
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  h4 { font-size: 1.125rem; }
+  h5 { font-size: 1rem; }
+  h6 { font-size: 0.875rem; }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Responsive spacing */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+  
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .row {
+    padding-bottom: 1px;
+    padding-left: 2px;
+  }
+  
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    padding-left: 6px;
+  }
+}
+
+@media (min-width: 769px) {
+  .row {
+    padding-bottom: 2px;
+    padding-left: 4px;
+  }
+  
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    padding-left: 8px;
+  }
+}
+
 /* Modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

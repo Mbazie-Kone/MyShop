@@ -17,3 +17,68 @@
     color: #4e73df !important;
   }
 }
+
+/* Responsive footer adjustments */
+@media (max-width: 768px) {
+    footer {
+        padding: 2rem 1rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-section {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .footer-section h5 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    footer {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .footer-content {
+        gap: 1rem;
+    }
+    
+    .footer-section h5 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom {
+        padding: 0.75rem;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.8rem;
+    }
+}

@@ -19,3 +19,36 @@
         border-top: 6px solid #4e73df;
     }
 }
+
+/* Responsive spinner adjustments */
+@media (max-width: 768px) {
+    .spinner-container {
+        padding: 2rem;
+    }
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .spinner-text {
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .spinner-container {
+        padding: 1.5rem;
+    }
+    
+    .spinner {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .spinner-text {
+        font-size: 0.85rem;
+        margin-top: 0.75rem;
+    }
+}

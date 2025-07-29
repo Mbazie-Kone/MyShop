@@ -88,3 +88,60 @@ canvas {
         max-height: 200px;
     }
 }*/
+
+/* Responsive dashboard adjustments */
+@media (max-width: 768px) {
+    .card-header {
+        padding: 0.75rem 0;
+    }
+    
+    .custom-card-height {
+        height: 120px;
+    }
+    
+    .custom-card-b-height {
+        height: 400px;
+    }
+    
+    /* Stack cards in single column on mobile */
+    .row .col-lg-3,
+    .row .col-md-6 {
+        margin-bottom: 15px;
+    }
+    
+    /* Adjust chart containers */
+    .chart-wrapper, .chart-wrapper-donut {
+        min-height: 250px;
+    }
+    
+    canvas {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-card-height {
+        height: 100px;
+    }
+    
+    .custom-card-b-height {
+        height: 300px;
+    }
+    
+    .chart-wrapper, .chart-wrapper-donut {
+        min-height: 200px;
+    }
+    
+    canvas {
+        max-height: 200px;
+    }
+    
+    /* Reduce margins on very small screens */
+    .row {
+        margin-bottom: 1rem;
+    }
+    
+    .row:last-child {
+        margin-bottom: 0;
+    }
+}

@@ -11,14 +11,15 @@ This document provides a comprehensive overview of all the improvements implemen
 3. [Accessibility (A11y)](#accessibility-a11y)
 4. [Advanced Validation](#advanced-validation)
 5. [Design & UI/UX](#design--uiux)
-6. [Advanced Features](#advanced-features)
-7. [Testing & Quality](#testing--quality)
-8. [Internationalization (i18n)](#internationalization-i18n)
-9. [Security](#security)
-10. [Analytics & Monitoring](#analytics--monitoring)
-11. [File Structure](#file-structure)
-12. [Usage Examples](#usage-examples)
-13. [Best Practices](#best-practices)
+6. [Responsive Design](#responsive-design)
+7. [Advanced Features](#advanced-features)
+8. [Testing & Quality](#testing--quality)
+9. [Internationalization (i18n)](#internationalization-i18n)
+10. [Security](#security)
+11. [Analytics & Monitoring](#analytics--monitoring)
+12. [File Structure](#file-structure)
+13. [Usage Examples](#usage-examples)
+14. [Best Practices](#best-practices)
 
 ---
 
@@ -351,6 +352,249 @@ private checkForKeywords(text: string): boolean {
   }
 }
 ```
+
+---
+
+## 📱 Responsive Design
+
+### 1. Mobile-First Approach
+
+**Implementation**: `src/styles.css`
+
+```css
+:root {
+  --breakpoint-xs: 0;      /* Extra small devices */
+  --breakpoint-sm: 576px;  /* Small devices */
+  --breakpoint-md: 768px;  /* Medium devices */
+  --breakpoint-lg: 992px;  /* Large devices */
+  --breakpoint-xl: 1200px; /* Extra large devices */
+  --breakpoint-xxl: 1400px; /* Extra extra large devices */
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 576px) {
+  html { font-size: 14px; }
+  .container-fluid { padding-left: 10px; padding-right: 10px; }
+}
+```
+
+**Benefits**:
+- ✅ **Mobile-First**: Ottimizzato per dispositivi mobili
+- ✅ **Progressive Enhancement**: Miglioramenti per schermi più grandi
+- ✅ **Performance**: Caricamento rapido su connessioni lente
+
+### 2. Responsive Layout Components
+
+#### **Admin Navbar**
+```css
+@media (max-width: 768px) {
+  .container-fluid {
+    margin-left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .navbar { height: 60px; }
+  .center-section { display: none; } /* Hide search on mobile */
+}
+```
+
+#### **Admin Sidebar**
+```css
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+  
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+}
+```
+
+#### **Content Area**
+```css
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    margin-top: 60px;
+    padding: 15px;
+    height: calc(100vh - 60px);
+  }
+}
+```
+
+### 3. Responsive Tables
+
+**Implementation**: `src/app/admin/pages/products/view-products/view-products.component.css`
+
+```css
+@media (max-width: 768px) {
+  /* Hide less important columns */
+  .table th:nth-child(5), /* P Code */
+  .table th:nth-child(6), /* SKU */
+  .table td:nth-child(5),
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Hide more columns on very small screens */
+  .table th:nth-child(4), /* Quantity */
+  .table td:nth-child(4) {
+    display: none;
+  }
+}
+```
+
+**Features**:
+- ✅ **Desktop**: Tutte le colonne visibili
+- ✅ **Tablet**: Colonne meno importanti nascoste
+- ✅ **Mobile**: Solo colonne essenziali
+
+### 4. Responsive Forms
+
+**Implementation**: `src/app/core/components/admin/product-form/product-form.component.css`
+
+```css
+@media (max-width: 768px) {
+  .form-container { padding: 15px; }
+  
+  /* Stack form groups vertically */
+  .row .col-md-6,
+  .row .col-lg-4 {
+    margin-bottom: 15px;
+  }
+  
+  .description-editor { min-height: 200px; }
+}
+```
+
+### 5. Responsive Dashboard
+
+**Implementation**: `src/app/admin/pages/dashboard/dashboard.component.css`
+
+```css
+@media (max-width: 768px) {
+  .custom-card-height { height: 120px; }
+  .custom-card-b-height { height: 400px; }
+  
+  /* Stack cards in single column */
+  .row .col-lg-3,
+  .row .col-md-6 {
+    margin-bottom: 15px;
+  }
+  
+  .chart-wrapper, .chart-wrapper-donut {
+    min-height: 250px;
+  }
+}
+```
+
+### 6. Responsive Typography
+
+```css
+@media (max-width: 576px) {
+  html { font-size: 14px; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  html { font-size: 15px; }
+}
+
+@media (min-width: 769px) {
+  html { font-size: 16px; }
+}
+```
+
+### 7. Responsive Components
+
+#### **Cards**
+```css
+@media (max-width: 768px) {
+  .shared-card .card-body { padding: 1rem; }
+  .shared-card .card-title { font-size: 1.1rem; }
+}
+```
+
+#### **Spinner**
+```css
+@media (max-width: 768px) {
+  .spinner { width: 40px; height: 40px; }
+  .spinner-text { font-size: 0.9rem; }
+}
+```
+
+#### **Buttons & Badges**
+```css
+@media (max-width: 768px) {
+  .btn { padding: 8px 16px; font-size: 0.85rem; }
+  .badge { padding: 6px 12px; font-size: 0.75rem; }
+}
+```
+
+### 8. Responsive Navigation
+
+#### **MyShop Header**
+```css
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+  }
+}
+```
+
+### 9. Responsive Pagination
+
+```css
+@media (max-width: 768px) {
+  .pagination {
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Hide some page numbers */
+  .pagination .page-item:nth-child(n+6):not(:last-child) {
+    display: none;
+  }
+}
+```
+
+### 10. Theme Toggle Responsive
+
+```css
+@media (max-width: 768px) {
+  .navbar-theme-toggle .theme-label {
+    display: none;
+  }
+  
+  .navbar-theme-toggle app-theme-toggle {
+    min-width: 40px;
+    justify-content: center;
+  }
+}
+```
+
+**Benefits**:
+- ✅ **Universal Compatibility**: Funziona su tutti i dispositivi
+- ✅ **Touch-Friendly**: Ottimizzato per touch screen
+- ✅ **Performance**: Caricamento rapido su mobile
+- ✅ **Accessibility**: Facile da usare per tutti gli utenti
+- ✅ **Consistent UX**: Stessa esperienza su tutti i dispositivi
 
 ---
 
