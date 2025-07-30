@@ -8,7 +8,7 @@ import { I18nService } from '../../core/services/i18n.service';
   styleUrl: './language-switcher.component.css'
 })
 export class LanguageSwitcherComponent implements OnInit {
-  currentLanguage: string = 'en';
+  currentLanguage = 'en';
   supportedLanguages: string[] = [];
 
   constructor(private i18nService: I18nService) {}

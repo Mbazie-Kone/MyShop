@@ -7,7 +7,9 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
   private tokenKey = 'auth_token';
 
-  constructor() { }
+  constructor() {
+    // Service initialization
+  }
 
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);

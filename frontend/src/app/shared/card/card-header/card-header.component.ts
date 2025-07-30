@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card-header.component.css'
 })
 export class CardHeaderComponent {
-  @Input() cardHeaderCustom: string = '';
+  @Input() cardHeaderCustom = '';
 }

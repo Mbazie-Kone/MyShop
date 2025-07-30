@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './loading-test.component.css'
 })
 export class LoadingTestComponent {
-  loading: boolean = false;
+  loading = false;
   testData: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
   startLoading(): void {

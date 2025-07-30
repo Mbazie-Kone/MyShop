@@ -65,7 +65,7 @@ export class SecurityService {
     }
   }
 
-  validateInput(input: string, maxLength: number = 1000): boolean {
+  validateInput(input: string, maxLength = 1000): boolean {
     if (!input || input.length > maxLength) {
       return false;
     }

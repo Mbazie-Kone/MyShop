@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface LanguageMessages {
-  [key: string]: string;
-}
+export type LanguageMessages = Record<string, string>;
 
 export interface I18nConfig {
   defaultLanguage: string;
   supportedLanguages: string[];
-  messages: { [language: string]: LanguageMessages };
+  messages: Record<string, LanguageMessages>;
 }
 
 @Injectable({
@@ -238,7 +236,7 @@ export class I18nService {
     return this.config.supportedLanguages;
   }
 
-  translate(key: string, params?: any[]): string {
+  translate(key: string, params?: string[]): string {
     const currentLang = this.getCurrentLanguage();
     const messages = this.config.messages[currentLang] || this.config.messages[this.config.defaultLanguage];
     
@@ -246,14 +244,14 @@ export class I18nService {
     
     if (params && params.length > 0) {
       params.forEach((param, index) => {
-        message = message.replace(`{${index}}`, param);
+        message = message.replace(`{${index}}`, String(param));
       });
     }
     
     return message;
   }
 
-  translateAsync(key: string, params?: any[]): Observable<string> {
+  translateAsync(key: string, params?: string[]): Observable<string> {
     return new Observable(observer => {
       const translation = this.translate(key, params);
       observer.next(translation);
@@ -262,7 +260,7 @@ export class I18nService {
   }
 
   getLanguageName(languageCode: string): string {
-    const languageNames: { [key: string]: string } = {
+    const languageNames: Record<string, string> = {
       'en': 'English',
       'it': 'Italiano'
     };
@@ -277,7 +275,7 @@ export class I18nService {
   }
 
   getDateFormat(language: string): string {
-    const dateFormats: { [key: string]: string } = {
+    const dateFormats: Record<string, string> = {
       'en': 'MM/DD/YYYY',
       'it': 'DD/MM/YYYY'
     };
@@ -286,7 +284,7 @@ export class I18nService {
   }
 
   getNumberFormat(language: string): Intl.NumberFormat {
-    const locales: { [key: string]: string } = {
+    const locales: Record<string, string> = {
       'en': 'en-US',
       'it': 'it-IT'
     };
@@ -295,7 +293,7 @@ export class I18nService {
   }
 
   getCurrencyFormat(language: string): Intl.NumberFormat {
-    const currencyFormats: { [key: string]: string } = {
+    const currencyFormats: Record<string, string> = {
       'en': 'en-US',
       'it': 'it-IT'
     };

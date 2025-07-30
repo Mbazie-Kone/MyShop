@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './loading-wrapper.component.css'
 })
 export class LoadingWrapperComponent {
-  @Input() loading: boolean = false;
-  @Input() spinnerSize: string = '60px';
-  @Input() minHeight: string = '300px';
-  @Input() showSpinner: boolean = true;
+  @Input() loading = false;
+  @Input() spinnerSize = '60px';
+  @Input() minHeight = '300px';
+  @Input() showSpinner = true;
 } 

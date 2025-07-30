@@ -170,7 +170,7 @@ describe('ProductFormComponent', () => {
           new File([''], 'test.jpg', { type: 'image/jpeg' })
         ]
       }
-    } as any;
+    } as DragEvent;
 
     component.onDragOver(mockEvent);
     expect(component.isDragOver).toBe(true);

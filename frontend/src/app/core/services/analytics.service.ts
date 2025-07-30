@@ -80,8 +80,8 @@ export class AnalyticsService {
 
   private sendToAnalytics(event: AnalyticsEvent): void {
     // Google Analytics 4
-    if (typeof (window as any).gtag !== 'undefined') {
-      (window as any).gtag('event', event.action, {
+    if (typeof (window as { gtag?: (...args: unknown[]) => void }).gtag !== 'undefined') {
+      (window as { gtag: (...args: unknown[]) => void }).gtag('event', event.action, {
         event_category: event.category,
         event_label: event.label,
         value: event.value,
@@ -133,13 +133,13 @@ export class AnalyticsService {
 // Mock gtag function for development
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (...args: unknown[]) => void;
   }
 }
 
 // Initialize gtag if not available
 if (typeof window !== 'undefined' && !window.gtag) {
-  window.gtag = function(...args: any[]) {
+  window.gtag = function(...args: unknown[]) {
     console.log('GTAG (Mock):', args);
   };
 } 

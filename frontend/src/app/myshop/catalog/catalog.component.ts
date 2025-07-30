@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent implements OnInit {
-  loading: boolean = true; // Proprietà per gestire lo stato di caricamento
-  catalogData: any[] = []; // Dati del catalogo
+  loading = true; // Proprietà per gestire lo stato di caricamento
+  catalogData: { id: number; name: string; price: number }[] = []; // Dati del catalogo
 
   ngOnInit(): void {
     // Simula il caricamento dei dati dal database

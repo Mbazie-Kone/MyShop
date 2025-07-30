@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './spinner.component.css'
 })
 export class SpinnerComponent {
-  @Input() size: string = '50px';
+  @Input() size = '50px';
 }
