@@ -1,15 +1,19 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Category } from '../../../models/catalog.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../../../../admin/services/catalog.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { AnalyticsService } from '../../../services/analytics.service';
+import { SharedModule } from '../../../../shared/shared.module';
+import { Nl2brPipe } from '../../../../shared/pipes/nl2br.pipe';
 
 @Component({
   selector: 'app-product-form',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, SharedModule, Nl2brPipe],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
@@ -60,13 +64,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     { name: 'Home & Garden', template: 'This essential home and garden product enhances your living space with both functionality and aesthetic appeal. Built to last, it combines practical design with beautiful craftsmanship.' }
   ];
 
-  constructor(
-    private fb: FormBuilder, 
-    private route: ActivatedRoute, 
-    private router: Router, 
-    private catalogService: CatalogService,
-    private analyticsService: AnalyticsService
-  ) {}
+  private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private catalogService = inject(CatalogService);
+  private analyticsService = inject(AnalyticsService);
 
   ngOnInit(): void {
     // Track page visit
