@@ -9,6 +9,7 @@ import { ViewProductsComponent } from './pages/products/view-products/view-produ
 import { SharedModule } from '../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CoreModule } from '../core/core.module';
+import { ProductFormComponent } from '../core/components/admin/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CoreModule } from '../core/core.module';
     SharedModule,
     NgxPaginationModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    ProductFormComponent
   ]
 })
 export class AdminModule { }

@@ -8,7 +8,7 @@ import { HeaderSidebarComponent } from './components/admin/header-sidebar/header
 import { AdminLayoutComponent } from './components/admin/layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
 import { AdminFooterComponent } from './components/admin/admin-footer/admin-footer.component';
-import { ProductFormComponent } from './components/admin/product-form/product-form.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { Nl2brPipe } from '../shared/pipes/nl2br.pipe';
@@ -27,8 +27,7 @@ import { SecurityService } from './services/security.service';
     HeaderSidebarComponent,
     AdminLayoutComponent,
     FooterComponent,
-    AdminFooterComponent,
-    ProductFormComponent
+    AdminFooterComponent
   ],
   imports: [
     CommonModule,
@@ -45,8 +44,7 @@ import { SecurityService } from './services/security.service';
     HeaderSidebarComponent,
     AdminLayoutComponent,
     FooterComponent,
-    AdminFooterComponent,
-    ProductFormComponent
+    AdminFooterComponent
   ],
   providers: [
     AnalyticsService,
