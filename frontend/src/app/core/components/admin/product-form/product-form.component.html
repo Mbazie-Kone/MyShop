@@ -10,27 +10,28 @@
                         <div>
                             <!-- Product name -->
                             <div class="mb-3">
-                                <label class="form-label">Product Name</label>
-                                <input class="form-control" formControlName="name" 
-                                       aria-describedby="name-help"
-                                       aria-required="true">
+                                <label class="form-label" for="productName">Product Name</label>
+                                <input 
+                                    class="form-control" 
+                                    id="productName"
+                                    formControlName="name"
+                                    aria-describedby="name-help"
+                                    aria-required="true">
+                                <div id="name-help" class="form-text">Enter a descriptive name for your product</div>
                                 <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
                                     Product name is required.
                                 </div>
-                                <div id="name-help" class="form-text">Enter a descriptive name for your product</div>
                             </div>
 
                             <!-- Enhanced Product Description -->
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <label class="form-label mb-0" for="description-field">Product Description</label>
+                                    <label class="form-label mb-0" for="productDescription">Product Description</label>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Description actions">
-                                        <button type="button" class="btn btn-outline-secondary" (click)="toggleDescriptionPreview()"
-                                                title="Toggle preview (Ctrl+P)" [attr.aria-pressed]="showDescriptionPreview">
+                                        <button type="button" class="btn btn-outline-secondary" (click)="toggleDescriptionPreview()" aria-label="Toggle preview">
                                             <i class="icon-eye"></i> {{ showDescriptionPreview ? 'Hide' : 'Show' }} Preview
                                         </button>
-                                        <button type="button" class="btn btn-outline-danger" (click)="clearDescription()"
-                                                title="Clear description">
+                                        <button type="button" class="btn btn-outline-danger" (click)="clearDescription()" aria-label="Clear description">
                                             <i class="icon-trash"></i> Clear
                                         </button>
                                     </div>
@@ -38,13 +39,14 @@
 
                                 <!-- Description Templates -->
                                 <div class="mb-3">
-                                    <label class="form-label small">Quick Templates</label>
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <button type="button" 
-                                                class="btn btn-outline-primary btn-sm" 
-                                                *ngFor="let template of descriptionTemplates"
-                                                (click)="applyTemplate(template.template)"
-                                                title="Apply {{ template.name }} template">
+                                    <h6 class="form-label">Quick Templates</h6>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Description templates">
+                                        <button 
+                                            *ngFor="let template of descriptionTemplates" 
+                                            type="button" 
+                                            class="btn btn-outline-primary"
+                                            (click)="applyTemplate(template.template)"
+                                            [attr.aria-label]="'Apply ' + template.name + ' template'">
                                             {{ template.name }}
                                         </button>
                                     </div>
@@ -53,20 +55,15 @@
                                 <!-- Description Editor -->
                                 <div *ngIf="!showDescriptionPreview">
                                     <textarea 
-                                        id="description-field"
-                                        class="form-control description-editor" 
+                                        class="form-control" 
+                                        id="productDescription"
                                         rows="6" 
                                         formControlName="description"
                                         [placeholder]="descriptionPlaceholder"
                                         (input)="onDescriptionInput($event)"
                                         [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched"
-                                        [class.drag-over]="isDragOver"
-                                        (dragover)="onDragOver($event)"
-                                        (dragleave)="onDragLeave($event)"
-                                        (drop)="onDrop($event)"
-                                        aria-describedby="description-help description-counter description-suggestions"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="productForm.get('description')?.invalid">
+                                        aria-describedby="description-help description-counter"
+                                        aria-required="true">
                                     </textarea>
                                     
                                     <!-- Character counter and status -->
@@ -80,8 +77,8 @@
                                     </div>
 
                                     <!-- Smart Suggestions -->
-                                    <div *ngIf="suggestions.length > 0" class="mt-2" id="description-suggestions">
-                                        <div class="alert alert-info alert-sm">
+                                    <div *ngIf="suggestions.length > 0" class="mt-3">
+                                        <div class="alert alert-info" role="alert">
                                             <h6 class="alert-heading">
                                                 <i class="icon-lightbulb"></i> Suggestions to improve your description:
                                             </h6>
@@ -96,7 +93,7 @@
                                 <div *ngIf="showDescriptionPreview" class="border rounded p-3 bg-light">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <h6 class="mb-0">Description Preview</h6>
-                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="toggleDescriptionPreview()">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" (click)="toggleDescriptionPreview()" aria-label="Return to edit mode">
                                             <i class="icon-edit"></i> Edit
                                         </button>
                                     </div>
@@ -114,7 +111,7 @@
                     </div>
                 </app-card>
 
-                <!-- Card 2 -->
+                <!-- Card 2 - Enhanced Image Upload -->
                 <app-card customClass="custom-card-mb">
                     <!-- Card body -->
                     <div class="card-body">
@@ -123,15 +120,13 @@
                             <div class="mb-4">
                                 <!-- Heading -->
                                 <h5 class="mb-4">Product Gallery</h5>
-                                <label class="form-label">Product Image (max 8)</label>
                                 
-                                <!-- Upload Progress Bar -->
+                                <!-- Upload Progress -->
                                 <div *ngIf="isUploading" class="mb-3">
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                                             role="progressbar" 
+                                        <div class="progress-bar" role="progressbar" 
                                              [style.width.%]="uploadProgress"
-                                             [attr.aria-valuenow]="uploadProgress" 
+                                             [attr.aria-valuenow]="uploadProgress"
                                              aria-valuemin="0" 
                                              aria-valuemax="100">
                                             {{ uploadProgress }}%
@@ -141,51 +136,59 @@
                                 </div>
 
                                 <!-- Drag & Drop Zone -->
-                                <div class="upload-zone" 
+                                <div class="upload-zone mb-3" 
                                      [class.drag-over]="isDragOver"
                                      (dragover)="onDragOver($event)"
                                      (dragleave)="onDragLeave($event)"
-                                     (drop)="onDrop($event)">
-                                    <input type="file" class="form-control" 
+                                     (drop)="onDrop($event)"
+                                     role="button"
+                                     tabindex="0"
+                                     aria-label="Drop images here or click to select files">
+                                    <div class="upload-zone-content">
+                                        <i class="icon-upload" style="font-size: 2rem; color: #6c757d;"></i>
+                                        <p class="mb-2">Drag & drop images here or click to select</p>
+                                        <small class="text-muted">Supports JPG, PNG (max 8 images)</small>
+                                    </div>
+                                    <input type="file" 
+                                           class="form-control" 
                                            (change)="onImageSelected($event)" 
                                            accept=".jpg,.jpeg,.png" 
                                            multiple 
                                            [disabled]="isFileInputDisabled"
-                                           aria-describedby="upload-help">
-                                    <div class="upload-zone-text" *ngIf="!isDragOver">
-                                        <i class="icon-upload"></i>
-                                        <p>Drag & drop images here or click to browse</p>
-                                    </div>
-                                    <div class="upload-zone-text" *ngIf="isDragOver">
-                                        <i class="icon-upload"></i>
-                                        <p>Drop images here to upload</p>
-                                    </div>
-                                </div>
-                                
-                                <div id="upload-help" class="form-text">
-                                    Supported formats: JPG, PNG. Maximum 8 images.
+                                           style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;">
                                 </div>
 
-                                <p class="mt-2">Image Preview</p>
-                                <div class="mt-2 d-flex flex-wrap gap-2">
-                                    <!-- Existing images (edit mode) -->
-                                     <ng-container *ngIf="isEditMode">
-                                        <div *ngFor="let image of existingImages" class="position-relative">
-                                            <img [src]="image.url" style="width: 80px;" [alt]="'Product image ' + image.id">
-                                            <button type="button" class="btn-remove-image" (click)="removeExistingImage(image.id)"
-                                                    aria-label="Remove image">
+                                <!-- Image Preview -->
+                                <div *ngIf="imagePreviews.length > 0 || existingImages.length > 0" class="mt-3">
+                                    <h6>Image Preview</h6>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <!-- Existing images (edit mode) -->
+                                         <ng-container *ngIf="isEditMode">
+                                            <div *ngFor="let image of existingImages" class="position-relative image-preview-item">
+                                                <img [src]="image.url" 
+                                                     [alt]="'Product image ' + image.id"
+                                                     style="width: 80px; height: 80px; object-fit: cover;">
+                                                <button type="button" 
+                                                        class="btn btn-sm btn-danger position-absolute top-0 end-0" 
+                                                        (click)="removeExistingImage(image.id)"
+                                                        aria-label="Remove image">
+                                                    <i class="icon-cancel-circled"></i>
+                                                </button>
+                                            </div>
+                                         </ng-container>
+                                        <!-- Selected images to upload -->
+                                         <div *ngFor="let img of imagePreviews; let i = index" class="position-relative image-preview-item">
+                                            <img [src]="img" 
+                                                 [alt]="'Selected image ' + (i + 1)"
+                                                 style="width: 80px; height: 80px; object-fit: cover;">
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-danger position-absolute top-0 end-0" 
+                                                    (click)="removeSelectedImage(i)"
+                                                    aria-label="Remove selected image">
                                                 <i class="icon-cancel-circled"></i>
                                             </button>
-                                        </div>
-                                     </ng-container>
-                                    <!-- Selected images to upload -->
-                                     <div *ngFor="let img of imagePreviews; let i = index" class="position-relative">
-                                        <img [src]="img" style="width: 80px;" [alt]="'Preview image ' + (i + 1)">
-                                        <button type="button" class="btn-remove-image" (click)="removeSelectedImage(i)"
-                                                aria-label="Remove preview image">
-                                            <i class="icon-cancel-circled"></i>
-                                        </button>
-                                     </div>
+                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,11 +204,16 @@
                         <div>
                             <!-- Product code -->
                             <div class="mb-3">
-                                <label class="form-label">Product Code</label>
-                                <input class="form-control" id="productCode" formControlName="productCode">
+                                <label class="form-label" for="productCode">Product Code</label>
+                                <input class="form-control" 
+                                       id="productCode" 
+                                       formControlName="productCode"
+                                       aria-describedby="productCode-help"
+                                       aria-required="true">
+                                <div id="productCode-help" class="form-text">16 characters, uppercase letters, numbers, and dashes only</div>
                                 <div *ngIf="productForm.get('productCode')?.touched && productForm.get('productCode')?.invalid" class="text-danger">
                                     <div *ngIf="productForm.get('productCode')?.errors?.['required']">Product code is required</div>
-                                    <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at leat 16 characters</div>
+                                    <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at least 16 characters</div>
                                     <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 16 characters</div>
                                     <div *ngIf="productForm.get('productCode')?.errors?.['pattern']">Only uppercase letters, numbers and dashes are allowed.</div>
                                 </div>
@@ -213,8 +221,13 @@
 
                             <!-- Product sku -->
                             <div class="mb-3">
-                                <label class="form-label">Product SKU</label>
-                                <input class="form-control" id="sku" formControlName="sku">
+                                <label class="form-label" for="productSku">Product SKU</label>
+                                <input class="form-control" 
+                                       id="productSku" 
+                                       formControlName="sku"
+                                       aria-describedby="sku-help"
+                                       aria-required="true">
+                                <div id="sku-help" class="form-text">16 characters, uppercase letters and numbers only</div>
                                 <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
                                     <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
                                     <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 16 characters.</div>
@@ -225,10 +238,16 @@
 
                             <!-- Product category -->
                             <div class="mb-3">
-                                <label class="form-label">Category</label>
-                                <select class="form-select" formControlName="categoryId">
+                                <label class="form-label" for="productCategory">Category</label>
+                                <select class="form-select" 
+                                        id="productCategory"
+                                        formControlName="categoryId"
+                                        aria-describedby="category-help"
+                                        aria-required="true">
+                                    <option value="">Select a category</option>
                                     <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                                 </select>
+                                <div id="category-help" class="form-text">Choose the most appropriate category for your product</div>
                                 <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
                                     Category is required.
                                 </div>
@@ -243,8 +262,15 @@
                         <div>
                             <!-- Product stock -->
                             <div class="mb-3">
-                                <label class="form-label">Stock</label>
-                                <input type="number" class="form-control" formControlName="stock" min="0">
+                                <label class="form-label" for="productStock">Stock</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="productStock"
+                                       formControlName="stock" 
+                                       min="0"
+                                       aria-describedby="stock-help"
+                                       aria-required="true">
+                                <div id="stock-help" class="form-text">Enter the available quantity</div>
                                 <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
                                     Stock cannot be negative.
                                 </div>
@@ -252,8 +278,16 @@
 
                             <!-- Product price -->
                             <div class="mb-3">
-                                <label class="form-label">Regular Price</label>
-                                <input type="number" class="form-control" formControlName="price" step="0.01" min="0">
+                                <label class="form-label" for="productPrice">Regular Price</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="productPrice"
+                                       formControlName="price" 
+                                       step="0.01" 
+                                       min="0"
+                                       aria-describedby="price-help"
+                                       aria-required="true">
+                                <div id="price-help" class="form-text">Enter the price in euros (e.g., 29.99)</div>
                                 <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
                                     Price is required.
                                 </div>
@@ -270,22 +304,19 @@
 
                 <!-- Submit -->
                  <div class="d-grid">
-                    <button class="btn btn-success" type="submit" [disabled]="productForm.invalid || saving">
+                    <button class="btn btn-success" 
+                            type="submit" 
+                            [disabled]="productForm.invalid || saving"
+                            aria-describedby="submit-help">
                         <span *ngIf="saving">
                             <app-spinner size="16px"></app-spinner>
                             Saving...
                         </span>
                         <span *ngIf="!saving">{{ isEditMode ? 'Update' : 'Add' }} Product</span>
                     </button>
-                 </div>
-
-                 <!-- Keyboard Shortcuts Help -->
-                 <div class="mt-3">
-                     <small class="text-muted">
-                         <strong>Keyboard shortcuts:</strong><br>
-                         Ctrl+P: Toggle preview<br>
-                         Ctrl+S: Save product
-                     </small>
+                    <div id="submit-help" class="form-text mt-1">
+                        All required fields must be completed before saving
+                    </div>
                  </div>
             </div>
         </div>  

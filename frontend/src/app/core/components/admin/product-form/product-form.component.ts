@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../../models/catalog.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../../../../admin/services/catalog.service';
-import { AnalyticsService } from '../../../services/analytics.service';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { AnalyticsService } from '../../../services/analytics.service';
 
 @Component({
   selector: 'app-product-form',
@@ -21,8 +21,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   isEditMode = false;
   productId!: number;
   showToast = false;
-  loading: boolean = true; // Loading state for initial data
-  saving: boolean = false; // Loading state for form submission
+  loading = true; // Loading state for initial data
+  saving = false; // Loading state for form submission
 
   // Deleting image
   existingImages: { id: number; url: string }[] = [];
@@ -32,32 +32,32 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   isFileInputDisabled = false;
 
   // Description editor properties
-  descriptionLength: number = 0;
-  maxDescriptionLength: number = 2000;
-  descriptionPlaceholder: string = 'Enter a detailed description of your product...';
-  showDescriptionPreview: boolean = false;
+  descriptionLength = 0;
+  maxDescriptionLength = 2000;
+  descriptionPlaceholder = 'Enter a detailed description of your product...';
+  showDescriptionPreview = false;
 
   // Auto-save properties
-  private autoSaveInterval: any;
-  private descriptionChanges$ = new Subject<string>();
+  private autoSaveInterval: number | undefined;
+  private destroy$ = new Subject<void>();
   private subscriptions: Subscription[] = [];
 
   // Upload progress
-  uploadProgress: number = 0;
-  isUploading: boolean = false;
+  uploadProgress = 0;
+  isUploading = false;
 
-  // Drag & drop
-  isDragOver: boolean = false;
+  // Drag & drop properties
+  isDragOver = false;
 
-  // Suggestions
+  // Suggestions for description improvement
   suggestions: string[] = [];
 
-  // Templates
-  descriptionTemplates = [
-    { name: 'Electronics', template: 'This high-quality electronic device features advanced technology and innovative design. Perfect for modern users who demand reliability and performance.' },
-    { name: 'Clothing', template: 'Made from premium materials, this garment offers exceptional comfort and style. Designed with attention to detail for the fashion-conscious individual.' },
-    { name: 'Books', template: 'This engaging book provides readers with valuable insights and knowledge. Written by experts in the field, it offers comprehensive coverage of the subject matter.' },
-    { name: 'Home & Garden', template: 'Transform your living space with this beautifully crafted home accessory. Combining functionality with elegant design, it enhances any room decor.' }
+  // Description templates
+  descriptionTemplates: { name: string; template: string }[] = [
+    { name: 'Electronics', template: 'This high-quality electronic device features advanced technology and superior performance. Perfect for both personal and professional use, it offers exceptional reliability and user-friendly operation.' },
+    { name: 'Clothing', template: 'Made from premium materials, this garment offers exceptional comfort and style. Designed with attention to detail, it provides a perfect fit and lasting durability for everyday wear.' },
+    { name: 'Books', template: 'This engaging book provides readers with valuable insights and knowledge. Written by experts in the field, it offers comprehensive coverage of the subject matter in an accessible format.' },
+    { name: 'Home & Garden', template: 'This essential home and garden product enhances your living space with both functionality and aesthetic appeal. Built to last, it combines practical design with beautiful craftsmanship.' }
   ];
 
   constructor(
@@ -69,9 +69,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Track page view
-    this.analyticsService.trackPageView(this.isEditMode ? 'edit-product' : 'add-product');
-
+    // Track page visit
+    this.analyticsService.trackUserJourney('form_opened', this.isEditMode ? 'edit_product' : 'add_product');
+    
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [
@@ -103,16 +103,19 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Monitor description changes for character count with debounce
-    const descriptionSubscription = this.descriptionChanges$.pipe(
+    // Monitor description changes with debounce for better performance
+    const descriptionSubscription = this.productForm.get('description')?.valueChanges.pipe(
       debounceTime(300),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
     ).subscribe(value => {
       this.descriptionLength = value ? value.length : 0;
-      this.validateDescriptionQuality(value);
+      this.validateDescriptionQuality(value || '');
     });
 
-    this.subscriptions.push(descriptionSubscription);
+    if (descriptionSubscription) {
+      this.subscriptions.push(descriptionSubscription);
+    }
 
     this.productForm.get('stock')?.valueChanges.subscribe(stock => {
       const priceControl = this.productForm.get('price');
@@ -126,18 +129,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Cleanup subscriptions
+    this.destroy$.next();
+    this.destroy$.complete();
     this.subscriptions.forEach(sub => sub.unsubscribe());
-    
-    // Clear auto-save interval
-    if (this.autoSaveInterval) {
-      clearInterval(this.autoSaveInterval);
-    }
+    this.clearAutoSave();
   }
 
   // Auto-save functionality
   private setupAutoSave(): void {
-    this.autoSaveInterval = setInterval(() => {
+    this.autoSaveInterval = window.setInterval(() => {
       this.autoSaveDescription();
     }, 30000); // Auto-save every 30 seconds
   }
@@ -158,48 +158,55 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Smart validation
+  private clearAutoSave(): void {
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval);
+    }
+  }
+
+  // Smart validation with quality suggestions
   private setupSmartValidation(): void {
-    const validationSubscription = this.productForm.get('description')?.valueChanges.pipe(
+    const descriptionSubscription = this.productForm.get('description')?.valueChanges.pipe(
       debounceTime(500),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
     ).subscribe(value => {
-      this.validateDescriptionQuality(value);
+      this.validateDescriptionQuality(value || '');
     });
 
-    if (validationSubscription) {
-      this.subscriptions.push(validationSubscription);
+    if (descriptionSubscription) {
+      this.subscriptions.push(descriptionSubscription);
     }
   }
 
   private validateDescriptionQuality(text: string): void {
-    if (!text) {
-      this.suggestions = [];
-      return;
-    }
+    this.suggestions = [];
+    
+    if (!text) return;
 
     const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
     const hasKeywords = this.checkForKeywords(text);
     const readability = this.calculateReadability(text);
     
-    this.suggestions = [];
-    
     if (wordCount < 20) {
       this.suggestions.push('Consider adding more details to make your description more comprehensive');
     }
+    
     if (!hasKeywords) {
       this.suggestions.push('Include relevant keywords to improve search visibility');
     }
+    
     if (readability < 0.6) {
       this.suggestions.push('Consider simplifying the language for better readability');
     }
-    if (text.length < 100) {
-      this.suggestions.push('A longer description (100+ characters) typically performs better');
+
+    if (text.length < 50) {
+      this.suggestions.push('A longer description helps customers understand your product better');
     }
   }
 
   private checkForKeywords(text: string): boolean {
-    const commonKeywords = ['quality', 'premium', 'best', 'excellent', 'perfect', 'amazing', 'great'];
+    const commonKeywords = ['quality', 'premium', 'durable', 'reliable', 'efficient', 'modern', 'comfortable', 'stylish'];
     return commonKeywords.some(keyword => text.toLowerCase().includes(keyword));
   }
 
@@ -211,8 +218,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     if (sentences.length === 0 || words.length === 0) return 0;
     
     // Flesch Reading Ease formula
-    const fleschScore = 206.835 - (1.015 * (words.length / sentences.length)) - (84.6 * (syllables / words.length));
-    return Math.max(0, Math.min(1, fleschScore / 100));
+    return 206.835 - (1.015 * (words.length / sentences.length)) - (84.6 * (syllables / words.length));
   }
 
   private countSyllables(text: string): number {
@@ -224,8 +230,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   private countWordSyllables(word: string): number {
     word = word.toLowerCase();
+    if (word.length <= 3) return 1;
+    
     word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
     word = word.replace(/^y/, '');
+    
     const matches = word.match(/[aeiouy]{1,2}/g);
     return matches ? matches.length : 1;
   }
@@ -269,9 +278,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   // Description editor methods
-  onDescriptionInput(event: any): void {
-    const value = event.target.value;
-    this.descriptionChanges$.next(value);
+  onDescriptionInput(event: Event): void {
+    const target = event.target as HTMLTextAreaElement;
+    const value = target.value;
+    this.descriptionLength = value ? value.length : 0;
+    this.analyticsService.trackFormInteraction('product_form', 'description_input', 'description');
   }
 
   clearDescription(): void {
@@ -279,12 +290,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.descriptionLength = 0;
     this.suggestions = [];
     localStorage.removeItem('product-description-draft');
-    this.analyticsService.trackFeatureUsage('description_clear', 'form', 'cleared');
+    this.analyticsService.trackFeatureUsage('description_clear');
   }
 
   toggleDescriptionPreview(): void {
     this.showDescriptionPreview = !this.showDescriptionPreview;
-    this.analyticsService.trackFeatureUsage('description_preview', 'form', this.showDescriptionPreview ? 'enabled' : 'disabled');
+    this.analyticsService.trackFeatureUsage(`description_preview_${this.showDescriptionPreview ? 'show' : 'hide'}`);
   }
 
   // Template methods
@@ -292,7 +303,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.productForm.get('description')?.setValue(template);
     this.descriptionLength = template.length;
     this.validateDescriptionQuality(template);
-    this.analyticsService.trackFeatureUsage('description_template', 'form', 'applied');
+    this.analyticsService.trackFeatureUsage('description_template_applied');
   }
 
   getDescriptionStatus(): string {
@@ -347,19 +358,19 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const files = event.dataTransfer?.files;
     if (files) {
       this.handleDroppedFiles(files);
+      this.analyticsService.trackFeatureUsage('image_drag_drop');
     }
   }
 
   private handleDroppedFiles(files: FileList): void {
-    for (let i = 0; i < files.length; i++) {
+    for (const file of files) {
       const totalImages = this.selectedFiles.length + this.existingImages.length;
       if (totalImages >= this.maxImages) break;
     
-      const file = files[i];
       if (['image/jpeg', 'image/png'].includes(file.type)) {
         this.selectedFiles.push(file);
         const reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = () => {
           this.imagePreviews.push(reader.result as string);
         };
         reader.readAsDataURL(file);
@@ -368,23 +379,26 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.updateFileInputState();
   }
 
-  onImageSelected(event: any): void {
-    const files: FileList = event.target.files;
+  onImageSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const files: FileList | null = target.files;
 
     if (!files || files.length === 0) return;
 
     this.isUploading = true;
     this.uploadProgress = 0;
 
-    for (let i = 0; i < files.length; i++) {
+    this.analyticsService.trackFeatureUsage('image_upload');
+    this.analyticsService.trackFormInteraction('product_form', 'image_selected', 'images');
+
+    for (const file of files) {
       const totalImages = this.selectedFiles.length + this.existingImages.length;
       if (totalImages >= this.maxImages) break;
     
-      const file = files[i];
       if (['image/jpeg', 'image/png'].includes(file.type)) {
         this.selectedFiles.push(file);
         const reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = () => {
           this.imagePreviews.push(reader.result as string);
         };
         reader.readAsDataURL(file);
@@ -405,7 +419,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.updateFileInputState();
 
     // Reset input to allow identical subsequent selections
-    event.target.value = '';
+    target.value = '';
   }
 
   updateFileInputState(): void {
@@ -417,7 +431,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     if (this.productForm.invalid) return;
 
     this.saving = true; // Start saving loading state
-    this.analyticsService.trackFormInteraction('product_form', 'submitted');
+    this.analyticsService.trackFormInteraction('product_form', 'submit', this.isEditMode ? 'edit' : 'create');
 
     const formData = new FormData();
     formData.append('name', this.productForm.value.name);
@@ -481,6 +495,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.suggestions = [];
     localStorage.removeItem('product-description-draft');
 
+    this.analyticsService.trackUserJourney('form_submitted_success', this.isEditMode ? 'edit_product' : 'add_product');
+
     setTimeout(() => {
       this.showToast = false;
       this.router.navigate(['/administration/view-products']);
@@ -490,17 +506,36 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   // Keyboard shortcuts
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
-    // Prevent shortcuts when typing in form fields
-    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
-      return;
-    }
-
+    // Ctrl+S to save
     if (event.ctrlKey && event.key === 's') {
       event.preventDefault();
-      this.onSubmit();
+      if (!this.productForm.invalid && !this.saving) {
+        this.onSubmit();
+      }
     }
+    
+    // Ctrl+P to toggle preview
     if (event.ctrlKey && event.key === 'p') {
       event.preventDefault();
+      this.toggleDescriptionPreview();
+    }
+    
+    // Ctrl+Shift+C to clear description
+    if (event.ctrlKey && event.shiftKey && event.key === 'C') {
+      event.preventDefault();
+      this.clearDescription();
+    }
+    
+    // Ctrl+Shift+T to apply template (first one)
+    if (event.ctrlKey && event.shiftKey && event.key === 'T') {
+      event.preventDefault();
+      if (this.descriptionTemplates.length > 0) {
+        this.applyTemplate(this.descriptionTemplates[0].template);
+      }
+    }
+    
+    // Escape to close preview
+    if (event.key === 'Escape' && this.showDescriptionPreview) {
       this.toggleDescriptionPreview();
     }
   }

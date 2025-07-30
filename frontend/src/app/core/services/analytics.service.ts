@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 export interface AnalyticsEvent {
   event: string;
@@ -23,172 +24,122 @@ export class AnalyticsService {
     this.loadUserId();
   }
 
-  /**
-   * Track feature usage
-   */
-  trackFeatureUsage(feature: string, category: string = 'feature', action: string = 'used'): void {
+  private generateSessionId(): string {
+    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  private loadUserId(): void {
+    this.userId = localStorage.getItem('user_id') || undefined;
+  }
+
+  setUserId(userId: string): void {
+    this.userId = userId;
+    localStorage.setItem('user_id', userId);
+  }
+
+  trackEvent(category: string, action: string, label?: string, value?: number): void {
     const event: AnalyticsEvent = {
-      event: 'feature_used',
+      event: 'interaction',
       category,
       action,
-      label: feature,
-      timestamp: new Date().toISOString(),
-      userId: this.userId,
-      sessionId: this.sessionId
-    };
-
-    this.sendAnalytics(event);
-  }
-
-  /**
-   * Track form interactions
-   */
-  trackFormInteraction(formName: string, action: string, field?: string): void {
-    const event: AnalyticsEvent = {
-      event: 'form_interaction',
-      category: 'form',
-      action,
-      label: `${formName}${field ? `_${field}` : ''}`,
-      timestamp: new Date().toISOString(),
-      userId: this.userId,
-      sessionId: this.sessionId
-    };
-
-    this.sendAnalytics(event);
-  }
-
-  /**
-   * Track page views
-   */
-  trackPageView(page: string): void {
-    const event: AnalyticsEvent = {
-      event: 'page_view',
-      category: 'navigation',
-      action: 'view',
-      label: page,
-      timestamp: new Date().toISOString(),
-      userId: this.userId,
-      sessionId: this.sessionId
-    };
-
-    this.sendAnalytics(event);
-  }
-
-  /**
-   * Track errors
-   */
-  trackError(error: string, context?: string): void {
-    const event: AnalyticsEvent = {
-      event: 'error',
-      category: 'error',
-      action: 'occurred',
-      label: error,
-      timestamp: new Date().toISOString(),
-      userId: this.userId,
-      sessionId: this.sessionId
-    };
-
-    this.sendAnalytics(event);
-  }
-
-  /**
-   * Track performance metrics
-   */
-  trackPerformance(metric: string, value: number): void {
-    const event: AnalyticsEvent = {
-      event: 'performance',
-      category: 'performance',
-      action: 'measured',
-      label: metric,
+      label,
       value,
       timestamp: new Date().toISOString(),
       userId: this.userId,
       sessionId: this.sessionId
     };
 
-    this.sendAnalytics(event);
+    // Log to console in development
+    if (this.isDevelopment()) {
+      console.log('Analytics Event:', event);
+    }
+
+    // Send to analytics service (Google Analytics, etc.)
+    this.sendToAnalytics(event);
   }
 
-  /**
-   * Set user ID for tracking
-   */
-  setUserId(userId: string): void {
-    this.userId = userId;
-    localStorage.setItem('analytics_user_id', userId);
+  trackFeatureUsage(feature: string): void {
+    this.trackEvent('feature', 'used', feature);
   }
 
-  /**
-   * Get analytics data for reporting
-   */
-  getAnalyticsData(): AnalyticsEvent[] {
-    const data = localStorage.getItem('analytics_events');
-    return data ? JSON.parse(data) : [];
+  trackFormInteraction(formName: string, action: string, field?: string): void {
+    this.trackEvent('form', action, `${formName}${field ? '_' + field : ''}`);
   }
 
-  /**
-   * Clear analytics data
-   */
-  clearAnalyticsData(): void {
-    localStorage.removeItem('analytics_events');
+  trackError(error: string, context?: string): void {
+    this.trackEvent('error', 'occurred', context || 'unknown', 1);
   }
 
-  /**
-   * Generate unique session ID
-   */
-  private generateSessionId(): string {
-    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  trackPerformance(metric: string, value: number): void {
+    this.trackEvent('performance', metric, undefined, value);
   }
 
-  /**
-   * Load user ID from storage
-   */
-  private loadUserId(): void {
-    this.userId = localStorage.getItem('analytics_user_id') || undefined;
+  trackUserJourney(step: string, page?: string): void {
+    this.trackEvent('journey', step, page);
   }
 
-  /**
-   * Send analytics data
-   */
-  private sendAnalytics(event: AnalyticsEvent): void {
-    // Store locally for now (in a real app, this would send to a server)
-    this.storeEventLocally(event);
-    
-    // Log to console for development
-    console.log('Analytics Event:', event);
-    
-    // In production, you would send to your analytics service
-    // this.sendToAnalyticsService(event);
+  private sendToAnalytics(event: AnalyticsEvent): void {
+    // Google Analytics 4
+    if (typeof (window as any).gtag !== 'undefined') {
+      (window as any).gtag('event', event.action, {
+        event_category: event.category,
+        event_label: event.label,
+        value: event.value,
+        custom_parameter_1: event.userId,
+        custom_parameter_2: event.sessionId
+      });
+    }
+
+    // Send to custom analytics endpoint
+    this.sendToCustomEndpoint(event);
   }
 
-  /**
-   * Store event locally
-   */
-  private storeEventLocally(event: AnalyticsEvent): void {
-    const events = this.getAnalyticsData();
+  private sendToCustomEndpoint(event: AnalyticsEvent): void {
+    // In a real application, you would send this to your analytics server
+    // For now, we'll just store it locally for demonstration
+    const events = this.getStoredEvents();
     events.push(event);
     
-    // Keep only last 1000 events to prevent storage bloat
-    if (events.length > 1000) {
-      events.splice(0, events.length - 1000);
+    // Keep only last 100 events
+    if (events.length > 100) {
+      events.splice(0, events.length - 100);
     }
     
     localStorage.setItem('analytics_events', JSON.stringify(events));
   }
 
-  /**
-   * Send to external analytics service (placeholder for production)
-   */
-  private sendToAnalyticsService(event: AnalyticsEvent): void {
-    // Example: Google Analytics
-    // if (typeof gtag !== 'undefined') {
-    //   gtag('event', event.action, {
-    //     event_category: event.category,
-    //     event_label: event.label,
-    //     value: event.value
-    //   });
-    // }
-    
-    // Example: Custom API endpoint
-    // this.http.post('/api/analytics', event).subscribe();
+  private getStoredEvents(): AnalyticsEvent[] {
+    try {
+      const stored = localStorage.getItem('analytics_events');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
   }
+
+  getAnalyticsData(): AnalyticsEvent[] {
+    return this.getStoredEvents();
+  }
+
+  clearAnalyticsData(): void {
+    localStorage.removeItem('analytics_events');
+  }
+
+  private isDevelopment(): boolean {
+    return !environment.production;
+  }
+}
+
+// Mock gtag function for development
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
+// Initialize gtag if not available
+if (typeof window !== 'undefined' && !window.gtag) {
+  window.gtag = function(...args: any[]) {
+    console.log('GTAG (Mock):', args);
+  };
 } 

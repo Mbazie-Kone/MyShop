@@ -2,15 +2,7 @@
     background-color: #ffffff;
     padding: 1rem;
     border-bottom: 1px solid rgb(212, 208, 208);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark mode styles for shared card header */
-@media (prefers-color-scheme: dark) {
-  .shared-card-header {
-    background-color: #2d3748;
-    border-bottom: 1px solid #4a5568;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.2);
-    color: inherit;
-  }
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 20, 0.08),        
+        0 6px 12px rgba(0, 0, 20, 0.08);
 }

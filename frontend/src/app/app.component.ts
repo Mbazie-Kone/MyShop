@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from './core/services/theme.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +6,6 @@ import { ThemeService } from './core/services/theme.service';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'frontend';
-
-  constructor(private themeService: ThemeService) {}
-
-  ngOnInit(): void {
-    // Inizializza il tema all'avvio dell'applicazione
-    console.log('App initialized, current theme:', this.themeService.getCurrentTheme());
-    
-    // Test del sistema di temi
-    setTimeout(() => {
-      this.themeService.testThemeSystem();
-    }, 1000);
-  }
 }
