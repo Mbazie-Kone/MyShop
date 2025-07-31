@@ -10,6 +10,8 @@
 
 .description-preview p {
     margin-bottom: 0.5rem;
+    color: #374151;
+    line-height: 1.6;
 }
 
 .description-preview p:last-child {
@@ -48,10 +50,22 @@
 }
 
 /* Preview container styles */
-.description-preview {
+.description-preview-container {
     background-color: #f8f9fa;
+    border: 1px solid #e2e8f0;
     border-radius: 0.375rem;
-    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.description-preview-container:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.description-preview {
+    background-color: transparent;
+    border-radius: 0.375rem;
+    padding: 0;
     min-height: 100px;
 }
 
@@ -234,9 +248,24 @@
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
+    .description-preview-container {
+        background-color: #f8f9fa !important;
+        border-color: #e2e8f0 !important;
+        color: #374151 !important;
+    }
+
+    .description-preview-container:hover {
+        background-color: #f1f5f9 !important;
+        border-color: #cbd5e1 !important;
+    }
+
     .description-preview {
-        background-color: #2d3748;
-        color: #e2e8f0;
+        background-color: transparent !important;
+        color: #374151 !important;
+    }
+
+    .description-preview p {
+        color: #374151 !important;
     }
     
     .form-control {
