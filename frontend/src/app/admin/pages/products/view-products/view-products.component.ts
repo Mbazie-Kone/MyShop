@@ -29,12 +29,11 @@ export class ViewProductsComponent {
   ngOnInit(): void {
     this.loading = true; // Imposta loading a true all'inizio
     this.catalogService.getAllProducts().subscribe({
-      next: (data) => {
-        console.log('Products loaded:', data);
-        this.products = Array.isArray(data) ? data : [];
-        this.applyFilters();
-        this.loading = false; // Imposta loading a false quando i dati sono caricati
-      },
+                    next: (data) => {
+                this.products = Array.isArray(data) ? data : [];
+                this.applyFilters();
+                this.loading = false; // Imposta loading a false quando i dati sono caricati
+              },
       error: (error) => {
         console.error('Error loading products:', error);
         this.loading = false; // Imposta loading a false anche in caso di errore

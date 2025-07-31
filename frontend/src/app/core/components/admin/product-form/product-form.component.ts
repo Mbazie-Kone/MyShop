@@ -46,15 +46,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private subscriptions: Subscription[] = [];
 
-  // Upload progress
-  uploadProgress = 0;
-  isUploading = false;
-
   // Drag & drop properties
   isDragOver = false;
-
-  // Suggestions for description improvement
-  suggestions: string[] = [];
 
   // Description templates
   descriptionTemplates: { name: string; template: string }[] = [
@@ -91,7 +84,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     this.loadCategories();
     this.setupAutoSave();
-    this.setupSmartValidation();
 
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
@@ -148,7 +140,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const description = this.productForm.get('description')?.value;
     if (description && description.length > 0) {
       localStorage.setItem('product-description-draft', description);
-      console.log('Description auto-saved');
+      // Description auto-saved
     }
   }
 
@@ -166,80 +158,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Smart validation with quality suggestions
-  private setupSmartValidation(): void {
-    const descriptionSubscription = this.productForm.get('description')?.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-      takeUntil(this.destroy$)
-    ).subscribe(value => {
-      this.validateDescriptionQuality(value || '');
-    });
 
-    if (descriptionSubscription) {
-      this.subscriptions.push(descriptionSubscription);
-    }
-  }
-
-  private validateDescriptionQuality(text: string): void {
-    this.suggestions = [];
-    
-    if (!text) return;
-
-    const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
-    const hasKeywords = this.checkForKeywords(text);
-    const readability = this.calculateReadability(text);
-    
-    if (wordCount < 20) {
-      this.suggestions.push('Consider adding more details to make your description more comprehensive');
-    }
-    
-    if (!hasKeywords) {
-      this.suggestions.push('Include relevant keywords to improve search visibility');
-    }
-    
-    if (readability < 0.6) {
-      this.suggestions.push('Consider simplifying the language for better readability');
-    }
-
-    if (text.length < 50) {
-      this.suggestions.push('A longer description helps customers understand your product better');
-    }
-  }
-
-  private checkForKeywords(text: string): boolean {
-    const commonKeywords = ['quality', 'premium', 'durable', 'reliable', 'efficient', 'modern', 'comfortable', 'stylish'];
-    return commonKeywords.some(keyword => text.toLowerCase().includes(keyword));
-  }
-
-  private calculateReadability(text: string): number {
-    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    const words = text.split(/\s+/).filter(w => w.length > 0);
-    const syllables = this.countSyllables(text);
-    
-    if (sentences.length === 0 || words.length === 0) return 0;
-    
-    // Flesch Reading Ease formula
-    return 206.835 - (1.015 * (words.length / sentences.length)) - (84.6 * (syllables / words.length));
-  }
-
-  private countSyllables(text: string): number {
-    const words = text.toLowerCase().split(/\s+/);
-    return words.reduce((count, word) => {
-      return count + this.countWordSyllables(word);
-    }, 0);
-  }
-
-  private countWordSyllables(word: string): number {
-    word = word.toLowerCase();
-    if (word.length <= 3) return 1;
-    
-    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-    word = word.replace(/^y/, '');
-    
-    const matches = word.match(/[aeiouy]{1,2}/g);
-    return matches ? matches.length : 1;
-  }
 
   loadCategories(): void {
     this.catalogService.getCategories().subscribe({
@@ -387,9 +306,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     if (!files || files.length === 0) return;
 
-    this.isUploading = true;
-    this.uploadProgress = 0;
-
     this.analyticsService.trackFeatureUsage('image_upload');
     this.analyticsService.trackFormInteraction('product_form', 'image_selected', 'images');
 
@@ -406,16 +322,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         reader.readAsDataURL(file);
       }
     }
-
-    // Simulate upload progress
-    const interval = setInterval(() => {
-      this.uploadProgress += 10;
-      if (this.uploadProgress >= 100) {
-        clearInterval(interval);
-        this.isUploading = false;
-        this.uploadProgress = 0;
-      }
-    }, 100);
 
     // Update input disabled state
     this.updateFileInputState();
@@ -494,7 +400,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.productForm.reset();
     this.imagePreviews = [];
     this.selectedFiles = [];
-    this.suggestions = [];
     localStorage.removeItem('product-description-draft');
 
     this.analyticsService.trackUserJourney('form_submitted_success', this.isEditMode ? 'edit_product' : 'add_product');

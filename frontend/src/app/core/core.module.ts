@@ -15,8 +15,6 @@ import { Nl2brPipe } from '../shared/pipes/nl2br.pipe';
 
 // Services
 import { AnalyticsService } from './services/analytics.service';
-import { I18nService } from './services/i18n.service';
-import { SecurityService } from './services/security.service';
 
 @NgModule({
   declarations: [
@@ -46,10 +44,8 @@ import { SecurityService } from './services/security.service';
     FooterComponent,
     AdminFooterComponent
   ],
-  providers: [
-    AnalyticsService,
-    I18nService,
-    SecurityService
-  ]
+            providers: [
+            AnalyticsService
+          ]
 })
 export class CoreModule { }

@@ -51,7 +51,7 @@ export class AnalyticsService {
 
     // Log to console in development
     if (this.isDevelopment()) {
-      console.log('Analytics Event:', event);
+      // Analytics event logged
     }
 
     // Send to analytics service (Google Analytics, etc.)
@@ -140,6 +140,6 @@ declare global {
 // Initialize gtag if not available
 if (typeof window !== 'undefined' && !window.gtag) {
   window.gtag = function(...args: unknown[]) {
-    console.log('GTAG (Mock):', args);
+    // GTAG mock call logged
   };
 } 

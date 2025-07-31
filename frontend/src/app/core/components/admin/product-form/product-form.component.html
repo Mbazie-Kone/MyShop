@@ -76,17 +76,7 @@
                                         </small>
                                     </div>
 
-                                    <!-- Smart Suggestions -->
-                                    <div *ngIf="suggestions.length > 0" class="mt-3">
-                                        <div class="alert alert-info" role="alert">
-                                            <h6 class="alert-heading">
-                                                <i class="icon-lightbulb"></i> Suggestions to improve your description:
-                                            </h6>
-                                            <ul class="mb-0">
-                                                <li *ngFor="let suggestion of suggestions">{{ suggestion }}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
                                 <!-- Description Preview -->
@@ -121,19 +111,7 @@
                                 <!-- Heading -->
                                 <h5 class="mb-4">Product Gallery</h5>
                                 
-                                <!-- Upload Progress -->
-                                <div *ngIf="isUploading" class="mb-3">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" 
-                                             [style.width.%]="uploadProgress"
-                                             [attr.aria-valuenow]="uploadProgress"
-                                             aria-valuemin="0" 
-                                             aria-valuemax="100">
-                                            {{ uploadProgress }}%
-                                        </div>
-                                    </div>
-                                    <small class="text-muted">Uploading images...</small>
-                                </div>
+
 
                                 <!-- Drag & Drop Zone -->
                                 <div class="upload-zone mb-3" 
