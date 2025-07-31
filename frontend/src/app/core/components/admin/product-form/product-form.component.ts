@@ -49,6 +49,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   // Drag & drop properties
   isDragOver = false;
 
+  // SKU validation properties
+  isSkuUnique = true;
+  isCheckingSku = false;
+
   // Description templates
   descriptionTemplates: { name: string; template: string }[] = [
     { name: 'Electronics', template: 'This high-quality electronic device features advanced technology and superior performance. Perfect for both personal and professional use, it offers exceptional reliability and user-friendly operation.' },
@@ -77,7 +81,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       stock: [0, [Validators.required, Validators.min(0)]],
       price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       productCode: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[A-Z0-9-]+$/)]],
-      sku: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^[A-Z0-9-]+$/)]],
+      sku: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30), Validators.pattern(/^[A-Z0-9-]+$/)]],
       categoryId: [null, [Validators.required]],
       images: [null]
     });
@@ -92,9 +96,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         this.isEditMode = true;
         this.productId = +idParam;
         this.loadProduct(this.productId);
+        // Reset SKU validation state for edit mode
+        this.isSkuUnique = true;
+        this.isCheckingSku = false;
       } else {
         this.loading = false; // No product to load, categories will be loaded
         this.loadDraftDescription();
+        // Reset SKU validation state for add mode
+        this.isSkuUnique = true;
+        this.isCheckingSku = false;
       }
     });
 
@@ -197,12 +207,43 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const stockSuffix = this.padNumber(stock, 3);
     const priceSuffix = this.padNumber(Math.floor(price), 3);
     const timestamp = Date.now().toString().slice(-4);
+    const randomSuffix = Math.random().toString(36).substring(2, 5).toUpperCase();
 
-    // Combine components
-    const generatedSku = `${namePrefix}-${categoryPrefix}-${stockSuffix}-${priceSuffix}-${timestamp}`;
+    // Combine components with random suffix for better uniqueness
+    const generatedSku = `${namePrefix}-${categoryPrefix}-${stockSuffix}-${priceSuffix}-${timestamp}-${randomSuffix}`;
 
     // Update SKU field
     this.productForm.patchValue({ sku: generatedSku }, { emitEvent: false });
+
+    // Check SKU uniqueness
+    this.checkSkuUniqueness(generatedSku);
+  }
+
+  private checkSkuUniqueness(sku: string): void {
+    const productId = this.isEditMode ? this.productId : undefined;
+    
+    this.isCheckingSku = true;
+    this.isSkuUnique = true;
+    
+    this.catalogService.checkSkuUniqueness(sku, productId).subscribe({
+      next: (response) => {
+        this.isCheckingSku = false;
+        this.isSkuUnique = response.isUnique;
+        
+        if (!response.isUnique) {
+          // If SKU is not unique, regenerate with a different timestamp
+          setTimeout(() => {
+            this.generateSku();
+          }, 100);
+        }
+      },
+      error: (error) => {
+        console.error('Error checking SKU uniqueness:', error);
+        this.isCheckingSku = false;
+        this.isSkuUnique = true; // Assume unique if check fails
+        // Continue with the generated SKU even if check fails
+      }
+    });
   }
 
   private getCleanPrefix(text: string, maxLength: number): string {
@@ -429,7 +470,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private getFieldFormatText(fieldName: string): string {
     const formatTexts: { [key: string]: string } = {
       'productCode': 'Only uppercase letters, numbers and dashes are allowed',
-      'sku': 'Auto-generated SKU format: NAME-CAT-STK-PRC-TIME',
+      'sku': 'Auto-generated SKU format: NAME-CAT-STK-PRC-TIME-RND',
       'price': 'Price must be a valid Euro amount (e.g. 10.99)'
     };
     return formatTexts[fieldName] || 'Invalid format';
@@ -547,7 +588,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.productForm.invalid) return;
+    if (this.productForm.invalid || !this.isSkuUnique || this.isCheckingSku) return;
 
     this.saving = true; // Start saving loading state
     this.analyticsService.trackFormInteraction('product_form', 'submit', this.isEditMode ? 'edit' : 'create');

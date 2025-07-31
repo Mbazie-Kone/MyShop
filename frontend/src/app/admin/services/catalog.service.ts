@@ -42,4 +42,13 @@ export class CatalogService {
     return this.http.delete(`${this.apiUrl}/delete-product/${id}`);
   }
 
+  // SKU Validation
+  checkSkuUniqueness(sku: string, productId?: number): Observable<{ isUnique: boolean }> {
+    const params: Record<string, string> = { sku };
+    if (productId) {
+      params['productId'] = productId.toString();
+    }
+    return this.http.get<{ isUnique: boolean }>(`${this.apiUrl}/check-sku`, { params });
+  }
+
 }
