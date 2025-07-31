@@ -12,17 +12,7 @@
     overflow: hidden;
 }
 
-.shared-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+/* Rimuoviamo la linea blu in cima alla card */
 
 .shared-card:hover {
     transform: translateY(-4px);
@@ -31,6 +21,4 @@
         0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.shared-card:hover::before {
-    opacity: 1;
-}
+/* Rimuoviamo l'effetto della linea blu nell'hover */
