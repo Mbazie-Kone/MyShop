@@ -10,7 +10,7 @@ import { AdminService } from '../../services/admin.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  roles: Record<string, unknown>[] = [];
+  roles: any[] = [];
   error = '';
   isLoading = false;
 
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  passwordsMatchValidator(control: AbstractControl): Record<string, unknown> | null  {
+  passwordsMatchValidator(control: AbstractControl): { [key: string]: any } | null  {
     const group = control as FormGroup;
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;

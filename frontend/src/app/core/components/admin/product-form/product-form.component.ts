@@ -208,7 +208,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   clearDescription(): void {
     this.productForm.get('description')?.setValue('');
     this.descriptionLength = 0;
-    this.suggestions = [];
     localStorage.removeItem('product-description-draft');
     this.analyticsService.trackFeatureUsage('description_clear');
   }

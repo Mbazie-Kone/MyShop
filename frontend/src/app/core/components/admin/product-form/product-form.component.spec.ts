@@ -141,7 +141,7 @@ describe('ProductFormComponent', () => {
     
     expect(component.productForm.get('description')?.value).toBe('');
     expect(component.descriptionLength).toBe(0);
-    expect(component.suggestions).toEqual([]);
+
     expect(analyticsService.trackFeatureUsage).toHaveBeenCalledWith('description_clear');
   });
 
@@ -311,16 +311,7 @@ describe('ProductFormComponent', () => {
     expect(component.getDescriptionStatusClass()).toBe('text-success');
   });
 
-  it('should validate description quality and provide suggestions', fakeAsync(() => {
-    fixture.detectChanges();
-    
-    // Test with short description
-    component.productForm.get('description')?.setValue('Short description');
-    tick(500); // Wait for debounce
-    
-    expect(component.suggestions.length).toBeGreaterThan(0);
-    expect(component.suggestions.some(s => s.includes('more details'))).toBe(true);
-  }));
+
 
   it('should handle keyboard shortcuts', () => {
     fixture.detectChanges();

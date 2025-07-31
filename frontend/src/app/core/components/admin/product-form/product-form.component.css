@@ -151,28 +151,7 @@
     color: white;
 }
 
-/* Suggestions alert styles */
-.alert-info {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-    color: #0c5460;
-}
 
-.alert-heading {
-    color: #0c5460;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.alert ul {
-    padding-left: 1.2rem;
-    margin-bottom: 0;
-}
-
-.alert li {
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
-}
 
 /* Smooth animations */
 .description-editor {
@@ -227,13 +206,7 @@
         font-size: 0.9rem;
     }
 
-    .alert-heading {
-        font-size: 0.85rem;
-    }
 
-    .alert li {
-        font-size: 0.8rem;
-    }
 }
 
 @media (max-width: 576px) {
@@ -287,15 +260,7 @@
         border-color: #4e73df;
     }
 
-    .alert-info {
-        background-color: #1a202c;
-        border-color: #2d3748;
-        color: #e2e8f0;
-    }
 
-    .alert-heading {
-        color: #e2e8f0;
-    }
 
     .text-muted {
         color: #a0aec0 !important;
