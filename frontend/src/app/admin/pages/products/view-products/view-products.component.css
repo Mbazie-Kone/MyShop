@@ -205,9 +205,33 @@ input[type="checkbox"] {
 
 /* Ensure proper z-index for dropdown options */
 select option {
-    background: white;
-    color: #2d3748;
-    padding: 8px 12px;
+    background: white !important;
+    color: #2d3748 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+}
+
+/* Basic dropdown styling */
+.form-select {
+    background-color: white !important;
+    color: #374151 !important;
+    border: 1px solid #d1d5db !important;
+}
+
+.form-select:focus {
+    background-color: white !important;
+    color: #374151 !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Simple dropdown styling - no custom background image */
+.form-select {
+    z-index: 1000;
+}
+
+/* Ensure dropdown container doesn't clip */
+.card-header {
+    overflow: visible !important;
 }
 
 /* Button Styling */
