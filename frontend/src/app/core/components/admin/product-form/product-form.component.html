@@ -196,16 +196,28 @@
 
                             <!-- Product sku -->
                             <div class="mb-3">
-                                <label class="form-label" for="productSku">Product SKU</label>
-                                <input class="form-control" 
-                                       id="productSku" 
-                                       formControlName="sku"
-                                       aria-describedby="sku-help"
-                                       aria-required="true">
+                                <label class="form-label" for="productSku">
+                                    Product SKU 
+                                    <span class="text-muted fw-normal">(Auto-generated)</span>
+                                </label>
+                                <div class="input-group">
+                                    <input class="form-control" 
+                                           id="productSku" 
+                                           formControlName="sku"
+                                           [readonly]="!isEditMode"
+                                           aria-describedby="sku-help"
+                                           aria-required="true">
+                                    <button type="button" 
+                                            class="btn btn-outline-secondary" 
+                                            (click)="regenerateSku()"
+                                            *ngIf="!isEditMode"
+                                            title="Regenerate SKU">
+                                        <i class="icon-arrows-cw"></i>
+                                    </button>
+                                </div>
                                 <div id="sku-help" class="form-text" [class]="getFieldStatusClass('sku')">
                                     <i class="icon-info-circled"></i> {{ getFieldStatusText('sku') }}
                                 </div>
-
                             </div>
 
                             <!-- Product category -->

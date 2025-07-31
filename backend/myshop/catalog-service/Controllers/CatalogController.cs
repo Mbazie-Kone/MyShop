@@ -20,9 +20,7 @@ namespace catalog_service.Controllers
             _imageService = imageService;
         }
 
-        // GET:
-
-        // api/catalog/produt/{id}
+        // GET: api/catalog/product/{id}
         [HttpGet("product/{id}")]
         public async Task<ActionResult<UpdateProductDetailsOutput>> GetProductById(int id)
         {
@@ -34,7 +32,7 @@ namespace catalog_service.Controllers
             if (product == null)
                 return NotFound();
 
-            var dto = new UpdateProductDetailsOutput()
+            var dto = new UpdateProductDetailsOutput
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -45,37 +43,34 @@ namespace catalog_service.Controllers
                 ProductCode = product.ProductCode,
                 SKU = product.SKU,
                 CategoryId = product.CategoryId,
-                Images = product.Images.Any() 
+                Images = product.Images.Any()
                     ? product.Images.Select(i => new AdminProductImageDto
-                        {
-                            Id = i.Id,
-                            Url = i.Url,
-                        }).ToList()
+                    {
+                        Id = i.Id,
+                        Url = i.Url,
+                    }).ToList()
                     : new List<AdminProductImageDto>
+                    {
+                        new AdminProductImageDto
                         {
-                            new AdminProductImageDto
-                            {
-                                Id = 0,
-                                Url = "/assets/products/default.png"
-                            }
-
+                            Id = 0,
+                            Url = "/assets/products/default.png"
                         }
-
+                    }
             };
 
             return Ok(dto);
         }
 
-        // api/catalog/categories
+        // GET: api/catalog/categories
         [HttpGet("categories")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
             var categories = await _context.Categories.ToListAsync();
-
             return Ok(categories);
         }
 
-        // api/catalog/products
+        // GET: api/catalog/products
         [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<AdminViewAllProductsDto>>> GetAllProducts()
         {
@@ -101,9 +96,7 @@ namespace catalog_service.Controllers
             return Ok(products);
         }
 
-        // POST:
-
-        // api/catalog/add-product
+        // POST: api/catalog/add-product
         [HttpPost("add-product")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<UpdateProductDetailsOutput>> AddProduct([FromForm] ProductInputDto dto)
@@ -137,13 +130,13 @@ namespace catalog_service.Controllers
             // Image management
             if (dto.Images != null && dto.Images.Count > 0)
             {
-               try
+                try
                 {
                     var images = await _imageService.SaveImagesAsync(dto.Images, product.Id);
                     _context.Images.AddRange(images);
                     await _context.SaveChangesAsync();
                 }
-                catch (InvalidOperationException ex) 
+                catch (InvalidOperationException ex)
                 {
                     return BadRequest(ex.Message);
                 }
@@ -161,7 +154,7 @@ namespace catalog_service.Controllers
             {
                 Id = createdProduct.Id,
                 Name = createdProduct.Name,
-                Description = createdProduct.Description?? string.Empty,
+                Description = createdProduct.Description ?? string.Empty,
                 Price = createdProduct.Price,
                 Stock = createdProduct.Stock,
                 IsAvailable = createdProduct.IsAvailable,
@@ -178,9 +171,7 @@ namespace catalog_service.Controllers
             return Ok(responseDto);
         }
 
-        // PUT
-
-        // api/catalog/update-product/{id}
+        // PUT: api/catalog/update-product/{id}
         [HttpPut("update-product/{id}")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] ProductInputDto dto)
@@ -270,9 +261,7 @@ namespace catalog_service.Controllers
             return Ok(responseDto);
         }
 
-        // DELETE
-
-        // api/catalog/delete-product/{id}
+        // DELETE: api/catalog/delete-product/{id}
         [HttpDelete("delete-product/{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
@@ -292,7 +281,6 @@ namespace catalog_service.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Product deleted successfully." });
-                
         }
     }
 }

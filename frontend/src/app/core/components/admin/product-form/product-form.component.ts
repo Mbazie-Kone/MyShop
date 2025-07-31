@@ -77,13 +77,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       stock: [0, [Validators.required, Validators.min(0)]],
       price: [{ value: 0, disabled: true}, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       productCode: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[A-Z0-9-]+$/)]],
-      sku: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern(/^[A-Z0-9]+$/)]],
+      sku: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^[A-Z0-9-]+$/)]],
       categoryId: [null, [Validators.required]],
       images: [null]
     });
 
     this.loadCategories();
     this.setupAutoSave();
+    this.setupSkuGeneration();
 
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
@@ -154,6 +155,73 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private clearAutoSave(): void {
     if (this.autoSaveInterval) {
       clearInterval(this.autoSaveInterval);
+    }
+  }
+
+  private setupSkuGeneration(): void {
+    // Listen to changes in fields that affect SKU generation
+    const skuFields = ['name', 'categoryId', 'stock', 'price'];
+    
+    skuFields.forEach(field => {
+      this.productForm.get(field)?.valueChanges
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          if (!this.isEditMode) {
+            this.generateSku();
+          }
+        });
+    });
+  }
+
+  private generateSku(): void {
+    const name = this.productForm.get('name')?.value || '';
+    const categoryId = this.productForm.get('categoryId')?.value;
+    const stock = this.productForm.get('stock')?.value || 0;
+    const price = this.productForm.get('price')?.value || 0;
+
+    if (!name || !categoryId) {
+      return;
+    }
+
+    // Get category name
+    const category = this.categories.find(cat => cat.id === categoryId);
+    const categoryName = category ? category.name : 'GEN';
+
+    // Generate SKU components
+    const namePrefix = this.getCleanPrefix(name, 3);
+    const categoryPrefix = this.getCleanPrefix(categoryName, 3);
+    const stockSuffix = this.padNumber(stock, 3);
+    const priceSuffix = this.padNumber(Math.floor(price), 3);
+    const timestamp = Date.now().toString().slice(-4);
+
+    // Combine components
+    const generatedSku = `${namePrefix}-${categoryPrefix}-${stockSuffix}-${priceSuffix}-${timestamp}`;
+
+    // Update SKU field
+    this.productForm.patchValue({ sku: generatedSku }, { emitEvent: false });
+  }
+
+  private getCleanPrefix(text: string, maxLength: number): string {
+    return text
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '') // Remove non-alphanumeric characters
+      .slice(0, maxLength)
+      .padEnd(maxLength, 'X'); // Pad with X if too short
+  }
+
+  private padNumber(num: number, length: number): string {
+    return num.toString().padStart(length, '0');
+  }
+
+  // Public method to manually regenerate SKU
+  regenerateSku(): void {
+    if (!this.isEditMode) {
+      this.generateSku();
+      this.analyticsService.trackFeatureUsage('sku_regenerated');
     }
   }
 
@@ -361,7 +429,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private getFieldFormatText(fieldName: string): string {
     const formatTexts: { [key: string]: string } = {
       'productCode': 'Only uppercase letters, numbers and dashes are allowed',
-      'sku': 'SKU must contain only uppercase letters and numbers',
+      'sku': 'Auto-generated SKU format: NAME-CAT-STK-PRC-TIME',
       'price': 'Price must be a valid Euro amount (e.g. 10.99)'
     };
     return formatTexts[fieldName] || 'Invalid format';
@@ -381,7 +449,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const invalidTexts: { [key: string]: string } = {
       'name': 'Invalid product name',
       'productCode': 'Invalid product code format',
-      'sku': 'Invalid SKU format',
+      'sku': 'Invalid auto-generated SKU format',
       'categoryId': 'Invalid category',
       'stock': 'Invalid stock value',
       'price': 'Invalid price format'
@@ -393,7 +461,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const validTexts: { [key: string]: string } = {
       'name': 'Product name is valid',
       'productCode': 'Product code is valid',
-      'sku': 'SKU is valid',
+      'sku': 'Auto-generated SKU is valid',
       'categoryId': 'Category is valid',
       'stock': 'Stock is valid',
       'price': 'Price is valid'
