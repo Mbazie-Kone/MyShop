@@ -20,12 +20,13 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
                 <!-- USERNAME -->
                 <div class="form-group">
-                    <label class="form-label">Username</label>
+                    <label class="form-label" for="username">Username</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <i class="icon-user"></i>
                         </span>
                         <input class="form-control" 
+                               id="username"
                                type="text" 
                                placeholder="Enter your username" 
                                formControlName="username"
@@ -35,12 +36,13 @@
 
                 <!-- PASSWORD -->
                 <div class="form-group">
-                    <label class="form-label">Password</label>
+                    <label class="form-label" for="password">Password</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <i class="icon-light"></i>
                         </span>
                         <input class="form-control" 
+                               id="password"
                                type="password" 
                                placeholder="Enter your password" 
                                formControlName="password"
@@ -50,12 +52,13 @@
 
                 <!-- CONFIRM PASSWORD -->
                 <div class="form-group">
-                    <label class="form-label">Confirm Password</label>
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <i class="icon-light"></i>
                         </span>
                         <input class="form-control" 
+                               id="confirmPassword"
                                type="password" 
                                placeholder="Confirm your password" 
                                formControlName="confirmPassword"
@@ -69,12 +72,12 @@
                 
                 <!-- ROLE -->
                 <div class="form-group">
-                    <label class="form-label">Role</label>
+                    <label class="form-label" for="roleId">Role</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <i class="icon-settings"></i>
                         </span>
-                        <select class="form-control" formControlName="roleId">
+                        <select class="form-control" id="roleId" formControlName="roleId">
                             <option value="">Select a role</option>
                             <option *ngFor="let role of roles" [value]="role.id">
                                 {{ role.name }}

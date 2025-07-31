@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { UpdateProductDetailsDto } from '../../core/models/update-product-detail
 export class CatalogService {
   private apiUrl = environment.apiCatalogUrl;
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   // GET
   getCategories(): Observable<Category[]> {
@@ -38,7 +38,7 @@ export class CatalogService {
   }
 
   // DELETE
-  deleteProduct(id: number): Observable<any> {
+  deleteProduct(id: number): Observable<unknown> {
     return this.http.delete(`${this.apiUrl}/delete-product/${id}`);
   }
 

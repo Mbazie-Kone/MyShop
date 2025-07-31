@@ -104,7 +104,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(value => {
       this.descriptionLength = value ? value.length : 0;
-      this.validateDescriptionQuality(value || '');
     });
 
     if (descriptionSubscription) {
@@ -223,7 +222,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   applyTemplate(template: string): void {
     this.productForm.get('description')?.setValue(template);
     this.descriptionLength = template.length;
-    this.validateDescriptionQuality(template);
     this.analyticsService.trackFeatureUsage('description_template_applied');
   }
 

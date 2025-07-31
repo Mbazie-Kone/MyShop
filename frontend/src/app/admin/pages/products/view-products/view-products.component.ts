@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CatalogService } from '../../../services/catalog.service';
 import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dto';
 
@@ -8,13 +8,13 @@ import { ViewAllProductsDto } from '../../../../core/models/view-all-products.dt
   templateUrl: './view-products.component.html',
   styleUrl: './view-products.component.css'
 })
-export class ViewProductsComponent {
+export class ViewProductsComponent implements OnInit {
   products: ViewAllProductsDto[] = [];
-  loading: boolean = true; // Aggiunta proprietà per gestire lo stato di caricamento
+  loading = true; // Aggiunta proprietà per gestire lo stato di caricamento
 
   // Pagination
-  currentPage: number = 1;
-  itemsPerPage: number = 10;
+  currentPage = 1;
+  itemsPerPage = 10;
   filteredProducts: ViewAllProductsDto[] = [];
   paginatedProducts: ViewAllProductsDto[] = [];
   pageSizeOptions: number[] = [10, 25, 50, 100];
@@ -24,7 +24,7 @@ export class ViewProductsComponent {
   selectedCategory = '';
   selectedStatus = '';
 
-  constructor(private catalogService: CatalogService) {}
+  private catalogService = inject(CatalogService);
 
   ngOnInit(): void {
     this.loading = true; // Imposta loading a true all'inizio

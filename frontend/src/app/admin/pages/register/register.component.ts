@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 
@@ -10,11 +10,12 @@ import { AdminService } from '../../services/admin.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  roles: any[] = [];
-  error: string = '';
-  isLoading: boolean = false;
+  roles: Record<string, unknown>[] = [];
+  error = '';
+  isLoading = false;
 
-  constructor(private fb: FormBuilder, private adminService: AdminService) {}
+  private fb = inject(FormBuilder);
+  private adminService = inject(AdminService);
 
   ngOnInit(): void {
     const options: AbstractControlOptions = {
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  passwordsMatchValidator(control: AbstractControl): { [key: string]: any } | null  {
+  passwordsMatchValidator(control: AbstractControl): Record<string, unknown> | null  {
     const group = control as FormGroup;
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;

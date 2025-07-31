@@ -139,7 +139,7 @@ declare global {
 
 // Initialize gtag if not available
 if (typeof window !== 'undefined' && !window.gtag) {
-  window.gtag = function(...args: unknown[]) {
+  window.gtag = function() {
     // GTAG mock call logged
   };
 } 

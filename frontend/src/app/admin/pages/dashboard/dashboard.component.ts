@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CategoryProductCount } from '../../../core/models/category-product-count.model';
@@ -9,7 +9,7 @@ import { CategoryProductCount } from '../../../core/models/category-product-coun
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewChecked {
+export class DashboardComponent implements AfterViewChecked, AfterViewInit {
   loading = true;
   private donutChartInitialized = false;
   
@@ -17,7 +17,7 @@ export class DashboardComponent implements AfterViewChecked {
   public categoryData: number[] = [];
   public categories: CategoryProductCount[] = [];
 
-  constructor(private dashboardService: DashboardService) {}
+  private dashboardService = inject(DashboardService);
 
   @ViewChild('categoryChart') categoryChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;

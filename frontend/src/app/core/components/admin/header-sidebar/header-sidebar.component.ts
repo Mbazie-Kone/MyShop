@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../../services/layout.service';
@@ -13,7 +13,10 @@ export class HeaderSidebarComponent implements OnInit {
   showUserCard = false;
   username = '';
 
-  constructor(private authService: AuthService, private router: Router, private eRef: ElementRef, public layoutService: LayoutService) {}
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private eRef = inject(ElementRef);
+  public layoutService = inject(LayoutService);
 
   ngOnInit() {
     const tokenData = this.authService.decodeToken();

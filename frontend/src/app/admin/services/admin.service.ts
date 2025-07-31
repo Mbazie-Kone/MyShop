@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { Role, UserDto } from '../../core/models/user.model';
 export class AdminService {
   private apiUrl = environment.apiAdminUrl;
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   register(data: RegisterRequest): Observable<UserDto> {
     return this.http.post<UserDto>(`${this.apiUrl}/register`, data);

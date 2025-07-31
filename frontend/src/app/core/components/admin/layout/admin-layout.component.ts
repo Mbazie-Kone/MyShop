@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LayoutService } from '../../../services/layout.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PageTitleService } from '../../../services/page-title.service';
@@ -13,8 +13,12 @@ import { filter, map } from 'rxjs/operators';
 export class AdminLayoutComponent {
   pageTitle = '';
 
-  // COLLAPSED
-  constructor(public layoutService: LayoutService, private router: Router, private activatedRoute: ActivatedRoute, private pagetitleService: PageTitleService) {
+  public layoutService = inject(LayoutService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private pagetitleService = inject(PageTitleService);
+
+  constructor() {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),

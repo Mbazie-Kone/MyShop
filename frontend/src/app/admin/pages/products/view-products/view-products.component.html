@@ -81,7 +81,9 @@
                                 <a [routerLink]="['/administration/edit-product', product.productId]">
                                     <i class="icon-edit modify" title="Edit"></i>
                                 </a>
-                                <i class="icon-trash modify" title="Delete" (click)="confirmDelete(product.productId)"></i>
+                                <button type="button" class="btn btn-link p-0" (click)="confirmDelete(product.productId)" (keyup.enter)="confirmDelete(product.productId)" (keyup.space)="confirmDelete(product.productId)">
+                                    <i class="icon-trash modify" title="Delete"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>

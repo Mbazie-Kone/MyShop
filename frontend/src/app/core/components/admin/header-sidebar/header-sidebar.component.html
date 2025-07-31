@@ -4,7 +4,9 @@
 
       <!-- Left section -->
       <div class="left-section d-flex align-items-center">
-        <i class="icon-hamburger" (click)="toggleSidebar()"></i>
+        <button type="button" class="btn btn-link p-0" (click)="toggleSidebar()" (keyup.enter)="toggleSidebar()" (keyup.space)="toggleSidebar()">
+          <i class="icon-hamburger"></i>
+        </button>
       </div>
       
       <!-- Center section -->
@@ -24,7 +26,9 @@
           <i class="icon-bell"></i>
         </a>
         <div class="user-menu">
-          <li (click)="toggleUserCard()"><i class="icon-user"></i></li>
+          <button type="button" class="btn btn-link p-0" (click)="toggleUserCard()" (keyup.enter)="toggleUserCard()" (keyup.space)="toggleUserCard()">
+            <i class="icon-user"></i>
+          </button>
           <div class="user-card" *ngIf="showUserCard">
             <div class="card-body text-center">
               <p class="user-logged">
@@ -32,7 +36,9 @@
               </p>
               <hr>
               <a routerLink="/administration/user/settings">Settings</a>
-              <p (click)="logout()" class="logout mt-2">Sign Out</p>
+              <button type="button" class="btn btn-link p-0" (click)="logout()" (keyup.enter)="logout()" (keyup.space)="logout()">
+                <span class="logout mt-2">Sign Out</span>
+              </button>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -12,10 +12,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm! : FormGroup;
-  error: string = '';
-  isLoading: boolean = false;
+  error = '';
+  isLoading = false;
 
-  constructor(private fb: FormBuilder, private adminService: AdminService, private authService: AuthService, private router: Router) {}
+  private fb = inject(FormBuilder);
+  private adminService = inject(AdminService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({

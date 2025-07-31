@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,7 +9,7 @@ export class PageTitleService {
   private pageTitleSubject = new BehaviorSubject<string>('Admin');
   pageTitle$ = this.pageTitleSubject.asObservable();
 
-  constructor(private title: Title) {}
+  private title = inject(Title);
 
   setTitle(browserTitle: string, pageTitle?: string): void {
     // Set browser tab title
