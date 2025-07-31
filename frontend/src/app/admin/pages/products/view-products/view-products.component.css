@@ -172,20 +172,21 @@ input[type="checkbox"] {
 
 /* Filter Controls */
 .form-control, .form-select {
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 12px;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    background: #ffffff !important;
+    transition: all 0.3s ease !important;
     position: relative;
     z-index: 10;
+    color: #374151 !important;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    background: rgba(255, 255, 255, 0.95);
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    background: #ffffff !important;
+    color: #374151 !important;
 }
 
 /* Ensure dropdowns are visible */

@@ -41,8 +41,10 @@
 
 /* Textarea focus styles */
 .form-control:focus {
-    border-color: #4e73df;
-    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    background-color: #ffffff !important;
+    color: #374151 !important;
 }
 
 /* Preview container styles */
@@ -73,12 +75,12 @@
 }
 
 .upload-zone:hover {
-    border-color: #4e73df;
+    border-color: #3b82f6;
     background-color: #e3f2fd;
 }
 
 .upload-zone.drag-over {
-    border-color: #4e73df;
+    border-color: #3b82f6;
     background-color: #e3f2fd;
     transform: scale(1.02);
 }
@@ -135,19 +137,19 @@
 }
 
 .progress-bar {
-    background-color: #4e73df;
+    background-color: #3b82f6;
     transition: width 0.3s ease;
 }
 
 /* Template buttons styles */
 .btn-outline-primary {
-    border-color: #4e73df;
-    color: #4e73df;
+    border-color: #3b82f6;
+    color: #3b82f6;
 }
 
 .btn-outline-primary:hover {
-    background-color: #4e73df;
-    border-color: #4e73df;
+    background-color: #3b82f6;
+    border-color: #3b82f6;
     color: white;
 }
 
@@ -238,26 +240,26 @@
     }
     
     .form-control {
-        background-color: #4a5568;
-        border-color: #718096;
-        color: #e2e8f0;
+        background-color: #ffffff !important;
+        border-color: #d1d5db !important;
+        color: #374151 !important;
     }
 
     .form-control:focus {
-        background-color: #4a5568;
-        border-color: #4e73df;
-        color: #e2e8f0;
+        background-color: #ffffff !important;
+        border-color: #3b82f6 !important;
+        color: #374151 !important;
     }
 
     .upload-zone {
-        background-color: #2d3748;
-        border-color: #4a5568;
+        background-color: #f8f9fa !important;
+        border-color: #dee2e6 !important;
     }
 
     .upload-zone:hover,
     .upload-zone.drag-over {
-        background-color: #1a202c;
-        border-color: #4e73df;
+        background-color: #e3f2fd !important;
+        border-color: #3b82f6 !important;
     }
 
 
@@ -305,7 +307,7 @@
 .btn:focus,
 .form-control:focus,
 .form-select:focus {
-    outline: 2px solid #4e73df;
+    outline: 2px solid #3b82f6;
     outline-offset: 2px;
 }
 

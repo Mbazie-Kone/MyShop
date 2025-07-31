@@ -172,3 +172,47 @@ td {
 .badge {
   font-weight: 600;
 }
+
+/* Global Form Styles - Override Bootstrap */
+.form-control {
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+}
+
+.form-control:focus {
+  background-color: #ffffff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  color: #374151 !important;
+}
+
+.form-control::placeholder {
+  color: #9ca3af !important;
+}
+
+.form-select {
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+}
+
+.form-select:focus {
+  background-color: #ffffff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  color: #374151 !important;
+}
+
+/* Override dark form controls */
+.form-control[style*="background-color: rgb(33, 37, 41)"],
+.form-control[style*="background-color: #212529"] {
+  background-color: #ffffff !important;
+  color: #374151 !important;
+}
+
+.form-select[style*="background-color: rgb(33, 37, 41)"],
+.form-select[style*="background-color: #212529"] {
+  background-color: #ffffff !important;
+  color: #374151 !important;
+}
