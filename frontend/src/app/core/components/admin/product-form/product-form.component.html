@@ -17,10 +17,10 @@
                                     formControlName="name"
                                     aria-describedby="name-help"
                                     aria-required="true">
-                                <div id="name-help" class="form-text">Enter a descriptive name for your product</div>
-                                <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
-                                    Product name is required.
+                                <div id="name-help" class="form-text" [class]="getFieldStatusClass('name')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('name') }}
                                 </div>
+
                             </div>
 
                             <!-- Enhanced Product Description -->
@@ -188,13 +188,10 @@
                                        formControlName="productCode"
                                        aria-describedby="productCode-help"
                                        aria-required="true">
-                                <div id="productCode-help" class="form-text">16 characters, uppercase letters, numbers, and dashes only</div>
-                                <div *ngIf="productForm.get('productCode')?.touched && productForm.get('productCode')?.invalid" class="text-danger">
-                                    <div *ngIf="productForm.get('productCode')?.errors?.['required']">Product code is required</div>
-                                    <div *ngIf="productForm.get('productCode')?.errors?.['minlength']">Must be at least 16 characters</div>
-                                    <div *ngIf="productForm.get('productCode')?.errors?.['maxlength']">Must be no more than 16 characters</div>
-                                    <div *ngIf="productForm.get('productCode')?.errors?.['pattern']">Only uppercase letters, numbers and dashes are allowed.</div>
+                                <div id="productCode-help" class="form-text" [class]="getFieldStatusClass('productCode')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('productCode') }}
                                 </div>
+
                             </div>
 
                             <!-- Product sku -->
@@ -205,13 +202,10 @@
                                        formControlName="sku"
                                        aria-describedby="sku-help"
                                        aria-required="true">
-                                <div id="sku-help" class="form-text">16 characters, uppercase letters and numbers only</div>
-                                <div *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-danger">
-                                    <div *ngIf="productForm.get('sku')?.errors?.['required']">SKU is required.</div>
-                                    <div *ngIf="productForm.get('sku')?.errors?.['minlength']">SKU must be at least 16 characters.</div>
-                                    <div *ngIf="productForm.get('sku')?.errors?.['maxlength']">SKU must be no more than 16 characters.</div>
-                                    <div *ngIf="productForm.get('sku')?.errors?.['pattern']">SKU must contain only uppercase letters and numbers.</div>
+                                <div id="sku-help" class="form-text" [class]="getFieldStatusClass('sku')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('sku') }}
                                 </div>
+
                             </div>
 
                             <!-- Product category -->
@@ -225,10 +219,10 @@
                                     <option value="">Select a category</option>
                                     <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                                 </select>
-                                <div id="category-help" class="form-text">Choose the most appropriate category for your product</div>
-                                <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">
-                                    Category is required.
+                                <div id="category-help" class="form-text" [class]="getFieldStatusClass('categoryId')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('categoryId') }}
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -248,10 +242,10 @@
                                        min="0"
                                        aria-describedby="stock-help"
                                        aria-required="true">
-                                <div id="stock-help" class="form-text">Enter the available quantity</div>
-                                <div *ngIf="productForm.get('stock')?.hasError('min')" class="text-danger">
-                                    Stock cannot be negative.
+                                <div id="stock-help" class="form-text" [class]="getFieldStatusClass('stock')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('stock') }}
                                 </div>
+
                             </div>
 
                             <!-- Product price -->
@@ -265,16 +259,10 @@
                                        min="0"
                                        aria-describedby="price-help"
                                        aria-required="true">
-                                <div id="price-help" class="form-text">Enter the price in euros (e.g., 29.99)</div>
-                                <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
-                                    Price is required.
+                                <div id="price-help" class="form-text" [class]="getFieldStatusClass('price')">
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('price') }}
                                 </div>
-                                <div *ngIf="productForm.get('price')?.hasError('min')" class="text-danger">
-                                    Price must be 0 or greater.
-                                </div>
-                                <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('pattern')" class="text-danger">
-                                    Price must be a valid Euro amount (e.g. 10.99).
-                                </div>
+
                             </div>
                         </div>
                     </div>

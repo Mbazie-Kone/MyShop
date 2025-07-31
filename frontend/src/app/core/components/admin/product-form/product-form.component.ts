@@ -255,6 +255,152 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Dynamic validation methods for all fields
+  getFieldStatus(fieldName: string): string {
+    const control = this.productForm.get(fieldName);
+    if (!control) return 'valid';
+    
+    if (control.invalid && control.touched) {
+      if (control.errors?.['required']) return 'required';
+      if (control.errors?.['minlength']) return 'too-short';
+      if (control.errors?.['maxlength']) return 'too-long';
+      if (control.errors?.['pattern']) return 'invalid-format';
+      if (control.errors?.['min']) return 'too-low';
+      return 'invalid';
+    }
+    
+    if (control.valid && control.touched) return 'valid';
+    return 'empty';
+  }
+
+  getFieldStatusClass(fieldName: string): string {
+    const status = this.getFieldStatus(fieldName);
+    switch (status) {
+      case 'empty': return 'text-muted';
+      case 'required': return 'text-danger';
+      case 'too-short': return 'text-warning';
+      case 'too-long': return 'text-warning';
+      case 'invalid-format': return 'text-danger';
+      case 'too-low': return 'text-danger';
+      case 'invalid': return 'text-danger';
+      case 'valid': return 'text-success';
+      default: return 'text-muted';
+    }
+  }
+
+  getFieldStatusText(fieldName: string): string {
+    const status = this.getFieldStatus(fieldName);
+    const control = this.productForm.get(fieldName);
+    
+    switch (status) {
+      case 'empty': 
+        return this.getFieldHelperText(fieldName);
+      case 'required': 
+        return this.getFieldRequiredText(fieldName);
+      case 'too-short': 
+        return this.getFieldMinLengthText(fieldName, control);
+      case 'too-long': 
+        return this.getFieldMaxLengthText(fieldName, control);
+      case 'invalid-format': 
+        return this.getFieldFormatText(fieldName);
+      case 'too-low': 
+        return this.getFieldMinValueText(fieldName, control);
+      case 'invalid': 
+        return this.getFieldInvalidText(fieldName);
+      case 'valid': 
+        return this.getFieldValidText(fieldName);
+      default: 
+        return this.getFieldHelperText(fieldName);
+    }
+  }
+
+  private getFieldHelperText(fieldName: string): string {
+    const helpers: { [key: string]: string } = {
+      'name': 'Enter a descriptive name for your product',
+      'productCode': '16 characters, uppercase letters, numbers, and dashes only',
+      'sku': '16 characters, uppercase letters and numbers only',
+      'categoryId': 'Choose the most appropriate category for your product',
+      'stock': 'Enter the available quantity',
+      'price': 'Enter the price in euros (e.g., 29.99)'
+    };
+    return helpers[fieldName] || '';
+  }
+
+  private getFieldRequiredText(fieldName: string): string {
+    const requiredTexts: { [key: string]: string } = {
+      'name': 'Product name is required',
+      'productCode': 'Product code is required',
+      'sku': 'SKU is required',
+      'categoryId': 'Category is required',
+      'stock': 'Stock is required',
+      'price': 'Price is required'
+    };
+    return requiredTexts[fieldName] || 'This field is required';
+  }
+
+  private getFieldMinLengthText(fieldName: string, control: any): string {
+    const minLength = control?.errors?.['minlength']?.requiredLength;
+    const fieldNames: { [key: string]: string } = {
+      'productCode': 'Product code',
+      'sku': 'SKU'
+    };
+    const fieldNameText = fieldNames[fieldName] || fieldName;
+    return `${fieldNameText} must be at least ${minLength} characters`;
+  }
+
+  private getFieldMaxLengthText(fieldName: string, control: any): string {
+    const maxLength = control?.errors?.['maxlength']?.requiredLength;
+    const fieldNames: { [key: string]: string } = {
+      'productCode': 'Product code',
+      'sku': 'SKU'
+    };
+    const fieldNameText = fieldNames[fieldName] || fieldName;
+    return `${fieldNameText} must be no more than ${maxLength} characters`;
+  }
+
+  private getFieldFormatText(fieldName: string): string {
+    const formatTexts: { [key: string]: string } = {
+      'productCode': 'Only uppercase letters, numbers and dashes are allowed',
+      'sku': 'SKU must contain only uppercase letters and numbers',
+      'price': 'Price must be a valid Euro amount (e.g. 10.99)'
+    };
+    return formatTexts[fieldName] || 'Invalid format';
+  }
+
+  private getFieldMinValueText(fieldName: string, control: any): string {
+    const minValue = control?.errors?.['min']?.min;
+    const fieldNames: { [key: string]: string } = {
+      'stock': 'Stock',
+      'price': 'Price'
+    };
+    const fieldNameText = fieldNames[fieldName] || fieldName;
+    return `${fieldNameText} must be ${minValue} or greater`;
+  }
+
+  private getFieldInvalidText(fieldName: string): string {
+    const invalidTexts: { [key: string]: string } = {
+      'name': 'Invalid product name',
+      'productCode': 'Invalid product code format',
+      'sku': 'Invalid SKU format',
+      'categoryId': 'Invalid category',
+      'stock': 'Invalid stock value',
+      'price': 'Invalid price format'
+    };
+    return invalidTexts[fieldName] || 'Invalid value';
+  }
+
+  private getFieldValidText(fieldName: string): string {
+    const validTexts: { [key: string]: string } = {
+      'name': 'Product name is valid',
+      'productCode': 'Product code is valid',
+      'sku': 'SKU is valid',
+      'categoryId': 'Category is valid',
+      'stock': 'Stock is valid',
+      'price': 'Price is valid'
+    };
+    return validTexts[fieldName] || 'Field is valid';
+  }
+
   // Drag & drop methods
   onDragOver(event: DragEvent): void {
     event.preventDefault();
