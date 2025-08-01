@@ -196,36 +196,16 @@
 
                             <!-- Product sku -->
                             <div class="mb-3">
-                                <label class="form-label" for="productSku">
-                                    Product SKU 
-                                    <span class="text-muted fw-normal">(Auto-generated)</span>
-                                </label>
-                                <div class="input-group">
-                                    <input class="form-control" 
-                                           id="productSku" 
-                                           formControlName="sku"
-                                           [readonly]="!isEditMode"
-                                           [class.is-valid]="isSkuUnique && !isCheckingSku"
-                                           [class.is-invalid]="!isSkuUnique && !isCheckingSku"
-                                           aria-describedby="sku-help"
-                                           aria-required="true">
-                                    <button type="button" 
-                                            class="btn btn-outline-secondary" 
-                                            (click)="regenerateSku()"
-                                            *ngIf="!isEditMode"
-                                            [disabled]="isCheckingSku"
-                                            title="Regenerate SKU">
-                                        <i class="icon-arrows-cw" *ngIf="!isCheckingSku"></i>
-                                        <app-spinner size="14px" *ngIf="isCheckingSku"></app-spinner>
-                                    </button>
-                                </div>
+                                <label class="form-label" for="productSku">Product SKU</label>
+                                <input class="form-control" 
+                                       id="productSku" 
+                                       formControlName="sku"
+                                       aria-describedby="sku-help"
+                                       aria-required="true">
                                 <div id="sku-help" class="form-text" [class]="getFieldStatusClass('sku')">
-                                    <i class="icon-info-circled"></i> 
-                                    <span *ngIf="isCheckingSku">Verificando unicità SKU...</span>
-                                    <span *ngIf="!isCheckingSku && isSkuUnique">SKU univoco e valido</span>
-                                    <span *ngIf="!isCheckingSku && !isSkuUnique">SKU duplicato, rigenerazione in corso...</span>
-                                    <span *ngIf="!isCheckingSku && productForm.get('sku')?.invalid">{{ getFieldStatusText('sku') }}</span>
+                                    <i class="icon-info-circled"></i> {{ getFieldStatusText('sku') }}
                                 </div>
+
                             </div>
 
                             <!-- Product category -->
@@ -292,7 +272,7 @@
                  <div class="d-grid">
                     <button class="btn btn-success" 
                             type="submit" 
-                            [disabled]="productForm.invalid || saving || !isSkuUnique || isCheckingSku"
+                            [disabled]="productForm.invalid || saving"
                             aria-describedby="submit-help">
                         <span *ngIf="saving">
                             <app-spinner size="16px"></app-spinner>
@@ -301,10 +281,7 @@
                         <span *ngIf="!saving">{{ isEditMode ? 'Update' : 'Add' }} Product</span>
                     </button>
                     <div id="submit-help" class="form-text mt-1">
-                        <span *ngIf="productForm.invalid">All required fields must be completed before saving</span>
-                        <span *ngIf="!isSkuUnique">SKU must be unique before saving</span>
-                        <span *ngIf="isCheckingSku">Please wait while SKU is being validated</span>
-                        <span *ngIf="productForm.valid && isSkuUnique && !isCheckingSku">Ready to save</span>
+                        All required fields must be completed before saving
                     </div>
                  </div>
             </div>
