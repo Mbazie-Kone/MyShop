@@ -1,11 +1,14 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CategoryProductCount } from '../../../core/models/category-product-count.model';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, SharedModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -32,10 +35,10 @@ export class DashboardComponent implements AfterViewChecked, AfterViewInit {
   };
 
   // Recent orders data
-  public recentOrders: any[] = [];
+  public recentOrders: {id: string, customer: string, amount: number, status: string}[] = [];
   
   // Top products data
-  public topProducts: any[] = [];
+  public topProducts: {name: string, sales: number, revenue: number}[] = [];
 
   private dashboardService = inject(DashboardService);
 
