@@ -10,11 +10,11 @@
           </div>
           <div class="mt-2 mb-3 d-flex align-items-center">
             <h3 class="fw-bold mb-0">
-              5,312
+              {{ formatNumber(stats.totalOrders) }}
             </h3>
-            <span class="mt-1 ms-2 text-danger">
-              <i class="icon-down other-icons"></i>
-              2.29%
+            <span class="mt-1 ms-2" [ngClass]="stats.ordersChange >= 0 ? 'text-success' : 'text-danger'">
+              <i [ngClass]="stats.ordersChange >= 0 ? 'icon-up' : 'icon-down'" class="other-icons"></i>
+              {{ Math.abs(stats.ordersChange) }}%
             </span>
           </div>
           <a href="#" class="fw-bold">
@@ -34,11 +34,11 @@
           </div>
           <div class="mt-2 mb-3 d-flex align-items-center">
             <h3 class="fw-bold mb-0">
-              €8,312
+              {{ formatCurrency(stats.totalRevenue) }}
             </h3>
-            <span class="mt-1 ms-2 text-success">
-              <i class="icon-up other-icons"></i>
-              2.29%
+            <span class="mt-1 ms-2" [ngClass]="stats.revenueChange >= 0 ? 'text-success' : 'text-danger'">
+              <i [ngClass]="stats.revenueChange >= 0 ? 'icon-up' : 'icon-down'" class="other-icons"></i>
+              {{ Math.abs(stats.revenueChange) }}%
             </span>
           </div>
           <a href="#" class="fw-bold">
@@ -58,11 +58,11 @@
           </div>
           <div class="mt-2 mb-3 d-flex align-items-center">
             <h3 class="fw-bold mb-0">
-              €15,312
+              {{ formatNumber(stats.totalCustomers) }}
             </h3>
-            <span class="mt-1 ms-2 text-success">
-              <i class="icon-up other-icons"></i>
-              5.16%
+            <span class="mt-1 ms-2" [ngClass]="stats.customersChange >= 0 ? 'text-success' : 'text-danger'">
+              <i [ngClass]="stats.customersChange >= 0 ? 'icon-up' : 'icon-down'" class="other-icons"></i>
+              {{ Math.abs(stats.customersChange) }}%
             </span>
           </div>
           <a href="#" class="fw-bold">
@@ -82,7 +82,7 @@
           </div>
           <div class="mt-2 mb-3 d-flex align-items-center">
             <h3 class="fw-bold mb-0">
-              €35.64k
+              {{ formatCurrency(stats.totalBalance) }}
             </h3>
           </div>
           <a href="#" class="fw-bold">
@@ -101,10 +101,13 @@
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 p-2">Revenue</h5>
+          <h5 class="mb-0 p-2">Revenue Trend</h5>
+          <small class="text-muted">Monthly comparison</small>
         </div>
-        <div class="card-body">
-          
+        <div class="card-body p-3">
+          <div style="height: 350px;">
+            <canvas #revenueChart></canvas>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card>
@@ -113,8 +116,13 @@
   <div class="col-4">
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
-        <div class="card-body">
-          <!-- Content will be added here -->
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Traffic Sources</h5>
+        </div>
+        <div class="card-body p-3">
+          <div style="height: 300px;">
+            <canvas #trafficChart></canvas>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card >
@@ -127,8 +135,13 @@
   <div class="col-4">
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
-        <div class="card-body">
-          <!-- Content will be added here -->
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Sales by Category</h5>
+        </div>
+        <div class="card-body p-3">
+          <div style="height: 350px;">
+            <canvas #stackedChart></canvas>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card >
@@ -137,8 +150,34 @@
   <div class="col-8">
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
-        <div class="card-body">
-          <!-- Content will be added here -->
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Recent Orders</h5>
+        </div>
+        <div class="card-body p-3">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of recentOrders">
+                  <td class="fw-bold">{{ order.id }}</td>
+                  <td>{{ order.customer }}</td>
+                  <td>{{ formatCurrency(order.amount) }}</td>
+                  <td>
+                    <span [ngClass]="getStatusClass(order.status)">
+                      {{ order.status }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card >
@@ -146,23 +185,98 @@
 </div>
 <!-- ROW 3 -->
 
-<!-- ROW 5 -->
+<!-- ROW 4 -->
 <div class="row">
-  <div class="col">
+  <div class="col-4">
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
-        <div class="card-body">
-          <!-- Content will be added here -->
+        <div class="card-header">
+          <h5 class="mb-0 p-2">User Distribution</h5>
+        </div>
+        <div class="card-body p-3">
+          <div style="height: 300px;">
+            <canvas #pieChart></canvas>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card >
   </div>
 
+  <div class="col-4">
+    <app-card customClass="custom-card-b-height">
+      <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Monthly Growth</h5>
+        </div>
+        <div class="card-body p-3">
+          <div style="height: 300px;">
+            <canvas #areaChart></canvas>
+          </div>
+        </div>
+      </app-loading-wrapper>
+    </app-card >
+  </div>
+
+  <div class="col-4">
+    <app-card customClass="custom-card-b-height">
+      <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Performance Score</h5>
+        </div>
+        <div class="card-body p-3">
+          <div style="height: 300px;">
+            <canvas #radarChart></canvas>
+          </div>
+        </div>
+      </app-loading-wrapper>
+    </app-card >
+  </div>
+</div>
+<!-- ROW 4 -->
+
+<!-- ROW 5 -->
+<div class="row">
   <div class="col">
     <app-card customClass="custom-card-b-height">
       <app-loading-wrapper [loading]="loading" [spinnerSize]="'60px'">
-        <div class="card-body">
-          <!-- Content will be added here -->
+        <div class="card-header">
+          <h5 class="mb-0 p-2">Top Selling Products</h5>
+        </div>
+        <div class="card-body p-3">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Sales</th>
+                  <th>Revenue</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of topProducts; let i = index">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="avatar-circle me-2">{{ i + 1 }}</div>
+                      <strong>{{ product.name }}</strong>
+                    </div>
+                  </td>
+                  <td>{{ product.sales }} units</td>
+                  <td>{{ formatCurrency(product.revenue) }}</td>
+                  <td>
+                    <div class="progress" style="height: 8px;">
+                      <div 
+                        class="progress-bar" 
+                        role="progressbar" 
+                        [style.width.%]="(product.sales / 300) * 100"
+                        [ngClass]="'bg-' + (i % 2 === 0 ? 'primary' : 'success')">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </app-loading-wrapper>
     </app-card >

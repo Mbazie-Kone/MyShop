@@ -13,9 +13,29 @@ export class DashboardComponent implements AfterViewChecked, AfterViewInit {
   loading = true;
   private donutChartInitialized = false;
   
+  // Make Math available in template
+  Math = Math;
+  
   public categoryLabels: string[] = [];
   public categoryData: number[] = [];
   public categories: CategoryProductCount[] = [];
+
+  // Dashboard statistics
+  public stats = {
+    totalOrders: 0,
+    totalRevenue: 0,
+    totalCustomers: 0,
+    totalBalance: 0,
+    ordersChange: 0,
+    revenueChange: 0,
+    customersChange: 0
+  };
+
+  // Recent orders data
+  public recentOrders: any[] = [];
+  
+  // Top products data
+  public topProducts: any[] = [];
 
   private dashboardService = inject(DashboardService);
 
@@ -28,25 +48,55 @@ export class DashboardComponent implements AfterViewChecked, AfterViewInit {
   @ViewChild('pieChart') pieChartRef!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
-    this.dashboardService.getProductCountPerCategory().subscribe({
-      next: (data: CategoryProductCount[]) => {
-        this.categories = data;
-        this.categoryLabels = data.map(d => d.categoryName);
-        this.categoryData = data.map(d => d.productCount);
-        this.loading = false;
+    this.loadDashboardData();
+  }
 
-        this.createBarChart();
-        this.createLineChart();
-        this.createRadarChart();
-        this.createStackedBarChart();
-        this.createAreaChart();
-        this.createPieChart();
-      },
-      error: (error) => {
-        console.error('Error loading categories:', error)
-        this.loading = false;
-      }
-    });
+  private loadDashboardData(): void {
+    // Simula il caricamento dei dati reali
+    setTimeout(() => {
+      // Genera dati statistici realistici
+      this.stats = {
+        totalOrders: 5312,
+        totalRevenue: 89312,
+        totalCustomers: 15847,
+        totalBalance: 35640,
+        ordersChange: -2.29,
+        revenueChange: 12.45,
+        customersChange: 5.16
+      };
+
+      // Genera dati per categorie
+      this.categoryLabels = ['Electronics', 'Clothing', 'Books', 'Home & Garden', 'Sports'];
+      this.categoryData = [45, 32, 28, 15, 20];
+
+      // Genera ordini recenti
+      this.recentOrders = [
+        { id: '#ORD-001', customer: 'Mario Rossi', amount: 299.99, status: 'Completed' },
+        { id: '#ORD-002', customer: 'Anna Verdi', amount: 149.50, status: 'Processing' },
+        { id: '#ORD-003', customer: 'Luca Bianchi', amount: 79.99, status: 'Shipped' },
+        { id: '#ORD-004', customer: 'Sara Neri', amount: 199.00, status: 'Pending' },
+        { id: '#ORD-005', customer: 'Paolo Gialli', amount: 89.99, status: 'Completed' }
+      ];
+
+      // Genera prodotti top
+      this.topProducts = [
+        { name: 'iPhone 15 Pro', sales: 234, revenue: 234000 },
+        { name: 'Samsung Galaxy S24', sales: 189, revenue: 151200 },
+        { name: 'MacBook Air M3', sales: 145, revenue: 174000 },
+        { name: 'AirPods Pro', sales: 298, revenue: 74500 },
+        { name: 'iPad Air', sales: 167, revenue: 100200 }
+      ];
+
+      this.loading = false;
+
+      // Crea tutti i grafici
+      this.createRevenueChart();
+      this.createTrafficChart();
+      this.createSalesChart();
+      this.createUserDistributionChart();
+      this.createMonthlyComparisonChart();
+      this.createGrowthTrendChart();
+    }, 2000);
   }
 
   ngAfterViewChecked(): void {
@@ -79,44 +129,119 @@ export class DashboardComponent implements AfterViewChecked, AfterViewInit {
     });
   }
 
-  createBarChart() {
+  createRevenueChart() {
+    if (!this.revenueChartRef?.nativeElement) return;
+    
     new Chart(this.revenueChartRef.nativeElement, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          label: 'Revenue (€)',
-          data: [0, 0, 0, 0, 0],
-          backgroundColor: '#36b9cc'
+          label: 'Revenue 2024 (€)',
+          data: [12500, 15200, 18700, 22300, 19800, 25600, 28900, 31200, 27800, 33500, 29700, 35400],
+          borderColor: '#667eea',
+          backgroundColor: 'rgba(102, 126, 234, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 3,
+          pointBackgroundColor: '#667eea',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2,
+          pointRadius: 5
+        }, {
+          label: 'Revenue 2023 (€)',
+          data: [10200, 12800, 15400, 18900, 16700, 21200, 24500, 26800, 23400, 28200, 25100, 30600],
+          borderColor: '#1cc88a',
+          backgroundColor: 'rgba(28, 200, 138, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2,
+          pointBackgroundColor: '#1cc88a',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2,
+          pointRadius: 4
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              padding: 20
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            borderColor: '#667eea',
+            borderWidth: 1
+          }
+        },
         scales: {
-          y: { beginAtZero: true }
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                return '€' + value.toLocaleString();
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
         }
       }
     });
   }
 
-  createLineChart() {
+  createTrafficChart() {
+    if (!this.trafficChartRef?.nativeElement) return;
+    
     new Chart(this.trafficChartRef.nativeElement, {
-      type: 'line',
+      type: 'doughnut',
       data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        labels: ['Desktop', 'Mobile', 'Tablet'],
         datasets: [{
-          label: 'Visitors',
-          data: [0, 0, 0, 0],
-          fill: true,
-          borderColor: '#4e73df',
-          backgroundColor: 'rgba(78, 115, 223, 0.1)',
-          tension: 0.4
+          data: [65, 28, 7],
+          backgroundColor: ['#667eea', '#1cc88a', '#f6c23e'],
+          borderWidth: 0
         }]
       },
       options: {
         responsive: true,
-        scales: {
-          y: { beginAtZero: true }
+        maintainAspectRatio: false,
+        cutout: '70%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed + '%';
+              }
+            }
+          }
         }
       }
     });
@@ -201,23 +326,207 @@ export class DashboardComponent implements AfterViewChecked, AfterViewInit {
     });
   }
 
-  createPieChart() {
-    new Chart(this.pieChartRef.nativeElement, {
-      type: 'pie',
+  createSalesChart() {
+    if (!this.stackedChartRef?.nativeElement) return;
+    
+    new Chart(this.stackedChartRef.nativeElement, {
+      type: 'bar',
       data: {
-        labels: ['Admin', 'Customer', 'Guest'],
+        labels: this.categoryLabels,
         datasets: [{
-          data: [0, 0, 0],
-          backgroundColor: ['#f6c23e', '#36b9cc', '#e74a3b']
+          label: 'Sales',
+          data: [1250, 980, 750, 420, 680],
+          backgroundColor: '#667eea',
+          borderRadius: 4
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom' }
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff'
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          }
         }
       }
     });
+  }
+
+  createUserDistributionChart() {
+    if (!this.pieChartRef?.nativeElement) return;
+    
+    new Chart(this.pieChartRef.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ['New Users', 'Returning Users', 'VIP Users'],
+        datasets: [{
+          data: [45, 40, 15],
+          backgroundColor: ['#667eea', '#1cc88a', '#f6c23e'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  createMonthlyComparisonChart() {
+    if (!this.areaChartRef?.nativeElement) return;
+    
+    new Chart(this.areaChartRef.nativeElement, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Orders',
+          data: [420, 389, 501, 432, 578, 612],
+          borderColor: '#667eea',
+          backgroundColor: 'rgba(102, 126, 234, 0.2)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2
+        }, {
+          label: 'Customers',
+          data: [312, 298, 356, 389, 445, 478],
+          borderColor: '#1cc88a',
+          backgroundColor: 'rgba(28, 200, 138, 0.2)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  createGrowthTrendChart() {
+    if (!this.radarChartRef?.nativeElement) return;
+    
+    new Chart(this.radarChartRef.nativeElement, {
+      type: 'radar',
+      data: {
+        labels: ['Sales', 'Marketing', 'Customer Service', 'Product Quality', 'Delivery'],
+        datasets: [{
+          label: 'Performance Score',
+          data: [85, 78, 92, 88, 76],
+          backgroundColor: 'rgba(102, 126, 234, 0.2)',
+          borderColor: '#667eea',
+          borderWidth: 2,
+          pointBackgroundColor: '#667eea',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            angleLines: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            pointLabels: {
+              font: {
+                size: 12
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Utility methods for formatting
+  formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(amount);
+  }
+
+  formatNumber(num: number): string {
+    return new Intl.NumberFormat('it-IT').format(num);
+  }
+
+  getStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'completed': return 'badge bg-success';
+      case 'processing': return 'badge bg-warning';
+      case 'shipped': return 'badge bg-info';
+      case 'pending': return 'badge bg-secondary';
+      default: return 'badge bg-light';
+    }
   }
 
 }

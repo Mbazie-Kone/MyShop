@@ -78,13 +78,86 @@ canvas {
     max-height: 300px;
 }*/
 
-/* COLLAPSED
-@media (max-width: 768px) {
-    .chart-wrapper, .chart-wrapper-donut {
-        min-height: 200px;
-    }
+/* Chart containers */
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
 
-    canvas {
-        max-height: 200px;
+/* Avatar circle for top products */
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Table improvements */
+.table thead th {
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+.table tbody td {
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Badge styles */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.5em 0.75em;
+    border-radius: 0.5rem;
+}
+
+/* Progress bar improvements */
+.progress {
+    background-color: rgba(102, 126, 234, 0.1);
+    border-radius: 4px;
+}
+
+.progress-bar {
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+/* Custom card heights */
+.custom-card-b-height {
+    min-height: 400px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .custom-card-a-height {
+        margin-bottom: 1rem;
     }
-}*/
+    
+    .custom-card-b-height {
+        min-height: 300px;
+        margin-bottom: 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .avatar-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+}
