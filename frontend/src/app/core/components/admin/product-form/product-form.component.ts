@@ -609,6 +609,45 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       ).subscribe(() => {
         this.generateSkuIfReady()
       });
+
+      const categorySubscription = categoryControl.valueChanges.pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      ).subscribe(() => {
+        this.generateSkuIfReady();
+      });
+
+      this.subscriptions.push(nameSubscription, categorySubscription);
     }
+  }
+
+  // Generate SKU if ready
+  private generateSkuIfReady(): void {
+    if (this.isEditMode || this.skuGenerationInProgress) {
+      return;
     }
+
+    const productName = this.productForm.get('name')?.value;
+    const categoryId = this.productForm.get('categoryId')?.value;
+
+    if (productName && productName.trim().length >= 3 && categoryId) {
+      this.generateSku(categoryId, productName.trim());
+    }
+  }
+
+  // Generate SKU
+  private generateSku(categoryId: number, productName: string): void {
+    this.skuGenerationInProgress = true;
+
+    this.catalogService.generateSku(categoryId, productName).subscribe({
+      next: (response) => {
+        this.productForm.get('sku')?.setValue(response.sku);
+        this.skuGenerationInProgress = false;
+      },
+      error: (error) => {
+        console.error('Error generating SKU:', error);
+        this.skuGenerationInProgress = false;
+      }
+    });
+  }
 }
