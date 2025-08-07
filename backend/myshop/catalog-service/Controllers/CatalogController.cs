@@ -282,5 +282,16 @@ namespace catalog_service.Controllers
 
             return Ok(new { message = "Product deleted successfully." });
         }
+
+        // GET: api/catalog/generate-sku
+        [HttpGet("generate-sku")]
+        public async Task<ActionResult<string>> GenerateSkuCode([FromQuery] int categoryId, [FromQuery] string productName) 
+        {
+            // Validate if category exists
+            var category = await _context.Products
+                .Where(p => p.CategoryId == categoryId)
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync();
+        }
     }
 }
