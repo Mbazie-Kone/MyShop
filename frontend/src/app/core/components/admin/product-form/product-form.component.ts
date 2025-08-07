@@ -653,11 +653,20 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   // Manually generate SKU
   manuallyGenerateSku(): void {
+    console.log('Manual SKU generation clicked!');
+
     const productName = this.productForm.get('name')?.value;
     const categoryId = this.productForm.get('categoryId')?.value;
 
+    console.log('Product Name:', productName);
+    console.log('Category ID:', categoryId);
+    console.log('Can generate:', this.canGenerateSku());
+
     if (productName && categoryId) {
+      console.log('Calling generateSku...');
       this.generateSku(categoryId, productName.trim());
+    }else {
+      console.log('Missing data for SKU generation');
     }
   }
 
