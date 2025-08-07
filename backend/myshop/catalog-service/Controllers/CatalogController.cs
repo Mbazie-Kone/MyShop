@@ -311,7 +311,7 @@ namespace catalog_service.Controllers
             var sku = $"{prefix}{timestamp}{productIdentifier}{sequence}";
 
             // Validate generated SKU
-            if (!ValidateSkuFormate(sku))
+            if (!ValidateSkuFormat(sku))
                 return BadRequest("Generated SKU is not valid.");
 
             return Ok(new { sku, message = "SKU generated successfully." });
@@ -336,6 +336,25 @@ namespace catalog_service.Controllers
         {
             // Generate 3-digits sequence number
             return (productsCount + 1).ToString("D3");
+        }
+
+        private string GenerateProductIdentifier(string productName)
+        {
+            // Get first 3 letters of product name, padded with 'X' if needed
+            return new string(
+                productName
+                    .ToUpper()
+                    .Where(c => char.IsLetterOrDigit(c))
+                    .Take(4)
+                    .Concat(Enumerable.Repeat('0', 4))
+                    .Take(4)
+                    .ToArray()
+            );
+        }
+
+        private bool ValidateSkuFormat(string sku)
+        {
+            return sku.Length == 16 && System.Text.RegularExpressions.Regex.IsMatch(sku, @"^[A-Z0-9]+$");
         }
     }
 }
