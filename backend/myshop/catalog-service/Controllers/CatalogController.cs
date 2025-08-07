@@ -307,6 +307,35 @@ namespace catalog_service.Controllers
             var productIdentifier = GenerateProductIdentifier(productName);
             var timestamp = DateTime.UtcNow.ToString("yyMM");
 
+            // Combine all parts to create SKU (16 chars)
+            var sku = $"{prefix}{timestamp}{productIdentifier}{sequence}";
+
+            // Validate generated SKU
+            if (!ValidateSkuFormate(sku))
+                return BadRequest("Generated SKU is not valid.");
+
+            return Ok(new { sku, message = "SKU generated successfully." });
+        }
+
+        // Helper methods for SKU generation
+        private string GenerateCategoryPrefix(string categoryName)
+        {
+            // Get first 3 letters of category name, padded with 'X' if needed
+            return new string(
+                categoryName
+                    .ToUpper()
+                    .Where(c => char.IsLetter(c))
+                    .Take(3)
+                    .Concat(Enumerable.Repeat('X', 3))
+                    .Take(3)
+                    .ToArray()
+            );
+        }
+
+        private string GenerateSequence(int productsCount)
+        {
+            // Generate 3-digits sequence number
+            return (productsCount + 1).ToString("D3");
         }
     }
 }
