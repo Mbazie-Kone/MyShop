@@ -103,12 +103,10 @@ namespace catalog_service.Controllers
             try
             {
                 // Validate if category exists
-                var category = await _context.Products
-                    .Where(p => p.CategoryId == categoryId)
-                    .Include(p => p.Category)
-                    .FirstOrDefaultAsync();
+                var category = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Id == categoryId);
 
-                if (category?.Category == null)
+                if (category == null)
                     return BadRequest("Invalid category.");
 
                 // Get total products in the same category
@@ -117,7 +115,7 @@ namespace catalog_service.Controllers
                     .CountAsync();
 
                 // Generate SKU components
-                var prefix = GenerateCategoryPrefix(category.Category.Name);
+                var prefix = GenerateCategoryPrefix(category.Name);
                 var sequence = GenerateSequence(productsInCategory);
                 var productIdentifier = GenerateProductIdentifier(productName);
                 var timestamp = DateTime.UtcNow.ToString("yyMM");
@@ -135,8 +133,6 @@ namespace catalog_service.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ERROR: {ex.Message}");
-                Console.WriteLine($"STACK: {ex.StackTrace}");
                 return BadRequest($"Errore: {ex.Message}");
             }
 
