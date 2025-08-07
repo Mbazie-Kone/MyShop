@@ -42,4 +42,16 @@ export class CatalogService {
     return this.http.delete(`${this.apiUrl}/delete-product/${id}`);
   }
 
+  // OTHERS
+  
+  // SKU Generation
+  generateSku(categoryId: number, productName: string): Observable<{sku: string, message: string}> {
+    return this.http.get<{sku: string, message: string}>(`${this.apiUrl}/generate-sku`, {
+      params: {
+        categoryId: categoryId.toString(),
+        productName: productName
+      }
+    });
+  }
+
 }
