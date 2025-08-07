@@ -163,8 +163,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
   loadCategories(): void {
     this.catalogService.getCategories().subscribe({
       next: (res) => {
@@ -596,4 +594,21 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  // SKU Generation
+  private setupSkuGeneration(): void {
+    // Get form controls
+    const nameControl = this.productForm.get('name');
+    const categoryControl = this.productForm.get('categoryId');
+
+    if (nameControl && categoryControl) {
+      // Generate SKU when name changes
+      const nameSubscription = nameControl.valueChanges.pipe(
+        debounceTime(500), // Wait 500ms before generating SKU
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      ).subscribe(() => {
+        this.generateSkuIfReady()
+      });
+    }
+    }
 }
