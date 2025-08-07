@@ -363,7 +363,7 @@ namespace catalog_service.Controllers
         private string GenerateSequence(int productsCount)
         {
             // Generate 3-digits sequence number
-            return (productsCount + 1).ToString("D3");
+            return (productsCount + 1).ToString("D5");
         }
 
         private string GenerateProductIdentifier(string productName)
