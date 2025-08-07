@@ -46,8 +46,6 @@ export class CatalogService {
   
   // SKU Generation
   generateSku(categoryId: number, productName: string): Observable<{sku: string, message: string}> {
-    console.log('CatalogService.generateSku called with:', { categoryId, productName });
-    console.log('API URL:', `${this.apiUrl}/generate-sku`);
 
     return this.http.get<{sku: string, message: string}>(`${this.apiUrl}/generate-sku`, {
       params: {
