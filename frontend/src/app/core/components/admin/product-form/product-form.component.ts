@@ -63,6 +63,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private catalogService = inject(CatalogService);
   private analyticsService = inject(AnalyticsService);
 
+  // SKU Generation
+  private skuGenerationInProgress = false;
+
   ngOnInit(): void {
     // Track page visit
     this.analyticsService.trackUserJourney('form_opened', this.isEditMode ? 'edit_product' : 'add_product');
