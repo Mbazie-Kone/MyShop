@@ -122,6 +122,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         priceControl?.setValue(0);
       }
     });
+
+    // Setup SKU Generation
+    this.setupSkuGeneration();
   }
 
   ngOnDestroy(): void {
