@@ -637,18 +637,26 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   // Generate SKU
   private generateSku(categoryId: number, productName: string): void {
+    console.log('generateSku started with:', { categoryId, productName });
+    
     this.skuGenerationInProgress = true;
 
+    console.log('Calling catalogService.generateSku...');
     this.catalogService.generateSku(categoryId, productName).subscribe({
       next: (response) => {
+        console.log('SKU generated successfully:', response);
         this.productForm.get('sku')?.setValue(response.sku);
         this.skuGenerationInProgress = false;
+        console.log('SKU set in form:', response.sku);
       },
       error: (error) => {
         console.error('Error generating SKU:', error);
+        console.error('Error details:', error.error);
         this.skuGenerationInProgress = false;
       }
     });
+
+    console.log('Subscription created, waiting for response...');
   }
 
   // Manually generate SKU
