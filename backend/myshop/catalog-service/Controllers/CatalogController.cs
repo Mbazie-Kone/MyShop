@@ -292,6 +292,21 @@ namespace catalog_service.Controllers
                 .Where(p => p.CategoryId == categoryId)
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync();
+
+            if (category?.Category == null)
+                return BadRequest("Invalid category.");
+
+            // Get total products in the same category
+            var productsInCategory = await _context.Products
+                .Where(p => p.CategoryId == categoryId)
+                .CountAsync();
+
+            // Generate SKU components
+            var prefix = GenerateCategoryPrefix(category.Category.Name);
+            var sequence = GenerateSequence(productsInCategory);
+            var productIdentifier = GenerateProductIdentifier(productName);
+            var timestamp = DateTime.UtcNow.ToString("yyMM");
+
         }
     }
 }
