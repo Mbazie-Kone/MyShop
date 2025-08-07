@@ -257,7 +257,8 @@
                             <div class="mb-3">
                                 <label class="form-label" for="productPrice">Regular Price</label>
                                 <input type="number" 
-                                       class="form-control" 
+                                       class="form-control"
+                                       [class.price-disabled]="productForm.get('stock')?.value === 0" 
                                        id="productPrice"
                                        formControlName="price" 
                                        step="0.01" 

@@ -291,8 +291,6 @@
         border-color: #3b82f6 !important;
     }
 
-
-
     .text-muted {
         color: #a0aec0 !important;
     }
@@ -425,4 +423,12 @@ textarea.form-control::-webkit-scrollbar-thumb:hover {
 
 .form-control.is-invalid {
     animation: errorShake 0.5s ease-in-out;
+}
+
+.form-control.price-disabled {
+    background-color: #f8f9fa;
+    border-color: #e2e8f0;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
 }
