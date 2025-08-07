@@ -74,9 +74,7 @@
                                         <small [class]="descriptionLength > maxDescriptionLength ? 'text-danger' : 'text-muted'" id="description-counter">
                                             {{ descriptionLength }} / {{ maxDescriptionLength }} characters
                                         </small>
-                                    </div>
-
-                                    
+                                    </div> 
                                 </div>
 
                                 <!-- Description Preview -->
@@ -111,8 +109,6 @@
                                 <!-- Heading -->
                                 <h5 class="mb-4">Product Gallery</h5>
                                 
-
-
                                 <!-- Drag & Drop Zone -->
                                 <div class="upload-zone mb-3" 
                                      [class.drag-over]="isDragOver"
@@ -197,11 +193,20 @@
                             <!-- Product sku -->
                             <div class="mb-3">
                                 <label class="form-label" for="productSku">Product SKU</label>
-                                <input class="form-control" 
+                                <div class="input-group">
+                                    <input class="form-control" 
                                        id="productSku" 
                                        formControlName="sku"
                                        aria-describedby="sku-help"
                                        aria-required="true">
+                                    <button class="btn btn-outline-secondary"
+                                            type="button"
+                                            (click)="manuallyGenerateSku()"
+                                            [disabled]="!canGenerateSku()"
+                                            title="Generate new SKU">
+                                        <i class="icon-refresh"></i>
+                                    </button>
+                                </div>
                                 <div id="sku-help" class="form-text" [class]="getFieldStatusClass('sku')">
                                     <i class="icon-info-circled"></i> {{ getFieldStatusText('sku') }}
                                 </div>

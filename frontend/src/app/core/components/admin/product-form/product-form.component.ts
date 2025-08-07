@@ -650,4 +650,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  // Manually generate SKU
+  manuallyGenerateSku(): void {
+    const productName = this.productForm.get('name')?.value;
+    const categoryId = this.productForm.get('categoryId')?.value;
+
+    if (productName && categoryId) {
+      this.generateSku(categoryId, productName.trim());
+    }
+  }
+
+  // Check if SKU can be generated
+  canGenerateSku(): boolean {
+    const productName = this.productForm.get('name')?.value;
+    const categoryId = this.productForm.get('categoryId')?.value;
+
+    return !!(productName && productName.trim().length >= 3 && categoryId && !this.skuGenerationInProgress);
+  }
 }
