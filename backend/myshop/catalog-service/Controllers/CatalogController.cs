@@ -100,12 +100,6 @@ namespace catalog_service.Controllers
         [HttpGet("generate-sku")]
         public async Task<ActionResult<string>> GenerateSkuCode([FromQuery] int categoryId, [FromQuery] string productName)
         {
-
-            // LOG: Verifica che l'endpoint venga chiamato
-            Console.WriteLine($"=== SKU GENERATION STARTED ===");
-            Console.WriteLine($"CategoryId: {categoryId}");
-            Console.WriteLine($"ProductName: {productName}");
-
             try
             {
                 // Validate if category exists
@@ -122,31 +116,21 @@ namespace catalog_service.Controllers
                     .Where(p => p.CategoryId == categoryId)
                     .CountAsync();
 
-                Console.WriteLine($"Products in category: {productsInCategory}");
-
                 // Generate SKU components
                 var prefix = GenerateCategoryPrefix(category.Category.Name);
                 var sequence = GenerateSequence(productsInCategory);
                 var productIdentifier = GenerateProductIdentifier(productName);
                 var timestamp = DateTime.UtcNow.ToString("yyMM");
 
-                Console.WriteLine($"Prefix: {prefix}");
-                Console.WriteLine($"Sequence: {sequence}");
-                Console.WriteLine($"ProductIdentifier: {productIdentifier}");
-                Console.WriteLine($"Timestamp: {timestamp}");
-
                 // Combine all parts to create SKU (16 chars)
                 var sku = $"{prefix}{timestamp}{productIdentifier}{sequence}";
-                Console.WriteLine($"Generated SKU: {sku} (Length: {sku.Length})");
 
                 // Validate generated SKU
                 if (!ValidateSkuFormat(sku))
                 {
-                    Console.WriteLine($"ERROR: SKU validation failed for: {sku}");
                     return BadRequest("Generated SKU is not valid.");
                 }
                     
-                Console.WriteLine("=== SKU GENERATION SUCCESS ===");
                 return Ok(new { sku, message = "SKU generated successfully." });
             }
             catch (Exception ex)
