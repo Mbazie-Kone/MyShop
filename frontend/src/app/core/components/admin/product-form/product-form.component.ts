@@ -113,13 +113,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.subscriptions.push(descriptionSubscription);
     }
 
-    this.productForm.get('stock')?.valueChanges.subscribe(stock => {
-      const priceControl = this.productForm.get('price');
-      if (stock > 0) {
-        priceControl?.enable();
+    this.productForm.get('stock')?.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(stock => {
+        const priceControl = this.productForm.get('price');
+        if (stock > 0) {
+          priceControl?.enable();
       } else {
-        priceControl?.disable();
-        priceControl?.setValue(0);
+          priceControl?.disable();
+          priceControl?.setValue(0);
       }
     });
 
