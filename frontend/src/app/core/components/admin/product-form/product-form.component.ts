@@ -44,7 +44,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   // Auto-save properties
   private autoSaveInterval: number | undefined;
   private destroy$ = new Subject<void>();
-  private subscriptions: Subscription[] = [];
 
   // Drag & drop properties
   isDragOver = false;
@@ -134,7 +133,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    this.subscriptions.forEach(sub => sub.unsubscribe());
     this.clearAutoSave();
   }
 
