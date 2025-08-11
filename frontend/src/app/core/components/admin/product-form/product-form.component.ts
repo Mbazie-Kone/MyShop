@@ -88,7 +88,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.loadCategories();
     this.setupAutoSave();
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
         this.isEditMode = true;
