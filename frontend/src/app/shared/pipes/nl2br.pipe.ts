@@ -1,12 +1,11 @@
-import { Pipe, PipeTransform, inject } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'nl2br',
   standalone: true
 })
 export class Nl2brPipe implements PipeTransform {
-  transform(value: string): SafeHtml {
+  transform(value: string): string {
     if (!value) return '';
     return value.replace(/\n/g, '<br>');
   }
