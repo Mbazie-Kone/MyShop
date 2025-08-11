@@ -134,6 +134,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
     this.clearAutoSave();
+    if (this.successTimeoutId) clearTimeout(this.successTimeoutId);
   }
 
   // Auto-save functionality
@@ -553,7 +554,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     this.analyticsService.trackUserJourney('form_submitted_success', this.isEditMode ? 'edit_product' : 'add_product');
 
-    setTimeout(() => {
+    this.successTimeoutId = window.setTimeout(() => {
       this.showToast = false;
       this.router.navigate(['/administration/view-products']);
     }, 3000); // Hide the toast after 3 seconds
