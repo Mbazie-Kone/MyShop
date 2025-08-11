@@ -96,7 +96,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         this.loading = false; // No product to load, categories will be loaded
         this.loadDraftDescription();
       }
-      // Sposta il tracking qui, dopo aver determinato la modalità
       this.analyticsService.trackUserJourney('form_opened', this.isEditMode ? 'edit_product' : 'add_product');
     });
 
