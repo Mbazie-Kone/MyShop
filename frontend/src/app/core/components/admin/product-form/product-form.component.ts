@@ -64,11 +64,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   // SKU Generation
   private skuGenerationInProgress = false;
+  private successTimeoutId?: number;
 
   ngOnInit(): void {
-    // Track page visit
-    this.analyticsService.trackUserJourney('form_opened', this.isEditMode ? 'edit_product' : 'add_product');
-    
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [
@@ -102,17 +100,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     });
 
     // Monitor description changes with debounce for better performance
-    const descriptionSubscription = this.productForm.get('description')?.valueChanges.pipe(
+    this.productForm.get('description')?.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       takeUntil(this.destroy$)
     ).subscribe(value => {
       this.descriptionLength = value ? value.length : 0;
     });
-
-    if (descriptionSubscription) {
-      this.subscriptions.push(descriptionSubscription);
-    }
 
     this.productForm.get('stock')?.valueChanges
       .pipe(takeUntil(this.destroy$))
@@ -605,22 +599,20 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     if (nameControl && categoryControl) {
       // Generate SKU when name changes
-      const nameSubscription = nameControl.valueChanges.pipe(
-        debounceTime(500), // Wait 500ms before generating SKU
+      nameControl.valueChanges.pipe(
+        debounceTime(500),
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       ).subscribe(() => {
         this.generateSkuIfReady()
       });
 
-      const categorySubscription = categoryControl.valueChanges.pipe(
+      categoryControl.valueChanges.pipe(
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       ).subscribe(() => {
         this.generateSkuIfReady();
       });
-
-      this.subscriptions.push(nameSubscription, categorySubscription);
     }
   }
 
