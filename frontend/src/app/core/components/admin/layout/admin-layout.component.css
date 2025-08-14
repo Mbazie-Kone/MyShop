@@ -23,6 +23,13 @@
     margin-left: 80px;
 }
 
+/* Footer screen < 850 pixel */
+.content-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Page title spacing */
 .page-title {
     margin-bottom: 30px;

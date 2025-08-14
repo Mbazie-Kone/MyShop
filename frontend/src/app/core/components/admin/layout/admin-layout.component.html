@@ -3,10 +3,12 @@
 <div [ngClass]="{ 'collapsed': layoutService.isCollapsed() }">
 <!-- COLLAPSED -->
     <div class="content">
-        <div class="mb-3">
-            <h4 class="page-title">{{ pageTitle }}</h4>
+        <div class="content-main">
+            <div class="mb-3">
+                <h4 class="page-title">{{ pageTitle }}</h4>
+            </div>
+            <router-outlet></router-outlet>
         </div>
-        <router-outlet></router-outlet>
         <app-admin-footer></app-admin-footer>
     </div>
 <!-- COLLAPSED -->
