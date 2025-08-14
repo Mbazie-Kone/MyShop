@@ -10,6 +10,9 @@
     margin-top: 70px;
     padding: 20px;
 
+    display: flex;
+    flex-direction: column;
+
     /* COLLAPSED */
     transition: margin-left 0.3s ease;
     
