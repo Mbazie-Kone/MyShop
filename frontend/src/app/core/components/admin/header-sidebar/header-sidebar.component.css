@@ -35,7 +35,7 @@
   left: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start; /* Always keep left alignment */
   height: 70px;
   position: relative;
   background: rgba(255, 255, 255, 0.1);
@@ -44,7 +44,7 @@
 }
 
 .sidebar-logo {
-  margin-left: 15px;
+  margin-left: 15px; /* Fixed margin for perfect alignment */
   filter: brightness(1.2) contrast(1.1);
 }
 
@@ -56,11 +56,6 @@
 /* Collapsed logo styling */
 .logo-collapsed {
   width: 33.5px;
-}
-
-/* Center logo container when sidebar is collapsed */
-.layout-wrapper.collapsed .sidebar-logo-container {
-  justify-content: center;
 }
 
 /* COLLAPSED */
