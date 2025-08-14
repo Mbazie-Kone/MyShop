@@ -1,13 +1,13 @@
 .content {
     /* OVERFLOW */
     position: relative;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 70px);
     overflow-y: auto;
     overflow-x: hidden;
     /* OVERFLOW */
     
     margin-left: 250px;
-    margin-top: 50px;
+    margin-top: 70px;
     padding: 20px;
 
     /* COLLAPSED */
