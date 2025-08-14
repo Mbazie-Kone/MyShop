@@ -55,7 +55,6 @@
 
 /* COLLAPSED */
 .logo-expanded {
-  display: block;
   width: 120px;
   transition: opacity 0.3s ease;
 }
@@ -64,15 +63,6 @@
   /* display: none; */
   width: 33.5px;
   transition: opacity 0.3s ease;
-}
-
-.layout-wrapper.collapsed .logo-expanded {
-  display: none;
-}
-
-.layout-wrapper.collapsed .logo-collapsed {
-  display: block;
-  margin-left: 0;
 }
 
 .layout-wrapper.collapsed .sidebar-logo-container {
