@@ -50,13 +50,13 @@
   <div class="sidebar">
     <div class="sidebar-logo-container">
       <a routerLink="/administration/dashboard">
-        <!-- Logo completo quando la sidebar è estesa -->
+        <!-- Expanded logo when sidebar is open -->
         <img *ngIf="!layoutService.isCollapsed()" 
              src="assets/images/logo.png" 
              alt="logo" 
              class="sidebar-logo logo-expanded" />
         
-        <!-- Logo ridotto quando la sidebar è collassata -->
+        <!-- Collapsed logo when sidebar is closed -->
         <img *ngIf="layoutService.isCollapsed()" 
              src="assets/images/logo-collapsed.png" 
              alt="logo" 

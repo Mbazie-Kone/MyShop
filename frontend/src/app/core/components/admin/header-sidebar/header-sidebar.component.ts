@@ -39,7 +39,7 @@ export class HeaderSidebarComponent implements OnInit {
     }
   }
 
-  // COLLAPSED
+  // Toggle sidebar collapsed state
   toggleSidebar() {
     this.layoutService.toggle();
   }
