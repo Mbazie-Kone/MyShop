@@ -175,8 +175,7 @@
 
 .container-fluid {
   margin-left: 250px;
-
-  /* COLLAPSED */
+  padding-left: 0; /* Remove padding */
   transition: margin-left 0.3s ease;
 }
 
@@ -187,12 +186,12 @@
 
 .left-section {
   flex: 0 0 auto;
-  margin-left: 10px;
+  margin-left: 20px; /* Same as content padding to align with titles */
 }
 
 /* COLLAPSED */
 .collapsed .left-section {
-  margin-left: 10px;
+  margin-left: 20px; /* Keep consistent when collapsed */
 }
 
 .center-section {
@@ -249,9 +248,10 @@
 
 .icon-hamburger {
   font-size: 1.5rem;
-  padding: 8px;
+  padding: 0; /* Remove internal padding */
   border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 0; /* No additional margin */
 }
 
 .icon-user:hover,
