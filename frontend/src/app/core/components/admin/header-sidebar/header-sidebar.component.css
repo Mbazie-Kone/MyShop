@@ -58,12 +58,8 @@
 
 .logo-collapsed {
   width: 33.5px;
-  /* transition: opacity 0.3s ease; */
 }
 
-.layout-wrapper.collapsed .sidebar-logo-container {
-  justify-content: center;
-}
 /* COLLAPSED */
 
 .sidebar-icons-container {
