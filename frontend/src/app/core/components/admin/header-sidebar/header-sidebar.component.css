@@ -35,7 +35,7 @@
   left: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start; /* Mantieni sempre flex-start */
   height: 70px;
   position: relative;
   background: rgba(255, 255, 255, 0.1);
@@ -44,20 +44,20 @@
 }
 
 .sidebar-logo {
-  /* width: 120px; */
-  margin-left: 15px;
+  margin-left: 15px; /* Margine fisso per entrambi i loghi */
   filter: brightness(1.2) contrast(1.1);
 }
 
-
-/* COLLAPSED */
+/* Logo esteso - visibile quando sidebar è aperta */
 .logo-expanded {
   width: 120px;
   transition: opacity 0.3s ease;
 }
 
+/* Logo collassato - nascosto quando sidebar è aperta */
 .logo-collapsed {
   width: 33.5px;
+  /* Rimuovi qualsiasi transizione per evitare movimenti */
 }
 
 /* COLLAPSED */
