@@ -45,8 +45,12 @@
 
 .sidebar-logo {
   /* width: 120px; */
-  margin-left: 20px;
+  margin-left: 15px;
   filter: brightness(1.2) contrast(1.1);
+}
+
+.collogo {
+  margin-left: 0.3px !important;
 }
 
 /* COLLAPSED */
@@ -57,7 +61,7 @@
 }
 
 .logo-collapsed {
-  display: none;
+  /* display: none; */
   width: 33.5px;
   transition: opacity 0.3s ease;
 }
