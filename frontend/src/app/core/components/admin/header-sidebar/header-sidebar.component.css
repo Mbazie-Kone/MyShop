@@ -81,8 +81,6 @@
   backdrop-filter: blur(5px);
 }
 
-
-
 /* COLLAPSED */
 .sidebar-icons-container a::after {
   content: attr(data-tooltip);
@@ -265,9 +263,9 @@
   transform: scale(1.1);
 }
 
-.icon-hamburger:hover {
+/*.icon-hamburger:hover {
   background: rgba(102, 126, 234, 0.1);
-}
+}*/
 
 .user-logged {
   cursor: default;
