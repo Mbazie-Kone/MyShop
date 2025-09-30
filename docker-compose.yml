@@ -70,7 +70,7 @@ services:
     container_name: init-default-image
     volumes:
       - product_images:/mnt/products
-      - ./default:/init:ro
+      - default_data:/init:ro
     entrypoint: >
       sh -c "if [ ! -f /mnt/products/default.png ]; then
                cp /init/default.png /mnt/products/default.png;
@@ -81,6 +81,7 @@ services:
 volumes:
   sql_data:
   product_images:
+  default_data:
   
 networks:
   mynetwork:
