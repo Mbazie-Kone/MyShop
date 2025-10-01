@@ -316,6 +316,7 @@
   display: inline-block;
   text-decoration: none;
   border: 1px solid transparent;
+  border-radius: 5px;
   background: rgba(220, 38, 38, 0.05);
 }
 
